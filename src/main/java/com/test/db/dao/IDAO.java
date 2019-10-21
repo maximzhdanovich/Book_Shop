@@ -1,7 +1,5 @@
 package com.test.db.dao;
 
-import org.hibernate.criterion.DetachedCriteria;
-
 import java.util.List;
 
 public interface IDAO  <T> {

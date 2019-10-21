@@ -1,7 +1,7 @@
 package com.test.db.dao;
 
 import com.test.db.model.Book;
-import com.test.db.model.Category;
+//import com.test.db.model.Category;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
@@ -72,9 +72,9 @@ public class BookDAO implements IDAO<Book> {
 
     @Override
     public void initGeneralInfo(Object object) {
-        Hibernate.initialize(((Book) object).getCategory());
-        Hibernate.initialize(((Book) object).getAuthor());
-        Hibernate.initialize(((Book) object).getPrice());
+//        Hibernate.initialize(((Book) object).getCategory());
+//        Hibernate.initialize(((Book) object).getAuthor());
+//        Hibernate.initialize(((Book) object).getPrice());
     }
 
 }
