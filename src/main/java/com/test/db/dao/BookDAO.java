@@ -2,8 +2,10 @@ package com.test.db.dao;
 
 import com.test.db.model.Book;
 import com.test.db.model.Category;
+import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -31,16 +33,19 @@ public class BookDAO implements IDAO<Book> {
     public void add(Book entity) {
         sessionFactory.getCurrentSession().persist(entity);
     }
+
     @Override
     @Transactional
     public void update(Book entity) {
         sessionFactory.getCurrentSession().update(entity);
     }
+
     @Override
     @Transactional
     public void delete(Book entity) {
         sessionFactory.getCurrentSession().delete(entity);
     }
+
     @Override
     @Transactional
     public Book getOnId(Long id) {
@@ -48,6 +53,7 @@ public class BookDAO implements IDAO<Book> {
         initGeneralInfo(book);
         return book;
     }
+
     @Override
     @Transactional
     public List<Book> findAll() {
@@ -61,7 +67,7 @@ public class BookDAO implements IDAO<Book> {
     @Override
     @Transactional
     public void deleteOnId(Long id) {
-        sessionFactory.getCurrentSession().delete(sessionFactory.getCurrentSession().get(Category.class, id));
+        sessionFactory.getCurrentSession().delete(sessionFactory.getCurrentSession().get(Book.class, id));
     }
 
     @Override

@@ -2,36 +2,41 @@ package com.test.db.model;
 
 import com.sun.istack.internal.NotNull;
 
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "CATEGORY")
-public class Category {
+public class Category implements Serializable {
 
     protected long id;
     private String titleRu;
     private String titleEn;
-    private Set<Book> books;
-
-    @ManyToOne(targetEntity = Book.class)
-    public Set<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(Set<Book> books) {
-        this.books = books;
-    }
+    private Set<Book> Books;
 
 
     public Category() {
     }
 
-    public Category(String titleRu, String titleEn) {
+    @NotNull
+    @ManyToMany
+    @JoinTable(name = "BOOK_WITH_CATEGORY",
+            joinColumns = @JoinColumn(name = "CATEGORY_ID"),
+            inverseJoinColumns = @JoinColumn(name = "BOOK_ID"))
+    public Set<Book> getBooks() {
+        return Books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        Books = books;
+    }
+
+    public Category(String titleRu, String titleEn, Set<Book> books) {
         this.titleRu = titleRu;
         this.titleEn = titleEn;
+        Books = books;
     }
 
     @Id
@@ -48,7 +53,7 @@ public class Category {
 
     @NotNull
     @Size(max = 128)
-    @Column(name = "TITLE_RU", nullable = false, length = 128)
+    @Column(name = "TITLE_RU")
     public String getTitleRu() {
         return titleRu;
     }
@@ -63,7 +68,7 @@ public class Category {
 
     @NotNull
     @Size(max = 128)
-    @Column(name = "TITLE_EN", nullable = false, length = 128)
+    @Column(name = "TITLE_EN")
     public void setTitleEn(String titleEn) {
         this.titleEn = titleEn;
     }

@@ -4,24 +4,37 @@ import com.sun.istack.internal.NotNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.Set;
 
-public class Book {
+public class Book implements Serializable {
     private long id;
-    private String category;
-    private String author;
+    private Set<Category> category;
+    private Author author;
     private double price;
     private String titleRu;
     private String titleEn;
+    private Basket basket;
 
     public Book() {
     }
 
-    public Book(double price, String titleRu, String titleEn, String category, String author) {
+    @ManyToMany
+    @JoinTable(name = "BOOK_WITH_BASKET",
+            joinColumns = @JoinColumn(name = "BOOK_ID"),
+            inverseJoinColumns = @JoinColumn(name="BASKET_ID"))
+    public Basket getBasket() {
+        return basket;
+    }
+
+    public void setBasket(Basket basket) {
+        this.basket = basket;
+    }
+
+    public Book(double price, String titleRu, String titleEn) {
         this.price = price;
         this.titleRu = titleRu;
         this.titleEn = titleEn;
-        this.category = category;
-        this.author = author;
     }
 
     @Id
@@ -69,26 +82,27 @@ public class Book {
     }
 
     @NotNull
-    @OneToMany(targetEntity = Category.class, mappedBy = "category")
-    @JoinColumn(name = "FK_CATEGORY_ID")
-    public String getCategory() {
+    @ManyToMany
+    @JoinTable(name = "BOOK_WITH_CATEGORY",
+    joinColumns = @JoinColumn(name = "BOOK_ID"),
+    inverseJoinColumns = @JoinColumn(name="CATEGORY_ID"))
+    public Set<Category> getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Set<Category> category) {
         this.category = category;
     }
 
     @NotNull
-    @OneToMany()
-    @Column(name = "AUTHOR")
-    public String getAuthor() {
+    @ManyToOne(targetEntity = Author.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_AUTHOR_ID")
+    @Access(AccessType.PROPERTY)
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
-
-
 }
