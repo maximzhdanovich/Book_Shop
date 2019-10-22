@@ -5,7 +5,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Set;
-
+@Entity
+@Table(name = "ROLE")
 public class Book implements Serializable {
     private long id;
     //private Set<Category> category;

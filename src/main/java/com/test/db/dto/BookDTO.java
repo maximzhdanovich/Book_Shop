@@ -4,9 +4,11 @@ import com.test.db.dao.IDAO;
 import com.test.db.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
+@Qualifier("bookDTO")
 public class BookDTO implements IDTO<Book> {
     @Autowired
     @Qualifier("bookDAO")

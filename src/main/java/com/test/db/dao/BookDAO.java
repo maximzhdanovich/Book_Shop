@@ -7,14 +7,17 @@ import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
-@EnableTransactionManagement
+@Configuration
 @Component
+@Qualifier("bookDAO")
 public class BookDAO implements IDAO<Book> {
 
     @Autowired
