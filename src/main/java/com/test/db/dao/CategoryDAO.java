@@ -3,18 +3,16 @@ package com.test.db.dao;
 import com.test.db.model.Category;
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
+import java.util.Set;
 
 public interface CategoryDAO extends CrudRepository<Category, Long> {
-    List<Category> findAll();
+    Set<Category> findAll();
 
     Category findById(long id);
 
+    Category findByTitleEn(String string);
+
     Category deleteById(long id);
-
-    List<Category> findByTitleEnOrTitleRu(String price);
-
-    List<Category> deleteByTitleEnOrTitleRu(String price);
 
 
 }

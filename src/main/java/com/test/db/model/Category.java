@@ -12,6 +12,7 @@ public class Category implements Serializable {
     protected long id;
     private String titleRu;
     private String titleEn;
+    private Set<Book> Books;
 
     @NotNull
     @ManyToMany
@@ -26,7 +27,6 @@ public class Category implements Serializable {
         Books = books;
     }
 
-    private Set<Book> Books;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

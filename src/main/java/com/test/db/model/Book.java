@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "BOOK")
 public class Book implements Serializable {
@@ -11,9 +13,8 @@ public class Book implements Serializable {
     private double price;
     private String titleRu;
     private String titleEn;
-    private List<Category> categories;
+    private Set<Category> categories ;
     private Author author;
-
     @NotNull
     @ManyToOne(targetEntity = Author.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "FK_AUTHOR_ID")
@@ -21,24 +22,29 @@ public class Book implements Serializable {
     public Author getAuthor() {
         return author;
     }
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
     @NotNull
     @ManyToMany
     @JoinTable(name = "BOOK_WITH_CATEGORY",
     joinColumns = @JoinColumn(name = "BOOK_ID"),
     inverseJoinColumns = @JoinColumn(name="CATEGORY_ID"))
-    public List<Category> getCategories() {
+    public Set<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<Category> categories) {
+    public void setCategories(Set<Category> categories) {
         this.categories = categories;
     }
 
-    public Book(double price, String titleRu, String titleEn, Author author) {
+    public Book(double price, String titleRu, String titleEn, Author author,Set<Category> categories) {
         this.price = price;
         this.titleRu = titleRu;
         this.titleEn = titleEn;
         this.author = author;
+        this.categories=categories;
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
