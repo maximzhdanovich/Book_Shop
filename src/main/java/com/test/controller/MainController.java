@@ -4,7 +4,9 @@ package com.test.controller;
 import com.test.db.dao.AuthorDAO;
 import com.test.db.dao.BookDAO;
 import com.test.db.dao.CategoryDAO;
+import com.test.db.model.Author;
 import com.test.db.model.Book;
+import com.test.db.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Controller
 public class MainController extends BaseController {
@@ -50,9 +53,10 @@ public class MainController extends BaseController {
             Map<String, Object> model
     ) {
 
-        Book book = new Book(price, titleRu, titleEn, authorDAO.findFirstBySurnameAndName(author_surname,author_name)
-                , categoryDAO.findAll());
-
+        Book book = new Book(price, titleRu, titleEn);
+        if (author_surname!=null&&author_name!=null) {
+            book.setAuthor(searchForAuthor(author_surname,author_name));
+        }
         bookDAO.save(book);
 
         List<Book> books = bookDAO.findAll();
@@ -61,4 +65,13 @@ public class MainController extends BaseController {
 
         return "main";
     }
+
+    private Author searchForAuthor(String surname, String name) {
+        if (authorDAO.findFirstBySurnameAndName(surname, name) == null) {
+            authorDAO.save(new Author(surname, name));
+
+        }
+        return authorDAO.findFirstBySurnameAndName(surname, name);
+    }
+
 }

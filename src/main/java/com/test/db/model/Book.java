@@ -15,7 +15,7 @@ public class Book implements Serializable {
     private String titleEn;
     private Set<Category> categories ;
     private Author author;
-    @NotNull
+
     @ManyToOne(targetEntity = Author.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "FK_AUTHOR_ID")
     @Access(AccessType.PROPERTY)
@@ -26,7 +26,7 @@ public class Book implements Serializable {
         this.author = author;
     }
 
-    @NotNull
+
     @ManyToMany
     @JoinTable(name = "BOOK_WITH_CATEGORY",
     joinColumns = @JoinColumn(name = "BOOK_ID"),
@@ -39,12 +39,10 @@ public class Book implements Serializable {
         this.categories = categories;
     }
 
-    public Book(double price, String titleRu, String titleEn, Author author,Set<Category> categories) {
+    public Book(double price, String titleRu, String titleEn) {
         this.price = price;
         this.titleRu = titleRu;
         this.titleEn = titleEn;
-        this.author = author;
-        this.categories=categories;
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
