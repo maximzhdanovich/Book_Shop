@@ -5,7 +5,7 @@
 //import java.util.Set;
 //@Entity
 //@Table(name = "BASKET")
-//public class Basket implements Serializable {
+//public class Basket {
 //    private Long id;
 //    private Set<Book> books;
 //    private User user;
@@ -21,7 +21,7 @@
 //    }
 //
 //    @ManyToMany
-//    @JoinTable(name = "BOOK_WITH_CATEGORY",
+//    @JoinTable(name = "BOOK_WITH_BASKET",
 //            joinColumns = @JoinColumn(name = "BASKET_ID"),
 //            inverseJoinColumns = @JoinColumn(name="BOOK_ID"))
 //    public Set<Book> getBooks() {

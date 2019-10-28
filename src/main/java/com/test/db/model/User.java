@@ -2,19 +2,17 @@
 //
 //import javax.persistence.*;
 //import javax.validation.constraints.NotNull;
-//import javax.validation.constraints.Size;
-//import java.io.Serializable;
 //
 //@Entity
 //@Table(name = "USER")
-//public class User implements Serializable {
+//public class User {
 //    private boolean enabled;
 //    private Long id;
 //    private String name;
 //    private String email;
 //    private String password;
 ////    private Role role;
-////    private Basket basket;
+//    private Basket basket;
 //
 //    @NotNull
 //    @Column(name = "ENABLED")
@@ -39,7 +37,6 @@
 //    }
 //
 //    @NotNull
-//    @Size(max = 1024)
 //    @Column(name = "NAME")
 //    public String getName() {
 //        return name;
@@ -50,7 +47,6 @@
 //    }
 //
 //    @NotNull
-//    @Size(max = 1024)
 //    @Column(name = "EMAIL")
 //    public String getEmail() {
 //        return email;
@@ -61,7 +57,6 @@
 //    }
 //
 //    @NotNull
-//    @Size(max = 1024)
 //    @Column(name = "PASSWORD")
 //    public String getPassword() {
 //        return password;
@@ -81,20 +76,20 @@
 ////        this.role = role;
 ////    }
 //
-////    @OneToOne
-////    @JoinColumn(name = "FK_BASKET_ID")
-////    public Basket getBasket() {
-////        return basket;
-////    }
-////
-////    public void setBasket(Basket basket) {
-////        this.basket = basket;
-////    }
+//    @OneToOne
+//    @JoinColumn(name = "FK_BASKET_ID")
+//    public Basket getBasket() {
+//        return basket;
+//    }
+//
+//    public void setBasket(Basket basket) {
+//        this.basket = basket;
+//    }
 //
 //    public User() {
 //    }
 //
-//    public User(String name, String email, String password, Role role, Basket basket) {
+//    public User(String name, String email, String password) {
 //        this.name = name;
 //        this.email = email;
 //        this.password = password;

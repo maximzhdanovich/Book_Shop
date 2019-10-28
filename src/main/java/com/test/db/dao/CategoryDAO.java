@@ -11,7 +11,7 @@ public interface CategoryDAO extends CrudRepository<Category, Long> {
     Category findById(long id);
 
     Category findByTitleEn(String string);
-    Category findByTitleEnOrTitleRu(String titleEn,String titleRu);
+    Category findFirstByTitleEnOrTitleRu(String titleEn,String titleRu);
 
     Category deleteById(long id);
 

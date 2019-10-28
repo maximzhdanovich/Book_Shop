@@ -58,4 +58,9 @@ public class Category implements Serializable {
     public String getTitleEn() {
         return titleEn;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(id);
+    }
 }

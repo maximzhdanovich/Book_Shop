@@ -5,15 +5,13 @@
 //
 //import javax.persistence.*;
 //import javax.validation.constraints.NotNull;
-//import javax.validation.constraints.Size;
-//import java.io.Serializable;
 //import java.util.Set;
 //@Entity
 //@Table(name = "ROLE")
-//public class Role implements Serializable {
+//public class Role {
 //    private Long id;
 //    private String title;
-////    private Set<User> users;
+//    private Set<User> users;
 //
 //    public Role() {
 //    }
@@ -28,7 +26,6 @@
 //        this.id = id;
 //    }
 //    @NotNull
-//    @Size(max = 1024)
 //    @Column(name = "title")
 //    public String getTitle() {
 //        return title;
@@ -38,15 +35,15 @@
 //        this.title = title;
 //    }
 //
-////    @LazyCollection(LazyCollectionOption.TRUE)
-////    @OneToMany(targetEntity = User.class, mappedBy = "role", orphanRemoval = true)
-////    public Set<User> getUsers() {
-////        return users;
-////    }
-////
-////    public void setUsers(Set<User> users) {
-////        this.users = users;
-////    }
+//  //  @LazyCollection(LazyCollectionOption.TRUE)
+//    @OneToMany(targetEntity = User.class, mappedBy = "role", orphanRemoval = true)
+//    public Set<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(Set<User> users) {
+//        this.users = users;
+//    }
 //
 //    public Role(String title) {
 //        this.title = title;

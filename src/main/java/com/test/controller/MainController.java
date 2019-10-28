@@ -3,10 +3,8 @@ package com.test.controller;
 
 import com.test.db.dao.AuthorDAO;
 import com.test.db.dao.BookDAO;
-import com.test.db.dao.CategoryDAO;
-import com.test.db.model.Author;
+//import com.test.db.dao.UserDAO;
 import com.test.db.model.Book;
-import com.test.db.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @Controller
 public class MainController extends BaseController {
@@ -25,13 +22,10 @@ public class MainController extends BaseController {
     private BookDAO bookDAO;
     @Autowired
     private AuthorDAO authorDAO;
-    @Autowired
-    private CategoryDAO categoryDAO;
-
 
     @GetMapping("/main")
     public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
-        Iterable<Book> books = bookDAO.findAll();
+        List<Book> books = bookDAO.findAll();
 
         if (filter != null && !filter.equals("")) {
             books = bookDAO.findByTitleEnOrTitleRu(filter, filter);
@@ -54,9 +48,8 @@ public class MainController extends BaseController {
     ) {
 
         Book book = new Book(price, titleRu, titleEn);
-        if (author_surname!=null&&author_name!=null) {
-            book.setAuthor(searchForAuthor(author_surname,author_name));
-        }
+            book.setAuthor(authorDAO.findBySurnameAndName(author_surname,author_name));
+
         bookDAO.save(book);
 
         List<Book> books = bookDAO.findAll();
@@ -65,13 +58,4 @@ public class MainController extends BaseController {
 
         return "main";
     }
-
-    private Author searchForAuthor(String surname, String name) {
-        if (authorDAO.findFirstBySurnameAndName(surname, name) == null) {
-            authorDAO.save(new Author(surname, name));
-
-        }
-        return authorDAO.findFirstBySurnameAndName(surname, name);
-    }
-
 }

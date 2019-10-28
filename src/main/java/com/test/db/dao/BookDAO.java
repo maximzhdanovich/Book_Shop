@@ -5,6 +5,7 @@ import com.test.db.model.Book;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Set;
 
 
 public interface BookDAO extends CrudRepository<Book, Long> {
@@ -17,6 +18,4 @@ public interface BookDAO extends CrudRepository<Book, Long> {
     List<Book> findAllByPrice(double price);
 
     List<Book> findByTitleEnOrTitleRu(String titleEn, String titleRu);
-
-
 }
