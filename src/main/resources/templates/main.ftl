@@ -14,7 +14,6 @@
 
         <input type="text" name="author_surname" placeholder="фамилия автора">
         <input type="text" name="author_name" placeholder="имя автора">
-<#--        <input type="hidden" name="_csrf" value="${_csrf.token}" />-->
         <button type="submit">Добавить</button>
     </form>
 </div>

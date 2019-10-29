@@ -1,10 +1,9 @@
 package com.test.controller;
 
 
-import com.test.db.dao.AuthorDAO;
-import com.test.db.dao.BookDAO;
-//import com.test.db.dao.UserDAO;
 import com.test.db.model.Book;
+import com.test.service.AuthorService;
+import com.test.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,18 +18,18 @@ import java.util.Map;
 public class MainController extends BaseController {
 
     @Autowired
-    private BookDAO bookDAO;
+    private BookService bookService;
     @Autowired
-    private AuthorDAO authorDAO;
+    private AuthorService authorService;
 
     @GetMapping("/main")
     public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
-        List<Book> books = bookDAO.findAll();
+        List<Book> books = bookService.findAll();
 
         if (filter != null && !filter.equals("")) {
-            books = bookDAO.findByTitleEnOrTitleRu(filter, filter);
+            books = bookService.findByTitleEnOrTitleRu(filter, filter);
         } else {
-            books = bookDAO.findAll();
+            books = bookService.findAll();
         }
         model.addAttribute("books", books);
         model.addAttribute("filter", filter);
@@ -48,11 +47,11 @@ public class MainController extends BaseController {
     ) {
 
         Book book = new Book(price, titleRu, titleEn);
-            book.setAuthor(authorDAO.findBySurnameAndName(author_surname,author_name));
+            book.setAuthor(authorService.findBySurnameAndName(author_surname,author_name));
 
-        bookDAO.save(book);
+        bookService.save(book);
 
-        List<Book> books = bookDAO.findAll();
+        List<Book> books = bookService.findAll();
 
         model.put("books", books);
 

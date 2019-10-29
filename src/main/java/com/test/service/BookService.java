@@ -1,35 +1,40 @@
 package com.test.service;
 
-import com.test.db.model.Author;
+import com.test.db.dto.BookDTO;
 import com.test.db.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
-public class BookService {
+@Qualifier("bookService")
+public class BookService{
     @Autowired
-    private BookService bookDAO;
+    private BookDTO bookDTO;
 
     public void save(Book book) {
-        bookDAO.save(book);
+        bookDTO.save(book);
+    }
+
+    public BookDTO getBookDTO() {
+        return bookDTO;
+    }
+
+    public void setBookDTO(BookDTO bookDTO) {
+        this.bookDTO = bookDTO;
     }
 
     public Book findById(long id) {
-        return bookDAO.findById(id);
+        return bookDTO.findById(id);
     }
 
     public List<Book> findAll() {
-        return bookDAO.findAll();
-    }
-
-    public Set<Book> findByAuthor(Author author) {
-        return bookDAO.findByAuthor(author);
+        return bookDTO.findAll();
     }
 
     public List<Book> findByTitleEnOrTitleRu(String titleEn, String titleRu) {
-        return bookDAO.findByTitleEnOrTitleRu(titleEn, titleRu);
+        return bookDTO.findByTitleEnOrTitleRu(titleEn, titleRu);
     }
 }

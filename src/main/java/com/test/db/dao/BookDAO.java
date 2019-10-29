@@ -5,7 +5,6 @@ import com.test.db.model.Book;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
-import java.util.Set;
 
 
 public interface BookDAO extends CrudRepository<Book, Long> {
@@ -13,7 +12,7 @@ public interface BookDAO extends CrudRepository<Book, Long> {
 
     Book findById(long id);
 
-    Book deleteById(long id);
+    void deleteById(long id);
 
     List<Book> findAllByPrice(double price);
 

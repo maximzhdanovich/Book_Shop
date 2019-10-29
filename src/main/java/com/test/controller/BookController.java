@@ -1,41 +1,41 @@
 package com.test.controller;
 
-import com.test.db.dao.AuthorDAO;
-import com.test.db.dao.BookDAO;
-import com.test.db.dao.CategoryDAO;
 import com.test.db.model.Book;
 import com.test.db.model.Category;
+import com.test.service.AuthorService;
+import com.test.service.BookService;
+import com.test.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/book")
 public class BookController {
 
     @Autowired
-    private AuthorDAO authorDAO;
+    private AuthorService authorService;
 
     @Autowired
-    private BookDAO bookDAO;
+    private BookService bookService;
 
     @Autowired
-    private CategoryDAO categoryDAO;
+    private CategoryService categoryService;
 
     @GetMapping
     public String bookList(Model model) {
-        model.addAttribute("books", bookDAO.findAll());
+        model.addAttribute("books", bookService.findAll());
         return "bookList";
     }
 
     @GetMapping("{book}")
     public String bookEdit(@PathVariable Book book, Model model) {
         model.addAttribute("book", book);
-        model.addAttribute("categories", categoryDAO.findAll());
+        model.addAttribute("categories", categoryService.findAll());
         return "bookEdit";
     }
 
@@ -49,18 +49,18 @@ public class BookController {
             @RequestParam("bookId") Book book) {
         book.setTitleRu(titleRu);
         book.setTitleEn(titleEn);
-        if (authorDAO.findBySurnameAndName(authorSurname, authorName) == null) {
+        if (authorService.findBySurnameAndName(authorSurname, authorName) == null) {
             return "redirect:/book/" + book.getId();
         }
-        book.setAuthor(authorDAO.findBySurnameAndName(authorSurname, authorName));
-        Set<Category> categories = categoryDAO.findAll();
+        book.setAuthor(authorService.findBySurnameAndName(authorSurname, authorName));
+        List<Category> categories = categoryService.findAll();
         book.getCategories().clear();
         for (String s : form.keySet()) {
             if (form.get(s).equals("on")) {
-                book.getCategories().add(categoryDAO.findById(Integer.valueOf(s)));
+                book.getCategories().add(categoryService.findById(Integer.valueOf(s)));
             }
         }
-        bookDAO.save(book);
+        bookService.save(book);
         return "redirect:/book";
     }
 }
