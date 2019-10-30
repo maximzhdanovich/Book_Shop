@@ -2,13 +2,14 @@ package com.test.db.model;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 @Entity
 @Table(name = "ROLE")
-public class Role {
+public class Role{
     private Long id;
     private String title;
     private Set<User> users;

@@ -22,7 +22,7 @@ public class MainController extends BaseController {
     @Autowired
     private AuthorService authorService;
 
-    @GetMapping("/main")
+    @GetMapping("/")
     public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
         List<Book> books = bookService.findAll();
 
@@ -36,7 +36,7 @@ public class MainController extends BaseController {
         return "main";
     }
 
-    @PostMapping("/main")
+    @PostMapping("/")
     public String add(
             @RequestParam double price,
             @RequestParam String titleRu,

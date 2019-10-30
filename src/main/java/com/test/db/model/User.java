@@ -1,11 +1,15 @@
 package com.test.db.model;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
 
 @Entity
 @Table(name = "USER")
-public class User {
+public class User{
     private Long id;
     private String username;
     private String email;
@@ -34,6 +38,7 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
+
     @NotNull
     @Column(name = "USERNAME")
     public String getUsername() {
@@ -44,7 +49,6 @@ public class User {
         this.username = username;
     }
 
-
     @NotNull
     @Column(name = "EMAIL")
     public String getEmail() {
@@ -54,6 +58,7 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
 
     @NotNull
     @Column(name = "PASSWORD")
@@ -93,6 +98,5 @@ public class User {
         this.email = email;
         this.password = password;
     }
-
 
 }
