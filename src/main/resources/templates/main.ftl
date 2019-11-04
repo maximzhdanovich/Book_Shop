@@ -5,6 +5,12 @@
     <title>Book_Shop</title>
 </head>
 <body>
+<div>
+    <form action="/logout" method="post">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+        <input type="submit" value="Sign Out"/>
+    </form>
+</div>
 <a href="/book">book list</a>
 <div>
     <form method="post">
@@ -18,7 +24,7 @@
     </form>
 </div>
 <div>Список книг</div>
-<form method="get" action="/main">
+<form method="get" action="/">
     <input type="text" name="filter" value="${filter!}" >
     <button type="submit">Найти</button>
 </form>

@@ -41,6 +41,10 @@ public class Basket {
         this.user = user;
     }
 
+    public Basket(User user) {
+        this.user = user;
+    }
+
     public Basket() {
     }
 

@@ -18,6 +18,15 @@ public class User{
     private Basket basket;
     private boolean active;
 
+    public User(User user) {
+        this.active=user.active;
+        this.username=user.username;
+        this.password=user.password;
+        this.email=user.email;
+        this.role=user.role;
+        this.id=user.id;
+    }
+
     @NotNull
     @Column(name = "Active")
     public boolean isActive() {
@@ -70,7 +79,7 @@ public class User{
         this.password = password;
     }
 
-    @ManyToOne(targetEntity = Role.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Role.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "FK_ROLE_ID")
     public Role getRole() {
         return role;
@@ -97,6 +106,7 @@ public class User{
         this.username = username;
         this.email = email;
         this.password = password;
+        setBasket(new Basket(this));
     }
 
 }

@@ -39,6 +39,11 @@ public class Book implements Serializable {
         this.categories = categories;
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(id);
+    }
+
     public Book(double price, String titleRu, String titleEn) {
         this.price = price;
         this.titleRu = titleRu;

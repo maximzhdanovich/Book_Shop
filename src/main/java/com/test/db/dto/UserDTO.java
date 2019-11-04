@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class UserDTO {
@@ -22,7 +23,7 @@ public class UserDTO {
     public void save(User user){
         userDAO.save(user);
     }
-    public User findByUsername(String name){
+    public Optional<User> findByUsername(String name){
         return userDAO.findByUsername(name);
     }
 

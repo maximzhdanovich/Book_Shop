@@ -16,9 +16,7 @@ Book Edit
             <label><input type="checkbox" name="${category}"
                         ${book.categories?seq_contains(category)?string("checked", "")}>${category.titleRu}</label>
         </div>
-
     </#list>
-
     <input type="hidden" value="${book.id}" name="bookId">
     <button type="submit">Save</button>
 </body>

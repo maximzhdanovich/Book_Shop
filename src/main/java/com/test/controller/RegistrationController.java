@@ -9,12 +9,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Optional;
+
 @Controller
 public class RegistrationController {
     @Autowired
     private UserService userService;
     @Autowired
     private RoleService roleService;
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
     @GetMapping("/registration")
     public String registration() {
         return "registration";
@@ -22,9 +28,9 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public String addUser(User user, Model model) {
-        User userFromDb = userService.findByUsername(user.getUsername());
+        Optional<User> userFromDb = userService.findByUsername(user.getUsername());
 
-        if (userFromDb != null) {
+        if (userFromDb.isPresent()) {
             model.addAttribute("message", "User exists!");
             return "registration";
         }

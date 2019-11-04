@@ -6,7 +6,7 @@
 </head>
 <body>
 List of Books<br>
-<a href="/main">main</a>
+<a href="/">main</a>
 <table>
     <thead>
     <tr>
