@@ -1,6 +1,8 @@
 package com.test.controller;
 
+import com.test.db.model.Basket;
 import com.test.db.model.User;
+import com.test.service.BasketService;
 import com.test.service.RoleService;
 import com.test.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +17,18 @@ import java.util.Optional;
 public class RegistrationController {
     @Autowired
     private UserService userService;
+
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private BasketService basketService;
+
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "login";
     }
+
     @GetMapping("/registration")
     public String registration() {
         return "registration";
@@ -34,11 +42,13 @@ public class RegistrationController {
             model.addAttribute("message", "User exists!");
             return "registration";
         }
-
         user.setActive(true);
         user.setRole(roleService.findByTitle("USER"));
         userService.save(user);
-
+        Basket basket = new Basket(user);
+        basketService.save(basket);
+        user.setBasket(basket);
+        userService.save(user);
         return "redirect:/login";
     }
 }

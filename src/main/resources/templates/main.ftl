@@ -28,13 +28,17 @@
     <input type="text" name="filter" value="${filter!}" >
     <button type="submit">Найти</button>
 </form>
+<form method="post" action="/addtobasket">
 <#list books as book>
     <div>
         <b>${book.price}</b>
         <b>${book.titleEn}</b>
         <b>${book.titleRu}</b>
         <b>${book.author.surname}</b>
+        <input type="checkbox" name="${book}">
     </div>
 </#list>
+    <button type="submit">add to basket</button>
+</form>
 </body>
 </html>

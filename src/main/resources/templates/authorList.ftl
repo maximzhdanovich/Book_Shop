@@ -6,7 +6,7 @@
 </head>
 <body>
 List of Authors<br>
-<a href="/main">main</a>
+<a href="/">main</a>
 <div>
     <form method="post">
         <input type="text" name="surname" placeholder="фамилия автора">

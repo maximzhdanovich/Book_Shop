@@ -19,5 +19,9 @@ Book Edit
     </#list>
     <input type="hidden" value="${book.id}" name="bookId">
     <button type="submit">Save</button>
+</form>
+<form method="get" action="/book/delete/${book.id}">
+    <button type="submit">Delete</button>
+</form>
 </body>
 </html>

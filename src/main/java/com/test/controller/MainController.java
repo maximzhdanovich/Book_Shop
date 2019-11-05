@@ -1,23 +1,27 @@
 package com.test.controller;
 
 
+import com.test.db.model.Basket;
 import com.test.db.model.Book;
+import com.test.db.model.CustomUserDetail;
 import com.test.db.model.User;
 import com.test.service.AuthorService;
+import com.test.service.BasketService;
 import com.test.service.BookService;
+import com.test.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.xml.bind.SchemaOutputResolver;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+@PreAuthorize("hasAnyRole('ADMIN','USER')")
 @Controller
 public class MainController extends BaseController {
 
@@ -25,10 +29,14 @@ public class MainController extends BaseController {
     private BookService bookService;
     @Autowired
     private AuthorService authorService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private BasketService basketService;
 
     @GetMapping("/")
-    public String main( @AuthenticationPrincipal User user,
-            @RequestParam(required = false, defaultValue = "") String filter, Model model) {
+    public String main(@AuthenticationPrincipal User user,
+                       @RequestParam(required = false, defaultValue = "") String filter, Model model) {
         List<Book> books = bookService.findAll();
 
         if (filter != null && !filter.equals("")) {
@@ -43,6 +51,7 @@ public class MainController extends BaseController {
 
     @PostMapping("/")
     public String add(
+            @AuthenticationPrincipal User user,
             @RequestParam double price,
             @RequestParam String titleRu,
             @RequestParam String titleEn,
@@ -52,7 +61,7 @@ public class MainController extends BaseController {
     ) {
 
         Book book = new Book(price, titleRu, titleEn);
-            book.setAuthor(authorService.findBySurnameAndName(author_surname,author_name));
+        book.setAuthor(authorService.findBySurnameAndName(author_surname, author_name));
 
         bookService.save(book);
 
@@ -60,6 +69,18 @@ public class MainController extends BaseController {
 
         model.addAttribute("books", books);
 
+
         return "main";
+    }
+
+    @PostMapping("/addtobasket")
+    public String addToBasket(@AuthenticationPrincipal CustomUserDetail user, @RequestParam Map<String, String> form) {
+        User userById = userService.findById(user.getId());
+        Basket basket = userById.getBasket();
+            for (String id : form.keySet()) {
+                basket.getBooks().add(bookService.findById(Long.valueOf(id)));
+            }
+        basketService.save(basket);
+        return "redirect:/";
     }
 }

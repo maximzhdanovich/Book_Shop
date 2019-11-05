@@ -32,4 +32,9 @@ public class BookDTO {
     public List<Book> findByTitleEnOrTitleRu(String titleEn, String titleRu) {
         return bookDAO.findByTitleEnOrTitleRu(titleEn, titleRu);
     }
+
+    public void deleteById(long id){
+        bookDAO.deleteById(id);
+    }
+
 }

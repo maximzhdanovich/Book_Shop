@@ -12,11 +12,15 @@ public class BasketService {
     @Autowired
     private BasketDTO basketDTO;
 
-    public List<Basket> findAll(){
+    public List<Basket> findAll() {
         return basketDTO.findAll();
     }
 
-    public Basket findById(long id){
+    public Basket findById(long id) {
         return basketDTO.findById(id);
+    }
+
+    public void save(Basket basket) {
+        basketDTO.save(basket);
     }
 }

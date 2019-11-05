@@ -31,7 +31,7 @@ public class Basket {
     public void setBooks(Set<Book> books) {
         this.books = books;
     }
-    @OneToOne(fetch=FetchType.LAZY)
+    @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "FK_User_ID")
     public User getUser() {
         return user;
@@ -41,8 +41,13 @@ public class Basket {
         this.user = user;
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(id);
+    }
+
     public Basket(User user) {
-        this.user = user;
+        setUser(user);
     }
 
     public Basket() {

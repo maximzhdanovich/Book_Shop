@@ -89,7 +89,7 @@ public class User{
         this.role = role;
     }
 
-    @OneToOne
+    @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "FK_BASKET_ID")
     public Basket getBasket() {
         return basket;

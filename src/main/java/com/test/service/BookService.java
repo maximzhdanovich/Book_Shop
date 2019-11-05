@@ -37,4 +37,8 @@ public class BookService{
     public List<Book> findByTitleEnOrTitleRu(String titleEn, String titleRu) {
         return bookDTO.findByTitleEnOrTitleRu(titleEn, titleRu);
     }
+
+    public void deleteById(long id){
+        bookDTO.deleteById(id);
+    }
 }

@@ -4,13 +4,14 @@ import com.test.db.model.User;
 import com.test.service.RoleService;
 import com.test.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
+import java.util.List;
 
-//@PreAuthorize("hasAnyRole('ADMIN')")
+@PreAuthorize("hasAnyRole('ADMIN')")
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -18,21 +19,23 @@ public class UserController {
     private UserService userService;
     @Autowired
     private RoleService roleService;
+
     @GetMapping
     public String userList(Model model) {
-        model.addAttribute("users", userService.findAll());
+        model.addAttribute("users",userService.findAll());
         return "userList";
     }
     @GetMapping("{user}")
     public String userEdit(@PathVariable User user, Model model) {
         model.addAttribute("user", user);
         model.addAttribute("roles", roleService.findAll());
+        System.out.println(user.getBasket());
+        System.out.println(user.getBasket().getUser().getUsername());
         return "userEdit";
     }
 
     @PostMapping
     public String userSave(@RequestParam("userId") User user,
-//                           @RequestParam Map<String, String> role,
                            @RequestParam String role,
                            @RequestParam String username,
                            @RequestParam String password,
