@@ -21,29 +21,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
 
-@PreAuthorize("hasAnyRole('ADMIN','USER')")
 @Controller
 public class MainController extends BaseController {
 
     @Autowired
     private BookService bookService;
+
     @Autowired
     private AuthorService authorService;
+
     @Autowired
     private UserService userService;
+
     @Autowired
     private BasketService basketService;
 
     @GetMapping("/")
-    public String main(@AuthenticationPrincipal User user,
+    public String main(@AuthenticationPrincipal CustomUserDetail user,
                        @RequestParam(required = false, defaultValue = "") String filter, Model model) {
-        List<Book> books = bookService.findAll();
+        List<Book> books;
 
         if (filter != null && !filter.equals("")) {
             books = bookService.findByTitleEnOrTitleRu(filter, filter);
         } else {
             books = bookService.findAll();
         }
+        if (getCurrentUser(user) == null) {
+            return "redirect:/login";
+        }
+        model.addAttribute("currentUser", getCurrentUser(user));
         model.addAttribute("books", books);
         model.addAttribute("filter", filter);
         return "main";
@@ -62,25 +68,26 @@ public class MainController extends BaseController {
 
         Book book = new Book(price, titleRu, titleEn);
         book.setAuthor(authorService.findBySurnameAndName(author_surname, author_name));
-
         bookService.save(book);
-
         List<Book> books = bookService.findAll();
-
         model.addAttribute("books", books);
-
-
         return "main";
     }
 
     @PostMapping("/addtobasket")
     public String addToBasket(@AuthenticationPrincipal CustomUserDetail user, @RequestParam Map<String, String> form) {
-        User userById = userService.findById(user.getId());
-        Basket basket = userById.getBasket();
-            for (String id : form.keySet()) {
-                basket.getBooks().add(bookService.findById(Long.valueOf(id)));
-            }
+        Basket basket = getCurrentUser(user).getBasket();
+        for (String id : form.keySet()) {
+            basket.getBooks().add(bookService.findById(Long.valueOf(id)));
+        }
         basketService.save(basket);
         return "redirect:/";
+    }
+
+    private User getCurrentUser(@AuthenticationPrincipal CustomUserDetail user) {
+        if (user.getId() == null) {
+            return null;
+        }
+        return userService.findById(user.getId());
     }
 }
