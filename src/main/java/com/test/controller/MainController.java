@@ -1,21 +1,17 @@
 package com.test.controller;
 
 
-import com.test.db.model.Basket;
-import com.test.db.model.Book;
-import com.test.db.model.CustomUserDetail;
-import com.test.db.model.User;
+import com.test.db.model.*;
+import com.test.exception.PageNotFoundException;
 import com.test.service.AuthorService;
 import com.test.service.BasketService;
 import com.test.service.BookService;
 import com.test.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -65,9 +61,9 @@ public class MainController extends BaseController {
             @RequestParam String author_name,
             Model model
     ) {
-
         Book book = new Book(price, titleRu, titleEn);
-        book.setAuthor(authorService.findBySurnameAndName(author_surname, author_name));
+        Author bySurnameAndName = authorService.findBySurnameAndName(author_surname, author_name);
+        book.setAuthor(bySurnameAndName);
         bookService.save(book);
         List<Book> books = bookService.findAll();
         model.addAttribute("books", books);
@@ -89,5 +85,15 @@ public class MainController extends BaseController {
             return null;
         }
         return userService.findById(user.getId());
+    }
+
+    @GetMapping("/pageNotFound")
+    public String pageNotFound(){
+        return "notFound";
+    }
+
+    @GetMapping("/{some}")
+    public String somepage(){
+        throw new PageNotFoundException();
     }
 }

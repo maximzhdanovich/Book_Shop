@@ -1,3 +1,4 @@
+<#include "parts/security.ftl">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +23,9 @@ List of Books<br>
             <td>${book.titleRu}</td>
             <td>${book.titleEn}</td>
             <td>${book.author.surname} ${book.author.name}</td>
+            <#if isAdmin>
             <td><a href="/book/${book.id}">edit</a></td>
+            </#if>
         </tr>
     </#list>
     </tbody>

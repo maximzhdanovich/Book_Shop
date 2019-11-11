@@ -1,3 +1,4 @@
+<#include "parts/security.ftl">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,8 +6,6 @@
     <title>Book_Shop</title>
 </head>
 <body>
-${currentUser.username}
-${currentUser.role.title}
 <#global sum=0>
 <div>
     <form action="/logout" method="post">
@@ -15,6 +14,10 @@ ${currentUser.role.title}
     </form>
 </div>
 <a href="/book">book list</a>
+<#if isAdmin>
+<a href="/user">user list</a>
+</#if>
+<div>${name}</div>
 <div>
     <form method="post">
         <input type="number" step="0.01" name="price" placeholder="стоимость">
@@ -38,11 +41,14 @@ ${currentUser.role.title}
             <b>${book.titleEn}</b>
             <b>${book.titleRu}</b>
             <b>${book.author.surname}</b>
+            <#if name!="unknow">
             <input type="checkbox" name="${book}" id="${book.id}" onclick="myFunction(${book.id},${book.price})">
+            </#if>
         </div>
     </#list>
-
+    <#if name!="unknow">
     <button type="submit">add to basket</button>
+    </#if>
 </form>
 <a>Cтоимость</a>
 <input type="number" id="sum" value="${sum}" readonly="readonly">

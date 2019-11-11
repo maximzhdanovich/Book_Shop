@@ -16,6 +16,9 @@ public class CustomUserDetail extends User implements UserDetails {
         SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_" + getRole().getTitle());
         return Collections.singleton(simpleGrantedAuthority);
     }
+    public boolean isAdmin(){
+        return getRole().getTitle().equals("ADMIN");
+    }
 
     @Override
     public String getPassword() {

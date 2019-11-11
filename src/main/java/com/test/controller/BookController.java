@@ -2,10 +2,12 @@ package com.test.controller;
 
 import com.test.db.model.Book;
 import com.test.db.model.Category;
+import com.test.exception.PageNotFoundException;
 import com.test.service.AuthorService;
 import com.test.service.BookService;
 import com.test.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,14 +33,14 @@ public class BookController {
         model.addAttribute("books", bookService.findAll());
         return "bookList";
     }
-
-    @GetMapping("{book}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @GetMapping("/{book}")
     public String bookEdit(@PathVariable Book book, Model model) {
         model.addAttribute("book", book);
         model.addAttribute("categories", categoryService.findAll());
         return "bookEdit";
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
     public String bookSave(
             @RequestParam String titleRu,
@@ -63,4 +65,5 @@ public class BookController {
         bookService.save(book);
         return "redirect:/book";
     }
+
 }
