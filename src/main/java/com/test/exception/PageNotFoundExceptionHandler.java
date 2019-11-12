@@ -8,6 +8,6 @@ public class PageNotFoundExceptionHandler {
 
     @ExceptionHandler(PageNotFoundException.class)
     public String  notBook(PageNotFoundException e) {
-        return "forward:/pageNotFound";
+        return "notFound";
     }
 }

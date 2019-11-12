@@ -1,11 +1,6 @@
+<#import "parts/common.ftl" as c>
 <#include "parts/security.ftl">
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Book_List</title>
-</head>
-<body>
+<@c.page>
 List of Books<br>
 <a href="/">main</a>
 <table>
@@ -30,5 +25,4 @@ List of Books<br>
     </#list>
     </tbody>
 </table>
-</body>
-</html>
+</@c.page>

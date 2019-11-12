@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Book_Edit</title>
-</head>
-<body>
+<#import "parts/common.ftl" as c>
+<@c.page>
 Book Edit
 <form action="/book" method="post">
     <input type="text" name="titleRu" value="${book.titleRu}">
@@ -23,5 +18,4 @@ Book Edit
 <form method="get" action="/book/delete/${book.id}">
     <button type="submit">Delete</button>
 </form>
-</body>
-</html>
+</@c.page>

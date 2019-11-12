@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Book_Shop</title>
-</head>
-<body>
+<#import "parts/common.ftl" as c>
+<@c.page>
 <div>
     Страница не найдена
     <a href="/">Главная</a>
 </div>
-</body>
-</html>
+</@c.page>

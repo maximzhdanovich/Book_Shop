@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Author_List</title>
-</head>
-<body>
+<#import "parts/common.ftl" as c>
+<@c.page>
 List of Authors<br>
 <a href="/">main</a>
 <div>
@@ -24,5 +19,4 @@ List of Authors<br>
     </#list>
     </tbody>
 </table>
-</body>
-</html>
+</@c.page>

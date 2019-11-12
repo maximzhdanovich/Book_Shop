@@ -1,23 +1,8 @@
+<#import "parts/common.ftl" as c>
 <#include "parts/security.ftl">
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Book_Shop</title>
-</head>
-<body>
+<@c.page>
 <#global sum=0>
-<div>
-    <form action="/logout" method="post">
-        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-        <input type="submit" value="Sign Out"/>
-    </form>
-</div>
-<a href="/book">book list</a>
-<#if isAdmin>
-<a href="/user">user list</a>
-</#if>
-<div>${name}</div>
+
 <div>
     <form method="post">
         <input type="number" step="0.01" name="price" placeholder="стоимость">
@@ -64,6 +49,4 @@
         }
     }
 </script>
-
-</body>
-</html>
+</@c.page>

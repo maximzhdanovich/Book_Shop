@@ -42,7 +42,7 @@ public class MainController extends BaseController {
         } else {
             books = bookService.findAll();
         }
-        if (getCurrentUser(user) == null) {
+        if (user == null) {
             return "redirect:/login";
         }
         model.addAttribute("currentUser", getCurrentUser(user));
