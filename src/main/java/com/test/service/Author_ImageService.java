@@ -13,6 +13,10 @@ public class Author_ImageService {
     @Autowired
     private Author_ImageDTO authorImageDTO;
 
+    public void save(Author_Image author_image){
+        authorImageDTO.save(author_image);
+    }
+
     public List<Author_Image> findAll(){
         return authorImageDTO.findAll();
     }

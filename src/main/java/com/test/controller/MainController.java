@@ -3,18 +3,19 @@ package com.test.controller;
 
 import com.test.db.model.*;
 import com.test.exception.PageNotFoundException;
-import com.test.service.AuthorService;
-import com.test.service.BasketService;
-import com.test.service.BookService;
-import com.test.service.UserService;
+import com.test.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 @Controller
@@ -32,9 +33,14 @@ public class MainController extends BaseController {
     @Autowired
     private BasketService basketService;
 
+    @Autowired
+    private Author_ImageService author_imageService;
+
+    @Value("${upload.path}")
+    private String uploadPath;
+
     @GetMapping("/")
-    public String main(@AuthenticationPrincipal CustomUserDetail user,
-                       @RequestParam(required = false, defaultValue = "") String filter, Model model) {
+    public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
         List<Book> books;
 
         if (filter != null && !filter.equals("")) {
@@ -42,25 +48,33 @@ public class MainController extends BaseController {
         } else {
             books = bookService.findAll();
         }
-        if (user == null) {
-            return "redirect:/login";
-        }
-        model.addAttribute("currentUser", getCurrentUser(user));
         model.addAttribute("books", books);
         model.addAttribute("filter", filter);
         return "main";
     }
 
     @PostMapping("/")
-    public String add(
-            @AuthenticationPrincipal User user,
-            @RequestParam double price,
-            @RequestParam String titleRu,
-            @RequestParam String titleEn,
-            @RequestParam String author_surname,
-            @RequestParam String author_name,
-            Model model
-    ) {
+    public String add(@RequestParam double price,
+                      @RequestParam String titleRu,
+                      @RequestParam String titleEn,
+                      @RequestParam String author_surname,
+                      @RequestParam String author_name,
+                      @RequestParam MultipartFile image,
+                      Model model
+    ) throws IOException {
+        if (image != null && !image.getOriginalFilename().isEmpty()) {
+            Author_Image author_image = new Author_Image();
+            File uploadDir = new File(uploadPath);
+            if (!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
+            String uuidFile = UUID.randomUUID().toString();
+            String fileName = uuidFile  + image.getOriginalFilename();
+            image.transferTo(new File(uploadPath+"/"+fileName));
+            author_image.setAuthorImage(fileName);
+            author_image.setAuthor(authorService.findById(1));
+            author_imageService.save(author_image);
+        }
         Book book = new Book(price, titleRu, titleEn);
         Author bySurnameAndName = authorService.findBySurnameAndName(author_surname, author_name);
         book.setAuthor(bySurnameAndName);
@@ -87,13 +101,13 @@ public class MainController extends BaseController {
         return userService.findById(user.getId());
     }
 
-    @GetMapping("/pageNotFound")
-    public String pageNotFound(){
-        return "notFound";
-    }
-
-    @GetMapping("/{some}")
-    public String somepage(){
-        throw new PageNotFoundException();
-    }
+//    @GetMapping("/pageNotFound")
+//    public String pageNotFound(){
+//        return "notFound";
+//    }
+//
+//    @GetMapping("/{some}")
+//    public String somepage(){
+//        throw new PageNotFoundException();
+//    }
 }

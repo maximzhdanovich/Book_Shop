@@ -13,10 +13,13 @@ List of Authors<br>
     <tbody>
     <#list authors as author>
         <tr>
-            <td>${author.surname} ${author.name}</td>
+            <td>${author.surname} ${author.name} </td>
             <td><a href="/author/${author.id}">edit</a></td>
         </tr>
     </#list>
     </tbody>
 </table>
+    <#list images as image>
+        <img src="/img/${image.authorImage}">
+    </#list>
 </@c.page>

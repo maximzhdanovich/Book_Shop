@@ -12,6 +12,9 @@ public class Author_ImageDTO  {
     @Autowired
     private Author_ImageDAO author_imageDAO;
 
+    public void save(Author_Image author_image){
+        author_imageDAO.save(author_image);
+    }
     public List<Author_Image> findAll(){
         return author_imageDAO.findAll();
     }

@@ -4,13 +4,14 @@
 <#global sum=0>
 
 <div>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <input type="number" step="0.01" name="price" placeholder="стоимость">
         <input type="text" name="titleRu" placeholder="название ру">
         <input type="text" name="titleEn" placeholder="название en">
-
         <input type="text" name="author_surname" placeholder="фамилия автора">
         <input type="text" name="author_name" placeholder="имя автора">
+        <input type="file" name="image">
+
         <button type="submit">Добавить</button>
     </form>
 </div>

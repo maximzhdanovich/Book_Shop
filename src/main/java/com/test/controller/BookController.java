@@ -36,7 +36,6 @@ public class BookController {
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/{book}")
     public String bookEdit(@PathVariable String book, Model model) {
-        if(bookService.findById(Long.parseLong(book))==null){return "notFound";}
         model.addAttribute("book", bookService.findById(Long.parseLong(book)));
         model.addAttribute("categories", categoryService.findAll());
         return "bookEdit";

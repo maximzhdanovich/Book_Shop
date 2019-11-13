@@ -2,6 +2,7 @@ package com.test.controller;
 
 import com.test.db.model.Author;
 import com.test.service.AuthorService;
+import com.test.service.Author_ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 public class AuthorController {
     @Autowired
     private AuthorService authorService;
+
+    @Autowired
+    private Author_ImageService authorImageService;
 
     @GetMapping("{author}")
     public String authorEdit(@PathVariable Author author, Model model) {
@@ -32,6 +36,7 @@ public class AuthorController {
     @GetMapping
     public String authorList(Model model) {
         model.addAttribute("authors", authorService.findAll());
+        model.addAttribute("images",authorImageService.findAll());
         return "authorList";
     }
 

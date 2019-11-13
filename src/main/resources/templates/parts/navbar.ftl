@@ -25,14 +25,16 @@
         </ul>
 
         <#if name=="unknown">
-            <b>${name}</b>
+            <div class="mr-3">
+            <b>${name}</b></div>
+            <a href="/login">login</a>
         <#else ><div class="mr-2">
             <form action="/logout" method="post">
                 <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
                 <input type="submit" value="Sign Out"/>
             </form>
         </div>
-            <a href="/user">${name}</a>
+            <a href="/account">${name}</a>
         </#if>
     </div>
 </nav>
