@@ -24,12 +24,8 @@ public class AuthorController {
     }
 
     @PostMapping("{authorId}")
-    public String authorSave(@RequestParam String surname,
-                             @RequestParam String name,
-                             @RequestParam("authorId") Author author){
-        author.setSurname(surname);
-        author.setName(name);
-        authorService.save(author);
+    public String authorSave(@RequestParam String surname, @RequestParam String name, @RequestParam("authorId") Author author){
+        authorService.update(surname, name, author);
         return "redirect:/author";
     }
 

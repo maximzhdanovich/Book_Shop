@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class AuthorService  {
+public class AuthorService {
     @Autowired
     private AuthorDTO authorDTO;
 
@@ -24,15 +24,27 @@ public class AuthorService  {
             return null;
         }
     }
-    public void deleteById(long id){
+
+    public void deleteById(long id) {
         authorDTO.deleteById(id);
     }
 
-    public Author findById(long id){
+    public Author findById(long id) {
         return authorDTO.findById(id);
     }
 
-    public List<Author> findAll(){
-     return authorDTO.findAll();
+    public List<Author> findAll() {
+        return authorDTO.findAll();
+    }
+
+    public void update(String surname, String name, Author author) {
+        author.setSurname(surname);
+        author.setName(name);
+        save(author);
+    }
+
+    public void create(String surname,String name){
+        Author author = new Author(surname, name);
+        save(author);
     }
 }

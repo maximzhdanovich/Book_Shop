@@ -9,8 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @PreAuthorize("hasAnyRole('ADMIN')")
 @Controller
 @RequestMapping("/user")
@@ -29,8 +27,6 @@ public class UserController {
     public String userEdit(@PathVariable User user, Model model) {
         model.addAttribute("user", user);
         model.addAttribute("roles", roleService.findAll());
-        System.out.println(user.getBasket());
-        System.out.println(user.getBasket().getUser().getUsername());
         return "userEdit";
     }
 
@@ -40,11 +36,7 @@ public class UserController {
                            @RequestParam String username,
                            @RequestParam String password,
                            @RequestParam String email){
-        user.setUsername(username);
-        user.setRole(roleService.findByTitle(role));
-        user.setEmail(email);
-        user.setPassword(password);
-        userService.save(user);
+        userService.update(user,role,username,password,email);
         return "redirect:/user";
     }
 }

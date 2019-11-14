@@ -1,6 +1,7 @@
 package com.test.service;
 
 import com.test.db.dto.BookDTO;
+import com.test.db.model.Author;
 import com.test.db.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,9 +11,15 @@ import java.util.List;
 
 @Service
 @Qualifier("bookService")
-public class BookService{
+public class BookService {
     @Autowired
     private BookDTO bookDTO;
+
+    public void create(double price, String titleRu, String titleEn, Author author) {
+        Book book = new Book(price, titleRu, titleEn);
+        book.setAuthor(author);
+        save(book);
+    }
 
     public void save(Book book) {
         bookDTO.save(book);
@@ -38,7 +45,7 @@ public class BookService{
         return bookDTO.findByTitleEnOrTitleRu(titleEn, titleRu);
     }
 
-    public void deleteById(long id){
+    public void deleteById(long id) {
         bookDTO.deleteById(id);
     }
 }

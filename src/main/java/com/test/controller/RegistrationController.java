@@ -37,18 +37,11 @@ public class RegistrationController {
     @PostMapping("/registration")
     public String addUser(User user, Model model) {
         Optional<User> userFromDb = userService.findByUsername(user.getUsername());
-
         if (userFromDb.isPresent()) {
             model.addAttribute("message", "User exists!");
             return "registration";
         }
-        user.setActive(true);
-        user.setRole(roleService.findByTitle("USER"));
-        userService.save(user);
-        Basket basket = new Basket(user);
-        basketService.save(basket);
-        user.setBasket(basket);
-        userService.save(user);
+        userService.create(user);
         return "redirect:/login";
     }
 }

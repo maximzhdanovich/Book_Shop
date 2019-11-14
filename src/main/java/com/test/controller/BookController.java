@@ -49,11 +49,11 @@ public class BookController {
             @RequestParam String authorName,
             @RequestParam Map<String, String> form,
             @RequestParam("bookId") Book book) {
-        book.setTitleRu(titleRu);
-        book.setTitleEn(titleEn);
         if (authorService.findBySurnameAndName(authorSurname, authorName) == null) {
             return "redirect:/book/" + book.getId();
         }
+        book.setTitleRu(titleRu);
+        book.setTitleEn(titleEn);
         book.setAuthor(authorService.findBySurnameAndName(authorSurname, authorName));
         List<Category> categories = categoryService.findAll();
         book.getCategories().clear();
