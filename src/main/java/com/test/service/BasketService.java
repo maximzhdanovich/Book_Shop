@@ -2,6 +2,7 @@ package com.test.service;
 
 import com.test.db.dto.BasketDTO;
 import com.test.db.model.Basket;
+import com.test.db.model.Book;
 import com.test.db.model.CustomUserDetail;
 import com.test.db.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,12 @@ public class BasketService {
         for (String id : form.keySet()) {
             basket.getBooks().add(bookService.findById(Long.valueOf(id)));
         }
+        save(basket);
+    }
+
+    public void addSingleBook(CustomUserDetail user, Book book){
+        Basket basket = getByUser(user);
+        basket.getBooks().add(book);
         save(basket);
     }
 }

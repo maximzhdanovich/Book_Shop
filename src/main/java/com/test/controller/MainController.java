@@ -1,12 +1,10 @@
 package com.test.controller;
 
 
-import com.test.db.model.*;
-import com.test.exception.PageNotFoundException;
-import com.test.service.*;
+import com.test.service.AuthorService;
+import com.test.service.Author_ImageService;
+import com.test.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,9 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.*;
 
 @Controller
 public class MainController extends BaseController {
@@ -27,8 +23,6 @@ public class MainController extends BaseController {
     @Autowired
     private AuthorService authorService;
 
-    @Autowired
-    private BasketService basketService;
 
     @Autowired
     private Author_ImageService author_imageService;
@@ -58,12 +52,12 @@ public class MainController extends BaseController {
         model.addAttribute("books", bookService.findAll());
         return "main";
     }
-
-    @PostMapping("/addtobasket")
-    public String addToBasket(@AuthenticationPrincipal CustomUserDetail user, @RequestParam Map<String, String> form) {
-            basketService.addBooks(user,form);
-        return "redirect:/";
-    }
+//
+//    @PostMapping("/addtobasket")
+//    public String addToBasket(@AuthenticationPrincipal CustomUserDetail user, @RequestParam Map<String, String> form) {
+//            basketService.addBooks(user,form);
+//        return "redirect:/";
+//    }
 
 
 }
