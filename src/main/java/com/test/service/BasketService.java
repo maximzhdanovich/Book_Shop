@@ -34,7 +34,7 @@ public class BasketService {
         basketDTO.save(basket);
     }
 
-    public Basket getByUser(CustomUserDetail user) {
+    public Basket getByUser(User user) {
         return userService.getCurrentUser(user).getBasket();
     }
 
@@ -52,7 +52,7 @@ public class BasketService {
         save(basket);
     }
 
-    public void addSingleBook(CustomUserDetail user, Book book){
+    public void addSingleBook(User user, Book book){
         Basket basket = getByUser(user);
         basket.getBooks().add(book);
         save(basket);

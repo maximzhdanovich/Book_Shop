@@ -19,6 +19,39 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
     <script type="text/javascript" src="/postrequest.js"></script>
+
+    <style>
+        #window {
+            /*width: 300px;*/
+            /*height: 50px;*/
+            text-align: center;
+            padding: 15px;
+            border: 3px solid #0000cc;
+            border-radius: 10px;
+            color: #0000cc;
+            display: none;
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        #window:target {
+            display: block;
+        }.close {
+            display: inline-block;
+            border: 1px solid #0000cc;
+            color: #0000cc;
+            /*padding: 10px 10px 10px 10px;*/
+            margin: -8px -3px;
+            text-decoration: none;
+            background: #f2f2f2;
+            font-size: 10pt;
+            cursor: pointer;
+        }.close:hover {
+            background: #e6e6ff;
+        }
+    </style>
 </head>
 <body>
 
@@ -46,7 +79,6 @@
     <form method="get" action="/">
         <input type="text" name="filter" value="${filter!}">
         <button type="submit">Найти</button>
-        <button type="submit">Найти</button>
     </form>
     <form id="basketAdd">
         <#list books as book>
@@ -56,24 +88,31 @@
                 <b>${book.titleRu}</b>
                 <b>${book.author.surname}</b>
                 <#if name!="unknow">
-                    <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id})>add to basket</button>
+                    <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id}) >add to basket</button>
                 </#if>
             </div>
         </#list>
+        <a href="#window">Вызвать всплывающее окно</a>
         <input type="hidden" id="bookId" value="${currentId}">
     </form>
 
-    <script>
-        function myFunction(bookId, price) {
-            var checkBox = document.getElementById(bookId);
-            var truePrice = price;
-            if (checkBox.checked === true) {
-                document.getElementById("sum").value -= -truePrice;
-            } else {
-                document.getElementById("sum").value -= truePrice;
-            }
-        }
-    </script>
+    <div id="window">
+        <a href="#" class="close">X</a>
+        <b id="windowText"></b>
+    </div>
+
+
+<#--    <script>-->
+<#--        function myFunction(bookId, price) {-->
+<#--            var checkBox = document.getElementById(bookId);-->
+<#--            var truePrice = price;-->
+<#--            if (checkBox.checked === true) {-->
+<#--                document.getElementById("sum").value -= -truePrice;-->
+<#--            } else {-->
+<#--                document.getElementById("sum").value -= truePrice;-->
+<#--            }-->
+<#--        }-->
+<#--    </script>-->
     <script>
         function editCurrentId(id) {
             document.getElementById("bookId").value = id;

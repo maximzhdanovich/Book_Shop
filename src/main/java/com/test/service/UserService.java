@@ -57,7 +57,7 @@ public class UserService implements UserDetailsService {
         return null;
     }
 
-    public User getCurrentUser(CustomUserDetail user) {
+    public User getCurrentUser(User user) {
         if (user == null) {
             throw new UserNotFoundException();
         }
