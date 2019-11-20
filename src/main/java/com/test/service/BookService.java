@@ -15,6 +15,11 @@ public class BookService {
     @Autowired
     private BookDTO bookDTO;
 
+    public void create(Book book,Author author){
+        book.setAuthor(author);
+        save(book);
+    }
+
     public void create(double price, String titleRu, String titleEn, Author author) {
         Book book = new Book(price, titleRu, titleEn);
         book.setAuthor(author);

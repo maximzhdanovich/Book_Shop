@@ -1,30 +1,36 @@
 package com.test.db.model;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.data.annotation.Transient;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.Collection;
 
 @Entity
 @Table(name = "USER")
-public class User{
+public class User {
     private Long id;
+    @NotBlank(message = "error")
     private String username;
+    @Email(message = "error email")
+    @NotBlank(message = "error")
     private String email;
+    @NotBlank(message = "error")
     private String password;
+
+
     private Role role;
     private Basket basket;
     private boolean active;
 
     public User(User user) {
-        this.active=user.active;
-        this.username=user.username;
-        this.password=user.password;
-        this.email=user.email;
-        this.role=user.role;
-        this.id=user.id;
+        this.active = user.active;
+        this.username = user.username;
+        this.password = user.password;
+        this.email = user.email;
+        this.role = user.role;
+        this.id = user.id;
     }
 
     @NotNull
@@ -89,7 +95,7 @@ public class User{
         this.role = role;
     }
 
-    @OneToOne(fetch=FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "FK_BASKET_ID")
     public Basket getBasket() {
         return basket;

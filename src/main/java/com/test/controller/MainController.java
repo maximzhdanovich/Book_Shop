@@ -1,6 +1,7 @@
 package com.test.controller;
 
 
+import com.test.db.model.Book;
 import com.test.service.AuthorService;
 import com.test.service.Author_ImageService;
 import com.test.service.BookService;
@@ -39,16 +40,14 @@ public class MainController extends BaseController {
     }
 
     @PostMapping("/")
-    public String add(@RequestParam double price,
-                      @RequestParam String titleRu,
-                      @RequestParam String titleEn,
+    public String add(Book book,
                       @RequestParam String author_surname,
                       @RequestParam String author_name,
                       @RequestParam MultipartFile image,
                       Model model
     ) throws IOException {
         author_imageService.add(image, authorService.findById(1));
-        bookService.create(price, titleRu, titleEn, authorService.findBySurnameAndName(author_surname, author_name));
+        bookService.create(book, authorService.findBySurnameAndName(author_surname, author_name));
         model.addAttribute("books", bookService.findAll());
         return "main";
     }

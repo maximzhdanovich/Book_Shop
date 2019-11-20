@@ -62,7 +62,7 @@
 <div class="container ml-5 mt-3">
     <#global sum=0>
     <#global currentId=0>
-
+    <#if isAdmin>
     <div>
         <form method="post" enctype="multipart/form-data">
             <input type="number" step="0.01" name="price" placeholder="стоимость">
@@ -75,6 +75,7 @@
             <button type="submit">Добавить</button>
         </form>
     </div>
+    </#if>
     <div>Список книг</div>
     <form method="get" action="/">
         <input type="text" name="filter" value="${filter!}">
