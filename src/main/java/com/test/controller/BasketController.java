@@ -20,11 +20,6 @@ public class BasketController {
     private BasketService basketService;
     @Autowired
     private BookService bookService;
-//    @PostMapping("/addtobasket")
-//    public String addToBasket(@AuthenticationPrincipal CustomUserDetail user, @RequestParam Map<String, String> form) {
-//        basketService.addBooks(user,form);
-//        return "redirect:/";
-//    }
 
 
     @PostMapping("/saveBook")

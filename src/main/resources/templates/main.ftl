@@ -20,38 +20,6 @@
             crossorigin="anonymous"></script>
     <script type="text/javascript" src="/postrequest.js"></script>
 
-    <style>
-        #window {
-            /*width: 300px;*/
-            /*height: 50px;*/
-            text-align: center;
-            padding: 15px;
-            border: 3px solid #0000cc;
-            border-radius: 10px;
-            color: #0000cc;
-            display: none;
-            position: fixed;
-            right: 0;
-            bottom: 0;
-            margin: auto;
-        }
-
-        #window:target {
-            display: block;
-        }.close {
-            display: inline-block;
-            border: 1px solid #0000cc;
-            color: #0000cc;
-            /*padding: 10px 10px 10px 10px;*/
-            margin: -8px -3px;
-            text-decoration: none;
-            background: #f2f2f2;
-            font-size: 10pt;
-            cursor: pointer;
-        }.close:hover {
-            background: #e6e6ff;
-        }
-    </style>
 </head>
 <body>
 
@@ -60,18 +28,19 @@
 
 
 <div class="container ml-5 mt-3">
+
     <#global sum=0>
     <#global currentId=0>
     <#if isAdmin>
+
     <div>
         <form method="post" enctype="multipart/form-data">
-            <input type="number" step="0.01" name="price" placeholder="стоимость">
+            <input type="number" step="0.01" name="price" placeholder="стоимость"
             <input type="text" name="titleRu" placeholder="название ру">
             <input type="text" name="titleEn" placeholder="название en">
             <input type="text" name="author_surname" placeholder="фамилия автора">
             <input type="text" name="author_name" placeholder="имя автора">
             <input type="file" name="image">
-
             <button type="submit">Добавить</button>
         </form>
     </div>
@@ -93,32 +62,19 @@
                 </#if>
             </div>
         </#list>
-        <a href="#window">Вызвать всплывающее окно</a>
         <input type="hidden" id="bookId" value="${currentId}">
     </form>
 
-    <div id="window">
-        <a href="#" class="close">X</a>
-        <b id="windowText"></b>
+    <div  id="addingToCartSuccess" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"  role="alert" >
+        <strong hidden>Success!</strong> This alert box could indicate a successful or positive action.
     </div>
-
-
-<#--    <script>-->
-<#--        function myFunction(bookId, price) {-->
-<#--            var checkBox = document.getElementById(bookId);-->
-<#--            var truePrice = price;-->
-<#--            if (checkBox.checked === true) {-->
-<#--                document.getElementById("sum").value -= -truePrice;-->
-<#--            } else {-->
-<#--                document.getElementById("sum").value -= truePrice;-->
-<#--            }-->
-<#--        }-->
-<#--    </script>-->
     <script>
         function editCurrentId(id) {
             document.getElementById("bookId").value = id;
         }
     </script>
+
+
 
 </div>
 
