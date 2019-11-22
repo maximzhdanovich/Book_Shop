@@ -79,4 +79,11 @@ public class UserService implements UserDetailsService {
         user.setPassword(password);
         save(user);
     }
+
+    public void update(User user, String username, String password, String email) {
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setPassword(password);
+        save(user);
+    }
 }

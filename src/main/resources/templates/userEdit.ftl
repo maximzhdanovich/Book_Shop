@@ -4,7 +4,7 @@ Book Edit
 <form action="/user" method="post">
     <input type="text" name="username" value="${user.username}">
     <input type="text" name="password" value="${user.password}">
-    <input type="text" name="email" value="${user.email}">
+    <input type="email" name="email" value="${user.email}">
     <select name="role">
         <option value="${user.role.title}">${user.role.title}</option>
         <#list roles as role>

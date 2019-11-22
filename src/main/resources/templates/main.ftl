@@ -19,7 +19,6 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
     <script type="text/javascript" src="/postrequest.js"></script>
-
 </head>
 <body>
 
@@ -35,7 +34,7 @@
 
     <div>
         <form method="post" enctype="multipart/form-data">
-            <input type="number" step="0.01" name="price" placeholder="стоимость"
+            <input type="number" step="0.01" name="price" placeholder="стоимость">
             <input type="text" name="titleRu" placeholder="название ру">
             <input type="text" name="titleEn" placeholder="название en">
             <input type="text" name="author_surname" placeholder="фамилия автора">
@@ -58,16 +57,17 @@
                 <b>${book.titleRu}</b>
                 <b>${book.author.surname}</b>
                 <#if name!="unknow">
-                    <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id}) >add to basket</button>
+                    <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id})>add to basket</button>
                 </#if>
             </div>
         </#list>
         <input type="hidden" id="bookId" value="${currentId}">
     </form>
 
-    <div  id="addingToCartSuccess" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"  role="alert" >
-        <strong hidden>Success!</strong> This alert box could indicate a successful or positive action.
+    <div  id="addingToCartSuccess" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"  role="alert">
+        <strong>Success!</strong> This alert box could indicate a successful or positive action.
     </div>
+
     <script>
         function editCurrentId(id) {
             document.getElementById("bookId").value = id;

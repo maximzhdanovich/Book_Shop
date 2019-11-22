@@ -48,10 +48,11 @@ public class RegistrationController {
                           BindingResult bindingResult,
                           Model model) {
         boolean empty = StringUtils.isEmpty(password1);
+
         if (empty) {
             model.addAttribute("password1Error","error");
         }
-        if (user.getPassword() != null && password1.equals(user.getPassword())) {
+        if (user.getPassword() != null && !password1.equals(user.getPassword())) {
             model.addAttribute("passwordError", "Password are different");
         }
         if (empty || bindingResult.hasErrors()) {
