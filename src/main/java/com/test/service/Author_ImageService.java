@@ -1,5 +1,6 @@
 package com.test.service;
 
+import com.test.db.dto.AuthorDTO;
 import com.test.db.dto.Author_ImageDTO;
 import com.test.db.model.Author;
 import com.test.db.model.Author_Image;
@@ -17,6 +18,9 @@ import java.util.UUID;
 public class Author_ImageService {
     @Autowired
     private Author_ImageDTO authorImageDTO;
+
+    @Autowired
+    private AuthorService authorService;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -55,6 +59,8 @@ public class Author_ImageService {
             author_image.setAuthorImage(fileName);
             author_image.setAuthor(author);
             save(author_image);
+            author.setImage(author_image);
+            authorService.save(author);
         }
     }
 

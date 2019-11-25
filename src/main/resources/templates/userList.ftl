@@ -13,7 +13,7 @@ List of Books<br>
     <#list users as user>
         <tr>
             <td>${user.username}</td>
-            <td><a href="/user/${user.id}">edit</a></td>
+            <td><a href="/user/${user.id}" class="btn btn-primary">edit</a></td>
         </tr>
     </#list>
     </tbody>

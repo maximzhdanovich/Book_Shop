@@ -1,6 +1,8 @@
 package com.test.db.model;
 
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -13,8 +15,21 @@ public class Author implements Serializable {
     private String name;
     private String surname;
     private Set<Book> books;
+    private Author_Image image;
 
     public Author() {
+
+    }
+
+
+    @OneToOne
+    @JoinColumn(name = "FK_IMAGE_ID")
+    public Author_Image getImage() {
+        return image;
+    }
+
+    public void setImage(Author_Image image) {
+        this.image = image;
     }
 
     @Id

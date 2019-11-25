@@ -21,6 +21,7 @@ public class Author_Image implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
     @NotNull
     @Column(name = "IMAGE")
     public String getAuthorImage() {

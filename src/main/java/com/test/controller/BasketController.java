@@ -1,5 +1,6 @@
 package com.test.controller;
 
+import com.test.db.model.Basket;
 import com.test.db.model.Book;
 import com.test.db.model.CustomUserDetail;
 import com.test.service.BasketService;
@@ -34,9 +35,11 @@ public class BasketController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/deleteFromBasket")
+    @PostMapping("account/deleteFromBasket")
     public ResponseEntity<Object> deleteBook(@AuthenticationPrincipal CustomUserDetail user, @RequestBody Book book) {
-        userService.getCurrentUser(user).getBasket().getBooks().remove(bookService.findById(book.getId()));
+        Basket basket = userService.getCurrentUser(user).getBasket();
+        basket.getBooks().remove(bookService.findById(book.getId()));
+        basketService.save(basket);
         ServiceResponse<Long> response = new ServiceResponse<Long>("success", book.getId());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

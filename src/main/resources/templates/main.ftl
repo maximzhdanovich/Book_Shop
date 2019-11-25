@@ -19,12 +19,23 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
     <script type="text/javascript" src="/postrequest.js"></script>
+    <style>
+        #addingToCartSuccess{
+            position: fixed;
+            right: 0;
+            top: 50px;
+            margin-top: 10px;
+            margin-right: 10px;
+            z-index: 15;
+            text-align: center;
+        }
+    </style>
 </head>
+
 <body>
 
 <#include "parts/security.ftl">
 <#include "parts/navbar.ftl">
-
 
 <div class="container ml-5 mt-3">
 
@@ -39,7 +50,6 @@
             <input type="text" name="titleEn" placeholder="название en">
             <input type="text" name="author_surname" placeholder="фамилия автора">
             <input type="text" name="author_name" placeholder="имя автора">
-            <input type="file" name="image">
             <button type="submit">Добавить</button>
         </form>
     </div>
@@ -53,8 +63,11 @@
         <#list books as book>
             <div>
                 <b>${book.price}</b>
+                <#if .lang=="en">
                 <b>${book.titleEn}</b>
+                <#elseif .lang=="ru">
                 <b>${book.titleRu}</b>
+                </#if>
                 <b>${book.author.surname}</b>
                 <#if name!="unknow">
                     <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id})>add to basket</button>
@@ -64,7 +77,8 @@
         <input type="hidden" id="bookId" value="${currentId}">
     </form>
 
-    <div  id="addingToCartSuccess" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"  role="alert">
+    <div  id="addingToCartSuccess" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
+          role="alert">
         <strong>Success!</strong> This alert box could indicate a successful or positive action.
     </div>
 
@@ -73,9 +87,6 @@
             document.getElementById("bookId").value = id;
         }
     </script>
-
-
-
 </div>
 
 </body>

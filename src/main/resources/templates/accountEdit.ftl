@@ -20,10 +20,23 @@
             <div class="col-sm-6">
                 <input type="password" name="password"
                        class="form-control ${(passwordError??)?string('is-invalid', '')}"
-                       placeholder="Password" />
+                       placeholder="Old Password" />
                 <#if passwordError??>
                     <div class="invalid-feedback">
                         ${passwordError}
+                    </div>
+                </#if>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Password:</label>
+            <div class="col-sm-6">
+                <input type="password" name="password1"
+                       class="form-control ${(passwordError??)?string('is-invalid', '')}"
+                       placeholder="New Password" />
+                <#if password1Error??>
+                    <div class="invalid-feedback">
+                        ${password1Error}
                     </div>
                 </#if>
             </div>
@@ -32,12 +45,12 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Password:</label>
             <div class="col-sm-6">
-                <input type="password" name="password1"
+                <input type="password" name="password2"
                        class="form-control ${(password1Error??)?string('is-invalid', '')}"
                        placeholder="Retype password" />
-                <#if password1Error??>
+                <#if password2Error??>
                     <div class="invalid-feedback">
-                        ${password1Error}
+                        ${password2Error}
                     </div>
                 </#if>
             </div>

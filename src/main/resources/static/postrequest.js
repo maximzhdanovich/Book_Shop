@@ -13,7 +13,7 @@ $(document).ready(
             $.ajax({
                 type: "POST",
                 contentType: "application/json",
-                url: "saveBook",
+                url: "/saveBook",
                 success: function () {
                     showSuccessMessage();
                 },
@@ -24,7 +24,6 @@ $(document).ready(
             });
         }
     });
-
 
 function showSuccessMessage() {
     $("#addingToCartSuccess").fadeOut();

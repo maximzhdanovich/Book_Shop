@@ -46,17 +46,28 @@ public class AccountController {
                               @Valid User user,
                               BindingResult bindingResult,
                               @RequestParam("password1") String password1,
+                              @RequestParam("password2") String password2,
                               Model model) {
         User currentUser = userService.getCurrentUser(customUserDetail);
-        boolean empty = StringUtils.isEmpty(password1);
-
-        if (empty) {
-            model.addAttribute("password1Error","error");
+        boolean empty1 = StringUtils.isEmpty(password1);
+        boolean empty2 = StringUtils.isEmpty(password2);
+        boolean equalsNewPassword = password1.equals(password2);
+        boolean equalsOldPassword = user.getPassword().equals(currentUser.getPassword());
+        if (!equalsOldPassword)
+        {
+            model.addAttribute("passwordError","Old password error");
         }
-        if (user.getPassword() != null && !password1.equals(user.getPassword())) {
-            model.addAttribute("passwordError", "Password are different");
+        if (empty1) {
+            model.addAttribute("password1Error","new password can't be empty");
         }
-        if (empty || bindingResult.hasErrors()) {
+        if (empty2) {
+            model.addAttribute("password2Error","repeat password can't be empty");
+        }
+        if (!password1.equals(password2)) {
+            model.addAttribute("password1Error", "Password are different");
+            model.addAttribute("password2Error", "Password are different");
+        }
+        if (empty1 || empty2 ||!equalsOldPassword|| bindingResult.hasErrors()|| !equalsNewPassword) {
             Collector<FieldError, ?, Map<String, String>> fieldErrorMapCollector = Collectors.toMap(
                     fieldError -> fieldError.getField() + "Error",
                     FieldError::getDefaultMessage
@@ -67,7 +78,7 @@ public class AccountController {
             model.addAttribute("user",currentUser);
             return "accountEdit";
         }
-        userService.update(currentUser,user.getUsername(), user.getPassword(),user.getEmail());
+        userService.update(currentUser,user.getUsername(), password1,user.getEmail());
 
         return "redirect:/account";
     }
