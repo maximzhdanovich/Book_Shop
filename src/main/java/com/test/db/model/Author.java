@@ -1,12 +1,10 @@
 package com.test.db.model;
 
 
-import org.springframework.web.multipart.MultipartFile;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "AUTHOR")
@@ -14,7 +12,7 @@ public class Author implements Serializable {
     private Long id;
     private String name;
     private String surname;
-    private Set<Book> books;
+    private List<Book> books;
     private Author_Image image;
 
     public Author() {
@@ -40,11 +38,11 @@ public class Author implements Serializable {
     }
 
     @OneToMany(targetEntity = Book.class, mappedBy = "author", orphanRemoval = true)
-    public Set<Book> getBooks() {
+    public List<Book> getBooks() {
         return books;
     }
 
-    public void setBooks(Set<Book> books) {
+    public void setBooks(List<Book> books) {
         this.books = books;
     }
 

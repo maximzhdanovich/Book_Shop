@@ -2,12 +2,13 @@ package com.test.db.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 @Entity
 @Table(name = "BASKET")
 public class Basket {
     private Long id;
-    private Set<Book> books;
+    private List<Book> books;
     private User user;
     @Id
     @Column(name = "ID")
@@ -24,11 +25,11 @@ public class Basket {
     @JoinTable(name = "BOOK_WITH_BASKET",
             joinColumns = @JoinColumn(name = "BASKET_ID"),
             inverseJoinColumns = @JoinColumn(name="BOOK_ID"))
-    public Set<Book> getBooks() {
+    public List<Book> getBooks() {
         return books;
     }
 
-    public void setBooks(Set<Book> books) {
+    public void setBooks(List<Book> books) {
         this.books = books;
     }
     @OneToOne(fetch=FetchType.EAGER)

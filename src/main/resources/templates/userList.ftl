@@ -1,7 +1,6 @@
 <#import "parts/common.ftl" as c>
 <@c.page>
 List of Books<br>
-<a href="/">main</a>
 <table>
     <thead>
     <tr>

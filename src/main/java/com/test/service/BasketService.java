@@ -8,6 +8,7 @@ import com.test.db.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -39,8 +40,11 @@ public class BasketService {
     }
 
     public Basket create(User user) {
-        Basket basket = new Basket(user);
+        User currentUser = userService.getCurrentUser(user);
+        Basket basket = new Basket(currentUser);
         save(basket);
+        currentUser.setBasket(basket);
+        userService.save(currentUser);
         return basket;
     }
 
@@ -52,9 +56,16 @@ public class BasketService {
         save(basket);
     }
 
-    public void addSingleBook(User user, Book book){
+    public void addSingleBook(User user, Book book) {
         Basket basket = getByUser(user);
-        basket.getBooks().add(book);
+        if (basket == null) {
+            basket = create(user);
+        }
+        List<Book> books = basket.getBooks();
+            if (basket.getBooks() == null) {
+            books = new ArrayList<>();
+        }
+        books.add(book);
         save(basket);
     }
 }

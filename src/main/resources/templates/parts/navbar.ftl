@@ -23,18 +23,36 @@
                 </li>
             </#if>
         </ul>
+        <div class="mr-2">
+            <form id="langEdit">
+                <div class="input-group mr-3">
+                    <select id="lang" class="custom-select" name="lang" onchange="langEdit()">
+                        <option>Language</option>
+                        <option value="ru" <#if .lang=="ru"> disabled</#if>>Russian</option>
+                        <option value="en" <#if .lang=="en"> disabled</#if>>English</option>
+                    </select>
+                </div>
+                <button id="langSubmit" type="submit" hidden> ok</button>
+            </form>
+        </div>
 
         <#if name=="unknown">
             <div class="mr-3">
-            <b>${name}</b></div>
+                <b>${name}</b></div>
             <a href="/login">login</a>
-        <#else ><div class="mr-2">
-            <form action="/logout" method="post">
-                <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-                <input type="submit" value="Sign Out"/>
-            </form>
-        </div>
+        <#else >
+            <div class="mr-2">
+                <form action="/logout" method="post">
+                    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                    <input type="submit" value="Sign Out"/>
+                </form>
+            </div>
             <a href="/account">${name}</a>
         </#if>
     </div>
+    <script>
+        function langEdit() {
+            document.getElementById("langSubmit").click();
+        }
+    </script>
 </nav>

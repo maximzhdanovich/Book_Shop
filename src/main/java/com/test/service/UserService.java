@@ -68,8 +68,7 @@ public class UserService implements UserDetailsService {
         user.setActive(true);
         user.setRole(roleService.findByTitle("USER"));
         save(user);
-        user.setBasket(basketService.create(user));
-        save(user);
+
     }
 
     public void update(User user, String role, String username, String password, String email) {

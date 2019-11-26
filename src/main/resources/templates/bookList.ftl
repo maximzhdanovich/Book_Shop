@@ -2,7 +2,6 @@
 <#include "parts/security.ftl">
 <@c.page>
 List of Books<br>
-<a href="/">main</a>
 <table>
     <thead>
     <tr>
@@ -19,7 +18,7 @@ List of Books<br>
             <td>${book.titleEn}</td>
             <td>${book.author.surname} ${book.author.name}</td>
             <#if isAdmin>
-            <td><a href="/book/${book.id}">edit</a></td>
+            <td><a href="/book/${book.id}" class="btn btn-primary">edit</a></td>
             </#if>
         </tr>
     </#list>

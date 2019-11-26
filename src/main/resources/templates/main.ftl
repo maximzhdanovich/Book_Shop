@@ -37,7 +37,7 @@
 <#include "parts/security.ftl">
 <#include "parts/navbar.ftl">
 
-<div class="container ml-5 mt-3">
+<div class="container mt-3 ml-5">
 
     <#global sum=0>
     <#global currentId=0>
@@ -59,35 +59,38 @@
         <input type="text" name="filter" value="${filter!}">
         <button type="submit">Найти</button>
     </form>
+</div>
+<div class="ml-5 mr-5">
     <form id="basketAdd">
+        <div class="card-columns">
         <#list books as book>
-            <div>
-                <b>${book.price}</b>
+            <div class="card my-3">
                 <#if .lang=="en">
                 <b>${book.titleEn}</b>
                 <#elseif .lang=="ru">
                 <b>${book.titleRu}</b>
                 </#if>
-                <b>${book.author.surname}</b>
+                <div class="card-footer text-muted">
+                    ${book.author.surname}
+                    <b>${book.price}</b>
                 <#if name!="unknow">
-                    <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id})>add to basket</button>
+                   <div class="ml-1"> <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id})>add to basket</button></div>
                 </#if>
+                </div>
             </div>
         </#list>
+        </div>
         <input type="hidden" id="bookId" value="${currentId}">
     </form>
-
+</div>
     <div  id="addingToCartSuccess" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
           role="alert">
-        <strong>Success!</strong> This alert box could indicate a successful or positive action.
-    </div>
+        <strong>Success</strong> Book added to cart
 
     <script>
         function editCurrentId(id) {
             document.getElementById("bookId").value = id;
         }
     </script>
-</div>
-
 </body>
 </html>
