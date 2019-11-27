@@ -20,14 +20,34 @@
             crossorigin="anonymous"></script>
     <script type="text/javascript" src="/postrequest.js"></script>
     <style>
-        #addingToCartSuccess{
+        #addingToCartSuccess {
             position: fixed;
             right: 0;
             top: 50px;
             margin-top: 10px;
             margin-right: 10px;
+            display: none;
             z-index: 15;
             text-align: center;
+        }
+
+        .card-columns {
+        @include media-breakpoint-only(lg) {
+            column-count: 4;
+        }
+        @include media-breakpoint-only(xl) {
+            column-count: 5;
+        }
+        }
+    </style>
+    <style type="text/scss">
+        .card-columns {
+        @include media-breakpoint-only(lg) {
+            column-count: 4;
+        }
+        @include media-breakpoint-only(xl) {
+            column-count: 5;
+        }
         }
     </style>
 </head>
@@ -43,16 +63,17 @@
     <#global currentId=0>
     <#if isAdmin>
 
-    <div>
-        <form method="post" enctype="multipart/form-data">
-            <input type="number" step="0.01" name="price" placeholder="стоимость">
-            <input type="text" name="titleRu" placeholder="название ру">
-            <input type="text" name="titleEn" placeholder="название en">
-            <input type="text" name="author_surname" placeholder="фамилия автора">
-            <input type="text" name="author_name" placeholder="имя автора">
-            <button type="submit">Добавить</button>
-        </form>
-    </div>
+        <div>
+            <form method="post" enctype="multipart/form-data">
+                <input type="number" step="0.01" name="price" placeholder="стоимость">
+                <input type="text" name="titleRu" placeholder="название ру">
+                <input type="text" name="titleEn" placeholder="название en">
+                <input type="text" name="author_surname" placeholder="фамилия автора">
+                <input type="text" name="author_name" placeholder="имя автора">
+                <input type="file" name="book_image">
+                <button type="submit">Добавить</button>
+            </form>
+        </div>
     </#if>
     <div>Список книг</div>
     <form method="get" action="/">
@@ -63,29 +84,38 @@
 <div class="ml-5 mr-5">
     <form id="basketAdd">
         <div class="card-columns">
-        <#list books as book>
-            <div class="card my-3">
-                <#if .lang=="en">
-                <b>${book.titleEn}</b>
-                <#elseif .lang=="ru">
-                <b>${book.titleRu}</b>
-                </#if>
-                <div class="card-footer text-muted">
-                    ${book.author.surname}
-                    <b>${book.price}</b>
-                <#if name!="unknow">
-                   <div class="ml-1"> <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id})>add to basket</button></div>
-                </#if>
+            <#list books as book>
+                <div class="card my-3">
+                    <#if .lang=="en">
+                        <b>${book.titleEn}</b>
+                    <#elseif .lang=="ru">
+                        <b>${book.titleRu}</b>
+                    </#if>
+                    <#if book.image??>
+                        <br>
+                        <img src="/img/book/${book.image.bookImage}" <#--class="card-img-top"--><#--class="img-thumbnail"-->>
+
+                    </#if>
+                    <div class="card-footer text-muted text-right ">
+                        ${book.author.surname}
+                        <b>${book.price}</b>
+                        <#if name!="unknow">
+                            <div class="ml-1">
+                                <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id})>add to
+                                    basket
+                                </button>
+                            </div>
+                        </#if>
+                    </div>
                 </div>
-            </div>
-        </#list>
+            </#list>
         </div>
         <input type="hidden" id="bookId" value="${currentId}">
     </form>
 </div>
-    <div  id="addingToCartSuccess" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
-          role="alert">
-        <strong>Success</strong> Book added to cart
+<div id="addingToCartSuccess" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
+     role="alert">
+    <strong>Success</strong> Book added to cart
 
     <script>
         function editCurrentId(id) {

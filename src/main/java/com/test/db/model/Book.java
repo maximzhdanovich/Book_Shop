@@ -15,6 +15,17 @@ public class Book implements Serializable {
     private String titleEn;
     private Set<Category> categories ;
     private Author author;
+    private Book_Image image;
+
+    @OneToOne
+    @JoinColumn(name = "FK_IMAGE_ID")
+    public Book_Image getImage() {
+        return image;
+    }
+
+    public void setImage(Book_Image image) {
+        this.image = image;
+    }
 
     @ManyToOne(targetEntity = Author.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "FK_AUTHOR_ID")
@@ -22,10 +33,10 @@ public class Book implements Serializable {
     public Author getAuthor() {
         return author;
     }
+
     public void setAuthor(Author author) {
         this.author = author;
     }
-
 
     @ManyToMany
     @JoinTable(name = "BOOK_WITH_CATEGORY",

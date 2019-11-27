@@ -8,12 +8,19 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Qualifier("bookService")
 public class BookService {
     @Autowired
     private BookDTO bookDTO;
+
+    @Autowired
+    private AuthorService authorService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     public void create(Book book,Author author){
         book.setAuthor(author);
@@ -52,5 +59,18 @@ public class BookService {
 
     public void deleteById(long id) {
         bookDTO.deleteById(id);
+    }
+
+    public void update(Book book, String titleEn, String titleRu, String authorSurname, String authorName, Map<String, String> form){
+        book.setTitleRu(titleRu);
+        book.setTitleEn(titleEn);
+        book.setAuthor(authorService.findBySurnameAndName(authorSurname, authorName));
+        book.getCategories().clear();
+        for (String s : form.keySet()) {
+            if (form.get(s).equals("on")) {
+                book.getCategories().add(categoryService.findById(Integer.valueOf(s)));
+            }
+        }
+        save(book);
     }
 }

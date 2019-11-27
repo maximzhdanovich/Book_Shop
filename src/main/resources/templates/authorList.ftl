@@ -31,7 +31,7 @@
             </div>
             <div class="col-sm m-1">
                 <#if author.image??>
-                <img src="/img/${author.image.authorImage}">
+                <img src="/img/author/${author.image.authorImage}">
                 </#if>
             </div>
             <div class="col-sm m-1">

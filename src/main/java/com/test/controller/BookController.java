@@ -53,16 +53,7 @@ public class BookController {
         if (authorService.findBySurnameAndName(authorSurname, authorName) == null) {
             return "redirect:/book/" + book.getId();
         }
-        book.setTitleRu(titleRu);
-        book.setTitleEn(titleEn);
-        book.setAuthor(authorService.findBySurnameAndName(authorSurname, authorName));
-        book.getCategories().clear();
-        for (String s : form.keySet()) {
-            if (form.get(s).equals("on")) {
-                book.getCategories().add(categoryService.findById(Integer.valueOf(s)));
-            }
-        }
-        bookService.save(book);
+        bookService.update(book,titleEn,titleRu,authorSurname,authorName,form);
         return "redirect:/book";
     }
 

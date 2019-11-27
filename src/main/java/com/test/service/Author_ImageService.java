@@ -22,7 +22,7 @@ public class Author_ImageService {
     @Autowired
     private AuthorService authorService;
 
-    @Value("${upload.path}")
+    @Value("${upload.path.author}")
     private String uploadPath;
 
 
