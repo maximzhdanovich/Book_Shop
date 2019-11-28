@@ -26,7 +26,7 @@ public class DeleteController {
     @GetMapping("/account/delete")
     public String deleteAccount(@AuthenticationPrincipal User user){
         userService.deleteById(userService.getCurrentUser(user).getId());
-        return "redirect:/login?logout";
+        return "redirect:/logout";
     }
 
 }
