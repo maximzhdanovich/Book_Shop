@@ -25,5 +25,5 @@
             <button class="btn btn-primary m-3" type="submit"> <@spring.message code="login.sign.in"/></button>
         </div>
     </form>
-    <button class="btn btn-primary m-3" href="/registration"><@spring.message code="login.registration"/></button>
+    <a class="btn btn-primary m-3" href="/registration"><@spring.message code="login.registration"/></a>
 </@c.page>

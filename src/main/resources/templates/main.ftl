@@ -30,26 +30,27 @@
             z-index: 15;
             text-align: center;
         }
+    </style>
+    <style>
+        .leftimg {
+            float: left; /* Выравнивание по левому краю */
+            margin: 7px 7px 7px 7px; /* Отступы вокруг картинки */
+        }
 
-        .card-columns {
-        @include media-breakpoint-only(lg) {
-            column-count: 4;
+    </style>
+    <style>
+        .cope_text {
+            overflow: hidden;
+            line-height: 20px;
         }
-        @include media-breakpoint-only(xl) {
-            column-count: 5;
-        }
+
+        .line-clamp {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
         }
     </style>
-    <style type="text/scss">
-        .card-columns {
-        @include media-breakpoint-only(lg) {
-            column-count: 4;
-        }
-        @include media-breakpoint-only(xl) {
-            column-count: 5;
-        }
-        }
-    </style>
+
 </head>
 
 <body>
@@ -86,23 +87,36 @@
         <div class="card-columns">
             <#list books as book>
                 <div class="card my-3">
-                    <#if .lang=="en">
-                        <b>${book.titleEn}</b>
-                    <#elseif .lang=="ru">
-                        <b>${book.titleRu}</b>
-                    </#if>
-                    <#if book.image??>
-                        <br>
-                        <img src="/img/book/${book.image.bookImage}" <#--class="card-img-top"--><#--class="img-thumbnail"-->>
 
-                    </#if>
+                    <#if book.image??>
+                    <p><img src="/img/book/${book.image.bookImage}" class="leftimg" width="96" height="125">
+                        <#else>
+                    <p><img src="/img/bookNot/bookImageNotFound.jpg" class="leftimg" width="96" height="125">
+                        </#if>
+                        Author: ${book.author.name} ${book.author.surname}
+                        <br>
+                        Title:
+                        <#if .lang=="en">
+                            ${book.titleEn}
+                        <#elseif .lang=="ru">
+                            ${book.titleRu}
+                        </#if>
+                    <div class="cope_text line-clamp">
+                        <#if book.description??>
+                            ${book.description}
+                        </#if>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                    </p><a href="/book/${book.id}" class="leftimg ml-4 mt-2">Book</a>
                     <div class="card-footer text-muted text-right ">
-                        ${book.author.surname}
+
                         <b>${book.price}</b>
-                        <#if name!="unknow">
+                        <#if name!="unknown">
                             <div class="ml-1">
-                                <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id})>add to
-                                    basket
+                                <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id})>
+                                    add to basket
                                 </button>
                             </div>
                         </#if>

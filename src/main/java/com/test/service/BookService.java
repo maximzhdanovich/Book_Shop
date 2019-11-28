@@ -61,10 +61,11 @@ public class BookService {
         bookDTO.deleteById(id);
     }
 
-    public void update(Book book, String titleEn, String titleRu, String authorSurname, String authorName, Map<String, String> form){
+    public void update(Book book,  String titleEn, String titleRu, String authorSurname, String authorName,String description, Map<String, String> form){
         book.setTitleRu(titleRu);
         book.setTitleEn(titleEn);
         book.setAuthor(authorService.findBySurnameAndName(authorSurname, authorName));
+        book.setDescription(description);
         book.getCategories().clear();
         for (String s : form.keySet()) {
             if (form.get(s).equals("on")) {

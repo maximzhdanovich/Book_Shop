@@ -9,6 +9,7 @@ import com.test.service.BookService;
 import com.test.service.Book_ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -50,6 +51,11 @@ public class MainController extends BaseController {
         bookImageService.add(book_image, book);
         model.addAttribute("books", bookService.findAll());
         return "main";
+    }
+    @GetMapping("/filter")
+    public String filter(@RequestParam(required = false, defaultValue = "") String filter,@RequestParam String url, Model model,HttpServletRequest request){
+        request.getRequestURI();
+        return "redirect:/";
     }
 
 }

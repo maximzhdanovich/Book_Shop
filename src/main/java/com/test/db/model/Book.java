@@ -16,6 +16,16 @@ public class Book implements Serializable {
     private Set<Category> categories ;
     private Author author;
     private Book_Image image;
+    private String description;
+
+    @Column(name = "DESCRIPTION")
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     @OneToOne
     @JoinColumn(name = "FK_IMAGE_ID")

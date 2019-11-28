@@ -55,7 +55,11 @@ public class RegistrationController {
         if (user.getPassword() != null && !password1.equals(user.getPassword())) {
             model.addAttribute("passwordError", "Password are different");
         }
-        if (empty || bindingResult.hasErrors()) {
+        Optional<User> userFromDb = userService.findByUsername(user.getUsername());
+        if (userFromDb.isPresent()) {
+            model.addAttribute("usernameError", "User exists!");
+        }
+        if (empty || bindingResult.hasErrors()||userFromDb.isPresent()) {
             Collector<FieldError, ?, Map<String, String>> fieldErrorMapCollector = Collectors.toMap(
                     fieldError -> fieldError.getField() + "Error",
                     FieldError::getDefaultMessage
@@ -65,11 +69,7 @@ public class RegistrationController {
             model.mergeAttributes(collectErrors);
             return "registration";
         }
-        Optional<User> userFromDb = userService.findByUsername(user.getUsername());
-        if (userFromDb.isPresent()) {
-            model.addAttribute("usernameError", "User exists!");
-            return "registration";
-        }
+
         userService.create(user);
         return "redirect:/login";
     }

@@ -48,12 +48,13 @@ public class BookController {
             @RequestParam String titleEn,
             @RequestParam String authorSurname,
             @RequestParam String authorName,
+            @RequestParam String description,
             @RequestParam Map<String, String> form,
             @RequestParam("bookId") Book book) {
         if (authorService.findBySurnameAndName(authorSurname, authorName) == null) {
             return "redirect:/book/" + book.getId();
         }
-        bookService.update(book,titleEn,titleRu,authorSurname,authorName,form);
+        bookService.update(book,titleEn,titleRu,authorSurname,authorName,description,form);
         return "redirect:/book";
     }
 
