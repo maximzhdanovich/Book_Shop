@@ -19,16 +19,29 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
     <script type="text/javascript" src="/deleteFromBasket.js"></script>
+    <style>
+        #DeleteFromBasketSuccess {
+            position: fixed;
+            right: 0;
+            top: 50px;
+            margin-top: 10px;
+            margin-right: 10px;
+            display: none;
+            z-index: 15;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 <#include "parts/navbar.ftl">
-<div class="container ml-5 mt-3">
-    <#global currentId=0>
-    <table>
+<#assign price = 0>
+<#global currentId=0>
+<div class="container center mt-5">
+    <table class="table table-bordered ">
         <thead>
         <tr>
-            <th>НазваниеRU</th>
-            <th>НазваниеEN</th>
+            <th>Цена</th>
+            <th>Название</th>
             <th>Author</th>
             <th></th>
         </tr>
@@ -37,17 +50,30 @@
         <form id="deleteFromBasket">
             <#list books as book>
                 <tr>
-                    <td>${book.titleRu}</td>
-                    <td>${book.titleEn}</td>
+                    <td>#{book.price}</td>
+                    <td><#if .lang=="en">
+                            ${book.titleEn}
+                        <#elseif .lang=="ru">
+                            ${book.titleRu}
+                        </#if></td>
                     <td>${book.author.surname} ${book.author.name}</td>
-                    <td><button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id})>delete</button></td>
+                    <td>
+                        <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id})>delete</button>
+                    </td>
                 </tr>
+                <#assign price += book.price>
             </#list>
         </form>
         </tbody>
     </table>
+    <br>
+    <a>Total price ${price}</a>
     <input type="hidden" id="bookIdDelete" value="${currentId}">
-    <script>
+    <div id="DeleteFromBasketSuccess" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
+         role="alert">
+        <strong>Success</strong> Book deleted from basket
+
+        <script>
         function editCurrentId(id) {
             document.getElementById("bookIdDelete").value = id;
         }

@@ -1,5 +1,6 @@
 <#import "parts/common.ftl" as c>
 <@c.page>
+
     <#assign spring=JspTaglibs["http://www.springframework.org/tags"]>
     <form action="/registration" method="post">
         <div class="form-group row">

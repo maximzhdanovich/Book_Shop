@@ -1,19 +1,18 @@
 package com.test.controller;
 
 import com.test.db.model.Book;
-import com.test.db.model.Category;
-import com.test.exception.PageNotFoundException;
 import com.test.service.AuthorService;
 import com.test.service.BookService;
+import com.test.service.Book_ImageService;
 import com.test.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import java.io.IOException;
 import java.util.Map;
 
 @Controller
@@ -24,25 +23,36 @@ public class BookController {
     private AuthorService authorService;
 
     @Autowired
+    private Book_ImageService bookImageService;
+
+    @Autowired
     private BookService bookService;
 
     @Autowired
     private CategoryService categoryService;
 
     @GetMapping
-    public String bookList(Model model) {
-        model.addAttribute("books", bookService.findAll());
+    public String bookList(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
+        if (filter != null && !filter.equals("")) {
+            model.addAttribute("books", bookService.findByTitleEnOrTitleRu(filter, filter));
+        } else {
+            model.addAttribute("books", bookService.findAll());
+        }
+        model.addAttribute("filter", filter);
         return "bookList";
     }
+
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @GetMapping("/{book}")
+    @GetMapping("/admin/{book}")
     public String bookEdit(@PathVariable String book, Model model) {
-        model.addAttribute("book", bookService.findById(Long.parseLong(book)));
+        Book byId = bookService.findById(Long.parseLong(book));
+        if (bookIsNull(byId)) return "redirect:/book";
+        model.addAttribute("book", byId);
         model.addAttribute("categories", categoryService.findAll());
         return "bookEdit";
     }
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @PostMapping
+    @PostMapping("/save")
     public String bookSave(
             @RequestParam String titleRu,
             @RequestParam String titleEn,
@@ -58,4 +68,28 @@ public class BookController {
         return "redirect:/book";
     }
 
+    @GetMapping("/{book}")
+    public String book(@PathVariable String book, Model model) {
+        Book byId = bookService.findById(Long.parseLong(book));
+        if (bookIsNull(byId)) return "redirect:/book";
+        model.addAttribute("book", byId);
+        model.addAttribute("categories", categoryService.findAll());
+        return "book";
+    }
+
+    @PostMapping("/add")
+    public String add(Book book,
+                      @RequestParam String author_surname,
+                      @RequestParam String author_name,
+                      Model model,
+                      @RequestParam MultipartFile book_image) throws IOException {
+        bookService.create(book, authorService.findBySurnameAndName(author_surname, author_name));
+        bookImageService.add(book_image, book);
+        model.addAttribute("books", bookService.findAll());
+        return "bookList";
+    }
+
+    private boolean bookIsNull(Book byId) {
+        return byId == null;
+    }
 }

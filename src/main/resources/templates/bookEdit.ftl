@@ -1,7 +1,7 @@
 <#import "parts/common.ftl" as c>
 <@c.page>
 Book Edit
-<form action="/book" method="post">
+<form action="/book/save" method="post">
     <input type="text" name="titleRu" value="${book.titleRu}">
     <input type="text" name="titleEn" value="${book.titleEn}">
     <input type="text" name="authorSurname" value="${book.author.surname}">

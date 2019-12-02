@@ -39,4 +39,11 @@ public class UserController {
         userService.update(user,role,username,password,email);
         return "redirect:/user";
     }
+
+    @GetMapping("{user}/basket")
+    public String showUserBasket(@PathVariable User user,Model model){
+        model.addAttribute("books",user.getBasket().getBooks());
+        return "myBasket";
+    }
+
 }

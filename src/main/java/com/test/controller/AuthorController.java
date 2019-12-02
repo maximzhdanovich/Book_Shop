@@ -57,7 +57,7 @@ public class AuthorController {
             model.addAttribute("books",authorService.findById(Long.parseLong(authorId)).getBooks());
         }
         model.addAttribute("books",authorService.findById(Long.parseLong(authorId)).getBooks());
-        return "main";
+        return "bookList";
     }
 
     private List<Book> filter(List<Book> books,String filter){

@@ -32,7 +32,7 @@ public class BasketController {
     public ResponseEntity<Object> addBook(@AuthenticationPrincipal CustomUserDetail user, @RequestBody Book book) {
         basketService.addSingleBook(user, bookService.findById(book.getId()));
         ServiceResponse<Long> response = new ServiceResponse<Long>("success", book.getId());
-        return new ResponseEntity<>(response, HttpStatus.OK);
+         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("account/deleteFromBasket")

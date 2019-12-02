@@ -45,7 +45,7 @@
             <div class="mr-2">
                 <form action="/logout" method="post">
                     <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-                    <input type="submit" value=<@spring.message code="navbar.log.out"/>/>
+                    <button type="submit"><@spring.message code="navbar.log.out"/></button>
                 </form>
             </div>
             <a href="/account">${name}</a>
