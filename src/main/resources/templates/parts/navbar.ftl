@@ -18,6 +18,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="/author"><@spring.message code="navbar.authors"/></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/category"><@spring.message code="navbar.categories"/></a>
+            </li>
             <#if isAdmin>
                 <li class="nav-item">
                     <a class="nav-link" href="/user"><@spring.message code="navbar.users"/></a>

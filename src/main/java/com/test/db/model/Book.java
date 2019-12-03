@@ -65,10 +65,11 @@ public class Book implements Serializable {
         return String.valueOf(id);
     }
 
-    public Book(double price, String titleRu, String titleEn) {
+    public Book(double price, String titleRu, String titleEn, String description) {
         this.price = price;
         this.titleRu = titleRu;
         this.titleEn = titleEn;
+        this.description=description;
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

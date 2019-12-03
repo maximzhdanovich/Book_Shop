@@ -37,7 +37,7 @@
             margin: 7px 7px 7px 7px; /* Отступы вокруг картинки */
         }
 
-        .lefttext {
+        .leftText {
             float: left;
         }
 
@@ -68,19 +68,22 @@
     <div><@spring.message code="book.list"/></div>
     <#if isAdmin>
         <div>
-            <form method="post" action="/book/save" enctype="multipart/form-data">
+            <form method="post" action="/book/create" enctype="multipart/form-data">
                 <input type="number" step="0.01" name="price" placeholder="стоимость">
                 <input type="text" name="titleRu" placeholder="название ру">
                 <input type="text" name="titleEn" placeholder="название en">
-                <input type="text" name="author_surname" placeholder="фамилия автора">
-                <input type="text" name="author_name" placeholder="имя автора">
-                <input type="file" name="book_image">
+                <input type="text" name="authorSurname" placeholder="фамилия автора">
+                <input type="text" name="authorName" placeholder="имя автора">
+                <textarea  maxlength="1000" rows="10" cols="90" name="description"></textarea>
+                <input type="file" name="image">
                 <button type="submit">Добавить</button>
             </form>
         </div>
     </#if>
     <form method="get" action="/book">
-        <input type="text" name="filter" value="${filter!}">
+        <label>
+            <input type="text" name="filter" value="${filter!}">
+        </label>
         <button type="submit">Найти</button>
     </form>
 </div>
@@ -107,18 +110,20 @@
                         <#if book.description??>
                             ${book.description}
                         </#if>
-                        <br><br><br>
+                        <br>
+                        <br>
+                        <br>
                     </div>
                     </p>
                     <div class="card-footer text-muted text-right">
                         <a href="/book/${book.id}"
-                           class="btn btn-primary ml-2 lefttext"><@spring.message code="book.book"/></a>
+                           class="btn btn-primary ml-2 leftText"><@spring.message code="book.book"/></a>
                         <#if isAdmin>
                             <a href="/book/admin/${book.id}"
-                               class="btn btn-primary ml-2 lefttext"><@spring.message code="book.edit"/></a>
+                               class="btn btn-primary ml-2 leftText"><@spring.message code="book.edit"/></a>
                         </#if>
                         <br>
-                        <b class="mr-2">${book.price}</b>
+                        <b class="mr-2"><@spring.message code="book.price"/>: ${book.price}</b>
                         <#if name!="unknown">
                             <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id})>
                                 <@spring.message code="book.basket.add"/>

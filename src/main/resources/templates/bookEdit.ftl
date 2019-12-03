@@ -8,7 +8,9 @@ Book Edit
     <input type="text" name="authorName" value="${book.author.name}">
     <br>
     <br>
-    <textarea  maxlength="1000" rows="10" cols="90" name="description" >${book.description}</textarea>
+
+    <textarea  maxlength="1000" rows="10" cols="90" name="description" ><#if book.description??>${book.description}</#if></textarea>
+
     <#list categories as category>
         <div>
             <label><input type="checkbox" name="${category}"

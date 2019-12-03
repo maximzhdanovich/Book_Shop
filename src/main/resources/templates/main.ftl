@@ -27,11 +27,6 @@
             <#if authorIndex<5>
                 <div class="card">
                     <#assign authorIndex++>
-<#--                    <#if book.image??>-->
-<#--                        <img class="card-img-top" src="/img/book/${book.image.bookImage}" &lt;#&ndash;class="leftimg" width="96" height="125"&ndash;&gt; alt="Card image cap">-->
-<#--                    <#else>-->
-<#--                        <img class="card-img-top" src="/img/bookNot/bookImageNotFound.jpg" &lt;#&ndash;class="leftimg" width="96" height="125"&ndash;&gt; alt="Card image cap">-->
-<#--                    </#if>-->
                     <#if author.image??>
                         <img src="/img/author/${author.image.authorImage}">
                     </#if>

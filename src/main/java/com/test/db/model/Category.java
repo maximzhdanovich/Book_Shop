@@ -3,7 +3,7 @@ package com.test.db.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "CATEGORY")
@@ -12,18 +12,18 @@ public class Category implements Serializable {
     protected long id;
     private String titleRu;
     private String titleEn;
-    private Set<Book> Books;
+    private List<Book> Books;
 
     @NotNull
     @ManyToMany
     @JoinTable(name = "BOOK_WITH_CATEGORY",
             joinColumns = @JoinColumn(name = "CATEGORY_ID"),
             inverseJoinColumns = @JoinColumn(name = "BOOK_ID"))
-    public Set<Book> getBooks() {
+    public List<Book> getBooks() {
         return Books;
     }
 
-    public void setBooks(Set<Book> books) {
+    public void setBooks(List<Book> books) {
         Books = books;
     }
 

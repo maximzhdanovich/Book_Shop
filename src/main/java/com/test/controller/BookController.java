@@ -43,6 +43,22 @@ public class BookController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
+    @PostMapping("/create")
+    public String bookCreate(@RequestParam Double price,
+                             @RequestParam String titleRu,
+                             @RequestParam String titleEn,
+                             @RequestParam String authorSurname,
+                             @RequestParam String authorName,
+                             @RequestParam String description,
+                             @RequestParam MultipartFile image) throws IOException {
+        if (authorService.findBySurnameAndName(authorSurname, authorName) == null) {
+            return "redirect:/book";
+        }
+        bookService.create(price, titleRu, titleEn, description,authorService.findBySurnameAndName(authorSurname, authorName),image);
+        return "redirect:/book";
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/admin/{book}")
     public String bookEdit(@PathVariable String book, Model model) {
         Book byId = bookService.findById(Long.parseLong(book));
@@ -51,6 +67,7 @@ public class BookController {
         model.addAttribute("categories", categoryService.findAll());
         return "bookEdit";
     }
+
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/save")
     public String bookSave(
@@ -64,7 +81,7 @@ public class BookController {
         if (authorService.findBySurnameAndName(authorSurname, authorName) == null) {
             return "redirect:/book/" + book.getId();
         }
-        bookService.update(book,titleEn,titleRu,authorSurname,authorName,description,form);
+        bookService.update(book, titleEn, titleRu, authorSurname, authorName, description, form);
         return "redirect:/book";
     }
 
