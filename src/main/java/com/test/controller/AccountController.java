@@ -86,7 +86,8 @@ public class AccountController {
     @GetMapping("/basket")
     public String myBasket(@AuthenticationPrincipal CustomUserDetail customUserDetail, Model model) {
         model.addAttribute("user", userService.getCurrentUser(customUserDetail));
-        model.addAttribute("books", basketService.getByUser(customUserDetail).getBooks());
+        if(basketService.getByUser(userService.getCurrentUser(customUserDetail)).getBooks()!=null){
+        model.addAttribute("books", basketService.getByUser(userService.getCurrentUser(customUserDetail)).getBooks());}
         return "myBasket";
     }
 }

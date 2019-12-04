@@ -2,7 +2,9 @@
 
 <@c.page>
     <#assign spring=JspTaglibs["http://www.springframework.org/tags"]>
-    <div class="m-2 ml-3">Login page</div>
+
+<#--    <div class="m-2 ml-3">Login page</div>-->
+    <#if RequestParameters.error??><div class="m-2 ml-3"><b>Неправильные логин или пароль</b></div></#if>
     <form action="/login" method="post">
         <div class="form-group row ml-1">
             <label class="col-sm-2 col-form-label"><@spring.message code="login.username"/> :</label>
@@ -26,4 +28,6 @@
         </div>
     </form>
     <a class="btn btn-primary m-3" href="/registration"><@spring.message code="login.registration"/></a>
+
+
 </@c.page>

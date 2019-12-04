@@ -24,7 +24,9 @@ public class AuthorService {
             return null;
         }
     }
-
+    public List<Author> findBySurnameOrName(String surname, String name){
+        return authorDTO.findBySurnameOrName(surname,name);
+    }
     public void deleteById(long id) {
         authorDTO.deleteById(id);
     }

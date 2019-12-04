@@ -27,6 +27,11 @@
                 </li>
             </#if>
         </ul>
+        <div>
+        <form method="get" action="/filter" class="mr-2">
+                <input type="text" name="filter" class="form-control" placeholder=<@spring.message code="filter.search"/> value="${filter!}">
+        </form>
+        </div>
         <div class="mr-2">
             <form id="langEdit">
                 <div class="input-group mr-3">
@@ -36,7 +41,7 @@
                         <option value="en" <#if .lang=="en"> disabled</#if>><@spring.message code="navbar.lang.en"/></option>
                     </select>
                 </div>
-                <button id="langSubmit" type="submit" hidden> ok</button>
+                <button id="langSubmit" type="submit" hidden>ok</button>
             </form>
         </div>
 
@@ -45,13 +50,14 @@
                 <b>${name}</b></div>
             <a href="/login"><@spring.message code="navbar.log.in"/></a>
         <#else >
-            <div class="mr-2">
+            <div class="mr-4">
                 <form action="/logout" method="post">
                     <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
                     <button type="submit"><@spring.message code="navbar.log.out"/></button>
+                    <a href="/account">${name}</a>
                 </form>
+
             </div>
-            <a href="/account">${name}</a>
         </#if>
     </div>
     <script>

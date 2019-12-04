@@ -32,13 +32,8 @@ public class BookController {
     private CategoryService categoryService;
 
     @GetMapping
-    public String bookList(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
-        if (filter != null && !filter.equals("")) {
-            model.addAttribute("books", bookService.findByTitleEnOrTitleRu(filter, filter));
-        } else {
-            model.addAttribute("books", bookService.findAll());
-        }
-        model.addAttribute("filter", filter);
+    public String bookList(Model model) {
+        model.addAttribute("books", bookService.findAll());
         return "bookList";
     }
 

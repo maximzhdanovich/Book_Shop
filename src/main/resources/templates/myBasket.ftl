@@ -48,6 +48,7 @@
         </thead>
         <tbody>
         <form id="deleteFromBasket">
+
             <#list books as book>
                 <tr>
                     <td>#{book.price}</td>
