@@ -4,13 +4,17 @@ import com.bookshop.model.dto.AuthorDTO;
 import com.bookshop.model.entity.Author;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
 public class AuthorService {
     @Autowired
     private AuthorDTO authorDTO;
+    @Autowired
+    private Author_ImageService authorImageService;
 
     public void save(Author author) {
         authorDTO.save(author);
@@ -40,9 +44,13 @@ public class AuthorService {
         return authorDTO.findAll();
     }
 
-    public void update(String surname, String name, Author author) {
+    public void update(String surname, String name, Author author, MultipartFile image) throws IOException {
         author.setSurname(surname);
         author.setName(name);
+        if (image != null && !image.getOriginalFilename().isEmpty()){
+            authorImageService.deleteById(author.getImage().getId());
+        authorImageService.add(image,author);
+        }
         save(author);
     }
 

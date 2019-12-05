@@ -65,27 +65,34 @@
 
     <#assign sum=0>
     <#assign currentId=0>
+    <#if categoryPage??>
+        <@spring.message code="book.page.category"/>
+        <#if .lang=="en">
+            ${category.titleEn}
+        <#elseif .lang=="ru">
+            ${category.titleRu}
+        </#if>
+    <#elseif authorPage??>
+        <@spring.message code="book.page.author"/>
+        ${author.name} ${author.surname}
+        <#else >
     <div><@spring.message code="book.list"/></div>
+
     <#if isAdmin>
         <div>
-            <form method="post" action="/book/create" enctype="multipart/form-data">
-                <input type="number" step="0.01" name="price" placeholder="стоимость">
-                <input type="text" name="titleRu" placeholder="название ру">
-                <input type="text" name="titleEn" placeholder="название en">
-                <input type="text" name="authorSurname" placeholder="фамилия автора">
-                <input type="text" name="authorName" placeholder="имя автора">
-                <textarea class="mt-1" maxlength="1000" rows="10" cols="90" name="description"></textarea>
+            <form method="post" action="/book/admin/create" enctype="multipart/form-data">
+                <input type="number" step="0.01" name="price" placeholder=<@spring.message code="book.price"/>>
+                <input type="text" name="titleRu" placeholder="<@spring.message code="book.title.ru"/>">
+                <input type="text" name="titleEn" placeholder="<@spring.message code="book.title.en"/>">
+                <input type="text" name="authorSurname" placeholder=<@spring.message code="author.surname"/>>
+                <input type="text" name="authorName" placeholder=<@spring.message code="author.name"/>>
+                <textarea class="mt-1" maxlength="1000" rows="10" cols="90" name=<@spring.message code="book.description"/>></textarea>
                 <input type="file" name="image">
-                <button type="submit">Добавить</button>
+                <button type="submit"><@spring.message code="book.add"/></button>
             </form>
         </div>
     </#if>
-    <#--    <form method="get" action="/filter">-->
-    <#--        <label>-->
-    <#--            <input type="text" name="filter" value="${filter!}">-->
-    <#--        </label>-->
-    <#--        <button type="submit">Найти</button>-->
-    <#--    </form>-->
+    </#if>
 </div>
 <div class="ml-5 mr-5">
     <form id="basketAdd">

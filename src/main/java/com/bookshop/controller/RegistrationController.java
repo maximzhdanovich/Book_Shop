@@ -50,7 +50,7 @@ public class RegistrationController {
         if (empty) {
             model.addAttribute("password1Error", "error");
         }
-        if (!StringUtils.isEmpty(user.getPassword()) &&!password1.equals(user.getPassword())) {
+        if (!StringUtils.isEmpty(user.getPassword()) && !password1.equals(user.getPassword())) {
             model.addAttribute("passwordError", "Password are different");
         }
         Optional<User> userFromDb = userService.findByUsername(user.getUsername());

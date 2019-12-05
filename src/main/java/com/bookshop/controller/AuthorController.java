@@ -29,8 +29,9 @@ public class AuthorController {
     }
 
     @PostMapping("admin/{authorId}")
-    public String authorSave(@RequestParam String surname, @RequestParam String name, @RequestParam("authorId") Author author) {
-        authorService.update(surname, name, author);
+    public String authorSave(@RequestParam String surname, @RequestParam String name, @RequestParam("authorId") Author author,
+                             @RequestParam MultipartFile image) throws IOException {
+        authorService.update(surname, name, author,image);
         return "redirect:/author";
     }
 
@@ -51,21 +52,12 @@ public class AuthorController {
     }
 
     @GetMapping("/{authorId}/books")
-    public String authorBooks(@RequestParam(required = false, defaultValue = "") String filter, Model model, @PathVariable String authorId) {
-        if (filter != null && !filter.equals("")) {
-            model.addAttribute("books", filter(authorService.findById(Long.parseLong(authorId)).getBooks(), filter));
-        } else {
-            model.addAttribute("books", authorService.findById(Long.parseLong(authorId)).getBooks());
-        }
-        model.addAttribute("books", authorService.findById(Long.parseLong(authorId)).getBooks());
+    public String authorBooks(Model model, @PathVariable Author authorId) {
+        model.addAttribute("books", authorId.getBooks());
+        model.addAttribute("authorPage","");
+        model.addAttribute("author",authorId);
         return "bookList";
     }
 
-    private List<Book> filter(List<Book> books, String filter) {
-        for (Book book : books) {
-            if (!book.getTitleEn().equals(filter) && !book.getTitleRu().equals(filter))
-                books.remove(book);
-        }
-        return books;
-    }
+
 }

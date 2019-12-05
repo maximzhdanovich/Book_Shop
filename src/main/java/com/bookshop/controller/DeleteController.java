@@ -18,7 +18,7 @@ public class DeleteController {
     private UserService userService;
 
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @GetMapping("/book/delete/{id}")
+    @GetMapping("/book/admin/delete/{id}")
     public String deleteBook(@PathVariable long id) {
         bookService.deleteById(id);
         return "redirect:/book";

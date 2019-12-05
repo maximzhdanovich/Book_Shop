@@ -67,7 +67,7 @@ public class BookService {
         bookDTO.deleteById(id);
     }
 
-    public void update(Book book, String titleEn, String titleRu, String authorSurname, String authorName, String description, Map<String, String> form) {
+    public void update(Book book, String titleEn, String titleRu, String authorSurname, String authorName, String description, Map<String, String> form, MultipartFile image) throws IOException {
         book.setTitleRu(titleRu);
         book.setTitleEn(titleEn);
         book.setAuthor(authorService.findBySurnameAndName(authorSurname, authorName));
@@ -77,6 +77,10 @@ public class BookService {
             if (form.get(s).equals("on")) {
                 book.getCategories().add(categoryService.findById(Integer.valueOf(s)));
             }
+        }
+        if (image != null && !image.getOriginalFilename().isEmpty()) {
+            book_imageService.deleteById(book.getImage().getId());
+            book_imageService.add(image, book);
         }
         save(book);
     }

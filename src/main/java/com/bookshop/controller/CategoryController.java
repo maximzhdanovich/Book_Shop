@@ -23,6 +23,8 @@ public class CategoryController {
 
     @GetMapping("/{category}")
     public String singleCategory(@PathVariable Category category, Model model) {
+        model.addAttribute("categoryPage","");
+        model.addAttribute("category",category);
         model.addAttribute("books", category.getBooks());
         return "bookList";
     }

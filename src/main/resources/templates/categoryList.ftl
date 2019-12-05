@@ -19,8 +19,8 @@
                                 <#elseif .lang=="ru">
                                     ${category.titleRu}
                                 </#if>
-
                             </button>
+                            <a href="/category/${category.id}" methods="get">All books</a>
                         </h5>
                     </div>
                     <div id="collapse${category.id}" class="collapse" aria-labelledby="heading${category.id}"

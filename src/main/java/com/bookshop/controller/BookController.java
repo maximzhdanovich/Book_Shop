@@ -38,7 +38,7 @@ public class BookController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @PostMapping("/create")
+    @PostMapping("/admin/create")
     public String bookCreate(@RequestParam Double price,
                              @RequestParam String titleRu,
                              @RequestParam String titleEn,
@@ -64,19 +64,20 @@ public class BookController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @PostMapping("/save")
+    @PostMapping("/admin/save")
     public String bookSave(
             @RequestParam String titleRu,
             @RequestParam String titleEn,
             @RequestParam String authorSurname,
             @RequestParam String authorName,
             @RequestParam String description,
+            @RequestParam MultipartFile image,
             @RequestParam Map<String, String> form,
-            @RequestParam("bookId") Book book) {
+            @RequestParam("bookId") Book book) throws IOException {
         if (authorService.findBySurnameAndName(authorSurname, authorName) == null) {
-            return "redirect:/book/" + book.getId();
+            return "redirect:/book/admin/" + book.getId();
         }
-        bookService.update(book, titleEn, titleRu, authorSurname, authorName, description, form);
+        bookService.update(book, titleEn, titleRu, authorSurname, authorName, description, form, image);
         return "redirect:/book";
     }
 
@@ -89,7 +90,7 @@ public class BookController {
         return "book";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/admin/add")
     public String add(Book book,
                       @RequestParam String author_surname,
                       @RequestParam String author_name,
