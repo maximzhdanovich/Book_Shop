@@ -28,9 +28,10 @@
             </#if>
         </ul>
         <div>
-        <form method="get" action="/filter" class="mr-2">
-                <input type="text" name="filter" class="form-control" placeholder=<@spring.message code="filter.search"/> value="${filter!}">
-        </form>
+            <form method="get" action="/filter" class="mr-2">
+                <input type="text" name="filter" class="form-control"
+                       placeholder=<@spring.message code="filter.search"/> value="${filter!}">
+            </form>
         </div>
         <div class="mr-2">
             <form id="langEdit">

@@ -31,13 +31,13 @@
             </div>
             <div class="col-sm m-1">
                 <#if author.image??>
-                <img src="/img/author/${author.image.authorImage}">
+                    <img src="/img/author/${author.image.authorImage}">
                 </#if>
             </div>
             <div class="col-sm m-1">
-                <a href="/author/${author.id}" class="btn btn-primary">edit</a>
+                <a href="/author/admin/${author.id}" class="btn btn-primary">edit</a>
             </div>
-            <div >
+            <div>
                 <a href="/author/${author.id}/books" class="btn btn-primary">список книг</a>
             </div>
         </div>

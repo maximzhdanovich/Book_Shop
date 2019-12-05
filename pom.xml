@@ -87,7 +87,7 @@
         </dependency>
 
 
-        <!-- Optional, test for static content, bootstrap CSS -->
+        <!-- Optional, bookshop for static content, bootstrap CSS -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
@@ -98,7 +98,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <derby.version>10.15.1.3</derby.version>
+        <version>10.15.1.3</version>
     </properties>
 
     <build>

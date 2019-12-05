@@ -74,18 +74,18 @@
                 <input type="text" name="titleEn" placeholder="название en">
                 <input type="text" name="authorSurname" placeholder="фамилия автора">
                 <input type="text" name="authorName" placeholder="имя автора">
-                <textarea  class="mt-1" maxlength="1000" rows="10" cols="90" name="description"></textarea>
+                <textarea class="mt-1" maxlength="1000" rows="10" cols="90" name="description"></textarea>
                 <input type="file" name="image">
                 <button type="submit">Добавить</button>
             </form>
         </div>
     </#if>
-<#--    <form method="get" action="/filter">-->
-<#--        <label>-->
-<#--            <input type="text" name="filter" value="${filter!}">-->
-<#--        </label>-->
-<#--        <button type="submit">Найти</button>-->
-<#--    </form>-->
+    <#--    <form method="get" action="/filter">-->
+    <#--        <label>-->
+    <#--            <input type="text" name="filter" value="${filter!}">-->
+    <#--        </label>-->
+    <#--        <button type="submit">Найти</button>-->
+    <#--    </form>-->
 </div>
 <div class="ml-5 mr-5">
     <form id="basketAdd">

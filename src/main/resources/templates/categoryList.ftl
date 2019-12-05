@@ -3,7 +3,7 @@
 <@c.page>
     CATEGORIES
     <#assign index=0>
-    <div class="card-columns" >
+    <div class="card-columns">
         <div id="accordion">
 
             <#list categories as category>
@@ -28,17 +28,17 @@
                         <div class="card-body">
                             <#list books as book>
                                 <#if index<5>
-                                <div class="card">
-                                    Author: ${book.author.surname} ${book.author.surname}<br>
-                                    Title:
-                                    <#if .lang=="en">
-                                        ${book.titleEn}
-                                    <#elseif .lang=="ru">
-                                        ${book.titleRu}
-                                    </#if>
-                                    <br>
-                                    <a href="/book/${book.id}" class="right">Book</a>
-                                </div>
+                                    <div class="card">
+                                        Author: ${book.author.surname} ${book.author.surname}<br>
+                                        Title:
+                                        <#if .lang=="en">
+                                            ${book.titleEn}
+                                        <#elseif .lang=="ru">
+                                            ${book.titleRu}
+                                        </#if>
+                                        <br>
+                                        <a href="/book/${book.id}" class="right">Book</a>
+                                    </div>
                                     <#assign index++>
                                 </#if>
                             </#list>

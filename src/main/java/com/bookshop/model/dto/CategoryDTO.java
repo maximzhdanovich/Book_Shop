@@ -1,0 +1,30 @@
+package com.bookshop.model.dto;
+
+import com.bookshop.model.dao.CategoryDAO;
+import com.bookshop.model.entity.Category;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+@Component
+public class CategoryDTO {
+    @Autowired
+    private CategoryDAO categoryDAO;
+
+    public List<Category> findAll() {
+        return categoryDAO.findAll();
+    }
+
+    public Category findById(long id) {
+        return categoryDAO.findById(id);
+    }
+
+    public Category findByTitleEn(String string) {
+        return categoryDAO.findByTitleEn(string);
+    }
+
+    public Category findFirstByTitleEnOrTitleRu(String titleEn, String titleRu) {
+        return categoryDAO.findFirstByTitleEnOrTitleRu(titleEn, titleRu);
+    }
+}

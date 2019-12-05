@@ -75,10 +75,10 @@
         <strong>Success</strong> Book deleted from basket
 
         <script>
-        function editCurrentId(id) {
-            document.getElementById("bookIdDelete").value = id;
-        }
-    </script>
-</div>
+            function editCurrentId(id) {
+                document.getElementById("bookIdDelete").value = id;
+            }
+        </script>
+    </div>
 </body>
 </html>

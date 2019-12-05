@@ -9,11 +9,11 @@ Book Edit
         <option value="${user.role.title}">${user.role.title}</option>
         <#list roles as role>
             <#if user.role.title!=role.title>
-            <option value="${role.title}">${role.title}</option>
+                <option value="${role.title}">${role.title}</option>
             </#if>
         </#list>
     </select>
     <br><br>
     <input type="hidden" value="${user.id}" name="userId">
     <button type="submit">Save</button>
-</@c.page>  
+    </@c.page>

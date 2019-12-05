@@ -1,27 +1,28 @@
 <#import "parts/common.ftl" as c>
 <@c.page>
-Book Edit
-<form action="/book/save" method="post">
-    <input type="text" name="titleRu" value="${book.titleRu}">
-    <input type="text" name="titleEn" value="${book.titleEn}">
-    <input type="text" name="authorSurname" value="${book.author.surname}">
-    <input type="text" name="authorName" value="${book.author.name}">
-    <br>
-    <br>
+    Book Edit
+    <form action="/book/save" method="post">
+        <input type="text" name="titleRu" value="${book.titleRu}">
+        <input type="text" name="titleEn" value="${book.titleEn}">
+        <input type="text" name="authorSurname" value="${book.author.surname}">
+        <input type="text" name="authorName" value="${book.author.name}">
+        <br>
+        <br>
 
-    <textarea  maxlength="1000" rows="10" cols="90" name="description" ><#if book.description??>${book.description}</#if></textarea>
+        <textarea maxlength="1000" rows="10" cols="90"
+                  name="description"><#if book.description??>${book.description}</#if></textarea>
 
-    <#list categories as category>
-        <div>
-            <label><input type="checkbox" name="${category}"
-                        ${book.categories?seq_contains(category)?string("checked", "")}>${category.titleRu}</label>
-        </div>
-    </#list>
-    <input type="hidden" value="${book.id}" name="bookId">
-    <button type="submit">Save</button>
-</form>
+        <#list categories as category>
+            <div>
+                <label><input type="checkbox" name="${category}"
+                            ${book.categories?seq_contains(category)?string("checked", "")}>${category.titleRu}</label>
+            </div>
+        </#list>
+        <input type="hidden" value="${book.id}" name="bookId">
+        <button type="submit">Save</button>
+    </form>
     <br>
-<form method="get" action="/book/delete/${book.id}">
-    <button type="submit">Delete</button>
-</form>
+    <form method="get" action="/book/delete/${book.id}">
+        <button type="submit">Delete</button>
+    </form>
 </@c.page>

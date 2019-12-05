@@ -4,7 +4,8 @@
     <#assign spring=JspTaglibs["http://www.springframework.org/tags"]>
 
 <#--    <div class="m-2 ml-3">Login page</div>-->
-    <#if RequestParameters.error??><div class="m-2 ml-3"><b>Неправильные логин или пароль</b></div></#if>
+    <#if RequestParameters.error??>
+        <div class="m-2 ml-3"><b>Неправильные логин или пароль</b></div></#if>
     <form action="/login" method="post">
         <div class="form-group row ml-1">
             <label class="col-sm-2 col-form-label"><@spring.message code="login.username"/> :</label>
