@@ -8,6 +8,8 @@ import java.util.List;
 public class Basket {
     private Long id;
     private List<Book> books;
+
+    private List<Book> booksInProcessing;
     private User user;
 
     @Id
@@ -54,5 +56,18 @@ public class Basket {
 
     public Basket() {
     }
+
+    @ManyToMany
+    @JoinTable(name = "BOOK_IN_PROCESSING_WITH_BASKET",
+            joinColumns = @JoinColumn(name = "BASKET_ID"),
+            inverseJoinColumns = @JoinColumn(name = "BOOK_ID"))
+    public List<Book> getBooksInProcessing() {
+        return booksInProcessing;
+    }
+
+    public void setBooksInProcessing(List<Book> booksInProcessing) {
+        this.booksInProcessing = booksInProcessing;
+    }
+
 
 }

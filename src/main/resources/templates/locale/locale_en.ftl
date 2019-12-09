@@ -1,0 +1,55 @@
+<#assign
+<#--    login page-->
+login_registration="New user"
+login_username="Username"
+login_password="Password"
+login_sign_in="Sing in"
+<#--    #registration page-->
+registration_username="User name"
+registration_password="Password"
+registration_password_repeat="Repeat Password"
+registration_email="Email"
+registration_create="Create"
+<#--    #navbar-->
+navbar_home="Home"
+navbar_books="Books"
+navbar_authors="Authors"
+navbar_users="Users"
+navbar_categories="Categories"
+navbar_lang="Language"
+navbar_lang_ru="Russian"
+navbar_lang_en="English"
+navbar_log_in="Log in"
+navbar_log_out="Sign out"
+<#--    #book-->
+book_title="Title"
+book_author="Author"
+book_price="Price"
+book_list="List of Books"
+book_view="View"
+book_basket_add="Add to cart"
+book_basket_add_alert="Book added to cart"
+book_edit="Edit"
+book_title_ru="Title Ru"
+book_title_en="Title En"
+book_description="Description"
+book_add="Add"
+<#--    #filter-->
+filter_search="Search"
+filter_books="Books"
+filter_books_not="Books not found"
+filter_authors="Authors"
+filter_authors_not="Authors not found"
+filter_categories="Categories"
+filter_categories_not="Categories not found"
+<#--    #account-->
+account_basket="My cart"
+account_configuration="Edit configuration"
+account_delete="Delete account"
+<#--    #author-->
+author_surname="Surname"
+author_name="Name"
+<#--    #book page-->
+book_page_category="Books of category"
+book_page_author="Books of author"
+>

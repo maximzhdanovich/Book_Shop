@@ -17,7 +17,7 @@ public class LocaleConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("classpath:locale/messages");
+        messageSource.setBasename("classpath:locale1/messages");
         messageSource.setCacheSeconds(3600);
         return messageSource;
     }

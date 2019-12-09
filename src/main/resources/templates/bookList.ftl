@@ -59,39 +59,43 @@
 <body>
 <#include "parts/security.ftl">
 <#include "parts/navbar.ftl">
-<#assign spring=JspTaglibs["http://www.springframework.org/tags"]>
+<#include "locale/locale.ftl">
+
+<#--<#assign spring=JspTaglibs["http://www.springframework.org/tags"]>-->
 
 <div class="container mt-3 ml-5">
 
     <#assign sum=0>
     <#assign currentId=0>
     <#if categoryPage??>
-        <@spring.message code="book.page.category"/>
+        ${book_page_category}
+    <#--        <@spring.message code="book.page.category"/>-->
         <#if .lang=="en">
             ${category.titleEn}
         <#elseif .lang=="ru">
             ${category.titleRu}
         </#if>
     <#elseif authorPage??>
-        <@spring.message code="book.page.author"/>
+        ${book_page_author}
+    <#--        <@spring.message code="book.page.author"/>-->
         ${author.name} ${author.surname}
-        <#else >
-    <div><@spring.message code="book.list"/></div>
+    <#else >
+        <div>${book_list}</div>
 
-    <#if isAdmin>
-        <div>
-            <form method="post" action="/book/admin/create" enctype="multipart/form-data">
-                <input type="number" step="0.01" name="price" placeholder=<@spring.message code="book.price"/>>
-                <input type="text" name="titleRu" placeholder="<@spring.message code="book.title.ru"/>">
-                <input type="text" name="titleEn" placeholder="<@spring.message code="book.title.en"/>">
-                <input type="text" name="authorSurname" placeholder=<@spring.message code="author.surname"/>>
-                <input type="text" name="authorName" placeholder=<@spring.message code="author.name"/>>
-                <textarea class="mt-1" maxlength="1000" rows="10" cols="90" name=<@spring.message code="book.description"/>></textarea>
-                <input type="file" name="image">
-                <button type="submit"><@spring.message code="book.add"/></button>
-            </form>
-        </div>
-    </#if>
+        <#if isAdmin>
+            <div>
+                <form method="post" action="/book/admin/create" enctype="multipart/form-data">
+                    <input type="number" step="0.01" name="price" placeholder=${book_price}>
+                    <input type="text" name="titleRu" placeholder=${book_title_ru}>
+                    <input type="text" name="titleEn" placeholder=${book_title_en}>
+                    <input type="text" name="authorSurname" placeholder=${author_surname}>
+                    <input type="text" name="authorName" placeholder=${author_surname}>
+                    <textarea class="mt-1" maxlength="1000" rows="10" cols="90" name=${book_description}></textarea>
+                    <input type="file" name="image">
+                    <button type="submit">${book_add}</button>
+                </form>
+            </div>
+        </#if>
     </#if>
 </div>
 <div class="ml-5 mr-5">
@@ -105,9 +109,9 @@
                         <#else>
                     <p><img src="/img/bookNot/bookImageNotFound.jpg" class="leftimg" width="96" height="125">
                         </#if>
-                        <@spring.message code="book.author"/>: ${book.author.name} ${book.author.surname}
+                        ${book_author}: ${book.author.name} ${book.author.surname}
                         <br>
-                        <@spring.message code="book.title"/>
+                        ${book_title}
                         <#if .lang=="en">
                             ${book.titleEn}
                         <#elseif .lang=="ru">
@@ -124,16 +128,16 @@
                     </p>
                     <div class="card-footer text-muted text-right">
                         <a href="/book/${book.id}"
-                           class="btn btn-primary ml-2 leftText"><@spring.message code="book.book"/></a>
+                           class="btn btn-primary ml-2 leftText">${book_view}</a>
                         <#if isAdmin>
                             <a href="/book/admin/${book.id}"
-                               class="btn btn-primary ml-2 leftText"><@spring.message code="book.edit"/></a>
+                               class="btn btn-primary ml-2 leftText">${book_edit}</a>
                         </#if>
                         <br>
-                        <b class="mr-2"><@spring.message code="book.price"/>: ${book.price}</b>
+                        <b class="mr-2">${book_price}: ${book.price}</b>
                         <#if name!="unknown">
                             <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id})>
-                                <@spring.message code="book.basket.add"/>
+                                ${book_basket_add}
                             </button>
                         </#if>
                     </div>
@@ -145,7 +149,7 @@
 </div>
 <div id="addingToCartSuccess" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
      role="alert">
-    <strong>Success</strong> <@spring.message code="book.basket.add.alert"/>
+    <strong>Success</strong> ${book_basket_add_alert}
 
     <script>
         function editCurrentId(id) {

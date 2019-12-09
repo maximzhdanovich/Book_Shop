@@ -1,11 +1,14 @@
 <#import "parts/common.ftl" as c>
 <#include "parts/security.ftl">
+<#include "locale/locale.ftl">
+
 <@c.page>
-    <#assign spring=JspTaglibs["http://www.springframework.org/tags"]>
+<#--    <#assign spring=JspTaglibs["http://www.springframework.org/tags"]>-->
     <#assign bookIndex=0>
     <#assign authorIndex=0>
     <div class="mt-3">
-        <@spring.message code="filter.books"/>
+        ${filter_books}
+        <#--        <@spring.message code="filter.books"/>-->
     </div>
     <div class="card-deck m-5">
         <#list books as book>
@@ -29,7 +32,7 @@
             </#if>
         </#list>
     </div>
-    <@spring.message code="filter.authors"/>
+    ${filter_authors}
     <div class="card-deck m-5">
         <#list authors as author>
             <#if authorIndex<5>

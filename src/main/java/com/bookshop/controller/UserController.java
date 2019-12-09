@@ -44,7 +44,8 @@ public class UserController {
     @GetMapping("{user}/basket")
     public String showUserBasket(@PathVariable User user, Model model) {
         model.addAttribute("books", user.getBasket().getBooks());
-        return "myBasket";
+        model.addAttribute("booksinprocessing",user.getBasket().getBooksInProcessing());
+        return "adminUsersBasket";
     }
 
 }

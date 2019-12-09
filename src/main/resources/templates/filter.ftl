@@ -1,5 +1,7 @@
 <#import "parts/common.ftl" as c>
 <#include "parts/security.ftl">
+<#include "locale/locale.ftl">
+
 <style>
     .leftimg {
         float: left; /* Выравнивание по левому краю */
@@ -25,11 +27,12 @@
 </style>
 
 <@c.page>
-    <#assign index=0>
-    <#assign spring=JspTaglibs["http://www.springframework.org/tags"]>
-    <#assign currentId=0>
 
-    <@spring.message code="filter.books"/>
+    <#assign index=0>
+<#--    <#assign spring=JspTaglibs["http://www.springframework.org/tags"]>-->
+    <#assign currentId=0>
+    ${filter_books}
+<#--    <@spring.message code="filter.books"/>-->
     <#if books?? && books?size!=0>
         <div class="ml-5 mr-5">
             <form id="basketAdd">
@@ -42,9 +45,9 @@
                                 <#else>
                             <p><img src="/img/bookNot/bookImageNotFound.jpg" class="leftimg" width="96" height="125">
                                 </#if>
-                                <@spring.message code="book.author"/>: ${book.author.name} ${book.author.surname}
+                                ${book_author}: ${book.author.name} ${book.author.surname}
                                 <br>
-                                <@spring.message code="book.title"/>
+                                ${book_title}
                                 <#if .lang=="en">
                                     ${book.titleEn}
                                 <#elseif .lang=="ru">
@@ -61,13 +64,13 @@
                             </p>
                             <div class="card-footer text-muted text-right">
                                 <a href="/book/${book.id}"
-                                   class="btn btn-primary ml-2 leftText"><@spring.message code="book.book"/></a>
+                                   class="btn btn-primary ml-2 leftText">${book_view}</a>
                                 <#if isAdmin>
                                     <a href="/book/admin/${book.id}"
-                                       class="btn btn-primary ml-2 leftText"><@spring.message code="book.edit"/></a>
+                                       class="btn btn-primary ml-2 leftText">${book_edit}</a>
                                 </#if>
                                 <br>
-                                <b class="mr-2"><@spring.message code="book.price"/>: ${book.price}</b>
+                                <b class="mr-2">${book_price}: ${book.price}</b>
                                 <#if name!="unknown">
                                 </#if>
                             </div>
@@ -78,9 +81,9 @@
             </form>
         </div>
     <#else>
-        <h5><@spring.message code="filter.books.not"/></h5>
+        <h5>${filter_books_not}</h5>
     </#if>
-    <@spring.message code="filter.authors"/>
+    ${filter_authors}
     <#if authors?? && authors?size!=0>
         <div class="card-deck m-5">
             <#list authors as author>
@@ -90,15 +93,15 @@
                     </#if>
                     <div class="card-body">
                         <h5 class="card-title">${author.surname} ${author.name} </h5>
-                        <a href="/author/${author.id}/books" class="card-text">Книги</a>
+                        <a href="/author/${author.id}/books" class="card-text">${filter_books}</a>
                     </div>
                 </div>
             </#list>
         </div>
     <#else>
-        <h5><@spring.message code="filter.authors.not"/></h5>
+        <h5>${filter_authors_not}</h5>
     </#if>
-    <@spring.message code="filter.categories"/>
+    ${filter_categories}
     <#if category??>
 
         <div class="card-columns">
@@ -115,7 +118,6 @@
                                 <#elseif .lang=="ru">
                                     ${category.titleRu}
                                 </#if>
-
                             </button>
                         </h5>
                     </div>
@@ -145,7 +147,7 @@
             </div>
         </div>
     <#else>
-        <h5><@spring.message code="filter.categories.not"/></h5>
+        <h5>${filter_categories_not}</h5>
     </#if>
 
 </@c.page>

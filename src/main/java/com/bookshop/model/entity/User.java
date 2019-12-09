@@ -11,10 +11,10 @@ public class User {
     private Long id;
     @NotBlank(message = "error")
     private String username;
-    @Email(message = "error email")
+    @Email(message = "email error")
     @NotBlank(message = "error")
     private String email;
-    @NotBlank(message = "error")
+    @NotBlank(message = "password error")
     private String password;
 
 

@@ -19,6 +19,8 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
     <script type="text/javascript" src="/deleteFromBasket.js"></script>
+    <script type="text/javascript" src="/bookToProcessing.js"></script>
+    <script type="text/javascript" src="/allBookToProcessing.js"></script>
     <style>
         #DeleteFromBasketSuccess {
             position: fixed;
@@ -36,7 +38,9 @@
 <#include "parts/navbar.ftl">
 <#assign price = 0>
 <#global currentId=0>
+<#global currentIdForProcessing=0>
 <div class="container center mt-5">
+    <form id="deleteFromBasket">
     <table class="table table-bordered ">
         <thead>
         <tr>
@@ -44,39 +48,60 @@
             <th>Название</th>
             <th>Author</th>
             <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
-        <form id="deleteFromBasket">
+        <#list books as book>
+            <tr>
+                <td>#{book.price}</td>
+                <td><#if .lang=="en">
+                        ${book.titleEn}
+                    <#elseif .lang=="ru">
+                        ${book.titleRu}
+                    </#if></td>
+                <td>${book.author.surname} ${book.author.name}</td>
+                <td>
 
-            <#list books as book>
-                <tr>
-                    <td>#{book.price}</td>
-                    <td><#if .lang=="en">
-                            ${book.titleEn}
-                        <#elseif .lang=="ru">
-                            ${book.titleRu}
-                        </#if></td>
-                    <td>${book.author.surname} ${book.author.name}</td>
-                    <td>
-                        <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id})>delete</button>
-                    </td>
-                </tr>
-                <#assign price += book.price>
-            </#list>
-        </form>
+                        <button type="submit" id="${book.id}" class="btn btn-primary" onclick=editCurrentId(${book.id})>
+                            delete
+                        </button>
+
+                </td>
+                <td>
+                        <button type="submit" class="btn btn-primary" onclick=editCurrentIdFor(${book.id})>Sent to
+                            Processing
+                        </button>
+                </td>
+            </tr>
+            <#assign price += book.price>
+        </#list>
         </tbody>
     </table>
+    </form>
+    <form id="bookToProcessing">
+        <button type="submit" hidden="hidden"></button>
+    </form>
     <br>
     <a>Total price ${price}</a>
-    <input type="hidden" id="bookIdDelete" value="${currentId}">
+    <input id="bookId" value="${currentId}">
+    <input id="bookIdFor" value="${currentIdForProcessing}">
+
+    <form id="AllBookToProcessing">
+        <button type="submit" class="btn btn-primary" <#if price==0> disabled="disabled" </#if>>Sent all to Processing
+        </button>
+    </form>
     <div id="DeleteFromBasketSuccess" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
          role="alert">
         <strong>Success</strong> Book deleted from basket
 
         <script>
             function editCurrentId(id) {
-                document.getElementById("bookIdDelete").value = id;
+                document.getElementById("bookId").value = id;
+            }
+            function editCurrentIdFor(id) {
+                document.getElementById("bookIdFor").value = id;
+                document.getElementById("bookToProcessing").click();
             }
         </script>
     </div>

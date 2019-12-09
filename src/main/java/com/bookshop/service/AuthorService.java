@@ -47,9 +47,9 @@ public class AuthorService {
     public void update(String surname, String name, Author author, MultipartFile image) throws IOException {
         author.setSurname(surname);
         author.setName(name);
-        if (image != null && !image.getOriginalFilename().isEmpty()){
+        if (image != null && !image.getOriginalFilename().isEmpty()) {
             authorImageService.deleteById(author.getImage().getId());
-        authorImageService.add(image,author);
+            authorImageService.add(image, author);
         }
         save(author);
     }

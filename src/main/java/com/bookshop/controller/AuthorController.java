@@ -31,7 +31,7 @@ public class AuthorController {
     @PostMapping("admin/{authorId}")
     public String authorSave(@RequestParam String surname, @RequestParam String name, @RequestParam("authorId") Author author,
                              @RequestParam MultipartFile image) throws IOException {
-        authorService.update(surname, name, author,image);
+        authorService.update(surname, name, author, image);
         return "redirect:/author";
     }
 
@@ -54,8 +54,8 @@ public class AuthorController {
     @GetMapping("/{authorId}/books")
     public String authorBooks(Model model, @PathVariable Author authorId) {
         model.addAttribute("books", authorId.getBooks());
-        model.addAttribute("authorPage","");
-        model.addAttribute("author",authorId);
+        model.addAttribute("authorPage", "");
+        model.addAttribute("author", authorId);
         return "bookList";
     }
 
