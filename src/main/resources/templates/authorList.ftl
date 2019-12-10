@@ -3,6 +3,9 @@
 <@c.page>
     List of Authors<br>
     <#if isAdmin>
+        <#if authorError??>
+            ${authorError}
+        </#if>
         <div>
             <form method="post" enctype="multipart/form-data">
                 <input type="text" name="surname" placeholder="фамилия автора">
@@ -12,24 +15,27 @@
             </form>
         </div>
     </#if>
-    <#list authors as author>
-        <div class="row">
-            <div class="col-sm m-1">
-                ${author.surname} ${author.name}
-            </div>
-            <div class="col-sm m-1">
-                <#if author.image??>
-                    <img src="/img/author/${author.image.authorImage}">
-                </#if>
-            </div>
-            <div>
-                <a href="/author/${author.id}/books" class="btn btn-primary mt-2">список книг</a>
-            </div>
-            <#if isAdmin>
-                <div class="col-sm m-1">
-                    <a href="/author/admin/${author.id}" class="btn btn-primary">edit</a>
+    <form>
+        <div class="card-columns">
+            <#list authors as author>
+
+                <div class="card m-2" <#--style="width: 20rem;"-->>
+                    <#if author.image??>
+                        <img class="card-img-top" src="/img/author/${author.image.authorImage}"   height="480">
+                    </#if>
+                    <div class="card-body">
+                        <a class="card-titlem-2">${author.surname} ${author.name}</a>
+                        <br>
+                        <div class="card-text">
+                            <a href="/author/${author.id}/books" class="btn btn-primary m-2">список книг</a>
+                            <br>
+                            <#if isAdmin>
+                                <a href="/author/admin/${author.id}" class="btn btn-primary m-2">edit</a>
+                            </#if>
+                        </div>
+                    </div>
                 </div>
-            </#if>
+            </#list>
         </div>
-    </#list>
+    </form>
 </@c.page>

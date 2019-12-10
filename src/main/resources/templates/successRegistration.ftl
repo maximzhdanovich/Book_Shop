@@ -1,7 +1,7 @@
 <#import "parts/common.ftl" as c>
 
 <@c.page>
-Registration success
+    Registration success
 
     <a href="/login" class="btn btn-primary">Login Page</a>
 </@c.page>

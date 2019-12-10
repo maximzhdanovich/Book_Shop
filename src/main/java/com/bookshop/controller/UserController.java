@@ -1,9 +1,12 @@
 package com.bookshop.controller;
 
+import com.bookshop.model.entity.Basket;
+import com.bookshop.model.entity.Book;
 import com.bookshop.model.entity.User;
-import com.bookshop.service.RoleService;
-import com.bookshop.service.UserService;
+import com.bookshop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +20,10 @@ public class UserController {
     private UserService userService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private BasketService basketService;
+    @Autowired
+    private BookService bookService;
 
     @GetMapping
     public String userList(Model model) {
@@ -44,8 +51,19 @@ public class UserController {
     @GetMapping("{user}/basket")
     public String showUserBasket(@PathVariable User user, Model model) {
         model.addAttribute("books", user.getBasket().getBooks());
-        model.addAttribute("booksinprocessing",user.getBasket().getBooksInProcessing());
+        model.addAttribute("booksinprocessing", user.getBasket().getBooksInProcessing());
+        model.addAttribute("user", user);
         return "adminUsersBasket";
+    }
+
+    @PostMapping("{user}/approvedBook")
+    public ResponseEntity<Object> AllBookToProcessing(@RequestBody Book book, @PathVariable User user) {
+        Basket basket = user.getBasket();
+        basket.getBooksInProcessing().remove(bookService.findById(book.getId()));
+        basket.getBooksApproved().add(bookService.findById(book.getId()));
+        basketService.save(basket);
+        ServiceResponse<Long> response = new ServiceResponse<Long>("success", basket.getId());
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }

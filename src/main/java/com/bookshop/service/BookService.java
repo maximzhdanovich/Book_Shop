@@ -70,7 +70,7 @@ public class BookService {
     public void update(Book book, String titleEn, String titleRu, String authorSurname, String authorName, String description, Map<String, String> form, MultipartFile image) throws IOException {
         book.setTitleRu(titleRu);
         book.setTitleEn(titleEn);
-        book.setAuthor(authorService.findBySurnameAndName(authorSurname, authorName));
+        book.setAuthor(authorService.findBySurnameAndName(authorSurname, authorName).get());
         book.setDescription(description);
         book.getCategories().clear();
         for (String s : form.keySet()) {

@@ -54,10 +54,7 @@
         </div>
 
         <#if name=="unknown">
-<#--            <div class="mr-3">-->
-<#--                <b>${name}</b></div>-->
             <a href="/login" class="btn btn-primary">${navbar_log_in}</a>
-        <#--            <a href="/login"><@spring.message code="navbar.log.in"/></a>-->
         <#else >
 
             <div class="mr-4">
@@ -66,7 +63,7 @@
 
                     <#--                    <button type="submit"><@spring.message code="navbar.log.out"/></button>-->
                     <a href="/account/basket" class="btn btn-primary">${account_basket}</a>
-                    <a href="/account"  class="btn btn-primary">${name}</a>
+                    <a href="/account" class="btn btn-primary">${name}</a>
                     <button type="submit" class="btn btn-primary">${navbar_log_out}</button>
                 </form>
             </div>
@@ -76,6 +73,7 @@
         function langEdit() {
             document.getElementById("langSubmit").click();
         }
+
         function account() {
             document.getElementById("account123").click();
         }

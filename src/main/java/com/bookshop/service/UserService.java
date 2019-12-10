@@ -54,9 +54,6 @@ public class UserService implements UserDetailsService {
     }
 
     public User getCurrentUser(User user) {
-        if (user == null) {
-            throw new UserNotFoundException();
-        }
         return findById(user.getId());
     }
 

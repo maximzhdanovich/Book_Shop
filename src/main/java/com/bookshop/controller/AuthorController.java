@@ -1,7 +1,6 @@
 package com.bookshop.controller;
 
 import com.bookshop.model.entity.Author;
-import com.bookshop.model.entity.Book;
 import com.bookshop.service.AuthorService;
 import com.bookshop.service.Author_ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
 
 @Controller
 @RequestMapping("/author")
@@ -38,16 +36,22 @@ public class AuthorController {
     @GetMapping
     public String authorList(Model model) {
         model.addAttribute("authors", authorService.findAll());
-        model.addAttribute("images", authorImageService.findAll());
+//        model.addAttribute("images", authorImageService.findAll());
         return "authorList";
     }
 
     @PostMapping
     public String addAuthor(@RequestParam String surname,
                             @RequestParam String name,
-                            @RequestParam MultipartFile image) throws IOException {
+                            @RequestParam MultipartFile image,
+                            Model model) throws IOException {
+        if(authorService.findBySurnameAndName(surname, name).isPresent()){
+            model.addAttribute("authorError","author is already exist");
+            model.addAttribute("authors", authorService.findAll());
+
+            return "authorList";}
         authorService.create(surname, name);
-        authorImageService.add(image, authorService.findBySurnameAndName(surname, name));
+        authorImageService.add(image, authorService.findBySurnameAndName(surname, name).get());
         return "redirect:/author";
     }
 

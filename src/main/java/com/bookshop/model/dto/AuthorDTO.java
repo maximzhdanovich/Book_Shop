@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class AuthorDTO {
@@ -24,7 +25,7 @@ public class AuthorDTO {
         authorDAO.deleteById(id);
     }
 
-    public Author findBySurnameAndName(String surname, String name) {
+    public Optional<Author> findBySurnameAndName(String surname, String name) {
         return authorDAO.findBySurnameAndName(surname, name);
     }
 

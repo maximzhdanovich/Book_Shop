@@ -15,7 +15,7 @@ $(document).ready(
                 contentType: "application/json",
                 url: "bookToProcessing",
                 success: function () {
-                    showSuccessMessage();
+                    showSuccessMessage1();
                 },
                 data: JSON.stringify(formData),
                 dataType: 'json'
@@ -23,10 +23,10 @@ $(document).ready(
         }
     });
 
-function showSuccessMessage() {
-    $("#DeleteFromBasketSuccess").fadeOut();
-    $("#DeleteFromBasketSuccess").fadeIn(1000);
+function showSuccessMessage1() {
+    $("#AddOnProcessing").fadeOut();
+    $("#AddOnProcessing").fadeIn(1000);
     setTimeout(function () {
-        $("#DeleteFromBasketSuccess").fadeOut(1000);
+        $("#AddOnProcessing").fadeOut(1000);
     }, 3000);
 }

@@ -4,10 +4,12 @@ import com.bookshop.model.dto.AuthorDTO;
 import com.bookshop.model.entity.Author;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AuthorService {
@@ -20,11 +22,11 @@ public class AuthorService {
         authorDTO.save(author);
     }
 
-    public Author findBySurnameAndName(String surname, String name) {
-        if (surname != null && !surname.equals("") && name != null && !name.equals("")) {
+    public Optional<Author> findBySurnameAndName(String surname, String name) {
+        if (!StringUtils.isEmpty(surname) && !StringUtils.isEmpty(name)) {
             return authorDTO.findBySurnameAndName(surname, name);
         } else {
-            return null;
+            return Optional.empty();
         }
     }
 

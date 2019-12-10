@@ -1,12 +1,11 @@
 package com.bookshop.controller;
 
 import com.bookshop.model.entity.Book;
-import com.bookshop.service.AuthorService;
-import com.bookshop.service.BookService;
-import com.bookshop.service.Book_ImageService;
-import com.bookshop.service.CategoryService;
+import com.bookshop.model.entity.CustomUserDetail;
+import com.bookshop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +30,9 @@ public class BookController {
     @Autowired
     private CategoryService categoryService;
 
+
     @GetMapping
-    public String bookList(Model model) {
+    public String bookList(Model model, @AuthenticationPrincipal CustomUserDetail user) {
         model.addAttribute("books", bookService.findAll());
         return "bookList";
     }
@@ -46,10 +46,10 @@ public class BookController {
                              @RequestParam String authorName,
                              @RequestParam String description,
                              @RequestParam MultipartFile image) throws IOException {
-        if (authorService.findBySurnameAndName(authorSurname, authorName) == null) {
+        if (!authorService.findBySurnameAndName(authorSurname, authorName).isPresent()) {
             return "redirect:/book";
         }
-        bookService.create(price, titleRu, titleEn, description, authorService.findBySurnameAndName(authorSurname, authorName), image);
+        bookService.create(price, titleRu, titleEn, description, authorService.findBySurnameAndName(authorSurname, authorName).get(), image);
         return "redirect:/book";
     }
 
@@ -74,7 +74,7 @@ public class BookController {
             @RequestParam MultipartFile image,
             @RequestParam Map<String, String> form,
             @RequestParam("bookId") Book book) throws IOException {
-        if (authorService.findBySurnameAndName(authorSurname, authorName) == null) {
+        if (!authorService.findBySurnameAndName(authorSurname, authorName).isPresent()) {
             return "redirect:/book/admin/" + book.getId();
         }
         bookService.update(book, titleEn, titleRu, authorSurname, authorName, description, form, image);
@@ -96,7 +96,7 @@ public class BookController {
                       @RequestParam String author_name,
                       Model model,
                       @RequestParam MultipartFile book_image) throws IOException {
-        bookService.create(book, authorService.findBySurnameAndName(author_surname, author_name));
+        bookService.create(book, authorService.findBySurnameAndName(author_surname, author_name).get());
         bookImageService.add(book_image, book);
         model.addAttribute("books", bookService.findAll());
         return "bookList";

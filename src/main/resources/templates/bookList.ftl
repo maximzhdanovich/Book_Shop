@@ -30,6 +30,17 @@
             z-index: 15;
             text-align: center;
         }
+
+        #addingToCartError {
+            position: fixed;
+            right: 0;
+            top: 50px;
+            margin-top: 10px;
+            margin-right: 10px;
+            display: none;
+            z-index: 15;
+            text-align: center;
+        }
     </style>
     <style>
         .leftimg {
@@ -90,7 +101,7 @@
                     <input type="text" name="titleEn" placeholder=${book_title_en}>
                     <input type="text" name="authorSurname" placeholder=${author_surname}>
                     <input type="text" name="authorName" placeholder=${author_surname}>
-                    <textarea class="mt-1" maxlength="1000" rows="10" cols="90" name=${book_description}></textarea>
+                    <textarea class="mt-1" maxlength="1000" rows="10" cols="90" name="description"></textarea>
                     <input type="file" name="image">
                     <button type="submit">${book_add}</button>
                 </form>
@@ -99,10 +110,13 @@
     </#if>
 </div>
 <div class="ml-5 mr-5">
+
     <form id="basketAdd">
         <div class="card-columns">
             <#list books as book>
+
                 <div class="card my-3">
+
 
                     <#if book.image??>
                     <p><img src="/img/book/${book.image.bookImage}" class="leftimg" width="96" height="125">
@@ -120,10 +134,15 @@
                     <div class="cope_text line-clamp">
                         <#if book.description??>
                             ${book.description}
+                            <#if book.description?length<55>
+                                <br>
+                                <br>
+                                <br>
+                            <#elseif  book.description?length<110>
+                                <br>
+                                <br>
+                            </#if>
                         </#if>
-                        <br>
-                        <br>
-                        <br>
                     </div>
                     </p>
                     <div class="card-footer text-muted text-right">
@@ -133,13 +152,16 @@
                             <a href="/book/admin/${book.id}"
                                class="btn btn-primary ml-2 leftText">${book_edit}</a>
                         </#if>
-                        <br>
-                        <b class="mr-2">${book_price}: ${book.price}</b>
-                        <#if name!="unknown">
-                            <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id})>
-                                ${book_basket_add}
-                            </button>
-                        </#if>
+
+                        <b class="mr-2">${book_price}: ${book.price} Br</b>
+
+
+                        <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id})
+                                <#if name="unknown">disabled="disabled"</#if>>
+                            ${book_basket_add}
+                        </button>
+
+
                     </div>
                 </div>
             </#list>
@@ -149,12 +171,12 @@
 </div>
 <div id="addingToCartSuccess" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
      role="alert">
-    <strong>Success</strong> ${book_basket_add_alert}
+    <strong>Success</strong> ${book_basket_add_alert}</div>
 
-    <script>
-        function editCurrentId(id) {
-            document.getElementById("bookId").value = id;
-        }
-    </script>
+        <script>
+            function editCurrentId(id) {
+                document.getElementById("bookId").value = id;
+            }
+        </script>
 </body>
 </html>

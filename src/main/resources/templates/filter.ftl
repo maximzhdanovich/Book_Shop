@@ -85,8 +85,9 @@
     </#if>
     ${filter_authors}
     <#if authors?? && authors?size!=0>
-        <div class="card-deck m-5">
+        <div class="card-columns m-5">
             <#list authors as author>
+
                 <div class="card">
                     <#if author.image??>
                         <img src="/img/author/${author.image.authorImage}">
@@ -96,6 +97,8 @@
                         <a href="/author/${author.id}/books" class="card-text">${filter_books}</a>
                     </div>
                 </div>
+
+
             </#list>
         </div>
     <#else>

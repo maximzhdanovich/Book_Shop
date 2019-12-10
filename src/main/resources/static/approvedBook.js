@@ -1,34 +1,32 @@
 $(document).ready(
     function () {
-        $("#basketAdd").submit(function (event) {
+        $("#approvedBook").submit(function (event) {
             // Prevent the form from submitting via the browser.
             event.preventDefault();
             ajaxPost();
         });
 
         function ajaxPost() {
-            var formData = {
+            var book = {
                 id: $("#bookId").val()
             }
             $.ajax({
                 type: "POST",
                 contentType: "application/json",
-                url: "/saveBook",
+                url: "approvedBook",
                 success: function () {
-                    showSuccessMessage();
+                    showSuccessMessage1();
                 },
-
-                data: JSON.stringify(formData),
-
+                data: JSON.stringify(book),
                 dataType: 'json'
             });
         }
     });
 
-function showSuccessMessage() {
-    $("#addingToCartSuccess").fadeOut();
-    $("#addingToCartSuccess").fadeIn(1000);
+function showSuccessMessage1() {
+    $("#AddOnProcessing").fadeOut();
+    $("#AddOnProcessing").fadeIn(1000);
     setTimeout(function () {
-        $("#addingToCartSuccess").fadeOut(1000);
+        $("#AddOnProcessing").fadeOut(1000);
     }, 3000);
 }
