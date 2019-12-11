@@ -45,11 +45,12 @@ public class AuthorController {
                             @RequestParam String name,
                             @RequestParam MultipartFile image,
                             Model model) throws IOException {
-        if(authorService.findBySurnameAndName(surname, name).isPresent()){
-            model.addAttribute("authorError","author is already exist");
+        if (authorService.findBySurnameAndName(surname, name).isPresent()) {
+            model.addAttribute("authorError", "author is already exist");
             model.addAttribute("authors", authorService.findAll());
 
-            return "authorList";}
+            return "authorList";
+        }
         authorService.create(surname, name);
         authorImageService.add(image, authorService.findBySurnameAndName(surname, name).get());
         return "redirect:/author";

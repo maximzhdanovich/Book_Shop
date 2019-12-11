@@ -21,7 +21,7 @@
 
                 <div class="card m-2" <#--style="width: 20rem;"-->>
                     <#if author.image??>
-                        <img class="card-img-top" src="/img/author/${author.image.authorImage}"   height="480">
+                        <img class="card-img-top" src="/img/author/${author.image.authorImage}" height="480">
                     </#if>
                     <div class="card-body">
                         <a class="card-titlem-2">${author.surname} ${author.name}</a>

@@ -52,7 +52,70 @@
 <#global currentIdForProcessing=0>
 <div class="container center mt-5">
     <#if books?size!=0>
-    <form id="deleteFromBasket">
+        <form id="deleteFromBasket">
+
+            <table class="table table-bordered ">
+                <thead>
+                <tr>
+                    <th>Цена</th>
+                    <th>Название</th>
+                    <th>Author</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <#list books as book>
+                    <tr>
+                        <td>#{book.price}</td>
+                        <td><#if .lang=="en">
+                                ${book.titleEn}
+                            <#elseif .lang=="ru">
+                                ${book.titleRu}
+                            </#if></td>
+                        <td>${book.author.surname} ${book.author.name}</td>
+                        <td>
+
+                            <button type="submit" id="${book.id}" class="btn btn-primary"
+                                    onclick=editCurrentId(${book.id})>
+                                delete
+                            </button>
+
+                        </td>
+                        <td>
+                            <button type="button" id="qwe${book.id}" class="btn btn-primary"
+                                    onclick=editCurrentIdFor(${book.id})>Sent to
+                                Processing
+                            </button>
+                        </td>
+                    </tr>
+                    <#assign price += book.price>
+                </#list>
+                </tbody>
+            </table>
+
+
+        </form>
+        <form id="bookToProcessing">
+            <button id="bookToProcessingButton" type="submit" hidden="hidden"></button>
+        </form>
+        <br>
+        <a>Total price ${price}</a>
+        <br>
+        <form id="AllBookToProcessing">
+            <button type="submit" class="btn btn-primary" <#if price==0> disabled="disabled" </#if>>Sent all to
+                Processing
+            </button>
+        </form>
+    <#else >
+        Cart is empty
+    </#if>
+    <br>
+    <br>
+    <input id="bookId" value="${currentId}" type="hidden">
+    <input id="bookIdFor" value="${currentIdForProcessing}" type="hidden">
+    <#if approvedBooks?size!=0>
+        Approved books
 
         <table class="table table-bordered ">
             <thead>
@@ -60,12 +123,11 @@
                 <th>Цена</th>
                 <th>Название</th>
                 <th>Author</th>
-                <th></th>
-                <th></th>
+
             </tr>
             </thead>
             <tbody>
-            <#list books as book>
+            <#list approvedBooks as book>
                 <tr>
                     <td>#{book.price}</td>
                     <td><#if .lang=="en">
@@ -74,70 +136,11 @@
                             ${book.titleRu}
                         </#if></td>
                     <td>${book.author.surname} ${book.author.name}</td>
-                    <td>
 
-                        <button type="submit" id="${book.id}" class="btn btn-primary" onclick=editCurrentId(${book.id})>
-                            delete
-                        </button>
-
-                    </td>
-                    <td>
-                        <button type="button" id="qwe${book.id}" class="btn btn-primary"
-                                onclick=editCurrentIdFor(${book.id})>Sent to
-                            Processing
-                        </button>
-                    </td>
                 </tr>
-                <#assign price += book.price>
             </#list>
             </tbody>
         </table>
-
-
-    </form>
-    <form id="bookToProcessing">
-        <button id="bookToProcessingButton" type="submit" hidden="hidden"></button>
-    </form>
-    <br>
-    <a>Total price ${price}</a>
-    <br>
-    <form id="AllBookToProcessing">
-        <button type="submit" class="btn btn-primary" <#if price==0> disabled="disabled" </#if>>Sent all to Processing
-        </button>
-    </form>
-    <#else >
-        Cart is empty
-    </#if>
-    <br>
-    <br>
-    <#if approvedBooks?size!=0>
-    Approved books
-    <input id="bookId" value="${currentId}" type="hidden">
-    <input id="bookIdFor" value="${currentIdForProcessing}" type="hidden">
-    <table class="table table-bordered ">
-        <thead>
-        <tr>
-            <th>Цена</th>
-            <th>Название</th>
-            <th>Author</th>
-
-        </tr>
-        </thead>
-        <tbody>
-        <#list approvedBooks as book>
-            <tr>
-                <td>#{book.price}</td>
-                <td><#if .lang=="en">
-                        ${book.titleEn}
-                    <#elseif .lang=="ru">
-                        ${book.titleRu}
-                    </#if></td>
-                <td>${book.author.surname} ${book.author.name}</td>
-
-            </tr>
-        </#list>
-        </tbody>
-    </table>
     </#if>
     <div id="AddOnProcessing" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
          role="alert">
@@ -159,6 +162,7 @@
             document.getElementById(id).setAttribute("disabled", "disabled");
             document.getElementById("bookToProcessingButton").click();
         }
+
     </script>
 
 </body>

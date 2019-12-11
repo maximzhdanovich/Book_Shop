@@ -20,10 +20,6 @@ public class CategoryDTO {
         return categoryDAO.findById(id);
     }
 
-    public Category findByTitleEn(String string) {
-        return categoryDAO.findByTitleEn(string);
-    }
-
     public Category findFirstByTitleEnOrTitleRu(String titleEn, String titleRu) {
         return categoryDAO.findFirstByTitleEnOrTitleRu(titleEn, titleRu);
     }

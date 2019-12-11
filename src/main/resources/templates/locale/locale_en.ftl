@@ -52,4 +52,22 @@ author_name="Name"
 <#--    #book page-->
 book_page_category="Books of category"
 book_page_author="Books of author"
+<#--    #account configuration page-->
+account_configuration_username_error="Username can not be empty"
+account_configuration_username_exist_error="Username is already in use"
+account_configuration_email_error="Email can not be empty"
+account_configuration_email_exist_error="Email is already in use"
+account_configuration_old_parssword_error="Password can not be empty"
+account_configuration_old_parssword_input_error="Old password incorrect"
+account_configuration_new_parssword_error="New password can't be empty"
+account_configuration_new_repeat_parssword_error="Repeat password can't be empty"
+account_configuration_new_parssword_different_error="Password are different"
+<#--    #registration page-->
+registration_create_username_error="Username can not be empty"
+registration_create_username_exist_error="Username is already in use"
+registration_create_email_error="Email can not be empty"
+registration_create_email_exist_error="Email is already in use"
+registration_create_new_parssword_error="Password can't be empty"
+registration_create_new_repeat_parssword_error="Repeat password can't be empty"
+registration_create_new_parssword_different_error="Password are different"
 >

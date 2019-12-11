@@ -2,7 +2,6 @@ package com.bookshop.service;
 
 import com.bookshop.model.dto.UserDTO;
 import com.bookshop.model.entity.User;
-import com.bookshop.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,7 +26,7 @@ public class UserService implements UserDetailsService {
         return userDTO.findAll();
     }
 
-    public User findById(long id) {
+    public Optional<User> findById(long id) {
         return userDTO.findById(id);
     }
 
@@ -35,7 +34,7 @@ public class UserService implements UserDetailsService {
         return userDTO.findByUsername(name);
     }
 
-    public User findByEmail(String email) {
+    public Optional<User> findByEmail(String email) {
         return userDTO.findByEmail(email);
     }
 
@@ -53,8 +52,10 @@ public class UserService implements UserDetailsService {
         return null;
     }
 
-    public User getCurrentUser(User user) {
-        return findById(user.getId());
+    public Optional<User> getCurrentUser(User user) {
+        if (findById(user.getId()).isPresent())
+            return findById(user.getId());
+        return Optional.empty();
     }
 
     public void create(User user) {

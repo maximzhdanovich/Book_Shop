@@ -43,14 +43,6 @@ public class BookService {
         bookDTO.save(book);
     }
 
-    public BookDTO getBookDTO() {
-        return bookDTO;
-    }
-
-    public void setBookDTO(BookDTO bookDTO) {
-        this.bookDTO = bookDTO;
-    }
-
     public Book findById(long id) {
         return bookDTO.findById(id);
     }

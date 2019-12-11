@@ -12,24 +12,19 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link" href="/">${navbar_home}</a>
-                <#--                <a class="nav-link" href="/"><@spring.message code="navbar.home"/></a>-->
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/book">${navbar_books}</a>
-                <#--                <a class="nav-link" href="/book"><@spring.message code="navbar.books"/></a>-->
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/author">${navbar_authors}</a>
-                <#--                <a class="nav-link" href="/author"><@spring.message code="navbar.authors"/></a>-->
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/category">${navbar_categories}</a>
-                <#--                <a class="nav-link" href="/category"><@spring.message code="navbar.categories"/></a>-->
             </li>
             <#if isAdmin>
                 <li class="nav-item">
                     <a class="nav-link" href="/user">${navbar_users}</a>
-                    <#--                    <a class="nav-link" href="/user"><@spring.message code="navbar.users"/></a>-->
                 </li>
             </#if>
         </ul>
@@ -37,7 +32,6 @@
             <form method="get" action="/filter" class="mr-2">
                 <input type="text" name="filter" class="form-control"
                        placeholder=${filter_search} value="${filter!}">
-                <#--                       placeholder=<@spring.message code="filter.search"/> value="${filter!}">-->
             </form>
         </div>
         <div class="mr-2">
@@ -60,8 +54,6 @@
             <div class="mr-4">
                 <form action="/logout" method="post">
                     <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-
-                    <#--                    <button type="submit"><@spring.message code="navbar.log.out"/></button>-->
                     <a href="/account/basket" class="btn btn-primary">${account_basket}</a>
                     <a href="/account" class="btn btn-primary">${name}</a>
                     <button type="submit" class="btn btn-primary">${navbar_log_out}</button>

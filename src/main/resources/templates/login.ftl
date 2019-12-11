@@ -7,7 +7,7 @@
     <#if RequestParameters.error??>
         <div class="m-2 ml-3"><b>Неправильные логин или пароль</b></div></#if>
     <form action="/login" method="post">
-        <div class="form-group row ml-1">
+        <div class="form-group row ">
             <label class="col-sm-2 col-form-label">${login_username} :</label>
             <#--            <label class="col-sm-2 col-form-label"><@spring.message code="login.username"/> :</label>-->
             <div class="col-sm-6">
@@ -16,7 +16,7 @@
                        placeholder="User name"/>
             </div>
         </div>
-        <div class="form-group row ml-1">
+        <div class="form-group row ">
             <label class="col-sm-2 col-form-label">${login_password} :</label>
             <#--            <label class="col-sm-2 col-form-label"><@spring.message code="login.password"/> :</label>-->
             <div class="col-sm-6">

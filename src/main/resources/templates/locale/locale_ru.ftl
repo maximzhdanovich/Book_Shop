@@ -52,4 +52,22 @@ author_name="Имя"
 <#--    #book page-->
 book_page_category="Книги из категории"
 book_page_author="Книги автора"
+<#--    #registration page-->
+account_configuration_username_error="Имя пользователя не может быть пустым"
+account_configuration_username_exist_error="Имя пользователя занято"
+account_configuration_email_error="Почта не может быть пустой"
+account_configuration_email_exist_error="Почта уже используется"
+account_configuration_old_parssword_error="Пароль не может быть пустым"
+account_configuration_old_parssword_input_error="Старый пароль не верный"
+account_configuration_new_parssword_error="Новый пароль не может быть пустым"
+account_configuration_new_repeat_parssword_error="Повторение пароля не может быть пустым"
+account_configuration_new_parssword_different_error="Пароли отличаются"
+<#--    #registration page-->
+registration_create_username_error="Имя пользователя не может быть пустым"
+registration_create_username_exist_error="Имя пользователя занято"
+registration_create_email_error="Почта не может быть пустой"
+registration_create_email_exist_error="Почта уже используется"
+registration_create_new_parssword_error="Пароль не может быть пустым"
+registration_create_new_repeat_parssword_error="Повторение пароля не может быть пустым"
+registration_create_new_parssword_different_error="Пароли отличаются"
 >

@@ -9,12 +9,12 @@ import javax.validation.constraints.NotNull;
 @Table(name = "USER")
 public class User {
     private Long id;
-    @NotBlank(message = "error")
+    @NotBlank(message = "username can not be empty")
     private String username;
     @Email(message = "email error")
-    @NotBlank(message = "error")
+    @NotBlank(message = "email can not be empty")
     private String email;
-    @NotBlank(message = "password error")
+    @NotBlank(message = "password can not be empty")
     private String password;
 
 

@@ -88,7 +88,8 @@
                         </#if></td>
                     <td>${bookinprocessing.author.surname} ${bookinprocessing.author.name}</td>
                     <td>
-                        <button type="submit" id="${bookinprocessing.id}" class="btn btn-primary" onclick=editCurrentId(${bookinprocessing.id})>
+                        <button type="submit" id="${bookinprocessing.id}" class="btn btn-primary"
+                                onclick=editCurrentId(${bookinprocessing.id})>
                             approved
                         </button>
                     </td>

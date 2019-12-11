@@ -27,7 +27,7 @@ public class DeleteController {
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
     @GetMapping("/account/delete")
     public String deleteAccount(@AuthenticationPrincipal User user) {
-        userService.deleteById(userService.getCurrentUser(user).getId());
+        userService.deleteById(userService.getCurrentUser(user).get().getId());
         return "redirect:/logout";
     }
 

@@ -37,10 +37,6 @@ public class Book_ImageService {
         return bookImageDTO.findById(id);
     }
 
-    public Book_Image findByAuthor(Book book) {
-        return bookImageDTO.findByAuthor(book);
-    }
-
     public void deleteById(long id) {
         bookImageDTO.deleteById(id);
     }

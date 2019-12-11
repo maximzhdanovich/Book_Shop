@@ -37,7 +37,7 @@ public class BasketController {
 
     @PostMapping("account/deleteFromBasket")
     public ResponseEntity<Object> deleteBook(@AuthenticationPrincipal CustomUserDetail user, @RequestBody Book book) {
-        Basket basket = userService.getCurrentUser(user).getBasket();
+        Basket basket = userService.getCurrentUser(user).get().getBasket();
         basket.getBooks().remove(bookService.findById(book.getId()));
         basketService.save(basket);
         ServiceResponse<Long> response = new ServiceResponse<Long>("success", book.getId());
@@ -46,7 +46,7 @@ public class BasketController {
 
     @PostMapping("account/bookToProcessing")
     public ResponseEntity<Object> bookToProcessing(@AuthenticationPrincipal CustomUserDetail user, @RequestBody Book book) {
-        Basket basket = userService.getCurrentUser(user).getBasket();
+        Basket basket = userService.getCurrentUser(user).get().getBasket();
         basket.getBooks().remove(bookService.findById(book.getId()));
         basket.getBooksInProcessing().add(bookService.findById(book.getId()));
         basketService.save(basket);
@@ -56,7 +56,7 @@ public class BasketController {
 
     @PostMapping("account/AllBookToProcessing")
     public ResponseEntity<Object> AllBookToProcessing(@AuthenticationPrincipal CustomUserDetail user) {
-        Basket basket = userService.getCurrentUser(user).getBasket();
+        Basket basket = userService.getCurrentUser(user).get().getBasket();
         basket.getBooksInProcessing().addAll(basket.getBooks());
         basket.getBooks().clear();
         basketService.save(basket);

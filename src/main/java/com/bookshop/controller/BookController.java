@@ -2,7 +2,10 @@ package com.bookshop.controller;
 
 import com.bookshop.model.entity.Book;
 import com.bookshop.model.entity.CustomUserDetail;
-import com.bookshop.service.*;
+import com.bookshop.service.AuthorService;
+import com.bookshop.service.BookService;
+import com.bookshop.service.Book_ImageService;
+import com.bookshop.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

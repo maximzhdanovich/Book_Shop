@@ -10,11 +10,11 @@ public interface UserDAO extends JpaRepository<User, Long> {
 
     List<User> findAll();
 
-    User findById(long id);
+    Optional<User> findById(long id);
 
     Optional<User> findByUsername(String name);
 
-    User findByEmail(String email);
+    Optional<User> findByEmail(String email);
 
     void deleteById(long id);
 }

@@ -1,7 +1,6 @@
 package com.bookshop.model.dto;
 
 import com.bookshop.model.dao.Author_ImageDAO;
-import com.bookshop.model.entity.Author;
 import com.bookshop.model.entity.Author_Image;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,9 +24,6 @@ public class Author_ImageDTO {
         return author_imageDAO.findById(id);
     }
 
-    public Author_Image findByAuthor(Author author) {
-        return author_imageDAO.findByAuthor(author);
-    }
 
     public void deleteById(long id) {
         author_imageDAO.deleteById(id);

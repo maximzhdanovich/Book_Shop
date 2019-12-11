@@ -48,14 +48,18 @@ public class RegistrationController {
                           Model model) {
         boolean empty = StringUtils.isEmpty(password1);
         if (empty) {
-            model.addAttribute("password1Error", "error");
+            model.addAttribute("password1EmptyError", "Repeat Password can not be empty");
         }
         if (!StringUtils.isEmpty(user.getPassword()) && !password1.equals(user.getPassword())) {
-            model.addAttribute("passwordError", "Password are different");
+            model.addAttribute("passwordDifferentError", "Password are different");
         }
         Optional<User> userFromDb = userService.findByUsername(user.getUsername());
         if (userFromDb.isPresent()) {
-            model.addAttribute("usernameError", "User exists!");
+            model.addAttribute("usernameExistsError", "User exists!");
+        }
+        userFromDb = userService.findByEmail(user.getEmail());
+        if (userFromDb.isPresent()) {
+            model.addAttribute("emailExistsError", "Email is already in use");
         }
         if (empty || bindingResult.hasErrors() || userFromDb.isPresent()) {
             Collector<FieldError, ?, Map<String, String>> fieldErrorMapCollector = Collectors.toMap(

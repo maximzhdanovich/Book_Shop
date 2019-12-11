@@ -17,7 +17,7 @@ public class UserDTO {
         return userDAO.findAll();
     }
 
-    public User findById(long id) {
+    public Optional<User> findById(long id) {
         return userDAO.findById(id);
     }
 
@@ -29,7 +29,7 @@ public class UserDTO {
         return userDAO.findByUsername(name);
     }
 
-    public User findByEmail(String email) {
+    public Optional<User> findByEmail(String email) {
         return userDAO.findByEmail(email);
     }
 

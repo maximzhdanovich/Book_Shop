@@ -74,39 +74,39 @@
 
 <#--<#assign spring=JspTaglibs["http://www.springframework.org/tags"]>-->
 
-<div class="container mt-3 ml-5">
+<div class="container mt-3">
 
     <#assign sum=0>
     <#assign currentId=0>
-    <#if categoryPage??>
+    <h5 align="center"> <#if categoryPage??>
         ${book_page_category}
-    <#--        <@spring.message code="book.page.category"/>-->
+        <#--        <@spring.message code="book.page.category"/>-->
         <#if .lang=="en">
             ${category.titleEn}
         <#elseif .lang=="ru">
             ${category.titleRu}
         </#if>
-    <#elseif authorPage??>
-        ${book_page_author}
-    <#--        <@spring.message code="book.page.author"/>-->
-        ${author.name} ${author.surname}
-    <#else >
+        <#elseif authorPage??>
+            ${book_page_author}
+        <#--        <@spring.message code="book.page.author"/>-->
+            ${author.name} ${author.surname}
+        <#else >
         <div>${book_list}</div>
-
-        <#if isAdmin>
-            <div>
-                <form method="post" action="/book/admin/create" enctype="multipart/form-data">
-                    <input type="number" step="0.01" name="price" placeholder=${book_price}>
-                    <input type="text" name="titleRu" placeholder=${book_title_ru}>
-                    <input type="text" name="titleEn" placeholder=${book_title_en}>
-                    <input type="text" name="authorSurname" placeholder=${author_surname}>
-                    <input type="text" name="authorName" placeholder=${author_surname}>
-                    <textarea class="mt-1" maxlength="1000" rows="10" cols="90" name="description"></textarea>
-                    <input type="file" name="image">
-                    <button type="submit">${book_add}</button>
-                </form>
-            </div>
-        </#if>
+    </h5>
+    <#if isAdmin>
+        <div>
+            <form method="post" action="/book/admin/create" enctype="multipart/form-data">
+                <input type="number" step="0.01" name="price" placeholder=${book_price}>
+                <input type="text" name="titleRu" placeholder=${book_title_ru}>
+                <input type="text" name="titleEn" placeholder=${book_title_en}>
+                <input type="text" name="authorSurname" placeholder=${author_surname}>
+                <input type="text" name="authorName" placeholder=${author_surname}>
+                <textarea class="mt-1" maxlength="1000" rows="10" cols="90" name="description"></textarea>
+                <input type="file" name="image">
+                <button type="submit">${book_add}</button>
+            </form>
+        </div>
+    </#if>
     </#if>
 </div>
 <div class="ml-5 mr-5">
@@ -173,10 +173,10 @@
      role="alert">
     <strong>Success</strong> ${book_basket_add_alert}</div>
 
-        <script>
-            function editCurrentId(id) {
-                document.getElementById("bookId").value = id;
-            }
-        </script>
+<script>
+    function editCurrentId(id) {
+        document.getElementById("bookId").value = id;
+    }
+</script>
 </body>
 </html>

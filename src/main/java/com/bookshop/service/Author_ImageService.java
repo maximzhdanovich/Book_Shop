@@ -37,9 +37,6 @@ public class Author_ImageService {
         return authorImageDTO.findById(id);
     }
 
-    public Author_Image findByAuthor(Author author) {
-        return authorImageDTO.findByAuthor(author);
-    }
 
     public void deleteById(long id) {
         authorImageDTO.deleteById(id);

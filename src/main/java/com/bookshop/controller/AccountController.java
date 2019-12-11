@@ -37,36 +37,44 @@ public class AccountController {
 
     @GetMapping("/edit")
     public String accountEdit(@AuthenticationPrincipal CustomUserDetail customUserDetail, Model model) {
-        model.addAttribute("user", userService.getCurrentUser(customUserDetail));
+        model.addAttribute("currentUser", userService.getCurrentUser(customUserDetail).get());
         return "accountEdit";
     }
 
     @PostMapping("/edit")
     public String accountEdit(@AuthenticationPrincipal CustomUserDetail customUserDetail,
-                              @Valid User user,
+                              @Valid User newUser,
                               BindingResult bindingResult,
                               @RequestParam("password1") String password1,
                               @RequestParam("password2") String password2,
                               Model model) {
-        User currentUser = userService.getCurrentUser(customUserDetail);
+        User currentUser = userService.getCurrentUser(customUserDetail).get();
         boolean empty1 = StringUtils.isEmpty(password1);
         boolean empty2 = StringUtils.isEmpty(password2);
         boolean equalsNewPassword = password1.equals(password2);
-        boolean equalsOldPassword = user.getPassword().equals(currentUser.getPassword());
+        boolean equalsOldPassword = newUser.getPassword().equals(currentUser.getPassword());
+        boolean present = userService.findByEmail(newUser.getEmail()).isPresent();
+        if (!currentUser.getEmail().equals(newUser.getEmail()) && present)
+            model.addAttribute("emailExistError", "Email is already in use");
+        boolean present1 = userService.findByUsername(newUser.getUsername()).isPresent();
+        if (!currentUser.getUsername().equals(newUser.getUsername()) && present1) {
+            model.addAttribute("usernameExistError", "Username is already in use");
+        }
         if (!equalsOldPassword) {
-            model.addAttribute("passwordError", "Old password error");
+            model.addAttribute("passwordInputError", "Old password incorrect");
         }
         if (empty1) {
-            model.addAttribute("password1Error", "new password can't be empty");
+            model.addAttribute("password1EmptyError", "new password can't be empty");
         }
         if (empty2) {
-            model.addAttribute("password2Error", "repeat password can't be empty");
+            model.addAttribute("password2EmptyError", "repeat password can't be empty");
         }
         if (!password1.equals(password2)) {
-            model.addAttribute("password1Error", "Password are different");
-            model.addAttribute("password2Error", "Password are different");
+            model.addAttribute("password1DifferentError", "Password are different");
+            model.addAttribute("password2DifferentError", "Password are different");
         }
-        if (empty1 || empty2 || !equalsOldPassword || bindingResult.hasErrors() || !equalsNewPassword) {
+        if (empty1 || empty2 || !equalsOldPassword || bindingResult.hasErrors() || !equalsNewPassword
+                || (!currentUser.getEmail().equals(newUser.getEmail()) && present) || (!currentUser.getUsername().equals(newUser.getUsername()) && present1)) {
             Collector<FieldError, ?, Map<String, String>> fieldErrorMapCollector = Collectors.toMap(
                     fieldError -> fieldError.getField() + "Error",
                     FieldError::getDefaultMessage
@@ -74,21 +82,21 @@ public class AccountController {
 
             Map<String, String> collectErrors = bindingResult.getFieldErrors().stream().collect(fieldErrorMapCollector);
             model.mergeAttributes(collectErrors);
-            model.addAttribute("user", currentUser);
+            model.addAttribute("currentUser", currentUser);
             return "accountEdit";
         }
-        userService.update(currentUser, user.getUsername(), password1, user.getEmail());
+        userService.update(currentUser, newUser.getUsername(), password1, newUser.getEmail());
 
         return "redirect:/account";
     }
 
     @GetMapping("/basket")
     public String myBasket(@AuthenticationPrincipal CustomUserDetail customUserDetail, Model model) {
-        model.addAttribute("user", userService.getCurrentUser(customUserDetail));
-//        if (basketService.getByUser(userService.getCurrentUser(customUserDetail)).getBooks() != null) {
-            model.addAttribute("books", basketService.getByUser(userService.getCurrentUser(customUserDetail)).getBooks());
-//        }
-        model.addAttribute("approvedBooks",basketService.getByUser(userService.getCurrentUser(customUserDetail)).getBooksApproved());
-        return "myBasket";
+        if (userService.getCurrentUser(customUserDetail).isPresent()) {
+            model.addAttribute("user", userService.getCurrentUser(customUserDetail));
+            model.addAttribute("books", basketService.getByUser(userService.getCurrentUser(customUserDetail).get()).getBooks());
+            model.addAttribute("approvedBooks", basketService.getByUser(userService.getCurrentUser(customUserDetail).get()).getBooksApproved());
+            return "myBasket";
+        } else return "redirect:/login";
     }
 }
