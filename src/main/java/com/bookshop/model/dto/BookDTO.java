@@ -1,9 +1,14 @@
 package com.bookshop.model.dto;
 
 import com.bookshop.model.dao.BookDAO;
+import com.bookshop.model.entity.Author;
 import com.bookshop.model.entity.Book;
+import com.bookshop.model.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -27,6 +32,17 @@ public class BookDTO {
         return bookDAO.findAll();
     }
 
+    public Page<Book> findAllByAuthor(Author author, Pageable pageable) {
+        return bookDAO.findAllByAuthor(author, pageable);
+    }
+
+    public Page<Book> findAllByCategories(Category category, Pageable pageable) {
+        return bookDAO.findAllByCategories(category, pageable);
+    }
+
+    public Page<Book> findAllPage(Pageable pageable) {
+        return bookDAO.findAll(pageable);
+    }
 
     public List<Book> findByTitleEnOrTitleRu(String titleEn, String titleRu) {
         return bookDAO.findByTitleEnOrTitleRu(titleEn, titleRu);

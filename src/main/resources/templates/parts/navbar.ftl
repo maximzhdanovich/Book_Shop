@@ -1,6 +1,15 @@
 <#include "security.ftl">
-
 <#include "*/locale/locale.ftl">
+<style>
+    .navbar {
+        position: fixed;
+        z-index: 4;
+        right: 0;
+        left: 0;
+        top: 0;
+        padding-bottom: 10px;
+    }
+</style>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/">Book Shop</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -71,3 +80,4 @@
         }
     </script>
 </nav>
+<#--<#include "footer.ftl">-->

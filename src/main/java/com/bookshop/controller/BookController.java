@@ -7,6 +7,11 @@ import com.bookshop.service.BookService;
 import com.bookshop.service.Book_ImageService;
 import com.bookshop.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -23,9 +28,9 @@ public class BookController {
 
     @Autowired
     private AuthorService authorService;
-
-    @Autowired
-    private Book_ImageService bookImageService;
+//
+//    @Autowired
+//    private Book_ImageService bookImageService;
 
     @Autowired
     private BookService bookService;
@@ -35,8 +40,10 @@ public class BookController {
 
 
     @GetMapping
-    public String bookList(Model model, @AuthenticationPrincipal CustomUserDetail user) {
-        model.addAttribute("books", bookService.findAll());
+    public String bookList(Model model, /*@AuthenticationPrincipal CustomUserDetail user,*/
+                           @PageableDefault(value = 12) Pageable pageable) {
+        model.addAttribute("url", "/book");
+        model.addAttribute("page", bookService.findAllPage(pageable));
         return "bookList";
     }
 
@@ -93,17 +100,17 @@ public class BookController {
         return "book";
     }
 
-    @PostMapping("/admin/add")
-    public String add(Book book,
-                      @RequestParam String author_surname,
-                      @RequestParam String author_name,
-                      Model model,
-                      @RequestParam MultipartFile book_image) throws IOException {
-        bookService.create(book, authorService.findBySurnameAndName(author_surname, author_name).get());
-        bookImageService.add(book_image, book);
-        model.addAttribute("books", bookService.findAll());
-        return "bookList";
-    }
+//    @PostMapping("/admin/add")
+//    public String add(Book book,
+//                      @RequestParam String author_surname,
+//                      @RequestParam String author_name,
+////                      Model model,
+//                      @RequestParam MultipartFile book_image) throws IOException {
+//        bookService.create(book, authorService.findBySurnameAndName(author_surname, author_name).get());
+//        bookImageService.add(book_image, book);
+////        model.addAttribute("books", bookService.findAll());
+//        return "redirect:/book";
+//    }
 
     private boolean bookIsNull(Book byId) {
         return byId == null;

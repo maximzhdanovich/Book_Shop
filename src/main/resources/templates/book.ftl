@@ -34,8 +34,8 @@
 <#include "locale/locale.ftl">
 <#include "parts/navbar.ftl">
 <#include "parts/security.ftl">
-<#--    <b>${book.titleEn}</b>-->
-<div class="container  mt-3">
+
+<div class="container  mt-5">
     <form id="basketAdd">
         <#if book.image??>
         <p><img src="/img/book/${book.image.bookImage}" align="left" class="m-2" width="300" height="400">
@@ -71,6 +71,5 @@
 <div id="addingToCartSuccess" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
      role="alert">
     <strong>Success</strong> ${book_basket_add_alert}
-
 </body>
 </html>

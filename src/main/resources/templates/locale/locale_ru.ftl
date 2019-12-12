@@ -47,8 +47,8 @@ account_basket="Моя корзина"
 account_configuration="Изменить конфигурацию"
 account_delete="Удалить аккаунт"
 <#--    #author-->
-author_surname="Фамилия"
-author_name="Имя"
+author_surname="Фамилия автора"
+author_name="Имя автора"
 <#--    #book page-->
 book_page_category="Книги из категории"
 book_page_author="Книги автора"

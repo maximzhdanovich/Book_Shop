@@ -2,7 +2,7 @@
 <@c.page>
     Book Edit
     <#assign index=0>
-    <form action="save" method="post" enctype="multipart/form-data">
+    <form action="/book/admin/save" method="post" enctype="multipart/form-data">
         <input type="text" name="titleRu" value="${book.titleRu}">
         <input type="text" name="titleEn" value="${book.titleEn}">
         <input type="text" name="authorSurname" value="${book.author.surname}">

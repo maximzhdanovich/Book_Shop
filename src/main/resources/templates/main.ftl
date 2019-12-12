@@ -3,6 +3,7 @@
 <#include "locale/locale.ftl">
 
 <@c.page>
+
 <#--    <#assign spring=JspTaglibs["http://www.springframework.org/tags"]>-->
     <#assign bookIndex=0>
     <#assign authorIndex=0>
@@ -34,19 +35,19 @@
     </div>
     ${filter_authors}
     <div class="card-deck m-5">
-        <#list authors as author>
-            <#if authorIndex<5>
-                <div class="card">
-                    <#assign authorIndex++>
-                    <#if author.image??>
-                        <img src="/img/author/${author.image.authorImage}">
-                    </#if>
-                    <div class="card-body">
-                        <h5 class="card-title">${author.surname} ${author.name} </h5>
-                        <a href="/author/${author.id}/books" class="card-text">Книги</a>
-                    </div>
+    <#list authors as author>
+        <#if authorIndex<5>
+            <div class="card">
+                <#assign authorIndex++>
+                <#if author.image??>
+                    <img src="/img/author/${author.image.authorImage}">
+                </#if>
+                <div class="card-body">
+                    <h5 class="card-title">${author.surname} ${author.name} </h5>
+                    <a href="/author/${author.id}/books" class="card-text">Книги</a>
                 </div>
-            </#if>
-        </#list>
-    </div>
+            </div>
+        </#if>
+    </#list>
+
 </@c.page>

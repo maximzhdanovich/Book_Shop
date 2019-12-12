@@ -1,3 +1,4 @@
+<#import "footer.ftl"as f>
 <#macro page>
     <!DOCTYPE html>
     <html lang="en">
@@ -24,10 +25,14 @@
 
     </head>
     <body>
-    <#include "navbar.ftl">
-    <div class="container  mt-3">
-        <#nested>
-    </div>
+    <@f.footer>
+        <#include "navbar.ftl">
+
+        <div class="container  mt-3">
+            <#nested>
+        </div>
+
+    </@f.footer>
     </body>
     </html>
 </#macro>

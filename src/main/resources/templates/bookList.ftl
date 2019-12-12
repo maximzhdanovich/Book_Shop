@@ -66,109 +66,116 @@
         }
     </style>
 
+
 </head>
 <body>
 <#include "parts/security.ftl">
 <#include "parts/navbar.ftl">
 <#include "locale/locale.ftl">
+<#import "parts/pager.ftl" as p>
+<#import "parts/footer.ftl" as f>
+
 
 <#--<#assign spring=JspTaglibs["http://www.springframework.org/tags"]>-->
+<@f.footer>
+    <div class="container mt-3">
 
-<div class="container mt-3">
-
-    <#assign sum=0>
-    <#assign currentId=0>
-    <h5 align="center"> <#if categoryPage??>
-        ${book_page_category}
-        <#--        <@spring.message code="book.page.category"/>-->
-        <#if .lang=="en">
-            ${category.titleEn}
-        <#elseif .lang=="ru">
-            ${category.titleRu}
+        <#assign sum=0>
+        <#assign currentId=0>
+        <h5 align="center"> <#if categoryPage??>
+            ${book_page_category}
+            <#--        <@spring.message code="book.page.category"/>-->
+            <#if .lang=="en">
+                ${category.titleEn}
+            <#elseif .lang=="ru">
+                ${category.titleRu}
+            </#if>
+            <#elseif authorPage??>
+                ${book_page_author}
+            <#--        <@spring.message code="book.page.author"/>-->
+                ${author.name} ${author.surname}
+            <#else >
+            <div>${book_list}</div>
+        </h5>
+        <#if isAdmin>
+            <div>
+                <form method="post" action="/book/admin/create" enctype="multipart/form-data">
+                    <input type="number" step="0.01" name="price" placeholder=${book_price}>
+                    <input type="text" name="titleRu" placeholder="${book_title_ru}">
+                    <input type="text" name="titleEn" placeholder="${book_title_en}">
+                    <input type="text" name="authorSurname" placeholder="${author_surname}">
+                    <input type="text" name="authorName" placeholder="${author_name}">
+                    <textarea class="mt-1" maxlength="1000" rows="10" cols="90" name="description"></textarea>
+                    <input type="file" name="image">
+                    <button type="submit">${book_add}</button>
+                </form>
+            </div>
         </#if>
-        <#elseif authorPage??>
-            ${book_page_author}
-        <#--        <@spring.message code="book.page.author"/>-->
-            ${author.name} ${author.surname}
-        <#else >
-        <div>${book_list}</div>
-    </h5>
-    <#if isAdmin>
-        <div>
-            <form method="post" action="/book/admin/create" enctype="multipart/form-data">
-                <input type="number" step="0.01" name="price" placeholder=${book_price}>
-                <input type="text" name="titleRu" placeholder=${book_title_ru}>
-                <input type="text" name="titleEn" placeholder=${book_title_en}>
-                <input type="text" name="authorSurname" placeholder=${author_surname}>
-                <input type="text" name="authorName" placeholder=${author_surname}>
-                <textarea class="mt-1" maxlength="1000" rows="10" cols="90" name="description"></textarea>
-                <input type="file" name="image">
-                <button type="submit">${book_add}</button>
-            </form>
-        </div>
-    </#if>
-    </#if>
-</div>
-<div class="ml-5 mr-5">
+        </#if>
+    </div>
+    <div class="ml-5 mr-5">
 
-    <form id="basketAdd">
-        <div class="card-columns">
-            <#list books as book>
+        <form id="basketAdd"> <@p.pager url page />
+            <div class="card-columns">
 
-                <div class="card my-3">
+                <#list page.content as book>
+
+                    <div class="card my-3">
 
 
-                    <#if book.image??>
-                    <p><img src="/img/book/${book.image.bookImage}" class="leftimg" width="96" height="125">
-                        <#else>
-                    <p><img src="/img/bookNot/bookImageNotFound.jpg" class="leftimg" width="96" height="125">
-                        </#if>
-                        ${book_author}: ${book.author.name} ${book.author.surname}
-                        <br>
-                        ${book_title}
-                        <#if .lang=="en">
-                            ${book.titleEn}
-                        <#elseif .lang=="ru">
-                            ${book.titleRu}
-                        </#if>
-                    <div class="cope_text line-clamp">
-                        <#if book.description??>
-                            ${book.description}
-                            <#if book.description?length<55>
-                                <br>
-                                <br>
-                                <br>
-                            <#elseif  book.description?length<110>
-                                <br>
-                                <br>
+                        <#if book.image??>
+                        <p><img src="/img/book/${book.image.bookImage}" class="leftimg" width="96" height="125">
+                            <#else>
+                        <p><img src="/img/bookNot/bookImageNotFound.jpg" class="leftimg" width="96" height="125">
                             </#if>
-                        </#if>
+                            ${book_author}: ${book.author.name} ${book.author.surname}
+                            <br>
+                            ${book_title}
+                            <#if .lang=="en">
+                                ${book.titleEn}
+                            <#elseif .lang=="ru">
+                                ${book.titleRu}
+                            </#if>
+                        <div class="cope_text line-clamp">
+                            <#if book.description??>
+                                ${book.description}
+                                <#if book.description?length<55>
+                                    <br>
+                                    <br>
+                                    <br>
+                                <#elseif  book.description?length<110>
+                                    <br>
+                                    <br>
+                                </#if>
+                            </#if>
+                        </div>
+                        </p>
+                        <div class="card-footer text-muted text-right">
+                            <a href="/book/${book.id}"
+                               class="btn btn-primary ml-2 leftText">${book_view}</a>
+                            <#if isAdmin>
+                                <a href="/book/admin/${book.id}"
+                                   class="btn btn-primary ml-2 leftText">${book_edit}</a>
+                            </#if>
+
+                            <b class="mr-2">${book_price}: ${book.price} Br</b>
+                            <br>
+
+                            <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id})
+                                    <#if name="unknown">disabled="disabled"</#if>>
+                                ${book_basket_add}
+                            </button>
+
+
+                        </div>
                     </div>
-                    </p>
-                    <div class="card-footer text-muted text-right">
-                        <a href="/book/${book.id}"
-                           class="btn btn-primary ml-2 leftText">${book_view}</a>
-                        <#if isAdmin>
-                            <a href="/book/admin/${book.id}"
-                               class="btn btn-primary ml-2 leftText">${book_edit}</a>
-                        </#if>
+                </#list>
 
-                        <b class="mr-2">${book_price}: ${book.price} Br</b>
-
-
-                        <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id})
-                                <#if name="unknown">disabled="disabled"</#if>>
-                            ${book_basket_add}
-                        </button>
-
-
-                    </div>
-                </div>
-            </#list>
-        </div>
-        <input type="hidden" id="bookId" value="${currentId}">
-    </form>
-</div>
+            </div> <@p.pager url page />
+            <input type="hidden" id="bookId" value="${currentId}">
+        </form>
+    </div>
+</@f.footer>
 <div id="addingToCartSuccess" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
      role="alert">
     <strong>Success</strong> ${book_basket_add_alert}</div>

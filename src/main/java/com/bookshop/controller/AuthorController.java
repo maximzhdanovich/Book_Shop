@@ -1,9 +1,14 @@
 package com.bookshop.controller;
 
 import com.bookshop.model.entity.Author;
+import com.bookshop.model.entity.Book;
 import com.bookshop.service.AuthorService;
 import com.bookshop.service.Author_ImageService;
+import com.bookshop.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +24,8 @@ public class AuthorController {
 
     @Autowired
     private Author_ImageService authorImageService;
+    @Autowired
+    private BookService bookService;
 
     @GetMapping("admin/{authorId}")
     public String authorEdit(@PathVariable("authorId") Author author, Model model) {
@@ -57,10 +64,11 @@ public class AuthorController {
     }
 
     @GetMapping("/{authorId}/books")
-    public String authorBooks(Model model, @PathVariable Author authorId) {
-        model.addAttribute("books", authorId.getBooks());
+    public String authorBooks(Model model, @PathVariable Author authorId, @PageableDefault(size = 12) Pageable pageable) {
+        model.addAttribute("page", bookService.findAllByAuthor(authorId, pageable));
         model.addAttribute("authorPage", "");
         model.addAttribute("author", authorId);
+        model.addAttribute("url", "/author/" + authorId.getId() + "/books");
         return "bookList";
     }
 

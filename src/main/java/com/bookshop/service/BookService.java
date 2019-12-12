@@ -3,8 +3,12 @@ package com.bookshop.service;
 import com.bookshop.model.dto.BookDTO;
 import com.bookshop.model.entity.Author;
 import com.bookshop.model.entity.Book;
+import com.bookshop.model.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -55,8 +59,20 @@ public class BookService {
         return bookDTO.findByTitleEnOrTitleRu(titleEn, titleRu);
     }
 
+    public Page<Book> findAllPage(Pageable pageable) {
+        return bookDTO.findAllPage(pageable);
+    }
+
     public void deleteById(long id) {
         bookDTO.deleteById(id);
+    }
+
+    public Page<Book> findAllByAuthor(Author author, Pageable pageable) {
+        return bookDTO.findAllByAuthor(author, pageable);
+    }
+
+    public Page<Book> findAllByCategories(Category category, Pageable pageable) {
+        return bookDTO.findAllByCategories(category, pageable);
     }
 
     public void update(Book book, String titleEn, String titleRu, String authorSurname, String authorName, String description, Map<String, String> form, MultipartFile image) throws IOException {

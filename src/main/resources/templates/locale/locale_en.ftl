@@ -47,8 +47,8 @@ account_basket="My cart"
 account_configuration="Edit configuration"
 account_delete="Delete account"
 <#--    #author-->
-author_surname="Surname"
-author_name="Name"
+author_surname="Author Surname"
+author_name="Author name"
 <#--    #book page-->
 book_page_category="Books of category"
 book_page_author="Books of author"
