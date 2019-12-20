@@ -6,6 +6,7 @@ import com.bookshop.service.AuthorService;
 import com.bookshop.service.BookService;
 import com.bookshop.service.Book_ImageService;
 import com.bookshop.service.CategoryService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -44,22 +45,27 @@ public class BookController {
                            @PageableDefault(value = 12) Pageable pageable) {
         model.addAttribute("url", "/book");
         model.addAttribute("page", bookService.findAllPage(pageable));
+        model.addAttribute("categories", categoryService.findAll());
+
         return "bookList";
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/admin/create")
-    public String bookCreate(@RequestParam Double price,
+    public String bookCreate(/*@RequestParam Double price,
                              @RequestParam String titleRu,
                              @RequestParam String titleEn,
                              @RequestParam String authorSurname,
                              @RequestParam String authorName,
-                             @RequestParam String description,
-                             @RequestParam MultipartFile image) throws IOException {
-        if (!authorService.findBySurnameAndName(authorSurname, authorName).isPresent()) {
+                             @RequestParam String description,*/
+                             @RequestParam MultipartFile image,
+                             @RequestParam Map<String,String> form,
+                             Model model) throws IOException {
+        if (!authorService.findBySurnameAndName(form.get("authorSurname"), form.get("authorName")).isPresent()) {
             return "redirect:/book";
         }
-        bookService.create(price, titleRu, titleEn, description, authorService.findBySurnameAndName(authorSurname, authorName).get(), image);
+        bookService.create(Double.valueOf(form.get("price")), form.get("titleRu"), form.get("titleEn"), form.get("description"), authorService.findBySurnameAndName(form.get("authorSurname"), form.get("authorName")).get(),form, image);
+        model.addAttribute("bookAdd","");
         return "redirect:/book";
     }
 
@@ -75,19 +81,15 @@ public class BookController {
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/admin/save")
-    public String bookSave(
-            @RequestParam String titleRu,
-            @RequestParam String titleEn,
-            @RequestParam String authorSurname,
-            @RequestParam String authorName,
-            @RequestParam String description,
+    public String bookSaveEdit(
             @RequestParam MultipartFile image,
             @RequestParam Map<String, String> form,
             @RequestParam("bookId") Book book) throws IOException {
-        if (!authorService.findBySurnameAndName(authorSurname, authorName).isPresent()) {
+        if (!authorService.findBySurnameAndName(form.get("authorSurname"),  form.get("authorName")).isPresent()) {
             return "redirect:/book/admin/" + book.getId();
         }
-        bookService.update(book, titleEn, titleRu, authorSurname, authorName, description, form, image);
+//        bookService.update(book, titleEn, titleRu, authorSurname, authorName, description, form, image);
+        bookService.update(book, form.get("titleEn"), form.get("titleRu"), form.get("authorSurname"), form.get("authorName"), form.get("description"), form, image);
         return "redirect:/book";
     }
 
@@ -99,18 +101,6 @@ public class BookController {
         model.addAttribute("categories", categoryService.findAll());
         return "book";
     }
-
-//    @PostMapping("/admin/add")
-//    public String add(Book book,
-//                      @RequestParam String author_surname,
-//                      @RequestParam String author_name,
-////                      Model model,
-//                      @RequestParam MultipartFile book_image) throws IOException {
-//        bookService.create(book, authorService.findBySurnameAndName(author_surname, author_name).get());
-//        bookImageService.add(book_image, book);
-////        model.addAttribute("books", bookService.findAll());
-//        return "redirect:/book";
-//    }
 
     private boolean bookIsNull(Book byId) {
         return byId == null;

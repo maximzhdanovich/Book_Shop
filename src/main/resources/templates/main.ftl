@@ -27,7 +27,7 @@
                     </#if>
                     <div class="card-body">
                         <h5 class="card-title">${book.titleEn}</h5>
-                        <p class="card-text">${book.price}</p>
+                        <p class="card-text">${book.price} Br </p>
                     </div>
                 </div>
             </#if>

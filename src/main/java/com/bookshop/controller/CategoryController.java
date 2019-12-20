@@ -6,11 +6,10 @@ import com.bookshop.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/category")
@@ -25,7 +24,13 @@ public class CategoryController {
         model.addAttribute("categories", categoryService.findAll());
         return "categoryList";
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PostMapping("/admin/create")
+    public String createCategory(@RequestParam String titleEn,
+                                 @RequestParam String titleRu){
+        categoryService.create(titleEn,titleRu);
+        return "redirect:/category";
+    }
     @GetMapping("/{category}")
     public String singleCategory(@PathVariable Category category, Model model, @PageableDefault(size = 12) Pageable pageable) {
         model.addAttribute("categoryPage", "");

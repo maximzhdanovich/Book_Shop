@@ -23,4 +23,8 @@ public class CategoryDTO {
     public Category findFirstByTitleEnOrTitleRu(String titleEn, String titleRu) {
         return categoryDAO.findFirstByTitleEnOrTitleRu(titleEn, titleRu);
     }
+
+    public void save(Category category){
+        categoryDAO.save(category);
+    }
 }

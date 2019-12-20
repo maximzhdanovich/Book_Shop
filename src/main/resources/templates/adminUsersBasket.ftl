@@ -37,6 +37,8 @@
 <#assign price = 0>
 <#global bookId=0>
 <#assign processingPrice = 0>
+<#import "parts/footer.ftl" as f>
+<@f.footer>
 <div class="container center mt-5">
     Book in Cart
     <form id="approvedBook">
@@ -102,7 +104,7 @@
 
     <br>
     <a>Total price ${processingPrice}</a>
-
+</@f.footer>
     <input type="hidden" id="userId" value="${user.id}">
     <input type="hidden" id="bookId" value="${bookId}">
     <div id="AddOnProcessing" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"

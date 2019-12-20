@@ -14,7 +14,6 @@ public class Category implements Serializable {
     private String titleEn;
     private List<Book> Books;
 
-    @NotNull
     @ManyToMany
     @JoinTable(name = "BOOK_WITH_CATEGORY",
             joinColumns = @JoinColumn(name = "CATEGORY_ID"),
@@ -37,6 +36,14 @@ public class Category implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Category() {
+    }
+
+    public Category(String titleRu, String titleEn) {
+        this.titleRu = titleRu;
+        this.titleEn = titleEn;
     }
 
     public void setTitleRu(String titleRu) {

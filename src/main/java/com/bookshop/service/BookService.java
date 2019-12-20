@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -36,9 +37,17 @@ public class BookService {
         save(book);
     }
 
-    public void create(double price, String titleRu, String titleEn, String description, Author author, MultipartFile image) throws IOException {
+    public void create(double price, String titleRu, String titleEn, String description, Author author,Map<String,String> form, MultipartFile image) throws IOException {
         Book book = new Book(price, titleRu, titleEn, description);
         book.setAuthor(author);
+        List<Category> category = new ArrayList<>();
+        for (String s : form.keySet()) {
+            if (form.get(s).equals("on")) {
+                category.add(categoryService.findById(Long.valueOf(s)));
+//                book.getCategories().add(categoryService.findById(Long.valueOf(s)));
+            }
+        }
+        book.setCategories(category);
         save(book);
         book_imageService.add(image, book);
     }
@@ -83,11 +92,12 @@ public class BookService {
         book.getCategories().clear();
         for (String s : form.keySet()) {
             if (form.get(s).equals("on")) {
-                book.getCategories().add(categoryService.findById(Integer.valueOf(s)));
+                book.getCategories().add(categoryService.findById(Long.valueOf(s)));
             }
         }
         if (image != null && !image.getOriginalFilename().isEmpty()) {
-            book_imageService.deleteById(book.getImage().getId());
+            if(book.getImage()!=null){
+            book_imageService.deleteById(book.getImage().getId());}
             book_imageService.add(image, book);
         }
         save(book);

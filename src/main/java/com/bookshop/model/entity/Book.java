@@ -3,6 +3,7 @@ package com.bookshop.model.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -12,7 +13,7 @@ public class Book implements Serializable {
     private double price;
     private String titleRu;
     private String titleEn;
-    private Set<Category> categories;
+    private List<Category> categories;
     private Author author;
     private Book_Image image;
     private String description;
@@ -51,11 +52,11 @@ public class Book implements Serializable {
     @JoinTable(name = "BOOK_WITH_CATEGORY",
             joinColumns = @JoinColumn(name = "BOOK_ID"),
             inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID"))
-    public Set<Category> getCategories() {
+    public List<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(Set<Category> categories) {
+    public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
 

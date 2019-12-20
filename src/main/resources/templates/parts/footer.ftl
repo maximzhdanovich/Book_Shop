@@ -2,7 +2,7 @@
     <style>#page-container {
             position: relative;
             min-height: 90vh;
-            padding-top: 20px;
+            padding-top: 60px;
         }
 
         #footer {
@@ -10,7 +10,6 @@
             color: white;
             text-align: center;
             position: absolute;
-
             bottom: -10vh;
             left: 0;
             width: 100%;

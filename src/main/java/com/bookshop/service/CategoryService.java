@@ -23,4 +23,11 @@ public class CategoryService {
     public Category findFirstByTitleEnOrTitleRu(String titleEn, String titleRu) {
         return categoryDTO.findFirstByTitleEnOrTitleRu(titleEn, titleRu);
     }
+
+    public void create(String titleEn,String titleRu){
+        save(new Category(titleEn,titleRu));
+    }
+    public void save(Category category){
+        categoryDTO.save(category);
+    }
 }

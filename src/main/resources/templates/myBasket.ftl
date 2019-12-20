@@ -50,6 +50,8 @@
 <#assign price = 0>
 <#global currentId=0>
 <#global currentIdForProcessing=0>
+<#import "parts/footer.ftl" as f>
+<@f.footer>
 <div class="container center mt-5">
     <#if books?size!=0>
         <form id="deleteFromBasket">
@@ -142,6 +144,7 @@
             </tbody>
         </table>
     </#if>
+    </@f.footer>
     <div id="AddOnProcessing" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
          role="alert">
         <strong>Success</strong> Book on processing
@@ -162,7 +165,6 @@
             document.getElementById(id).setAttribute("disabled", "disabled");
             document.getElementById("bookToProcessingButton").click();
         }
-
     </script>
 </body>
 </html>
