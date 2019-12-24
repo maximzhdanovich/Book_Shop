@@ -8,7 +8,7 @@
     <#assign bookIndex=0>
     <#assign authorIndex=0>
     <div class="mt-3">
-        ${filter_books}
+        ${main_book_new}
         <#--        <@spring.message code="filter.books"/>-->
     </div>
     <div class="card-deck m-5">
@@ -27,7 +27,7 @@
                     </#if>
                     <div class="card-body">
                         <h5 class="card-title">${book.titleEn}</h5>
-                        <p class="card-text">${book.price} Br </p>
+                        <p class="card-text">${book.price} BYN </p>
                     </div>
                 </div>
             </#if>

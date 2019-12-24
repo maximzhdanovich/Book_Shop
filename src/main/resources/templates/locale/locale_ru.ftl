@@ -29,7 +29,7 @@ book_list="Список Книг"
 book_view="Посмотреть"
 book_basket_add="Добавить в корзину"
 book_basket_add_alert="Книга добавлена в корзину"
-book_edit="Редактировать"
+book_edit="Редакт."
 book_title_ru="Название Ру"
 book_title_en="Название En"
 book_description="Описание"
@@ -37,6 +37,8 @@ book_add="Добавить"
 book_add_book="Добавить книгу"
 book_add_category="Категории"
 book_image="Изображение"
+book_save="Сохранить"
+book_delete="Удалить"
 <#--    #filter-->
 filter_search="Поиск"
 filter_books="Книги"
@@ -73,4 +75,7 @@ registration_create_email_exist_error="Почта уже используетс�
 registration_create_new_parssword_error="Пароль не может быть пустым"
 registration_create_new_repeat_parssword_error="Повторение пароля не может быть пустым"
 registration_create_new_parssword_different_error="Пароли отличаются"
+<#--    main page-->
+main_book_new="Новые книги"
+
 >

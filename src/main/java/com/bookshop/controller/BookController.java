@@ -89,7 +89,7 @@ public class BookController {
             return "redirect:/book/admin/" + book.getId();
         }
 //        bookService.update(book, titleEn, titleRu, authorSurname, authorName, description, form, image);
-        bookService.update(book, form.get("titleEn"), form.get("titleRu"), form.get("authorSurname"), form.get("authorName"), form.get("description"), form, image);
+        bookService.update(book,Double.valueOf(form.get("price")), form.get("titleEn"), form.get("titleRu"), form.get("authorSurname"), form.get("authorName"), form.get("description"), form, image);
         return "redirect:/book";
     }
 

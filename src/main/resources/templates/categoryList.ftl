@@ -39,7 +39,7 @@
     </div>
 </#if>
     <br>
-    CATEGORIES
+<#--    CATEGORIES-->
     <div class="card-columns">
         <div id="accordion">
 

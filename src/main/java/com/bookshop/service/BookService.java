@@ -37,6 +37,10 @@ public class BookService {
         save(book);
     }
 
+    public List<Book> lastBook(){
+        return bookDTO.lastBook();
+    }
+
     public void create(double price, String titleRu, String titleEn, String description, Author author,Map<String,String> form, MultipartFile image) throws IOException {
         Book book = new Book(price, titleRu, titleEn, description);
         book.setAuthor(author);
@@ -84,7 +88,8 @@ public class BookService {
         return bookDTO.findAllByCategories(category, pageable);
     }
 
-    public void update(Book book, String titleEn, String titleRu, String authorSurname, String authorName, String description, Map<String, String> form, MultipartFile image) throws IOException {
+    public void update(Book book,double price, String titleEn, String titleRu, String authorSurname, String authorName, String description, Map<String, String> form, MultipartFile image) throws IOException {
+        book.setPrice(price);
         book.setTitleRu(titleRu);
         book.setTitleEn(titleEn);
         book.setAuthor(authorService.findBySurnameAndName(authorSurname, authorName).get());

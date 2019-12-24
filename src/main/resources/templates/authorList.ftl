@@ -1,9 +1,9 @@
 <#import "parts/common.ftl" as c>
 <#include "parts/security.ftl">
 <@c.page>
-    List of Authors
-    <br>
-    <br>
+<#--    List of Authors-->
+<#--    <br>-->
+<#--    <br>-->
     <#if isAdmin>
         <#if authorError??>
             ${authorError}

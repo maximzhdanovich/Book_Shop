@@ -46,7 +46,7 @@
         <div class="mt-5 m-5">
             ${book_author}: ${book.author.name} ${book.author.surname}
             <br>
-            ${book_title}
+            ${book_title}:
             <#if .lang=="en">
                 ${book.titleEn}
             <#elseif .lang=="ru">
@@ -65,6 +65,10 @@
                     <#if name="unknown">disabled="disabled"</#if>>
                 ${book_basket_add}
             </button>
+            <#if isAdmin>
+                <a href="/book/admin/${book.id}"
+                   class="btn btn-primary ml-2 leftText">${book_edit}</a>
+            </#if>
 
             <input type="hidden" id="bookId" value="${book.id}">
     </form>

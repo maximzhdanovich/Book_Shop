@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,6 +18,10 @@ public class BookDTO {
     @Autowired
 
     private BookDAO bookDAO;
+
+    public List<Book> lastBook(){
+        return bookDAO.findByOrderByIdDesc();
+    }
 
     public void save(Book book) {
         bookDAO.save(book);
@@ -41,7 +44,7 @@ public class BookDTO {
     }
 
     public Page<Book> findAllPage(Pageable pageable) {
-        return bookDAO.findAll(pageable);
+        return bookDAO.findByOrderByTitleEnAsc(pageable);
     }
 
     public List<Book> findByTitleEnOrTitleRu(String titleEn, String titleRu) {

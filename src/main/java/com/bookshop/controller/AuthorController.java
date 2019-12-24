@@ -43,7 +43,7 @@ public class AuthorController {
     @GetMapping
     public String authorList(Model model) {
         model.addAttribute("authors", authorService.findAll());
-//        model.addAttribute("images", authorImageService.findAll());
+//        model.addAttribute("images", authorImageService.findByOrderByTitleEnAsc());
         return "authorList";
     }
 

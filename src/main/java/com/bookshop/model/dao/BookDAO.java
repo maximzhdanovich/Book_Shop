@@ -14,7 +14,9 @@ import java.util.List;
 public interface BookDAO extends CrudRepository<Book, Long> {
     List<Book> findAll();
 
-    Page<Book> findAll(Pageable pageable);
+    List<Book> findByOrderByIdDesc();
+
+    Page<Book> findByOrderByTitleEnAsc(Pageable pageable);
 
     Page<Book> findAllByAuthor(Author author, Pageable pageable);
 

@@ -37,6 +37,8 @@ book_add="Add"
 book_add_book="Add book"
 book_add_category="Category"
 book_image="Image"
+book_save="Save"
+book_delete="Delete"
 <#--    #filter-->
 filter_search="Search"
 filter_books="Books"
@@ -73,4 +75,6 @@ registration_create_email_exist_error="Email is already in use"
 registration_create_new_parssword_error="Password can't be empty"
 registration_create_new_repeat_parssword_error="Repeat password can't be empty"
 registration_create_new_parssword_different_error="Password are different"
+<#--    main page-->
+main_book_new="New books"
 >

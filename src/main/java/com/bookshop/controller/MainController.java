@@ -23,7 +23,7 @@ public class MainController extends BaseController {
 
     @GetMapping("/")
     public String main(Model model) {
-        model.addAttribute("books", bookService.findAll());
+        model.addAttribute("books", bookService.lastBook());
         model.addAttribute("authors", authorService.findAll());
         return "main";
     }

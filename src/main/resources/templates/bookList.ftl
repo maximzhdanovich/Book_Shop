@@ -67,6 +67,10 @@
         }
     </style>
 
+    <style>.card-columns {
+
+            column-count: 4;
+   </style>
 
 </head>
 <body>
@@ -81,192 +85,215 @@
 <@f.footer>
     <div class="container mt-3">
 
-    <#assign sum=0>
-    <#assign currentId=0>
-    <h5 align="center"> <#if categoryPage??>
+        <#assign sum=0>
+        <#assign currentId=0>
+        <h5 align="center"> <#if categoryPage??>
             ${book_page_category}
-        <#--        <@spring.message code="book.page.category"/>-->
+            <#--        <@spring.message code="book.page.category"/>-->
             <#if .lang=="en">
                 ${category.titleEn}
             <#elseif .lang=="ru">
                 ${category.titleRu}
             </#if>
-        <#elseif authorPage??>
-            ${book_page_author}
-        <#--        <@spring.message code="book.page.author"/>-->
-            ${author.name} ${author.surname}
-        <#else >
-            <div>${book_list}</div>
-        </#if>
-    </h5>
-    <#if isAdmin>
+            <#elseif authorPage??>
+                ${book_page_author}
+            <#--        <@spring.message code="book.page.author"/>-->
+                ${author.name} ${author.surname}
+            <#else >
 
-        <div id="accordion">
-            <div class="card">
-                <div class="card-header" id="headingOne">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                            aria-expanded="true" aria-controls="collapseOne">
-                        ${book_add_book}
-                    </button>
-                </div>
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
-                     data-parent="#accordion">
-                    <div class="card-body">
-                        <form method="post" action="/book/admin/create" enctype="multipart/form-data">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">${book_price}</span>
-                                </div>
-                                <input type="number" step="0.01" name="price" placeholder="${book_price}" class="form-control" aria-label="${book_price}" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">${book_title_ru}</span>
-                                </div>
-                                <input type="text" name="titleRu" class="form-control" placeholder="${book_title_ru}" aria-label="${book_title_ru}" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">${book_title_en}</span>
-                                </div>
-                                <input type="text" name="titleEn" class="form-control" placeholder="${book_title_en}" aria-label="${book_title_en}" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">${author_surname}</span>
-                                </div>
-                                <input type="text" name="authorSurname" class="form-control" placeholder="${author_surname}" aria-label="${author_surname}" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">${author_name}</span>
-                                </div>
-                                <input type="text" name="authorName" class="form-control" placeholder="${author_name}" aria-label="${author_name}" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">${book_description}</span>
-                                </div>
-                                <textarea name="description" class="form-control" aria-label="description"></textarea>
-                            </div>
-<#--                            <input type="number" step="0.01" name="price" placeholder=${book_price}>-->
-<#--                            <input type="text" name="titleRu" placeholder="${book_title_ru}">-->
-<#--                            <input type="text" name="titleEn" placeholder="${book_title_en}">-->
-<#--                            <input type="text" name="authorSurname" placeholder="${author_surname}">-->
-<#--                            <input type="text" name="authorName" placeholder="${author_name}">-->
-<#--                            <textarea class="mt-1" maxlength="1000" rows="10" cols="90"-->
-<#--                                      name="description"></textarea>-->
-                            <br>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroupFileAddon01">${book_image}</span>
-                                </div>
-                                <div class="custom-file">
-                                    <input type="file" name="image" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                                </div>
-                            </div>
-<#--                            <input type="file" name="image">-->
-                            <div id="accordionTwo">
-                                <div class="card">
-                                    <div class="card-header" id="headingTwo">
-                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo"
-                                                aria-expanded="true" aria-controls="collapseOne">
-                                            ${book_add_category}
-                                        </button>
+        </h5>
+        <#if isAdmin>
+
+            <div id="accordion">
+                <div class="card" >
+                    <div class="card-header" id="headingOne">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                            ${book_add_book}
+                        </button>
+                    </div>
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                         data-parent="#accordion">
+                        <div class="card-body">
+                            <form method="post" action="/book/admin/create" enctype="multipart/form-data">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">${book_price}</span>
                                     </div>
-                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-                                         data-parent="#accordionTwo">
-                                        <div class="card-body">
-                                            <div class="card-columns">
-                                            <#list categories as category>
-                                                <div class="card">
-                                                    <label><input type="checkbox" name="${category}" class="ml-3">
-                                                        <#if .lang=="en">
-                                                            ${category.titleEn}
-                                                        <#elseif .lang=="ru">
-                                                            ${category.titleRu}
-                                                        </#if></label>
+                                    <input type="number" step="0.01" name="price" placeholder="${book_price}"
+                                           class="form-control" aria-label="${book_price}"
+                                           aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">${book_title_ru}</span>
+                                    </div>
+                                    <input type="text" name="titleRu" class="form-control"
+                                           placeholder="${book_title_ru}" aria-label="${book_title_ru}"
+                                           aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">${book_title_en}</span>
+                                    </div>
+                                    <input type="text" name="titleEn" class="form-control"
+                                           placeholder="${book_title_en}" aria-label="${book_title_en}"
+                                           aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">${author_surname}</span>
+                                    </div>
+                                    <input type="text" name="authorSurname" class="form-control"
+                                           placeholder="${author_surname}" aria-label="${author_surname}"
+                                           aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">${author_name}</span>
+                                    </div>
+                                    <input type="text" name="authorName" class="form-control"
+                                           placeholder="${author_name}" aria-label="${author_name}"
+                                           aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">${book_description}</span>
+                                    </div>
+                                    <textarea name="description" class="form-control"
+                                              aria-label="description"></textarea>
+                                </div>
+                                <#--                            <input type="number" step="0.01" name="price" placeholder=${book_price}>-->
+                                <#--                            <input type="text" name="titleRu" placeholder="${book_title_ru}">-->
+                                <#--                            <input type="text" name="titleEn" placeholder="${book_title_en}">-->
+                                <#--                            <input type="text" name="authorSurname" placeholder="${author_surname}">-->
+                                <#--                            <input type="text" name="authorName" placeholder="${author_name}">-->
+                                <#--                            <textarea class="mt-1" maxlength="1000" rows="10" cols="90"-->
+                                <#--                                      name="description"></textarea>-->
+                                <br>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupFileAddon01">${book_image}</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" name="image" class="custom-file-input" id="inputGroupFile01"
+                                               aria-describedby="inputGroupFileAddon01">
+                                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                    </div>
+                                </div>
+                                <#--                            <input type="file" name="image">-->
+                                <div id="accordionTwo">
+                                    <div class="card">
+                                        <div class="card-header" id="headingTwo">
+                                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                                                    data-target="#collapseTwo"
+                                                    aria-expanded="true" aria-controls="collapseOne">
+                                                ${book_add_category}
+                                            </button>
+                                        </div>
+                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                             data-parent="#accordionTwo">
+                                            <div class="card-body">
+                                                <div class="card-columns">
+                                                    <#list categories as category>
+                                                        <div class="card">
+                                                            <label><input type="checkbox" name="${category}"
+                                                                          class="ml-3">
+                                                                <#if .lang=="en">
+                                                                    ${category.titleEn}
+                                                                <#elseif .lang=="ru">
+                                                                    ${category.titleRu}
+                                                                </#if></label>
 
+                                                        </div>
+
+                                                    </#list>
                                                 </div>
-
-                                            </#list>
-                                        </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary mt-2" >${book_add}</button>
-                        </form>
+                                <button type="submit" class="btn btn-primary mt-2">${book_add}</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </#if>
+        </#if>
+<#--        <div>${book_list}</div>-->
+        </#if>
     </div>
+    <#if page.numberOfElements!=0>
+        <div class="ml-5 mr-5" style="padding-right: 50px;padding-left: 50px">
 
-    <div class="ml-5 mr-5">
+            <form id="basketAdd">
+                <@p.pager url page />
+                <div class="card-columns">
 
-        <form id="basketAdd"> <@p.pager url page />
-            <div class="card-columns">
+                    <#list page.content as book>
 
-                <#list page.content as book>
-
-                    <div class="card my-3">
+                        <div class="card my-3">
 
 
-                        <#if book.image??>
-                        <p><img src="/img/book/${book.image.bookImage}" class="leftimg" width="96" height="125">
-                            <#else>
-                        <p><img src="/img/bookNot/bookImageNotFound.jpg" class="leftimg" width="96" height="125">
-                            </#if>
-                            ${book_author}: ${book.author.name} ${book.author.surname}
-                            <br>
-                            ${book_title}
-                            <#if .lang=="en">
-                                ${book.titleEn}
-                            <#elseif .lang=="ru">
-                                ${book.titleRu}
-                            </#if>
-                        <div class="cope_text line-clamp">
-                            <#if book.description??>
-                                ${book.description}
-                                <#if book.description?length<52>
-                                    <br>
-                                    <br>
-                                    <br>
-                                <#elseif  book.description?length<104>
-                                    <br>
-                                    <br>
+                            <#if book.image??>
+                            <p> <a href="/book/${book.id}"><img src="/img/book/${book.image.bookImage}" class="leftimg" width="96" height="125="></a>
+                                <#else>
+                            <p><a href="/book/${book.id}"><img src="/img/bookNot/bookImageNotFound.jpg" class="leftimg" width="96" height="125"></a>
                                 </#if>
-                            </#if>
+                                ${book_author}: ${book.author.name} ${book.author.surname}
+                                <br>
+                                ${book_title}:
+                                <#if .lang=="en">
+                                    ${book.titleEn}
+                                <#elseif .lang=="ru">
+                                    ${book.titleRu}
+                                </#if>
+                            <div class="cope_text line-clamp">
+                                <#if book.description??>
+                                    ${book.description}
+                                    <#if book.description?length<52>
+                                        <br>
+                                        <br>
+                                        <br>
+                                    <#elseif  book.description?length<104>
+                                        <br>
+                                        <br>
+                                    </#if>
+                                </#if>
+                            </div>
+                            </p>
+                            <div class="card-footer text-muted text-right">
+                                <a href="/book/${book.id}"
+                                   class="btn btn-primary ml-2 leftText">${book_view}</a>
+<#--                                <#if isAdmin>-->
+<#--                                    <a href="/book/admin/${book.id}"-->
+<#--                                       class="btn btn-primary ml-2 leftText">${book_edit}</a>-->
+<#--                                </#if>-->
+
+                                <b class="mr-2">${book_price}: ${book.price} BYN</b>
+                                <br>
+
+                                <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id})
+                                        <#if name="unknown">disabled="disabled"</#if>>
+                                    ${book_basket_add}
+                                </button>
+
+
+                            </div>
                         </div>
-                        </p>
-                        <div class="card-footer text-muted text-right">
-                            <a href="/book/${book.id}"
-                               class="btn btn-primary ml-2 leftText">${book_view}</a>
-                            <#if isAdmin>
-                                <a href="/book/admin/${book.id}"
-                                   class="btn btn-primary ml-2 leftText">${book_edit}</a>
-                            </#if>
+                    </#list>
 
-                            <b class="mr-2">${book_price}: ${book.price} Br</b>
-                            <br>
+                </div> <@p.pager url page />
+                <input type="hidden" id="bookId" value="${currentId}">
+            </form>
+        </div>
+        <#else>
+            <div class="container">
+                <br>
+        <h5 align="center">Books not found</h5>
+            </div>
+    </#if>
 
-                            <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id})
-                                    <#if name="unknown">disabled="disabled"</#if>>
-                                ${book_basket_add}
-                            </button>
-
-
-                        </div>
-                    </div>
-                </#list>
-
-            </div> <@p.pager url page />
-            <input type="hidden" id="bookId" value="${currentId}">
-        </form>
-    </div>
 </@f.footer>
 <div id="addingToCartSuccess" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
      role="alert">
