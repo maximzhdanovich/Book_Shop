@@ -39,9 +39,9 @@
 <div class="container  mt-5">
     <form id="basketAdd">
         <#if book.image??>
-        <p><img src="/img/book/${book.image.bookImage}" align="left" class="m-2" width="300" height="400">
+        <p><img src="/img/book/${book.image.bookImage}" align="left" class="m-2" width="300" height="400"/>
             <#else>
-        <p><img src="/img/bookNot/bookImageNotFound.jpg" align="left" class="m-2" width="300" height="400">
+        <p><img src="/img/bookNot/bookImageNotFound.jpg" align="left" class="m-2" width="300" height="400"/>
             </#if>
         <div class="mt-5 m-5">
             ${book_author}: ${book.author.name} ${book.author.surname}

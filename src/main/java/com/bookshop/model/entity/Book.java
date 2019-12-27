@@ -83,8 +83,8 @@ public class Book implements Serializable {
         this.id = id;
     }
 
-    @NotNull
-    @Column(name = "PRICE")
+//    @NotNull
+//    @Column(name = "PRICE")
     public double getPrice() {
         return price;
     }

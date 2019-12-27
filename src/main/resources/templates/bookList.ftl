@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Book Shop</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 
     <script src="http://code.jquery.com/jquery-1.11.0.min.js">
         integrity = "sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -115,14 +115,14 @@
                     <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
                          data-parent="#accordion">
                         <div class="card-body">
-                            <form method="post" action="/book/admin/create" enctype="multipart/form-data">
+                            <form method="post" action="/book<#--/admin/create-->" enctype="multipart/form-data">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">${book_price}</span>
                                     </div>
                                     <input type="number" step="0.01" name="price" placeholder="${book_price}"
                                            class="form-control" aria-label="${book_price}"
-                                           aria-describedby="basic-addon1">
+                                           aria-describedby="basic-addon1"/>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -130,7 +130,7 @@
                                     </div>
                                     <input type="text" name="titleRu" class="form-control"
                                            placeholder="${book_title_ru}" aria-label="${book_title_ru}"
-                                           aria-describedby="basic-addon1">
+                                           aria-describedby="basic-addon1"/>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -138,7 +138,7 @@
                                     </div>
                                     <input type="text" name="titleEn" class="form-control"
                                            placeholder="${book_title_en}" aria-label="${book_title_en}"
-                                           aria-describedby="basic-addon1">
+                                           aria-describedby="basic-addon1"/>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -146,7 +146,7 @@
                                     </div>
                                     <input type="text" name="authorSurname" class="form-control"
                                            placeholder="${author_surname}" aria-label="${author_surname}"
-                                           aria-describedby="basic-addon1">
+                                           aria-describedby="basic-addon1"/>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -154,7 +154,7 @@
                                     </div>
                                     <input type="text" name="authorName" class="form-control"
                                            placeholder="${author_name}" aria-label="${author_name}"
-                                           aria-describedby="basic-addon1">
+                                           aria-describedby="basic-addon1"/>
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -170,14 +170,14 @@
                                 <#--                            <input type="text" name="authorName" placeholder="${author_name}">-->
                                 <#--                            <textarea class="mt-1" maxlength="1000" rows="10" cols="90"-->
                                 <#--                                      name="description"></textarea>-->
-                                <br>
+                                <br/>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroupFileAddon01">${book_image}</span>
                                     </div>
                                     <div class="custom-file">
                                         <input type="file" name="image" class="custom-file-input" id="inputGroupFile01"
-                                               aria-describedby="inputGroupFileAddon01">
+                                               aria-describedby="inputGroupFileAddon01"/>
                                         <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                     </div>
                                 </div>
@@ -198,7 +198,7 @@
                                                     <#list categories as category>
                                                         <div class="card">
                                                             <label><input type="checkbox" name="${category}"
-                                                                          class="ml-3">
+                                                                          class="ml-3"/>
                                                                 <#if .lang=="en">
                                                                     ${category.titleEn}
                                                                 <#elseif .lang=="ru">
@@ -228,36 +228,39 @@
 
             <form id="basketAdd">
                 <@p.pager url page />
-                <div class="card-columns">
+                <div class="card-columns" id="book-list">
 
                     <#list page.content as book>
 
-                        <div class="card my-3">
+                        <div class="card my-3" data-id="${book.id}">
 
 
                             <#if book.image??>
-                            <p> <a href="/book/${book.id}"><img src="/img/book/${book.image.bookImage}" class="leftimg" width="96" height="125="></a>
+                            <p> <a href="/book/${book.id}"><img src="/img/book/${book.image.bookImage}" class="leftimg" width="96" height="125"/></a>
                                 <#else>
-                            <p><a href="/book/${book.id}"><img src="/img/bookNot/bookImageNotFound.jpg" class="leftimg" width="96" height="125"></a>
+                            <p><a href="/book/${book.id}"><img src="/img/bookNot/bookImageNotFound.jpg" class="leftimg" width="96" height="125"/></a>
                                 </#if>
                                 ${book_author}: ${book.author.name} ${book.author.surname}
-                                <br>
+                                <br/>
                                 ${book_title}:
+
                                 <#if .lang=="en">
                                     ${book.titleEn}
+                                    <#if book.titleEn?length<32><br/><br/></#if>
                                 <#elseif .lang=="ru">
                                     ${book.titleRu}
+                                    <#if book.titleRu?length<32><br/><br/></#if>
                                 </#if>
                             <div class="cope_text line-clamp">
                                 <#if book.description??>
                                     ${book.description}
                                     <#if book.description?length<52>
-                                        <br>
-                                        <br>
-                                        <br>
+                                        <br/>
+                                        <br/>
+                                        <br/>
                                     <#elseif  book.description?length<104>
-                                        <br>
-                                        <br>
+                                        <br/>
+                                        <br/>
                                     </#if>
                                 </#if>
                             </div>
@@ -271,9 +274,9 @@
 <#--                                </#if>-->
 
                                 <b class="mr-2">${book_price}: ${book.price} BYN</b>
-                                <br>
+                                <br/>
 
-                                <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id})
+                                <button type="submit" class="btn btn-primary" onclick="editCurrentId(${book.id})"
                                         <#if name="unknown">disabled="disabled"</#if>>
                                     ${book_basket_add}
                                 </button>
@@ -284,12 +287,12 @@
                     </#list>
 
                 </div> <@p.pager url page />
-                <input type="hidden" id="bookId" value="${currentId}">
+                <input type="hidden" id="bookId" value="${currentId}"/>
             </form>
         </div>
         <#else>
             <div class="container">
-                <br>
+                <br/>
         <h5 align="center">Books not found</h5>
             </div>
     </#if>

@@ -40,12 +40,13 @@
             <li class="page-item disabled">
                 <a class="page-link" href="#" tabindex="-1">Элементов на странице</a>
             </li>
-            <#list [6, 12, 30, 60] as c>
+            <#list [4, 12, 20, 40] as c>
                 <#if c == page.getSize()>
                     <li class="page-item active">
                         <a class="page-link" href="#" tabindex="-1">${c}</a>
                     </li>
                 <#else>
+
                     <li class="page-item">
                         <a class="page-link" href="${url}?page=${page.getNumber()}&size=${c}" tabindex="-1">${c}</a>
                     </li>

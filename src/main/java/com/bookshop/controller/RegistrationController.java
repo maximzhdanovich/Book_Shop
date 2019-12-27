@@ -73,6 +73,7 @@ public class RegistrationController {
         }
 
         userService.create(user);
+        basketService.create(user);
         return "successRegistration";
     }
 }

@@ -58,11 +58,12 @@ public class UserService implements UserDetailsService {
         return Optional.empty();
     }
 
-    public void create(User user) {
+    public boolean create(User user) {
         user.setActive(true);
         user.setRole(roleService.findByTitle("USER"));
         save(user);
-        basketService.create(user);
+
+        return true;
     }
 
     public void update(User user, String role, String username, String password, String email) {

@@ -40,7 +40,7 @@
         <div>
             <form method="get" action="/filter" class="mr-2">
                 <input type="text" name="filter" class="form-control"
-                       placeholder=${filter_search} value="${filter!}">
+                       placeholder="${filter_search}" value="${filter!}" />
             </form>
         </div>
         <div class="mr-2">
@@ -48,11 +48,11 @@
                 <div class="input-group mr-3">
                     <select id="lang" class="custom-select" name="lang" onchange="langEdit()">
                         <option>${navbar_lang}</option>
-                        <option value="ru" <#if .lang=="ru"> disabled</#if>>${navbar_lang_ru}</option>
-                        <option value="en" <#if .lang=="en"> disabled</#if>>${navbar_lang_en}</option>
+                        <option value="ru" <#if .lang=="ru"> disabled="disabled"</#if>>${navbar_lang_ru}</option>
+                        <option value="en" <#if .lang=="en"> disabled="disabled"</#if>>${navbar_lang_en}</option>
                     </select>
                 </div>
-                <button id="langSubmit" type="submit" hidden>ok</button>
+                <button id="langSubmit" type="submit" hidden="hidden">ok</button>
             </form>
         </div>
 

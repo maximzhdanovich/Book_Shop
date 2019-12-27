@@ -51,7 +51,7 @@ public class BookController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @PostMapping("/admin/create")
+    @PostMapping/*("/admin/create")*/
     public String bookCreate(/*@RequestParam Double price,
                              @RequestParam String titleRu,
                              @RequestParam String titleEn,
