@@ -2,7 +2,8 @@ delete
 from user;
 delete
 from basket;
-delete from role;
+delete
+from role;
 insert into role(id, title)
 VALUES (1, 'ADMIN'),
        (2, 'USER');

@@ -24,13 +24,15 @@ public class CategoryController {
         model.addAttribute("categories", categoryService.findAll());
         return "categoryList";
     }
+
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/admin/create")
     public String createCategory(@RequestParam String titleEn,
-                                 @RequestParam String titleRu){
-        categoryService.create(titleEn,titleRu);
+                                 @RequestParam String titleRu) {
+        categoryService.create(titleEn, titleRu);
         return "redirect:/category";
     }
+
     @GetMapping("/{category}")
     public String singleCategory(@PathVariable Category category, Model model, @PageableDefault(size = 12) Pageable pageable) {
         model.addAttribute("categoryPage", "");

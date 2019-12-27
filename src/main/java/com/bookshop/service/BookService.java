@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,11 +36,11 @@ public class BookService {
         save(book);
     }
 
-    public List<Book> lastBook(){
+    public List<Book> lastBook() {
         return bookDTO.lastBook();
     }
 
-    public void create(double price, String titleRu, String titleEn, String description, Author author,Map<String,String> form, MultipartFile image) throws IOException {
+    public void create(double price, String titleRu, String titleEn, String description, Author author, Map<String, String> form, MultipartFile image) throws IOException {
         Book book = new Book(price, titleRu, titleEn, description);
         book.setAuthor(author);
         List<Category> category = new ArrayList<>();
@@ -88,7 +87,7 @@ public class BookService {
         return bookDTO.findAllByCategories(category, pageable);
     }
 
-    public void update(Book book,double price, String titleEn, String titleRu, String authorSurname, String authorName, String description, Map<String, String> form, MultipartFile image) throws IOException {
+    public void update(Book book, double price, String titleEn, String titleRu, String authorSurname, String authorName, String description, Map<String, String> form, MultipartFile image) throws IOException {
         book.setPrice(price);
         book.setTitleRu(titleRu);
         book.setTitleEn(titleEn);
@@ -101,8 +100,9 @@ public class BookService {
             }
         }
         if (image != null && !image.getOriginalFilename().isEmpty()) {
-            if(book.getImage()!=null){
-            book_imageService.deleteById(book.getImage().getId());}
+            if (book.getImage() != null) {
+                book_imageService.deleteById(book.getImage().getId());
+            }
             book_imageService.add(image, book);
         }
         save(book);

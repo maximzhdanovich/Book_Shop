@@ -36,7 +36,7 @@
 <#include "parts/security.ftl">
 <#import "parts/footer.ftl" as f>
 <@f.footer>
-<div class="container  mt-5">
+    <div class="container  mt-5">
     <form id="basketAdd">
         <#if book.image??>
         <p><img src="/img/book/${book.image.bookImage}" align="left" class="m-2" width="300" height="400"/>
@@ -73,7 +73,7 @@
             <input type="hidden" id="bookId" value="${book.id}">
     </form>
 
-</div></@f.footer>
+    </div></@f.footer>
 <div id="addingToCartSuccess" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
      role="alert">
     <strong>Success</strong> ${book_basket_add_alert}

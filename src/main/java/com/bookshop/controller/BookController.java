@@ -1,20 +1,13 @@
 package com.bookshop.controller;
 
 import com.bookshop.model.entity.Book;
-import com.bookshop.model.entity.CustomUserDetail;
 import com.bookshop.service.AuthorService;
 import com.bookshop.service.BookService;
-import com.bookshop.service.Book_ImageService;
 import com.bookshop.service.CategoryService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -58,14 +51,14 @@ public class BookController {
                              @RequestParam String authorSurname,
                              @RequestParam String authorName,
                              @RequestParam String description,*/
-                             @RequestParam MultipartFile image,
-                             @RequestParam Map<String,String> form,
-                             Model model) throws IOException {
+            @RequestParam MultipartFile image,
+            @RequestParam Map<String, String> form,
+            Model model) throws IOException {
         if (!authorService.findBySurnameAndName(form.get("authorSurname"), form.get("authorName")).isPresent()) {
             return "redirect:/book";
         }
-        bookService.create(Double.valueOf(form.get("price")), form.get("titleRu"), form.get("titleEn"), form.get("description"), authorService.findBySurnameAndName(form.get("authorSurname"), form.get("authorName")).get(),form, image);
-        model.addAttribute("bookAdd","");
+        bookService.create(Double.valueOf(form.get("price")), form.get("titleRu"), form.get("titleEn"), form.get("description"), authorService.findBySurnameAndName(form.get("authorSurname"), form.get("authorName")).get(), form, image);
+        model.addAttribute("bookAdd", "");
         return "redirect:/book";
     }
 
@@ -85,11 +78,11 @@ public class BookController {
             @RequestParam MultipartFile image,
             @RequestParam Map<String, String> form,
             @RequestParam("bookId") Book book) throws IOException {
-        if (!authorService.findBySurnameAndName(form.get("authorSurname"),  form.get("authorName")).isPresent()) {
+        if (!authorService.findBySurnameAndName(form.get("authorSurname"), form.get("authorName")).isPresent()) {
             return "redirect:/book/admin/" + book.getId();
         }
 //        bookService.update(book, titleEn, titleRu, authorSurname, authorName, description, form, image);
-        bookService.update(book,Double.valueOf(form.get("price")), form.get("titleEn"), form.get("titleRu"), form.get("authorSurname"), form.get("authorName"), form.get("description"), form, image);
+        bookService.update(book, Double.valueOf(form.get("price")), form.get("titleEn"), form.get("titleRu"), form.get("authorSurname"), form.get("authorName"), form.get("description"), form, image);
         return "redirect:/book";
     }
 

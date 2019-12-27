@@ -19,7 +19,7 @@ public class BookDTO {
 
     private BookDAO bookDAO;
 
-    public List<Book> lastBook(){
+    public List<Book> lastBook() {
         return bookDAO.findByOrderByIdDesc();
     }
 

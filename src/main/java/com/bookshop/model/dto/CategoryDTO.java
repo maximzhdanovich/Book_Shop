@@ -24,7 +24,7 @@ public class CategoryDTO {
         return categoryDAO.findFirstByTitleEnOrTitleRu(titleEn, titleRu);
     }
 
-    public void save(Category category){
+    public void save(Category category) {
         categoryDAO.save(category);
     }
 }

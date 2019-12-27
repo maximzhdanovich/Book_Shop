@@ -4,7 +4,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "BOOK")
@@ -83,7 +82,7 @@ public class Book implements Serializable {
         this.id = id;
     }
 
-//    @NotNull
+    //    @NotNull
 //    @Column(name = "PRICE")
     public double getPrice() {
         return price;

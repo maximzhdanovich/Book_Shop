@@ -1,12 +1,10 @@
 package com.bookshop.controller;
 
 import com.bookshop.model.entity.Author;
-import com.bookshop.model.entity.Book;
 import com.bookshop.service.AuthorService;
 import com.bookshop.service.Author_ImageService;
 import com.bookshop.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;

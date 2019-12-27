@@ -35,20 +35,20 @@
     </div>
     ${filter_authors}
     <div class="card-deck m-5">
-    <#list authors as author>
-        <#if authorIndex<5>
-            <div class="card">
-                <#assign authorIndex++>
-                <#if author.image??>
-                    <img src="/img/author/${author.image.authorImage}"/>
-                </#if>
-                <div class="card-body">
-                    <h5 class="card-title">${author.surname} ${author.name} </h5>
-                    <a href="/author/${author.id}/books" class="card-text">Книги</a>
+        <#list authors as author>
+            <#if authorIndex<5>
+                <div class="card">
+                    <#assign authorIndex++>
+                    <#if author.image??>
+                        <img src="/img/author/${author.image.authorImage}"/>
+                    </#if>
+                    <div class="card-body">
+                        <h5 class="card-title">${author.surname} ${author.name} </h5>
+                        <a href="/author/${author.id}/books" class="card-text">Книги</a>
+                    </div>
                 </div>
-            </div>
-        </#if>
-    </#list>
+            </#if>
+        </#list>
     </div>
 
 </@c.page>

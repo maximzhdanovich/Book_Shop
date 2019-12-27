@@ -70,7 +70,7 @@
     <style>.card-columns {
 
             column-count: 4;
-   </style>
+    </style>
 
 </head>
 <body>
@@ -105,7 +105,7 @@
         <#if isAdmin>
 
             <div id="accordion">
-                <div class="card" >
+                <div class="card">
                     <div class="card-header" id="headingOne">
                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
                                 aria-expanded="true" aria-controls="collapseOne">
@@ -220,7 +220,7 @@
                 </div>
             </div>
         </#if>
-<#--        <div>${book_list}</div>-->
+    <#--        <div>${book_list}</div>-->
         </#if>
     </div>
     <#if page.numberOfElements!=0>
@@ -236,9 +236,11 @@
 
 
                             <#if book.image??>
-                            <p> <a href="/book/${book.id}"><img src="/img/book/${book.image.bookImage}" class="leftimg" width="96" height="125"/></a>
+                            <p><a href="/book/${book.id}"><img src="/img/book/${book.image.bookImage}" class="leftimg"
+                                                               width="96" height="125"/></a>
                                 <#else>
-                            <p><a href="/book/${book.id}"><img src="/img/bookNot/bookImageNotFound.jpg" class="leftimg" width="96" height="125"/></a>
+                            <p><a href="/book/${book.id}"><img src="/img/bookNot/bookImageNotFound.jpg" class="leftimg"
+                                                               width="96" height="125"/></a>
                                 </#if>
                                 ${book_author}: ${book.author.name} ${book.author.surname}
                                 <br/>
@@ -268,10 +270,10 @@
                             <div class="card-footer text-muted text-right">
                                 <a href="/book/${book.id}"
                                    class="btn btn-primary ml-2 leftText">${book_view}</a>
-<#--                                <#if isAdmin>-->
-<#--                                    <a href="/book/admin/${book.id}"-->
-<#--                                       class="btn btn-primary ml-2 leftText">${book_edit}</a>-->
-<#--                                </#if>-->
+                                <#--                                <#if isAdmin>-->
+                                <#--                                    <a href="/book/admin/${book.id}"-->
+                                <#--                                       class="btn btn-primary ml-2 leftText">${book_edit}</a>-->
+                                <#--                                </#if>-->
 
                                 <b class="mr-2">${book_price}: ${book.price} BYN</b>
                                 <br/>
@@ -290,11 +292,11 @@
                 <input type="hidden" id="bookId" value="${currentId}"/>
             </form>
         </div>
-        <#else>
-            <div class="container">
-                <br/>
-        <h5 align="center">Books not found</h5>
-            </div>
+    <#else>
+        <div class="container">
+            <br/>
+            <h5 align="center">Books not found</h5>
+        </div>
     </#if>
 
 </@f.footer>

@@ -40,7 +40,7 @@
         <div>
             <form method="get" action="/filter" class="mr-2">
                 <input type="text" name="filter" class="form-control"
-                       placeholder="${filter_search}" value="${filter!}" />
+                       placeholder="${filter_search}" value="${filter!}"/>
             </form>
         </div>
         <div class="mr-2">

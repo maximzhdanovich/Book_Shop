@@ -14,27 +14,30 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">фамилия автора</span>
                     </div>
-                    <input  type="text" name="surname" class="form-control" placeholder="фамилия автора" aria-label="фамилия автора" aria-describedby="basic-addon1">
+                    <input type="text" name="surname" class="form-control" placeholder="фамилия автора"
+                           aria-label="фамилия автора" aria-describedby="basic-addon1">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">имя автора</span>
                     </div>
-                    <input  type="text" name="name" class="form-control" placeholder="имя автора" aria-label="имя автора" aria-describedby="basic-addon1">
+                    <input type="text" name="name" class="form-control" placeholder="имя автора" aria-label="имя автора"
+                           aria-describedby="basic-addon1">
                 </div>
 
-<#--                <input type="text" name="surname" placeholder="фамилия автора">-->
-<#--                <input type="text" name="name" placeholder="имя автора">-->
+                <#--                <input type="text" name="surname" placeholder="фамилия автора">-->
+                <#--                <input type="text" name="name" placeholder="имя автора">-->
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroupFileAddon01">Image</span>
                     </div>
                     <div class="custom-file">
-                        <input type="file" name="image" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                        <input type="file" name="image" class="custom-file-input" id="inputGroupFile01"
+                               aria-describedby="inputGroupFileAddon01">
                         <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                     </div>
                 </div>
-<#--                <input type="file" name="image">-->
+                <#--                <input type="file" name="image">-->
                 <button type="submit" class="btn btn-primary m-2">Добавить</button>
             </form>
         </div>
