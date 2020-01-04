@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class CategoryDTO {
+public class CategoryDataService {
     @Autowired
     private CategoryDAO categoryDAO;
 

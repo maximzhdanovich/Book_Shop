@@ -14,7 +14,7 @@ import java.util.List;
 
 @Component
 @Qualifier("bookDAO")
-public class BookDTO {
+public class BookDataService {
     @Autowired
 
     private BookDAO bookDAO;

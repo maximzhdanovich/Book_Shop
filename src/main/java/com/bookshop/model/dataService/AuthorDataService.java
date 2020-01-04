@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class AuthorDTO {
+public class AuthorDataService {
     @Autowired
     private AuthorDAO authorDAO;
 
