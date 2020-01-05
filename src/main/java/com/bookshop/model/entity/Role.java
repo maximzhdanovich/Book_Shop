@@ -10,12 +10,10 @@ import java.util.Set;
 @Entity
 @Table(name = "ROLE")
 public class Role {
+
     private Long id;
     private String title;
     private Set<User> users;
-
-    public Role() {
-    }
 
     @Id
     @Column(name = "ID")
@@ -48,7 +46,17 @@ public class Role {
         this.users = users;
     }
 
+    public Role(Long id, String title, Set<User> users) {
+        this.id = id;
+        this.title = title;
+        this.users = users;
+    }
+
     public Role(String title) {
         this.title = title;
     }
+
+    public Role() {
+    }
+
 }

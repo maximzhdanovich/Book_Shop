@@ -2,19 +2,19 @@ package com.bookshop.model.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "BOOK")
-public class Book implements Serializable {
+public class Book {
+
     private long id;
     private double price;
     private String titleRu;
     private String titleEn;
     private List<Category> categories;
     private Author author;
-    private Book_Image image;
+    private BookImage image;
     private String description;
 
     @Column(name = "DESCRIPTION")
@@ -28,11 +28,11 @@ public class Book implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "FK_IMAGE_ID")
-    public Book_Image getImage() {
+    public BookImage getImage() {
         return image;
     }
 
-    public void setImage(Book_Image image) {
+    public void setImage(BookImage image) {
         this.image = image;
     }
 
@@ -64,13 +64,6 @@ public class Book implements Serializable {
         return String.valueOf(id);
     }
 
-    public Book(double price, String titleRu, String titleEn, String description) {
-        this.price = price;
-        this.titleRu = titleRu;
-        this.titleEn = titleEn;
-        this.description = description;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -82,8 +75,6 @@ public class Book implements Serializable {
         this.id = id;
     }
 
-    //    @NotNull
-//    @Column(name = "PRICE")
     public double getPrice() {
         return price;
     }
@@ -110,6 +101,24 @@ public class Book implements Serializable {
 
     public void setTitleEn(String titleEn) {
         this.titleEn = titleEn;
+    }
+
+    public Book(long id, double price, String titleRu, String titleEn, List<Category> categories, Author author, BookImage image, String description) {
+        this.id = id;
+        this.price = price;
+        this.titleRu = titleRu;
+        this.titleEn = titleEn;
+        this.categories = categories;
+        this.author = author;
+        this.image = image;
+        this.description = description;
+    }
+
+    public Book(double price, String titleRu, String titleEn, String description) {
+        this.price = price;
+        this.titleRu = titleRu;
+        this.titleEn = titleEn;
+        this.description = description;
     }
 
     public Book() {

@@ -15,6 +15,7 @@ import java.util.UUID;
 
 @Service
 public class AuthorImageService {
+
     @Autowired
     private AuthorImageDataService authorImageDataService;
 
@@ -23,7 +24,6 @@ public class AuthorImageService {
 
     @Value("${upload.path.author}")
     private String uploadPath;
-
 
     public void save(AuthorImage authorImage) {
         authorImageDataService.save(authorImage);
@@ -37,14 +37,13 @@ public class AuthorImageService {
         return authorImageDataService.findById(id);
     }
 
-
     public void deleteById(long id) {
         authorImageDataService.deleteById(id);
     }
 
     public void add(MultipartFile image, Author author) throws IOException {
-        if (image != null && !image.getOriginalFilename().isEmpty()) {
-            AuthorImage author_image = new AuthorImage();
+        if (image != null/* && !image.getOriginalFilename().isEmpty()*/ && image.getOriginalFilename()!=null) {
+            AuthorImage authorImage = new AuthorImage();
             File uploadDir = new File(uploadPath);
             if (!uploadDir.exists()) {
                 uploadDir.mkdir();
@@ -52,10 +51,10 @@ public class AuthorImageService {
             String uuidFile = UUID.randomUUID().toString();
             String fileName = uuidFile + image.getOriginalFilename();
             image.transferTo(new File(uploadPath + "/" + fileName));
-            author_image.setAuthorImage(fileName);
-            author_image.setAuthor(author);
-            save(author_image);
-            author.setImage(author_image);
+            authorImage.setAuthorImage(fileName);
+            authorImage.setAuthor(author);
+            save(authorImage);
+            author.setImage(authorImage);
             authorService.save(author);
         }
     }

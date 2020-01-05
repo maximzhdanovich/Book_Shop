@@ -2,7 +2,7 @@ package com.bookshop.service;
 
 import com.bookshop.model.dataService.BookImageDataService;
 import com.bookshop.model.entity.Book;
-import com.bookshop.model.entity.Book_Image;
+import com.bookshop.model.entity.BookImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -25,15 +25,15 @@ public class BookImageService {
     private String uploadPath;
 
 
-    public void save(Book_Image author_image) {
+    public void save(BookImage author_image) {
         bookImageDTO.save(author_image);
     }
 
-    public List<Book_Image> findAll() {
+    public List<BookImage> findAll() {
         return bookImageDTO.findAll();
     }
 
-    public Book_Image findById(long id) {
+    public BookImage findById(long id) {
         return bookImageDTO.findById(id);
     }
 
@@ -43,7 +43,7 @@ public class BookImageService {
 
     public void add(MultipartFile image, Book book) throws IOException {
         if (image != null && !image.getOriginalFilename().isEmpty()) {
-            Book_Image book_image = new Book_Image();
+            BookImage book_image = new BookImage();
             File uploadDir = new File(uploadPath);
             if (!uploadDir.exists()) {
                 uploadDir.mkdir();

@@ -1,15 +1,15 @@
 package com.bookshop.model.dao;
 
-import com.bookshop.model.entity.Book_Image;
+import com.bookshop.model.entity.BookImage;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface BookImageDAO extends CrudRepository<Book_Image, Long> {
+public interface BookImageDAO extends CrudRepository<BookImage, Long> {
 
-    List<Book_Image> findAll();
+    List<BookImage> findAll();
 
-    Book_Image findById(long id);
+    BookImage findById(long id);
 
     void deleteById(long id);
 

@@ -8,17 +8,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "AUTHOR")
-public class Author implements Serializable {
+public class Author {
+
     private Long id;
     private String name;
     private String surname;
     private List<Book> books;
     private AuthorImage image;
-
-    public Author() {
-
-    }
-
 
     @OneToOne
     @JoinColumn(name = "FK_IMAGE_ID")
@@ -66,13 +62,25 @@ public class Author implements Serializable {
         return surname;
     }
 
-
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public Author(Long id, String name, String surname, List<Book> books, AuthorImage image) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.books = books;
+        this.image = image;
     }
 
     public Author(String surname, String name) {
         this.name = name;
         this.surname = surname;
     }
+
+    public Author() {
+
+    }
+
 }

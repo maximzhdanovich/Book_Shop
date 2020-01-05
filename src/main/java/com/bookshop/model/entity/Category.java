@@ -38,14 +38,6 @@ public class Category implements Serializable {
         this.id = id;
     }
 
-    public Category() {
-    }
-
-    public Category(String titleRu, String titleEn) {
-        this.titleRu = titleRu;
-        this.titleEn = titleEn;
-    }
-
     public void setTitleRu(String titleRu) {
         this.titleRu = titleRu;
     }
@@ -70,4 +62,20 @@ public class Category implements Serializable {
     public String toString() {
         return String.valueOf(id);
     }
+
+    public Category(long id, String titleRu, String titleEn, List<Book> books) {
+        this.id = id;
+        this.titleRu = titleRu;
+        this.titleEn = titleEn;
+        Books = books;
+    }
+
+    public Category(String titleRu, String titleEn) {
+        this.titleRu = titleRu;
+        this.titleEn = titleEn;
+    }
+
+    public Category() {
+    }
+
 }

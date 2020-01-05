@@ -12,6 +12,7 @@ import java.util.List;
 
 
 public interface BookDAO extends CrudRepository<Book, Long> {
+
     List<Book> findAll();
 
     List<Book> findByOrderByIdDesc();

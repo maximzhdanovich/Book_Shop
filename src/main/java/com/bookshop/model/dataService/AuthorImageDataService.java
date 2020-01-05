@@ -1,6 +1,6 @@
 package com.bookshop.model.dataService;
 
-import com.bookshop.model.dao.Author_ImageDAO;
+import com.bookshop.model.dao.AuthorImageDAO;
 import com.bookshop.model.entity.AuthorImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,8 +9,9 @@ import java.util.List;
 
 @Component
 public class AuthorImageDataService {
+
     @Autowired
-    private Author_ImageDAO author_imageDAO;
+    private AuthorImageDAO author_imageDAO;
 
     public void save(AuthorImage author_image) {
         author_imageDAO.save(author_image);

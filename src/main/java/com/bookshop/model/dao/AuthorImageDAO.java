@@ -5,11 +5,11 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface Author_ImageDAO extends CrudRepository<AuthorImage, Long> {
+public interface AuthorImageDAO extends CrudRepository<AuthorImage, Long> {
+
     List<AuthorImage> findAll();
 
     AuthorImage findById(long id);
-
 
     void deleteById(long id);
 }

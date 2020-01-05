@@ -5,18 +5,10 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "BOOK_IMAGE")
-public class Book_Image {
+public class BookImage {
     private Long id;
     private String bookImage;
     private Book book;
-
-    public Book_Image() {
-    }
-
-    public Book_Image(String bookImage, Book book) {
-        this.bookImage = bookImage;
-        this.book = book;
-    }
 
     @NotNull
     @Column(name = "IMAGE")
@@ -50,5 +42,18 @@ public class Book_Image {
         this.id = id;
     }
 
+    public BookImage(Long id, String bookImage, Book book) {
+        this.id = id;
+        this.bookImage = bookImage;
+        this.book = book;
+    }
+
+    public BookImage(String bookImage, Book book) {
+        this.bookImage = bookImage;
+        this.book = book;
+    }
+
+    public BookImage() {
+    }
 
 }

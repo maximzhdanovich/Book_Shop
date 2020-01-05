@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "USER")
 public class User {
+
     private Long id;
     @NotBlank(message = "username can not be empty")
     private String username;
@@ -16,20 +17,9 @@ public class User {
     private String email;
     @NotBlank(message = "password can not be empty")
     private String password;
-
-
     private Role role;
     private Basket basket;
     private boolean active;
-
-    public User(User user) {
-        this.active = user.active;
-        this.username = user.username;
-        this.password = user.password;
-        this.email = user.email;
-        this.role = user.role;
-        this.id = user.id;
-    }
 
     @NotNull
     @Column(name = "Active")
@@ -103,7 +93,23 @@ public class User {
         this.basket = basket;
     }
 
-    public User() {
+    public User(Long id, @NotBlank(message = "username can not be empty") String username, @Email(message = "email error") @NotBlank(message = "email can not be empty") String email, @NotBlank(message = "password can not be empty") String password, Role role, Basket basket, boolean active) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.basket = basket;
+        this.active = active;
+    }
+
+    public User(User user) {
+        this.active = user.active;
+        this.username = user.username;
+        this.password = user.password;
+        this.email = user.email;
+        this.role = user.role;
+        this.id = user.id;
     }
 
     public User(String username, String email, String password) {
@@ -113,4 +119,6 @@ public class User {
         setBasket(new Basket(this));
     }
 
+    public User() {
+    }
 }

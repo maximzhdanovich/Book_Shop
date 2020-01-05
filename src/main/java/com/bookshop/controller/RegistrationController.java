@@ -2,6 +2,7 @@ package com.bookshop.controller;
 
 import com.bookshop.model.entity.User;
 import com.bookshop.service.BasketService;
+import com.bookshop.service.RegistrationService;
 import com.bookshop.service.RoleService;
 import com.bookshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +23,9 @@ import java.util.stream.Collectors;
 
 @Controller
 public class RegistrationController {
-    @Autowired
-    private UserService userService;
 
     @Autowired
-    private RoleService roleService;
-
-    @Autowired
-    private BasketService basketService;
-
-
-    
+    private RegistrationService registrationService;
 
     @GetMapping("/login")
     public String login() {
@@ -45,38 +38,10 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String addUser(@RequestParam("password1") String password1,
+    public String addUser(@RequestParam("password1") String repeatPassword,
                           @Valid User user,
                           BindingResult bindingResult,
                           Model model) {
-        boolean empty = StringUtils.isEmpty(password1);
-        if (empty) {
-            model.addAttribute("password1EmptyError", "Repeat Password can not be empty");
-        }
-        if (!StringUtils.isEmpty(user.getPassword()) && !password1.equals(user.getPassword())) {
-            model.addAttribute("passwordDifferentError", "Password are different");
-        }
-        Optional<User> userFromDb = userService.findByUsername(user.getUsername());
-        if (userFromDb.isPresent()) {
-            model.addAttribute("usernameExistsError", "User exists!");
-        }
-        userFromDb = userService.findByEmail(user.getEmail());
-        if (userFromDb.isPresent()) {
-            model.addAttribute("emailExistsError", "Email is already in use");
-        }
-        if (empty || bindingResult.hasErrors() || userFromDb.isPresent()) {
-            Collector<FieldError, ?, Map<String, String>> fieldErrorMapCollector = Collectors.toMap(
-                    fieldError -> fieldError.getField() + "Error",
-                    FieldError::getDefaultMessage
-            );
-
-            Map<String, String> collectErrors = bindingResult.getFieldErrors().stream().collect(fieldErrorMapCollector);
-            model.mergeAttributes(collectErrors);
-            return "registration";
-        }
-
-        userService.create(user);
-        basketService.create(user);
-        return "successRegistration";
+        return registrationService.addNewUser(repeatPassword,user,bindingResult,model);
     }
 }

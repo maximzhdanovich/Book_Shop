@@ -1,6 +1,5 @@
 package com.bookshop.controller;
 
-import com.bookshop.model.entity.Basket;
 import com.bookshop.model.entity.Book;
 import com.bookshop.model.entity.User;
 import com.bookshop.service.*;
@@ -16,12 +15,16 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+
     @Autowired
     private UserService userService;
+
     @Autowired
     private RoleService roleService;
+
     @Autowired
     private BasketService basketService;
+
     @Autowired
     private BookService bookService;
 
@@ -57,12 +60,13 @@ public class UserController {
     }
 
     @PostMapping("{user}/approvedBook")
-    public ResponseEntity<Object> AllBookToProcessing(@RequestBody Book book, @PathVariable User user) {
-        Basket basket = user.getBasket();
-        basket.getBooksInProcessing().remove(bookService.findById(book.getId()));
-        basket.getBooksApproved().add(bookService.findById(book.getId()));
-        basketService.save(basket);
-        ServiceResponse<Long> response = new ServiceResponse<Long>("success", basket.getId());
+    public ResponseEntity<Object> approvedSingleBookToUser(@RequestBody Book book, @PathVariable User user) {
+        basketService.approvedSingleBookToUser(book,user);
+//        Basket basket = user.getBasket();
+//        basket.getBooksInProcessing().remove(bookService.findById(book.getId()));
+//        basket.getBooksApproved().add(bookService.findById(book.getId()));
+//        basketService.save(basket);
+        ServiceResponse<Long> response = new ServiceResponse<Long>("success", book.getId());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

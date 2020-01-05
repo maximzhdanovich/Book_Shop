@@ -80,4 +80,11 @@ public class BasketService {
         basket.getBooks().clear();
         save(basket);
     }
+
+    public void approvedSingleBookToUser(Book book, User user){
+        Basket basket = user.getBasket();
+        basket.getBooksInProcessing().remove(bookService.findById(book.getId()));
+        basket.getBooksApproved().add(bookService.findById(book.getId()));
+        save(basket);
+    }
 }

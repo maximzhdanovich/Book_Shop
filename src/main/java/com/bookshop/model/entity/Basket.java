@@ -6,11 +6,11 @@ import java.util.List;
 @Entity
 @Table(name = "BASKET")
 public class Basket {
+
     private Long id;
     private List<Book> books;
     private List<Book> booksInProcessing;
     private List<Book> booksApproved;
-
     private User user;
 
     @Id
@@ -51,12 +51,6 @@ public class Basket {
         return String.valueOf(id);
     }
 
-    public Basket(User user) {
-        setUser(user);
-    }
-
-    public Basket() {
-    }
 
     @ManyToMany
     @JoinTable(name = "BOOK_IN_PROCESSING_WITH_BASKET",
@@ -80,6 +74,21 @@ public class Basket {
 
     public void setBooksApproved(List<Book> booksApproved) {
         this.booksApproved = booksApproved;
+    }
+
+    public Basket(Long id, List<Book> books, List<Book> booksInProcessing, List<Book> booksApproved, User user) {
+        this.id = id;
+        this.books = books;
+        this.booksInProcessing = booksInProcessing;
+        this.booksApproved = booksApproved;
+        this.user = user;
+    }
+
+    public Basket(User user) {
+        setUser(user);
+    }
+
+    public Basket() {
     }
 
 }

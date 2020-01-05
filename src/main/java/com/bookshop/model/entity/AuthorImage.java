@@ -6,7 +6,8 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "AUTHOR_IMAGE")
-public class AuthorImage implements Serializable {
+public class AuthorImage {
+
     private Long id;
     private String authorImage;
     private Author author;
@@ -32,11 +33,6 @@ public class AuthorImage implements Serializable {
         this.authorImage = authorImage;
     }
 
-    public AuthorImage(String authorImage, Author author) {
-        this.authorImage = authorImage;
-        this.author = author;
-    }
-
     @NotNull
     @OneToOne
     @JoinColumn(name = "FK_AUTHOR_ID")
@@ -48,6 +44,16 @@ public class AuthorImage implements Serializable {
         this.author = author;
     }
 
+    public AuthorImage(Long id, String authorImage, Author author) {
+        this.id = id;
+        this.authorImage = authorImage;
+        this.author = author;
+    }
+
+    public AuthorImage(String authorImage, Author author) {
+        this.authorImage = authorImage;
+        this.author = author;
+    }
     public AuthorImage() {
     }
 

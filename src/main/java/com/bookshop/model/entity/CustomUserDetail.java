@@ -8,9 +8,6 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class CustomUserDetail extends User implements UserDetails {
-    public CustomUserDetail(final User user) {
-        super(user);
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -50,5 +47,9 @@ public class CustomUserDetail extends User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public CustomUserDetail(final User user) {
+        super(user);
     }
 }
