@@ -32,18 +32,18 @@ public class UserController {
     }
 
     @GetMapping("{user}")
-    public String userEdit(@PathVariable User user, Model model) {
+    public String userEditInformation(@PathVariable User user, Model model) {
         model.addAttribute("user", user);
         model.addAttribute("roles", roleService.findAll());
         return "userEdit";
     }
 
     @PostMapping
-    public String userSave(@RequestParam("userId") User user,
-                           @RequestParam String role,
-                           @RequestParam String username,
-                           @RequestParam String password,
-                           @RequestParam String email) {
+    public String userSaveEditByAdmin(@RequestParam("userId") User user,
+                                      @RequestParam String role,
+                                      @RequestParam String username,
+                                      @RequestParam String password,
+                                      @RequestParam String email) {
         userService.update(user, role, username, password, email);
         return "redirect:/user";
     }

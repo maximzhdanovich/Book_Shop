@@ -2,8 +2,8 @@ package com.bookshop.controller;
 
 
 import com.bookshop.service.AuthorService;
+import com.bookshop.service.BookImageService;
 import com.bookshop.service.BookService;
-import com.bookshop.service.Book_ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +19,7 @@ public class MainController extends BaseController {
     private AuthorService authorService;
 
     @Autowired
-    private Book_ImageService bookImageService;
+    private BookImageService bookImageService;
 
     @GetMapping("/")
     public String main(Model model) {

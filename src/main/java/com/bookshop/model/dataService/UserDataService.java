@@ -1,4 +1,4 @@
-package com.bookshop.model.dto;
+package com.bookshop.model.dataService;
 
 import com.bookshop.model.dao.UserDAO;
 import com.bookshop.model.entity.User;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class UserDTO {
+public class UserDataService {
     @Autowired
     private UserDAO userDAO;
 
@@ -17,7 +17,7 @@ public class UserDTO {
         return userDAO.findAll();
     }
 
-    public Optional<User> findById(long id) {
+    public User findById(long id) {
         return userDAO.findById(id);
     }
 

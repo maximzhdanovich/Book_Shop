@@ -69,7 +69,7 @@
 
     <style>.card-columns {
 
-            column-count: 4;
+            column-count: 4;}
     </style>
 
 </head>
@@ -120,7 +120,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">${book_price}</span>
                                     </div>
-                                    <input type="number" step="0.01" name="price" placeholder="${book_price}"
+                                    <input type="number"  step="0.01" name="price" placeholder="${book_price}"
                                            class="form-control" aria-label="${book_price}"
                                            aria-describedby="basic-addon1"/>
                                 </div>

@@ -1,6 +1,6 @@
 package com.bookshop.service;
 
-import com.bookshop.model.dto.CategoryDTO;
+import com.bookshop.model.dataService.CategoryDataService;
 import com.bookshop.model.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,18 +10,18 @@ import java.util.List;
 @Service
 public class CategoryService {
     @Autowired
-    public CategoryDTO categoryDTO;
+    public CategoryDataService categoryDataService;
 
     public List<Category> findAll() {
-        return categoryDTO.findAll();
+        return categoryDataService.findAll();
     }
 
     public Category findById(long id) {
-        return categoryDTO.findById(id);
+        return categoryDataService.findById(id);
     }
 
     public Category findFirstByTitleEnOrTitleRu(String titleEn, String titleRu) {
-        return categoryDTO.findFirstByTitleEnOrTitleRu(titleEn, titleRu);
+        return categoryDataService.findFirstByTitleEnOrTitleRu(titleEn, titleRu);
     }
 
     public void create(String titleEn, String titleRu) {
@@ -29,6 +29,6 @@ public class CategoryService {
     }
 
     public void save(Category category) {
-        categoryDTO.save(category);
+        categoryDataService.save(category);
     }
 }

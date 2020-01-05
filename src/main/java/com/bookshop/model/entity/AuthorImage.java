@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "AUTHOR_IMAGE")
-public class Author_Image implements Serializable {
+public class AuthorImage implements Serializable {
     private Long id;
     private String authorImage;
     private Author author;
@@ -32,7 +32,7 @@ public class Author_Image implements Serializable {
         this.authorImage = authorImage;
     }
 
-    public Author_Image(String authorImage, Author author) {
+    public AuthorImage(String authorImage, Author author) {
         this.authorImage = authorImage;
         this.author = author;
     }
@@ -48,7 +48,7 @@ public class Author_Image implements Serializable {
         this.author = author;
     }
 
-    public Author_Image() {
+    public AuthorImage() {
     }
 
 }

@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/category")
 public class CategoryController {
+
     @Autowired
     private CategoryService categoryService;
+
     @Autowired
     private BookService bookService;
 

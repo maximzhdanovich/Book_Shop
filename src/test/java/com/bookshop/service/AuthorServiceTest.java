@@ -1,19 +1,51 @@
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
+package com.bookshop.service;
+
+import com.bookshop.model.dataService.AuthorImageDataService;
+import com.bookshop.model.entity.AuthorImage;
+import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.*;
+import java.util.Collections;
+import java.util.List;
 
-@RunWith(Arquillian.class)
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+@RunWith(MockitoJUnitRunner.class)
 public class AuthorServiceTest {
-    @Deployment
-    public static JavaArchive createDeployment() {
-        return ShrinkWrap.create(JavaArchive.class)
-                .addClass(com.bookshop.service.AuthorService.class)
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+
+    @Mock
+    private AuthorImageDataService authorImageDataService;
+
+    @Mock
+    private AuthorService authorService;
+
+    @InjectMocks
+    private AuthorImageService authorImageService;
+
+    @Test
+    public void shouldCallAuthorImageDataServiceSaveWhenSaveAuthorImage() {
+        AuthorImage authorImage = new AuthorImage();
+
+        authorImageService.save(authorImage);
+
+        verify(authorImageDataService).save(authorImage);
     }
+
+    @Test
+    public void shouldReturnEmptyListWhenCallFindAllAndDatabaseIsEmpty() {
+        when(authorImageDataService.findAll()).thenReturn(Collections.emptyList());
+
+        List<AuthorImage> authorImages = authorImageService.findAll();
+
+        assertThat(authorImages).isEmpty();
+
+//        assertThatThrownBy(() -> authorImageService.save(null)).isInstanceOf(IOException.class);
+    }
+
 
 }

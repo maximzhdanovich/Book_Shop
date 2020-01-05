@@ -1,6 +1,6 @@
 package com.bookshop.service;
 
-import com.bookshop.model.dto.AuthorDTO;
+import com.bookshop.model.dataService.AuthorDataService;
 import com.bookshop.model.entity.Author;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,36 +14,36 @@ import java.util.Optional;
 @Service
 public class AuthorService {
     @Autowired
-    private AuthorDTO authorDTO;
+    private AuthorDataService authorDataService;
     @Autowired
-    private Author_ImageService authorImageService;
+    private AuthorImageService authorImageService;
 
     public void save(Author author) {
-        authorDTO.save(author);
+        authorDataService.save(author);
     }
 
     public Optional<Author> findBySurnameAndName(String surname, String name) {
         if (!StringUtils.isEmpty(surname) && !StringUtils.isEmpty(name)) {
-            return authorDTO.findBySurnameAndName(surname, name);
+            return authorDataService.findBySurnameAndName(surname, name);
         } else {
             return Optional.empty();
         }
     }
 
     public List<Author> findBySurnameOrName(String surname, String name) {
-        return authorDTO.findBySurnameOrName(surname, name);
+        return authorDataService.findBySurnameOrName(surname, name);
     }
 
     public void deleteById(long id) {
-        authorDTO.deleteById(id);
+        authorDataService.deleteById(id);
     }
 
     public Author findById(long id) {
-        return authorDTO.findById(id);
+        return authorDataService.findById(id);
     }
 
     public List<Author> findAll() {
-        return authorDTO.findAll();
+        return authorDataService.findAll();
     }
 
     public void update(String surname, String name, Author author, MultipartFile image) throws IOException {

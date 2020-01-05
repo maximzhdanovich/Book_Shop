@@ -1,6 +1,6 @@
 package com.bookshop.service;
 
-import com.bookshop.model.dto.RoleDTO;
+import com.bookshop.model.dataService.RoleDataService;
 import com.bookshop.model.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,17 +11,17 @@ import java.util.List;
 public class RoleService {
 
     @Autowired
-    private RoleDTO roleDTO;
+    private RoleDataService roleDataService;
 
     public List<Role> findAll() {
-        return roleDTO.findAll();
+        return roleDataService.findAll();
     }
 
     public Role findById(long id) {
-        return roleDTO.findById(id);
+        return roleDataService.findById(id);
     }
 
     public Role findByTitle(String title) {
-        return roleDTO.findByTitle(title);
+        return roleDataService.findByTitle(title);
     }
 }

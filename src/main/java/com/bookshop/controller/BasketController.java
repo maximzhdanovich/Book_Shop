@@ -31,36 +31,28 @@ public class BasketController {
     @PostMapping("/saveBook")
     public ResponseEntity<Object> addBook(@AuthenticationPrincipal CustomUserDetail user, @RequestBody Book book) {
         basketService.addSingleBook(user, bookService.findById(book.getId()));
-        ServiceResponse<Long> response = new ServiceResponse<Long>("success", book.getId());
+        ServiceResponse<Long> response = new ServiceResponse<>("success", book.getId());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("account/deleteFromBasket")
     public ResponseEntity<Object> deleteBook(@AuthenticationPrincipal CustomUserDetail user, @RequestBody Book book) {
-        Basket basket = userService.getCurrentUser(user).get().getBasket();
-        basket.getBooks().remove(bookService.findById(book.getId()));
-        basketService.save(basket);
-        ServiceResponse<Long> response = new ServiceResponse<Long>("success", book.getId());
+        basketService.deleteBookFromBasket(user,book);
+        ServiceResponse<Long> response = new ServiceResponse<>("success", book.getId());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("account/bookToProcessing")
     public ResponseEntity<Object> bookToProcessing(@AuthenticationPrincipal CustomUserDetail user, @RequestBody Book book) {
-        Basket basket = userService.getCurrentUser(user).get().getBasket();
-        basket.getBooks().remove(bookService.findById(book.getId()));
-        basket.getBooksInProcessing().add(bookService.findById(book.getId()));
-        basketService.save(basket);
+        basketService.sendBookToProcessing(user,book);
         ServiceResponse<Long> response = new ServiceResponse<Long>("success", book.getId());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("account/AllBookToProcessing")
     public ResponseEntity<Object> AllBookToProcessing(@AuthenticationPrincipal CustomUserDetail user) {
-        Basket basket = userService.getCurrentUser(user).get().getBasket();
-        basket.getBooksInProcessing().addAll(basket.getBooks());
-        basket.getBooks().clear();
-        basketService.save(basket);
-        ServiceResponse<Long> response = new ServiceResponse<Long>("success", basket.getId());
+        basketService.sendAllBookToProcessing(user);
+        ServiceResponse<Long> response = new ServiceResponse<Long>("success", user.getId());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

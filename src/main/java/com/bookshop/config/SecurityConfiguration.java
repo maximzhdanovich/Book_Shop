@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableJpaRepositories(basePackageClasses = UserDAO.class)
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private CustomUserDetailService customUserDetailService;
 

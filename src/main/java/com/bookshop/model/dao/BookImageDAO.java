@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface Book_ImageDao extends CrudRepository<Book_Image, Long> {
+public interface BookImageDAO extends CrudRepository<Book_Image, Long> {
 
     List<Book_Image> findAll();
 

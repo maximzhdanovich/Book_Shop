@@ -1,6 +1,6 @@
 package com.bookshop.service;
 
-import com.bookshop.model.dto.BookDTO;
+import com.bookshop.model.dataService.BookDataService;
 import com.bookshop.model.entity.Author;
 import com.bookshop.model.entity.Book;
 import com.bookshop.model.entity.Category;
@@ -20,10 +20,10 @@ import java.util.Map;
 @Qualifier("bookService")
 public class BookService {
     @Autowired
-    private BookDTO bookDTO;
+    private BookDataService bookDataService;
 
     @Autowired
-    private Book_ImageService book_imageService;
+    private BookImageService book_imageService;
 
     @Autowired
     private AuthorService authorService;
@@ -37,11 +37,12 @@ public class BookService {
     }
 
     public List<Book> lastBook() {
-        return bookDTO.lastBook();
+        return bookDataService.lastBook();
     }
 
-    public void create(double price, String titleRu, String titleEn, String description, Author author, Map<String, String> form, MultipartFile image) throws IOException {
-        Book book = new Book(price, titleRu, titleEn, description);
+    public void create(Author author, Map<String, String> form, MultipartFile image) throws IOException {
+//        Book book = new Book(price, titleRu, titleEn, description);
+        Book book = new Book(Double.parseDouble(form.get("price")), form.get("titleRu"), form.get("titleEn"), form.get("description"));
         book.setAuthor(author);
         List<Category> category = new ArrayList<>();
         for (String s : form.keySet()) {
@@ -56,43 +57,43 @@ public class BookService {
     }
 
     public void save(Book book) {
-        bookDTO.save(book);
+        bookDataService.save(book);
     }
 
     public Book findById(long id) {
-        return bookDTO.findById(id);
+        return bookDataService.findById(id);
     }
 
     public List<Book> findAll() {
-        return bookDTO.findAll();
+        return bookDataService.findAll();
     }
 
     public List<Book> findByTitleEnOrTitleRu(String titleEn, String titleRu) {
-        return bookDTO.findByTitleEnOrTitleRu(titleEn, titleRu);
+        return bookDataService.findByTitleEnOrTitleRu(titleEn, titleRu);
     }
 
     public Page<Book> findAllPage(Pageable pageable) {
-        return bookDTO.findAllPage(pageable);
+        return bookDataService.findAllPage(pageable);
     }
 
     public void deleteById(long id) {
-        bookDTO.deleteById(id);
+        bookDataService.deleteById(id);
     }
 
     public Page<Book> findAllByAuthor(Author author, Pageable pageable) {
-        return bookDTO.findAllByAuthor(author, pageable);
+        return bookDataService.findAllByAuthor(author, pageable);
     }
 
     public Page<Book> findAllByCategories(Category category, Pageable pageable) {
-        return bookDTO.findAllByCategories(category, pageable);
+        return bookDataService.findAllByCategories(category, pageable);
     }
 
-    public void update(Book book, double price, String titleEn, String titleRu, String authorSurname, String authorName, String description, Map<String, String> form, MultipartFile image) throws IOException {
-        book.setPrice(price);
-        book.setTitleRu(titleRu);
-        book.setTitleEn(titleEn);
-        book.setAuthor(authorService.findBySurnameAndName(authorSurname, authorName).get());
-        book.setDescription(description);
+    public void update(Book book, Map<String, String> form, MultipartFile image) throws IOException {
+        book.setPrice(Double.parseDouble(form.get("price")));
+        book.setTitleRu(form.get("titleRu"));
+        book.setTitleEn(form.get("titleEn"));
+        book.setAuthor(authorService.findBySurnameAndName(form.get("authorSurname"), form.get("authorName")).get());
+        book.setDescription(form.get("description"));
         book.getCategories().clear();
         for (String s : form.keySet()) {
             if (form.get(s).equals("on")) {

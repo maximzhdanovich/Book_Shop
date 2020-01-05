@@ -1,6 +1,6 @@
 package com.bookshop.service;
 
-import com.bookshop.model.dto.Book_ImageDTO;
+import com.bookshop.model.dataService.BookImageDataService;
 import com.bookshop.model.entity.Book;
 import com.bookshop.model.entity.Book_Image;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +14,9 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class Book_ImageService {
+public class BookImageService {
     @Autowired
-    private Book_ImageDTO bookImageDTO;
+    private BookImageDataService bookImageDTO;
 
     @Autowired
     private BookService bookService;

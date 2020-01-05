@@ -1,4 +1,4 @@
-package com.bookshop.model.dto;
+package com.bookshop.model.dataService;
 
 import com.bookshop.model.dao.RoleDAO;
 import com.bookshop.model.entity.Role;

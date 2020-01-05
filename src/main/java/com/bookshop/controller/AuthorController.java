@@ -1,8 +1,8 @@
 package com.bookshop.controller;
 
 import com.bookshop.model.entity.Author;
+import com.bookshop.service.AuthorImageService;
 import com.bookshop.service.AuthorService;
-import com.bookshop.service.Author_ImageService;
 import com.bookshop.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +21,7 @@ public class AuthorController {
     private AuthorService authorService;
 
     @Autowired
-    private Author_ImageService authorImageService;
+    private AuthorImageService authorImageService;
     @Autowired
     private BookService bookService;
 

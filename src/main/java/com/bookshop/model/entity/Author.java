@@ -13,7 +13,7 @@ public class Author implements Serializable {
     private String name;
     private String surname;
     private List<Book> books;
-    private Author_Image image;
+    private AuthorImage image;
 
     public Author() {
 
@@ -22,11 +22,11 @@ public class Author implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "FK_IMAGE_ID")
-    public Author_Image getImage() {
+    public AuthorImage getImage() {
         return image;
     }
 
-    public void setImage(Author_Image image) {
+    public void setImage(AuthorImage image) {
         this.image = image;
     }
 

@@ -43,7 +43,7 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">New password:</label>
             <div class="col-sm-6">
-                <input type="password" name="password1"
+                <input type="password" name="newPassword"
                        class="form-control
                         ${(password1EmptyError??)?string('is-invalid', '')}
                         ${(password1DifferentError??)?string('is-invalid', '')}"
@@ -63,11 +63,11 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Repeat password:</label>
             <div class="col-sm-6">
-                <input type="password" name="password2"
+                <input type="password" name="repeatNewPassword"
                        class="form-control
                         ${(password2EmptyError??)?string('is-invalid', '')}
                         ${(password2DifferentError??)?string('is-invalid', '')}"
-                       placeholder="Retype password"/>
+                       placeholder="Repeat password"/>
                 <#if password2EmptyError??>
                     <div class="invalid-feedback">
                         ${account_configuration_new_repeat_parssword_error}

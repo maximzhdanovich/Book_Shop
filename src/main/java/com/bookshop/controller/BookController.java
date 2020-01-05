@@ -22,9 +22,6 @@ public class BookController {
 
     @Autowired
     private AuthorService authorService;
-//
-//    @Autowired
-//    private Book_ImageService bookImageService;
 
     @Autowired
     private BookService bookService;
@@ -39,25 +36,21 @@ public class BookController {
         model.addAttribute("url", "/book");
         model.addAttribute("page", bookService.findAllPage(pageable));
         model.addAttribute("categories", categoryService.findAll());
-
         return "bookList";
     }
 
+
+
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping/*("/admin/create")*/
-    public String bookCreate(/*@RequestParam Double price,
-                             @RequestParam String titleRu,
-                             @RequestParam String titleEn,
-                             @RequestParam String authorSurname,
-                             @RequestParam String authorName,
-                             @RequestParam String description,*/
+    public String bookCreate(
             @RequestParam MultipartFile image,
             @RequestParam Map<String, String> form,
             Model model) throws IOException {
         if (!authorService.findBySurnameAndName(form.get("authorSurname"), form.get("authorName")).isPresent()) {
             return "redirect:/book";
         }
-        bookService.create(Double.valueOf(form.get("price")), form.get("titleRu"), form.get("titleEn"), form.get("description"), authorService.findBySurnameAndName(form.get("authorSurname"), form.get("authorName")).get(), form, image);
+        bookService.create(authorService.findBySurnameAndName(form.get("authorSurname"), form.get("authorName")).get(), form, image);
         model.addAttribute("bookAdd", "");
         return "redirect:/book";
     }
@@ -66,7 +59,8 @@ public class BookController {
     @GetMapping("/admin/{book}")
     public String bookEdit(@PathVariable String book, Model model) {
         Book byId = bookService.findById(Long.parseLong(book));
-        if (bookIsNull(byId)) return "redirect:/book";
+        if (bookIsNull(byId))
+            return "redirect:/book";
         model.addAttribute("book", byId);
         model.addAttribute("categories", categoryService.findAll());
         return "bookEdit";
@@ -82,7 +76,7 @@ public class BookController {
             return "redirect:/book/admin/" + book.getId();
         }
 //        bookService.update(book, titleEn, titleRu, authorSurname, authorName, description, form, image);
-        bookService.update(book, Double.valueOf(form.get("price")), form.get("titleEn"), form.get("titleRu"), form.get("authorSurname"), form.get("authorName"), form.get("description"), form, image);
+        bookService.update(book, form, image);
         return "redirect:/book";
     }
 

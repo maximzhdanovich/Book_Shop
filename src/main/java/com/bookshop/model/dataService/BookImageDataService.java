@@ -1,4 +1,4 @@
-package com.bookshop.model.dto;
+package com.bookshop.model.dataService;
 
 import com.bookshop.model.dao.BookImageDAO;
 import com.bookshop.model.entity.Book_Image;

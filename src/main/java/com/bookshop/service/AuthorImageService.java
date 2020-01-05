@@ -1,8 +1,8 @@
 package com.bookshop.service;
 
-import com.bookshop.model.dto.Author_ImageDTO;
+import com.bookshop.model.dataService.AuthorImageDataService;
 import com.bookshop.model.entity.Author;
-import com.bookshop.model.entity.Author_Image;
+import com.bookshop.model.entity.AuthorImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -14,9 +14,9 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class Author_ImageService {
+public class AuthorImageService {
     @Autowired
-    private Author_ImageDTO authorImageDTO;
+    private AuthorImageDataService authorImageDataService;
 
     @Autowired
     private AuthorService authorService;
@@ -25,26 +25,26 @@ public class Author_ImageService {
     private String uploadPath;
 
 
-    public void save(Author_Image author_image) {
-        authorImageDTO.save(author_image);
+    public void save(AuthorImage authorImage) {
+        authorImageDataService.save(authorImage);
     }
 
-    public List<Author_Image> findAll() {
-        return authorImageDTO.findAll();
+    public List<AuthorImage> findAll() {
+        return authorImageDataService.findAll();
     }
 
-    public Author_Image findById(long id) {
-        return authorImageDTO.findById(id);
+    public AuthorImage findById(long id) {
+        return authorImageDataService.findById(id);
     }
 
 
     public void deleteById(long id) {
-        authorImageDTO.deleteById(id);
+        authorImageDataService.deleteById(id);
     }
 
     public void add(MultipartFile image, Author author) throws IOException {
         if (image != null && !image.getOriginalFilename().isEmpty()) {
-            Author_Image author_image = new Author_Image();
+            AuthorImage author_image = new AuthorImage();
             File uploadDir = new File(uploadPath);
             if (!uploadDir.exists()) {
                 uploadDir.mkdir();
