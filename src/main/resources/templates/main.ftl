@@ -40,7 +40,7 @@
                 <div class="card">
                     <#assign authorIndex++>
                     <#if author.image??>
-                        <img src="/img/author/${author.image.authorImage}"/>
+                        <img src="/img/author/${author.image.authorImage}" height="226"/>
                     </#if>
                     <div class="card-body">
                         <h5 class="card-title">${author.surname} ${author.name} </h5>

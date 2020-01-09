@@ -11,7 +11,7 @@
 
     <script src="http://code.jquery.com/jquery-1.11.0.min.js">
         integrity = "sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin = "anonymous" ></script>
+        crossorigin = "anonymous"</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
             integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
             crossorigin="anonymous"></script>
@@ -69,7 +69,8 @@
 
     <style>.card-columns {
 
-            column-count: 4;}
+            column-count: 4;
+        }
     </style>
 
 </head>
@@ -103,7 +104,12 @@
 
         </h5>
         <#if isAdmin>
-
+            <#if bookAddSuccess??>
+                ${bookAddSuccess}
+            </#if>
+            <#if authorNotFoundError??>
+                ${authorNotFoundError}
+            </#if>
             <div id="accordion">
                 <div class="card">
                     <div class="card-header" id="headingOne">
@@ -120,7 +126,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">${book_price}</span>
                                     </div>
-                                    <input type="number"  step="0.01" name="price" placeholder="${book_price}"
+                                    <input type="number" step="0.01" name="price" placeholder="${book_price}"
                                            class="form-control" aria-label="${book_price}"
                                            aria-describedby="basic-addon1"/>
                                 </div>

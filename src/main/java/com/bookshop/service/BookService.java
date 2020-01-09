@@ -19,11 +19,12 @@ import java.util.Map;
 @Service
 @Qualifier("bookService")
 public class BookService {
+
     @Autowired
     private BookDataService bookDataService;
 
     @Autowired
-    private BookImageService book_imageService;
+    private BookImageService bookImageService;
 
     @Autowired
     private AuthorService authorService;
@@ -31,29 +32,29 @@ public class BookService {
     @Autowired
     private CategoryService categoryService;
 
-    public void create(Book book, Author author) {
-        book.setAuthor(author);
-        save(book);
+//    public void create(Book book, Author author) {
+//        book.setAuthor(author);
+//        save(book);
+//    }
+
+    public List<Book> getLastBooks() {
+        return bookDataService.getLastBooks();
     }
 
-    public List<Book> lastBook() {
-        return bookDataService.lastBook();
-    }
-
-    public void create(Author author, Map<String, String> form, MultipartFile image) throws IOException {
+    public void create(double price, String titleRu, String titleEn, String description, Author author, Map<String, String> form, MultipartFile image) throws IOException {
 //        Book book = new Book(price, titleRu, titleEn, description);
-        Book book = new Book(Double.parseDouble(form.get("price")), form.get("titleRu"), form.get("titleEn"), form.get("description"));
+        Book book = new Book(price, titleRu, titleEn, description);
         book.setAuthor(author);
         List<Category> category = new ArrayList<>();
         for (String s : form.keySet()) {
             if (form.get(s).equals("on")) {
-                category.add(categoryService.findById(Long.valueOf(s)));
+                category.add(categoryService.findById(Long.parseLong(s)));
 //                book.getCategories().add(categoryService.findById(Long.valueOf(s)));
             }
         }
         book.setCategories(category);
         save(book);
-        book_imageService.add(image, book);
+        bookImageService.add(image, book);
     }
 
     public void save(Book book) {
@@ -88,23 +89,24 @@ public class BookService {
         return bookDataService.findAllByCategories(category, pageable);
     }
 
-    public void update(Book book, Map<String, String> form, MultipartFile image) throws IOException {
-        book.setPrice(Double.parseDouble(form.get("price")));
-        book.setTitleRu(form.get("titleRu"));
-        book.setTitleEn(form.get("titleEn"));
-        book.setAuthor(authorService.findBySurnameAndName(form.get("authorSurname"), form.get("authorName")).get());
-        book.setDescription(form.get("description"));
+    public void update(Book book, double price, String titleEn, String titleRu, String authorSurname, String authorName, String description, Map<String, String> form, MultipartFile image) throws IOException {
+        book.setPrice(price);
+        book.setTitleRu(titleRu);
+        book.setTitleEn(titleEn);
+        if (authorService.findBySurnameAndName(authorSurname, authorName).isPresent())
+        book.setAuthor(authorService.findBySurnameAndName(authorSurname, authorName).get());
+        book.setDescription(description);
         book.getCategories().clear();
         for (String s : form.keySet()) {
             if (form.get(s).equals("on")) {
-                book.getCategories().add(categoryService.findById(Long.valueOf(s)));
+                book.getCategories().add(categoryService.findById(Long.parseLong(s)));
             }
         }
-        if (image != null && !image.getOriginalFilename().isEmpty()) {
+        if (image != null && image.getOriginalFilename()!=null) {
             if (book.getImage() != null) {
-                book_imageService.deleteById(book.getImage().getId());
+                bookImageService.deleteById(book.getImage().getId());
             }
-            book_imageService.add(image, book);
+            bookImageService.add(image, book);
         }
         save(book);
     }

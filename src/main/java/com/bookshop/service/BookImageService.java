@@ -15,6 +15,7 @@ import java.util.UUID;
 
 @Service
 public class BookImageService {
+
     @Autowired
     private BookImageDataService bookImageDTO;
 

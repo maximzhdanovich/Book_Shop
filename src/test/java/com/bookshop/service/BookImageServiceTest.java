@@ -1,8 +1,10 @@
 package com.bookshop.service;
 
-import com.bookshop.model.dataService.AuthorImageDataService;
+import com.bookshop.model.dataService.BookImageDataService;
 import com.bookshop.model.entity.Author;
 import com.bookshop.model.entity.AuthorImage;
+import com.bookshop.model.entity.Book;
+import com.bookshop.model.entity.BookImage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -21,31 +23,31 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AuthorImageServiceTest {
+public class BookImageServiceTest {
 
     @Mock
-    private AuthorImageDataService authorImageDataService;
+    private BookImageDataService bookImageDataService;
 
     @Mock
-    private AuthorService authorService;
+    private BookService bookService;
 
     @InjectMocks
-    private AuthorImageService authorImageService;
+    private BookImageService bookImageService;
 
     @Test
-    public void shouldCallAuthorImageDataServiceSaveWhenSaveAuthorImage() {
-        AuthorImage authorImage = new AuthorImage();
+    public void shouldCallBookImageDataServiceSaveWhenSaveBookImage() {
+        BookImage bookImage = new BookImage();
 
-        authorImageService.save(authorImage);
+        bookImageService.save(bookImage);
 
-        verify(authorImageDataService).save(authorImage);
+        verify(bookImageDataService).save(bookImage);
     }
 
     @Test
     public void shouldReturnEmptyListWhenCallFindAllAndDatabaseIsEmpty() {
-        when(authorImageDataService.findAll()).thenReturn(Collections.emptyList());
+        when(bookImageDataService.findAll()).thenReturn(Collections.emptyList());
 
-        List<AuthorImage> authorImages = authorImageService.findAll();
+        List<BookImage> authorImages = bookImageService.findAll();
         assertThat(authorImages).isEmpty();
 
 //        assertThatThrownBy(() -> authorImageService.save(null)).isInstanceOf(IOException.class);
@@ -54,24 +56,24 @@ public class AuthorImageServiceTest {
     @Test
     public void shouldReturnEntityWhenCallFindByIdAndDatabaseIsNotEmpty() {
         long id = 1L;
-        when(authorImageDataService.findById(id)).thenReturn(new AuthorImage());
-        AuthorImage authorImage = authorImageService.findById(id);
-        assertThat(authorImage).isNotNull();
-        verify(authorImageDataService).findById(id);
+        when(bookImageDataService.findById(id)).thenReturn(new BookImage());
+        BookImage bookImage = bookImageService.findById(id);
+        assertThat(bookImage).isNotNull();
+        verify(bookImageDataService).findById(id);
     }
 
     @Test
-    public void shouldCallAuthorImageDataServiceDeleteByIdWhenDeleteByIdAuthorImage(){
+    public void shouldCallBookImageDataServiceDeleteByIdWhenDeleteByIdBookImage(){
         long id = 1L;
-        authorImageService.deleteById(id);
-        verify(authorImageDataService).deleteById(id);
+        bookImageService.deleteById(id);
+        verify(bookImageDataService).deleteById(id);
     }
 
     @Test
-    public void shouldCallAuthorImageServiceSaveWhenAddNotNullAuthorImage() throws Exception {
-        Author author = new Author();
+    public void shouldCallBookImageServiceSaveWhenAddNotNullBookImage() throws Exception {
+        Book book = new Book();
         setUploadPath();
-        authorImageService.add(new MultipartFile() {
+        bookImageService.add(new MultipartFile() {
             @Override
             public String getName() {
                 return null;
@@ -111,14 +113,16 @@ public class AuthorImageServiceTest {
             public void transferTo(File file) throws IOException, IllegalStateException {
 
             }
-        },author);
-        verify(authorImageDataService).save(notNull());
+        },book);
+        verify(bookImageDataService).save(notNull());
     }
 
     private void setUploadPath() throws NoSuchFieldException, IllegalAccessException {
-        Field field = authorImageService.getClass().getDeclaredField("uploadPath");
+        Field field = bookImageService.getClass().getDeclaredField("uploadPath");
         field.setAccessible(true);
-        field.set(authorImageService, "qwe");
+        field.set(bookImageService, "some");
         field.setAccessible(false);
     }
+
+
 }

@@ -91,4 +91,10 @@ public class Basket {
     public Basket() {
     }
 
+    public Basket(Long id, List<Book> books, List<Book> booksInProcessing, List<Book> booksApproved) {
+        this.id = id;
+        this.books = books;
+        this.booksInProcessing = booksInProcessing;
+        this.booksApproved = booksApproved;
+    }
 }

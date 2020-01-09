@@ -85,20 +85,25 @@
     </#if>
     ${filter_authors}
     <#if authors?? && authors?size!=0>
-        <div class="card-columns m-5">
+        <div class="card-columns">
             <#list authors as author>
 
-                <div class="card">
+                <div class="card m-2" <#--style="width: 20rem;"-->>
                     <#if author.image??>
-                        <img src="/img/author/${author.image.authorImage}">
+                        <img class="card-img-top" src="/img/author/${author.image.authorImage}" height="400">
                     </#if>
                     <div class="card-body">
-                        <h5 class="card-title">${author.surname} ${author.name} </h5>
-                        <a href="/author/${author.id}/books" class="card-text">${filter_books}</a>
+                        <a class="card-titlem-2">${author.surname} ${author.name}</a>
+                        <br>
+                        <div class="card-text">
+                            <a href="/author/${author.id}/books" class="btn btn-primary m-2">список книг</a>
+                            <br>
+                            <#if isAdmin>
+                                <a href="/author/admin/${author.id}" class="btn btn-primary m-2">edit</a>
+                            </#if>
+                        </div>
                     </div>
                 </div>
-
-
             </#list>
         </div>
     <#else>

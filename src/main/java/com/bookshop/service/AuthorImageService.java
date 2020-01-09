@@ -42,7 +42,7 @@ public class AuthorImageService {
     }
 
     public void add(MultipartFile image, Author author) throws IOException {
-        if (image != null/* && !image.getOriginalFilename().isEmpty()*/ && image.getOriginalFilename()!=null) {
+        if (image != null && image.getOriginalFilename()!=null) {
             AuthorImage authorImage = new AuthorImage();
             File uploadDir = new File(uploadPath);
             if (!uploadDir.exists()) {

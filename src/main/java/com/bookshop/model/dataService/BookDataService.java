@@ -19,7 +19,7 @@ public class BookDataService {
     @Autowired
     private BookDAO bookDAO;
 
-    public List<Book> lastBook() {
+    public List<Book> getLastBooks() {
         return bookDAO.findByOrderByIdDesc();
     }
 

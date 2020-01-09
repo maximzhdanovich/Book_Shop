@@ -1,6 +1,5 @@
 package com.bookshop.controller;
 
-import com.bookshop.model.entity.Basket;
 import com.bookshop.model.entity.Book;
 import com.bookshop.model.entity.CustomUserDetail;
 import com.bookshop.service.BasketService;
@@ -30,7 +29,7 @@ public class BasketController {
 
     @PostMapping("/saveBook")
     public ResponseEntity<Object> addBook(@AuthenticationPrincipal CustomUserDetail user, @RequestBody Book book) {
-        basketService.addSingleBook(user, bookService.findById(book.getId()));
+        basketService.addSingleBookToBasket(user, bookService.findById(book.getId()));
         ServiceResponse<Long> response = new ServiceResponse<>("success", book.getId());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -51,7 +50,7 @@ public class BasketController {
 
     @PostMapping("account/AllBookToProcessing")
     public ResponseEntity<Object> AllBookToProcessing(@AuthenticationPrincipal CustomUserDetail user) {
-        basketService.sendAllBookToProcessing(user);
+        basketService.sendAllBooksToProcessing(user);
         ServiceResponse<Long> response = new ServiceResponse<Long>("success", user.getId());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

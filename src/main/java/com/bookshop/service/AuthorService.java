@@ -13,8 +13,10 @@ import java.util.Optional;
 
 @Service
 public class AuthorService {
+
     @Autowired
     private AuthorDataService authorDataService;
+
     @Autowired
     private AuthorImageService authorImageService;
 
@@ -49,8 +51,10 @@ public class AuthorService {
     public void update(String surname, String name, Author author, MultipartFile image) throws IOException {
         author.setSurname(surname);
         author.setName(name);
-        if (image != null && !image.getOriginalFilename().isEmpty()) {
-            authorImageService.deleteById(author.getImage().getId());
+        if (image != null &&  image.getOriginalFilename()!=null) {
+            if (author.getImage()!=null) {
+                authorImageService.deleteById(author.getImage().getId());
+            }
             authorImageService.add(image, author);
         }
         save(author);

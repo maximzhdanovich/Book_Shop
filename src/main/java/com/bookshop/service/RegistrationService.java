@@ -24,8 +24,8 @@ public class RegistrationService {
     private BasketService basketService;
 
     public String addNewUser(String repeatPassword, @Valid User newUser, BindingResult bindingResult, Model model) {
-        boolean empty = StringUtils.isEmpty(repeatPassword);
-        if (empty) {
+        boolean repeatPasswordEmpty = StringUtils.isEmpty(repeatPassword);
+        if (repeatPasswordEmpty) {
             model.addAttribute("password1EmptyError", "Repeat Password can not be empty");
         }
         if (!StringUtils.isEmpty(newUser.getPassword()) && !repeatPassword.equals(newUser.getPassword())) {
@@ -39,7 +39,7 @@ public class RegistrationService {
         if (userFromDb.isPresent()) {
             model.addAttribute("emailExistsError", "Email is already in use");
         }
-        if (empty || bindingResult.hasErrors() || userFromDb.isPresent()) {
+        if (repeatPasswordEmpty || bindingResult.hasErrors() || userFromDb.isPresent()) {
             Collector<FieldError, ?, Map<String, String>> fieldErrorMapCollector = Collectors.toMap(
                     fieldError -> fieldError.getField() + "Error",
                     FieldError::getDefaultMessage

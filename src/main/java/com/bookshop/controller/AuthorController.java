@@ -26,14 +26,14 @@ public class AuthorController {
     private BookService bookService;
 
     @GetMapping("admin/{authorId}")
-    public String authorEdit(@PathVariable("authorId") Author author, Model model) {
+    public String authorEditPage(@PathVariable("authorId") Author author, Model model) {
         model.addAttribute("author", author);
         return "authorEdit";
     }
 
     @PostMapping("admin/{authorId}")
-    public String authorSave(@RequestParam String surname, @RequestParam String name, @RequestParam("authorId") Author author,
-                             @RequestParam MultipartFile image) throws IOException {
+    public String authorSaveEditedInformation(@RequestParam String surname, @RequestParam String name, @RequestParam("authorId") Author author,
+                                              @RequestParam MultipartFile image) throws IOException {
         authorService.update(surname, name, author, image);
         return "redirect:/author";
     }

@@ -13,6 +13,7 @@ import java.util.List;
 
 @Service
 public class BasketService {
+
     @Autowired
     private BasketDataService basketDataService;
 
@@ -34,10 +35,6 @@ public class BasketService {
         basketDataService.save(basket);
     }
 
-    public Basket getByUser(User user) {
-        return userService.getCurrentUser(user).getBasket();
-    }
-
     public Basket create(User user) {
         User currentUser = userService.getCurrentUser(user);
         Basket basket = new Basket(currentUser);
@@ -47,9 +44,8 @@ public class BasketService {
         return basket;
     }
 
-
-    public void addSingleBook(User user, Book book) {
-        Basket basket = getByUser(user);
+    public void addSingleBookToBasket(User user, Book book) {
+        Basket basket = userService.getCurrentUser(user).getBasket();
         if (basket == null) {
             basket = create(user);
         }
@@ -74,7 +70,7 @@ public class BasketService {
         save(basket);
     }
 
-    public void sendAllBookToProcessing(CustomUserDetail user){
+    public void sendAllBooksToProcessing(CustomUserDetail user){
         Basket basket = userService.getCurrentUser(user).getBasket();
         basket.getBooksInProcessing().addAll(basket.getBooks());
         basket.getBooks().clear();
@@ -82,7 +78,7 @@ public class BasketService {
     }
 
     public void approvedSingleBookToUser(Book book, User user){
-        Basket basket = user.getBasket();
+        Basket basket = userService.getCurrentUser(user).getBasket();
         basket.getBooksInProcessing().remove(bookService.findById(book.getId()));
         basket.getBooksApproved().add(bookService.findById(book.getId()));
         save(basket);

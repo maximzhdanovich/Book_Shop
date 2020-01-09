@@ -40,19 +40,24 @@ public class BookController {
     }
 
 
-
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping/*("/admin/create")*/
-    public String bookCreate(
-            @RequestParam MultipartFile image,
-            @RequestParam Map<String, String> form,
-            Model model) throws IOException {
+    public String bookCreate(@RequestParam MultipartFile image,
+                             @RequestParam Map<String, String> form,
+                             Model model, @PageableDefault(value = 12) Pageable pageable) throws IOException {
         if (!authorService.findBySurnameAndName(form.get("authorSurname"), form.get("authorName")).isPresent()) {
-            return "redirect:/book";
+            model.addAttribute("url", "/book");
+            model.addAttribute("page", bookService.findAllPage(pageable));
+            model.addAttribute("categories", categoryService.findAll());
+            model.addAttribute("authorNotFoundError","");
+            return "bookList";
         }
-        bookService.create(authorService.findBySurnameAndName(form.get("authorSurname"), form.get("authorName")).get(), form, image);
-        model.addAttribute("bookAdd", "");
-        return "redirect:/book";
+        bookService.create(Double.valueOf(form.get("price")), form.get("titleRu"), form.get("titleEn"), form.get("description"), authorService.findBySurnameAndName(form.get("authorSurname"), form.get("authorName")).get(), form, image);
+        model.addAttribute("bookAddSuccess", "");
+        model.addAttribute("url", "/book");
+        model.addAttribute("page", bookService.findAllPage(pageable));
+        model.addAttribute("categories", categoryService.findAll());
+        return "bookList";
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
@@ -75,8 +80,8 @@ public class BookController {
         if (!authorService.findBySurnameAndName(form.get("authorSurname"), form.get("authorName")).isPresent()) {
             return "redirect:/book/admin/" + book.getId();
         }
-//        bookService.update(book, titleEn, titleRu, authorSurname, authorName, description, form, image);
-        bookService.update(book, form, image);
+        bookService.update(book, Double.valueOf(form.get("price")), form.get("titleEn"), form.get("titleRu"), form.get("authorSurname"), form.get("authorName"), form.get("description"), form, image);
+//        bookService.update(book, form, image);
         return "redirect:/book";
     }
 
