@@ -50,47 +50,7 @@ public class BookServiceTest {
 
     @Test
     public void shouldCallBookDataServiceSaveWhenCreateBook() throws IOException {
-        bookService.create(1, "1", "1", "1", new Author(), new HashMap<String, String>(), new MultipartFile() {
-            @Override
-            public String getName() {
-                return "some";
-            }
-
-            @Override
-            public String getOriginalFilename() {
-                return "some";
-            }
-
-            @Override
-            public String getContentType() {
-                return null;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-
-            @Override
-            public long getSize() {
-                return 0;
-            }
-
-            @Override
-            public byte[] getBytes() throws IOException {
-                return new byte[0];
-            }
-
-            @Override
-            public InputStream getInputStream() throws IOException {
-                return null;
-            }
-
-            @Override
-            public void transferTo(File file) throws IOException, IllegalStateException {
-
-            }
-        });
+        bookService.create(1, "1", "1", "1", new Author(), new HashMap<String, String>(), getImage());
         verify(bookDataService).save(isA(Book.class));
     }
 
@@ -107,7 +67,7 @@ public class BookServiceTest {
         Book book = new Book();
         when(bookDataService.findById(id)).thenReturn(book);
         Book bookById = bookService.findById(id);
-        assertThat(book).isEqualTo(book);
+        assertThat(bookById).isEqualTo(book);
     }
 
     @Test
@@ -123,7 +83,7 @@ public class BookServiceTest {
         Book book = new Book();
         when(bookDataService.findByTitleEnOrTitleRu(titleEn, titleRu)).thenReturn(Collections.singletonList(book));
         List<Book> bookByTitleEnOrTitleRu = bookService.findByTitleEnOrTitleRu(titleEn, titleRu);
-        assertThat(bookByTitleEnOrTitleRu).isEqualTo(book);
+        assertThat(bookByTitleEnOrTitleRu.get(0)).isEqualTo(book);
     }
 
     @Test
@@ -160,7 +120,12 @@ public class BookServiceTest {
     public void shouldCallBookDataServiceSaveWhenUpdateBook() throws IOException {
         Book book = new Book();
         book.setCategories(new ArrayList<>());
-        bookService.update(book, 1, "1", "1", "1", "surname", "name", new HashMap<String, String>(), new MultipartFile() {
+        bookService.update(book, 1, "1", "1", "1", "surname", "name", new HashMap<String, String>(), getImage());
+        verify(bookDataService).save(book);
+    }
+
+    private MultipartFile getImage() {
+        return new MultipartFile() {
             @Override
             public String getName() {
                 return "some";
@@ -200,7 +165,6 @@ public class BookServiceTest {
             public void transferTo(File file) throws IOException, IllegalStateException {
 
             }
-        });
-        verify(bookDataService).save(book);
+        };
     }
 }

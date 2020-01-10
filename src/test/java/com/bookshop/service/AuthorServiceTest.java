@@ -82,7 +82,12 @@ public class AuthorServiceTest {
         String name = "name";
         String surname = "surname";
         Author author = new Author();
-        authorService.update(surname, name, author, new MultipartFile() {
+        authorService.update(surname, name, author, getImage());
+        verify(authorDataService).save(author);
+    }
+
+    private MultipartFile getImage() {
+        return new MultipartFile() {
             @Override
             public String getName() {
                 return "null";
@@ -122,7 +127,6 @@ public class AuthorServiceTest {
             public void transferTo(File file) throws IOException, IllegalStateException {
 
             }
-        });
-        verify(authorDataService).save(author);
+        };
     }
 }

@@ -44,12 +44,12 @@ public class AccountController {
     }
 
     @PostMapping("/edit")
-    public String accountEdit(@AuthenticationPrincipal CustomUserDetail customUserDetail,
-                              @Valid User newUserInformation,
-                              BindingResult bindingResult,
-                              @RequestParam("newPassword") String newPassword,
-                              @RequestParam("repeatNewPassword") String repeatNewPassword,
-                              Model model) {
+    public String saveAccountEdit(@AuthenticationPrincipal CustomUserDetail customUserDetail,
+                                  @Valid User newUserInformation,
+                                  BindingResult bindingResult,
+                                  @RequestParam("newPassword") String newPassword,
+                                  @RequestParam("repeatNewPassword") String repeatNewPassword,
+                                  Model model) {
         return userService.userEditConfiguration(customUserDetail, newUserInformation, bindingResult, newPassword, repeatNewPassword, model);
     }
 

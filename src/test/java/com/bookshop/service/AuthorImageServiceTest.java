@@ -71,7 +71,19 @@ public class AuthorImageServiceTest {
     public void shouldCallAuthorImageServiceSaveWhenAddNotNullAuthorImage() throws Exception {
         Author author = new Author();
         setUploadPath();
-        authorImageService.add(new MultipartFile() {
+        authorImageService.add(getImage(),author);
+        verify(authorImageDataService).save(notNull());
+    }
+
+    private void setUploadPath() throws NoSuchFieldException, IllegalAccessException {
+        Field field = authorImageService.getClass().getDeclaredField("uploadPath");
+        field.setAccessible(true);
+        field.set(authorImageService, "qwe");
+        field.setAccessible(false);
+    }
+
+    private MultipartFile getImage() {
+        return new MultipartFile() {
             @Override
             public String getName() {
                 return null;
@@ -111,14 +123,6 @@ public class AuthorImageServiceTest {
             public void transferTo(File file) throws IOException, IllegalStateException {
 
             }
-        },author);
-        verify(authorImageDataService).save(notNull());
-    }
-
-    private void setUploadPath() throws NoSuchFieldException, IllegalAccessException {
-        Field field = authorImageService.getClass().getDeclaredField("uploadPath");
-        field.setAccessible(true);
-        field.set(authorImageService, "qwe");
-        field.setAccessible(false);
+        };
     }
 }

@@ -9,8 +9,9 @@ import java.util.List;
 
 @Service
 public class CategoryService {
+
     @Autowired
-    public CategoryDataService categoryDataService;
+    private CategoryDataService categoryDataService;
 
     public List<Category> findAll() {
         return categoryDataService.findAll();

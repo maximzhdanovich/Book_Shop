@@ -17,11 +17,13 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/author")
 public class AuthorController {
+
     @Autowired
     private AuthorService authorService;
 
     @Autowired
     private AuthorImageService authorImageService;
+
     @Autowired
     private BookService bookService;
 
@@ -41,7 +43,6 @@ public class AuthorController {
     @GetMapping
     public String authorList(Model model) {
         model.addAttribute("authors", authorService.findAll());
-//        model.addAttribute("images", authorImageService.findByOrderByTitleEnAsc());
         return "authorList";
     }
 
@@ -61,12 +62,12 @@ public class AuthorController {
         return "redirect:/author";
     }
 
-    @GetMapping("/{authorId}/books")
-    public String authorBooks(Model model, @PathVariable Author authorId, @PageableDefault(size = 12) Pageable pageable) {
-        model.addAttribute("page", bookService.findAllByAuthor(authorId, pageable));
+    @GetMapping("/{author}/books")
+    public String authorBooks(Model model, @PathVariable Author author, @PageableDefault(size = 12) Pageable pageable) {
+        model.addAttribute("page", bookService.findAllByAuthor(author, pageable));
         model.addAttribute("authorPage", "");
-        model.addAttribute("author", authorId);
-        model.addAttribute("url", "/author/" + authorId.getId() + "/books");
+        model.addAttribute("author", author);
+        model.addAttribute("url", "/author/" + author.getId() + "/books");
         return "bookList";
     }
 

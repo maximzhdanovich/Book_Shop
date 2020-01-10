@@ -50,7 +50,6 @@ public class BookImageServiceTest {
         List<BookImage> authorImages = bookImageService.findAll();
         assertThat(authorImages).isEmpty();
 
-//        assertThatThrownBy(() -> authorImageService.save(null)).isInstanceOf(IOException.class);
     }
 
     @Test
@@ -73,7 +72,12 @@ public class BookImageServiceTest {
     public void shouldCallBookImageServiceSaveWhenAddNotNullBookImage() throws Exception {
         Book book = new Book();
         setUploadPath();
-        bookImageService.add(new MultipartFile() {
+        bookImageService.add(getImage(),book);
+        verify(bookImageDataService).save(notNull());
+    }
+
+    private MultipartFile getImage() {
+        return new MultipartFile() {
             @Override
             public String getName() {
                 return null;
@@ -113,8 +117,7 @@ public class BookImageServiceTest {
             public void transferTo(File file) throws IOException, IllegalStateException {
 
             }
-        },book);
-        verify(bookImageDataService).save(notNull());
+        };
     }
 
     private void setUploadPath() throws NoSuchFieldException, IllegalAccessException {

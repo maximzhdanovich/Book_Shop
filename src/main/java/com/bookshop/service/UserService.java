@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
+
     @Autowired
     private UserDataService userDataService;
 
@@ -51,7 +52,6 @@ public class UserService implements UserDetailsService {
         userDataService.deleteById(id);
     }
 
-
     public void save(User user) {
         userDataService.save(user);
     }
@@ -69,7 +69,6 @@ public class UserService implements UserDetailsService {
         user.setActive(true);
         user.setRole(roleService.findByTitle("USER"));
         save(user);
-
         return true;
     }
 
