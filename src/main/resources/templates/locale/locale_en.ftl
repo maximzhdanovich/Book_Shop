@@ -1,4 +1,5 @@
 <#assign
+success="Success"
 <#--    login page-->
 login_registration="New user"
 login_username="Username"
@@ -39,6 +40,7 @@ book_add_category="Category"
 book_image="Image"
 book_save="Save"
 book_delete="Delete"
+book_choose_file="Choose file"
 <#--    #filter-->
 filter_search="Search"
 filter_books="Books"
@@ -77,4 +79,18 @@ registration_create_new_repeat_parssword_error="Repeat password can't be empty"
 registration_create_new_parssword_different_error="Password are different"
 <#--    main page-->
 main_book_new="New books"
+<#--    admin User Basket-->
+admin_user_basket_book_in_cart="Book in Cart"
+admin_user_basket_price="Price"
+admin_user_basket_title="Title"
+admin_user_basket_author="Author"
+admin_user_basket_total_price="Total Price"
+admin_user_basket_book_in_processing="Book in processing"
+admin_user_basket_book_approved="Book approved"
+admin_user_basket_approved="Approved"
+<#--    author edit-->
+author_edit_author_edit="Author edit"
+author_edit_author_surname="Author surname"
+author_edit_author_name="Author name"
+author_edit_save="Save"
 >

@@ -28,7 +28,7 @@ public class BasketController {
 
 
     @PostMapping("/saveBook")
-    public ResponseEntity<Object> addBook(@AuthenticationPrincipal CustomUserDetail user, @RequestBody Book book) {
+    public ResponseEntity<Object> addBookToCart(@AuthenticationPrincipal CustomUserDetail user, @RequestBody Book book) {
         basketService.addSingleBookToBasket(user, bookService.findById(book.getId()));
         ServiceResponse<Long> response = new ServiceResponse<>("success", book.getId());
         return new ResponseEntity<>(response, HttpStatus.OK);

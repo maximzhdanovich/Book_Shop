@@ -18,9 +18,6 @@ public class MainController extends BaseController {
     @Autowired
     private AuthorService authorService;
 
-    @Autowired
-    private BookImageService bookImageService;
-
     @GetMapping("/")
     public String main(Model model) {
         model.addAttribute("books", bookService.getLastBooks());

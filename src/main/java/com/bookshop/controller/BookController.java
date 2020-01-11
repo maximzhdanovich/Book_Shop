@@ -29,7 +29,6 @@ public class BookController {
     @Autowired
     private CategoryService categoryService;
 
-
     @GetMapping
     public String bookList(Model model, /*@AuthenticationPrincipal CustomUserDetail user,*/
                            @PageableDefault(value = 12) Pageable pageable) {
@@ -52,7 +51,7 @@ public class BookController {
             model.addAttribute("authorNotFoundError","");
             return "bookList";
         }
-        bookService.create(Double.valueOf(form.get("price")), form.get("titleRu"), form.get("titleEn"), form.get("description"), authorService.findBySurnameAndName(form.get("authorSurname"), form.get("authorName")).get(), form, image);
+        bookService.create(Double.parseDouble(form.get("price")), form.get("titleRu"), form.get("titleEn"), form.get("description"), authorService.findBySurnameAndName(form.get("authorSurname"), form.get("authorName")).get(), form, image);
         model.addAttribute("bookAddSuccess", "");
         model.addAttribute("url", "/book");
         model.addAttribute("page", bookService.findAllPage(pageable));
@@ -80,8 +79,9 @@ public class BookController {
         if (!authorService.findBySurnameAndName(form.get("authorSurname"), form.get("authorName")).isPresent()) {
             return "redirect:/book/admin/" + book.getId();
         }
-        bookService.update(book, Double.valueOf(form.get("price")), form.get("titleEn"), form.get("titleRu"), form.get("authorSurname"), form.get("authorName"), form.get("description"), form, image);
-//        bookService.update(book, form, image);
+        bookService.update(book, Double.parseDouble(form.get("price")),
+                form.get("titleEn"), form.get("titleRu"), form.get("authorSurname"),
+                form.get("authorName"), form.get("description"), form, image);
         return "redirect:/book";
     }
 

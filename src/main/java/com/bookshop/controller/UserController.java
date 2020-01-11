@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @PreAuthorize("hasAnyRole('ADMIN')")
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class  UserController {
 
     @Autowired
     private UserService userService;
@@ -24,9 +24,6 @@ public class UserController {
 
     @Autowired
     private BasketService basketService;
-
-    @Autowired
-    private BookService bookService;
 
     @GetMapping
     public String userList(Model model) {
@@ -54,7 +51,7 @@ public class UserController {
     @GetMapping("{user}/basket")
     public String showUserBasket(@PathVariable User user, Model model) {
         model.addAttribute("books", user.getBasket().getBooks());
-        model.addAttribute("booksinprocessing", user.getBasket().getBooksInProcessing());
+        model.addAttribute("booksInProcessing", user.getBasket().getBooksInProcessing());
         model.addAttribute("user", user);
         return "adminUsersBasket";
     }

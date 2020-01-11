@@ -38,83 +38,85 @@
 <#global bookId=0>
 <#assign processingPrice = 0>
 <#import "parts/footer.ftl" as f>
+<#include "locale/locale.ftl">
 <@f.footer>
-<div class="container center mt-5">
-    Book in Cart
-    <form id="approvedBook">
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>Цена</th>
-                <th>Название</th>
-                <th>Author</th>
-            </thead>
-            <tbody>
-            <#list books as book>
+    <div class="container center mt-5">
+        ${admin_user_basket_book_in_cart}
+        <#--    Book in Cart-->
+        <form id="approvedBook">
+            <table class="table table-bordered">
+                <thead>
                 <tr>
-                    <td>#{book.price}</td>
-                    <td><#if .lang=="en">
-                            ${book.titleEn}
-                        <#elseif .lang=="ru">
-                            ${book.titleRu}
-                        </#if></td>
-                    <td>${book.author.surname} ${book.author.name}</td>
+                    <th>${admin_user_basket_price}</th>
+                    <th>${admin_user_basket_title}</th>
+                    <th>${admin_user_basket_author}</th>
+                </thead>
+                <tbody>
+                <#list books as book>
+                    <tr>
+                        <td>#{book.price}</td>
+                        <td><#if .lang=="en">
+                                ${book.titleEn}
+                            <#elseif .lang=="ru">
+                                ${book.titleRu}
+                            </#if></td>
+                        <td>${book.author.surname} ${book.author.name}</td>
 
-                </tr>
-                <#assign price += book.price>
-            </#list>
-            </tbody>
-        </table>
-        <br>
-        <a>Total price ${price}</a>
-        <br>
-        <br>
-        Book in processing
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>Цена</th>
-                <th>Название</th>
-                <th>Author</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <#list booksinprocessing as bookinprocessing>
+                    </tr>
+                    <#assign price += book.price>
+                </#list>
+                </tbody>
+            </table>
+            <br>
+            <a>${admin_user_basket_total_price} ${price}</a>
+            <br>
+            <br>
+            ${admin_user_basket_book_in_processing}
+            <table class="table table-bordered">
+                <thead>
                 <tr>
-                    <td>#{bookinprocessing.price}</td>
-                    <td><#if .lang=="en">
-                            ${bookinprocessing.titleEn}
-                        <#elseif .lang=="ru">
-                            ${bookinprocessing.titleRu}
-                        </#if></td>
-                    <td>${bookinprocessing.author.surname} ${bookinprocessing.author.name}</td>
-                    <td>
-                        <button type="submit" id="${bookinprocessing.id}" class="btn btn-primary"
-                                onclick=editCurrentId(${bookinprocessing.id})>
-                            approved
-                        </button>
-                    </td>
+                    <th>${admin_user_basket_price}</th>
+                    <th>${admin_user_basket_title}</th>
+                    <th>${admin_user_basket_author}</th>
+                    <th></th>
                 </tr>
-                <#assign processingPrice += bookinprocessing.price>
-            </#list>
-            </tbody>
-        </table>
-    </form>
-
-    <br>
-    <a>Total price ${processingPrice}</a>
-    </@f.footer>
-    <input type="hidden" id="userId" value="${user.id}">
-    <input type="hidden" id="bookId" value="${bookId}">
-    <div id="AddOnProcessing" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
-         role="alert">
-        <strong>Success</strong> Book on processing
+                </thead>
+                <tbody>
+                <#list booksInProcessing as bookInProcessing>
+                    <tr>
+                        <td>#{bookInProcessing.price}</td>
+                        <td><#if .lang=="en">
+                                ${bookInProcessing.titleEn}
+                            <#elseif .lang=="ru">
+                                ${bookInProcessing.titleRu}
+                            </#if></td>
+                        <td>${bookInProcessing.author.surname} ${bookInProcessing.author.name}</td>
+                        <td>
+                            <button type="submit" id="${bookInProcessing.id}" class="btn btn-primary"
+                                    onclick=editCurrentId(${bookInProcessing.id})>
+                                ${admin_user_basket_approved}
+                            </button>
+                        </td>
+                    </tr>
+                    <#assign processingPrice += bookInProcessing.price>
+                </#list>
+                </tbody>
+            </table>
+        </form>
+        <br>
+        <a> ${admin_user_basket_price} ${processingPrice}</a>
     </div>
-    <script>
-        function editCurrentId(id) {
-            document.getElementById("bookId").value = id;
-        }
-    </script>
+</@f.footer>
+<input type="hidden" id="userId" value="${user.id}">
+<input type="hidden" id="bookId" value="${bookId}">
+<div id="AddOnProcessing" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
+     role="alert">
+    <strong>${success}</strong><br>${admin_user_basket_book_approved}
+</div>
+<script>
+    function editCurrentId(id) {
+        document.getElementById("bookId").value = id;
+    }
+</script>
 </body>
 </html>
