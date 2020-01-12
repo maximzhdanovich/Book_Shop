@@ -61,8 +61,8 @@ public class BookController {
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/admin/{book}")
-    public String bookEdit(@PathVariable String book, Model model) {
-        Book byId = bookService.findById(Long.parseLong(book));
+    public String bookEdit(@PathVariable Long book, Model model) {
+        Book byId = bookService.findById(book);
         if (bookIsNull(byId))
             return "redirect:/book";
         model.addAttribute("book", byId);
@@ -86,8 +86,8 @@ public class BookController {
     }
 
     @GetMapping("/{book}")
-    public String book(@PathVariable String book, Model model) {
-        Book byId = bookService.findById(Long.parseLong(book));
+    public String book(@PathVariable Long book, Model model) {
+        Book byId = bookService.findById(book);
         if (bookIsNull(byId)) return "redirect:/book";
         model.addAttribute("book", byId);
         model.addAttribute("categories", categoryService.findAll());

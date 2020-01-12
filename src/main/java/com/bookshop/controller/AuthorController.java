@@ -1,5 +1,6 @@
 package com.bookshop.controller;
 
+import com.bookshop.exception.PageNotFoundException;
 import com.bookshop.model.entity.Author;
 import com.bookshop.service.AuthorImageService;
 import com.bookshop.service.AuthorService;
@@ -69,6 +70,11 @@ public class AuthorController {
         model.addAttribute("author", author);
         model.addAttribute("url", "/author/" + author.getId() + "/books");
         return "bookList";
+    }
+
+    @GetMapping("/{some}")
+    public String notFound(@PathVariable String some){
+        throw new PageNotFoundException();
     }
 
 

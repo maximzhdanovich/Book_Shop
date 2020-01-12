@@ -78,7 +78,7 @@ public class BookControllerTest {
         long id = 1L;
         Book book = new Book();
         when(bookService.findById(id)).thenReturn(book);
-        String resultValue = bookController.bookEdit(String.valueOf(id), getModel());
+        String resultValue = bookController.bookEdit(id, getModel());
         assertThat(resultValue).isEqualTo("bookEdit");
     }
 
@@ -107,9 +107,9 @@ public class BookControllerTest {
 
     @Test
     public void shouldReturnBookWhenGetBookPage(){
-        String bookId = "1";
+        Long bookId = 1L;
         Book book = new Book();
-        when(bookService.findById(Long.parseLong(bookId))).thenReturn(book);
+        when(bookService.findById(bookId)).thenReturn(book);
         String result = bookController.book(bookId, getModel());
         assertThat(result).isEqualTo("book");
     }
