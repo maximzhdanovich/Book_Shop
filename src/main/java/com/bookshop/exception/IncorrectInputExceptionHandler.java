@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 
 
 @ControllerAdvice
-public class UserNotFoundExceptionHandler {
+public class IncorrectInputExceptionHandler {
 
     @Autowired
     private BookController bookController;
@@ -25,9 +25,15 @@ public class UserNotFoundExceptionHandler {
 
     @ExceptionHandler(NumberFormatException.class)
     public String notCorrectInput(Exception e, Model model, HttpServletRequest httpServletRequest, @PageableDefault(value = 12) Pageable pageable) {
+        if (httpServletRequest.getRequestURL().indexOf("author")!=-1)
+            return "redirect:/author";
+        if (httpServletRequest.getRequestURL().indexOf("category")!=-1)
+            return "redirect:/category";
+        if (httpServletRequest.getRequestURL().indexOf("user")!=-1)
+            return "redirect:/user";
         if(httpServletRequest.getRequestURL().indexOf("book")+4!=httpServletRequest.getRequestURL().length())
             return "redirect:/book";
-        model.addAttribute("qwe", "qwe");
+        model.addAttribute("priceError", "");
         return bookController.bookList(model,pageable);
     }
 }

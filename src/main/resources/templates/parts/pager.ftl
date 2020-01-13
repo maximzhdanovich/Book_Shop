@@ -1,3 +1,4 @@
+<#include "*/locale/locale.ftl">
 <#macro pager url page>
     <#if page.getTotalPages() gt 7>
         <#assign
@@ -17,7 +18,7 @@
     <div class="mt-3">
         <ul class="pagination">
             <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Страницы</a>
+                <a class="page-link" href="#" tabindex="-1">${pager_page}</a>
             </li>
             <#list body as p>
                 <#if (p - 1) == page.getNumber()>
@@ -38,7 +39,7 @@
 
         <ul class="pagination">
             <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Элементов на странице</a>
+                <a class="page-link" href="#" tabindex="-1">${pager_page_elements}</a>
             </li>
             <#list [4, 12, 20, 40] as c>
                 <#if c == page.getSize()>

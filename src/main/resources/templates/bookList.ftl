@@ -105,10 +105,13 @@
         </h5>
         <#if isAdmin>
             <#if bookAddSuccess??>
-                ${bookAddSuccess}
+                ${book_book_add_success}
+            </#if>
+            <#if priceError??>
+                ${book_price_error}
             </#if>
             <#if authorNotFoundError??>
-                ${authorNotFoundError}
+                ${book_error_author_not_Found}
             </#if>
             <div id="accordion">
                 <div class="card">

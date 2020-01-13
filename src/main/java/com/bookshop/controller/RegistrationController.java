@@ -1,5 +1,6 @@
 package com.bookshop.controller;
 
+import com.bookshop.exception.PageNotFoundException;
 import com.bookshop.model.entity.User;
 import com.bookshop.service.BasketService;
 import com.bookshop.service.RegistrationService;
@@ -44,4 +45,5 @@ public class RegistrationController {
                           Model model) {
         return registrationService.addNewUser(repeatPassword,user,bindingResult,model);
     }
+
 }

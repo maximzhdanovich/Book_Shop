@@ -1,5 +1,6 @@
 package com.bookshop.controller;
 
+import com.bookshop.exception.PageNotFoundException;
 import com.bookshop.model.entity.Category;
 import com.bookshop.service.BookService;
 import com.bookshop.service.CategoryService;
@@ -36,11 +37,13 @@ public class CategoryController {
     }
 
     @GetMapping("/{category}")
-    public String singleCategory(@PathVariable Category category, Model model, @PageableDefault(size = 12) Pageable pageable) {
+    public String singleCategory(@PathVariable Long category, Model model, @PageableDefault(size = 12) Pageable pageable) {
         model.addAttribute("categoryPage", "");
-        model.addAttribute("category", category);
-        model.addAttribute("page", bookService.findAllByCategories(category, pageable));
-        model.addAttribute("url", "/category/" + category.getId());
+        model.addAttribute("category", categoryService.findById(category));
+        model.addAttribute("page", bookService.findAllByCategories(categoryService.findById(category), pageable));
+        model.addAttribute("url", "/category/" + category);
         return "bookList";
     }
+
+
 }

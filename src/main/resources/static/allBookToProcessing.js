@@ -12,17 +12,17 @@ $(document).ready(
                 contentType: "application/json",
                 url: "AllBookToProcessing",
                 success: function () {
-                    showSuccessMessage();
+                    showSuccessMessageThis();
                 },
                 dataType: 'json'
             });
         }
     });
 
-function showSuccessMessage() {
-    $("#DeleteFromBasketSuccess").fadeOut();
-    $("#DeleteFromBasketSuccess").fadeIn(1000);
+function showSuccessMessageThis() {
+    $("#BookAllProcessing").fadeOut();
+    $("#BookAllProcessing").fadeIn(1000);
     setTimeout(function () {
-        $("#DeleteFromBasketSuccess").fadeOut(1000);
+        $("#BookAllProcessing").fadeOut(1000);
     }, 3000);
 }

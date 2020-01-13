@@ -32,8 +32,8 @@ public class  UserController {
     }
 
     @GetMapping("{user}")
-    public String userEditInformation(@PathVariable User user, Model model) {
-        model.addAttribute("user", user);
+    public String userEditInformation(@PathVariable Long user, Model model) {
+        model.addAttribute("user", userService.findById(user));
         model.addAttribute("roles", roleService.findAll());
         return "userEdit";
     }
@@ -49,9 +49,9 @@ public class  UserController {
     }
 
     @GetMapping("{user}/basket")
-    public String showUserBasket(@PathVariable User user, Model model) {
-        model.addAttribute("books", user.getBasket().getBooks());
-        model.addAttribute("booksInProcessing", user.getBasket().getBooksInProcessing());
+    public String showUserBasket(@PathVariable Long user, Model model) {
+        model.addAttribute("books", userService.findById(user).getBasket().getBooks());
+        model.addAttribute("booksInProcessing", userService.findById(user).getBasket().getBooksInProcessing());
         model.addAttribute("user", user);
         return "adminUsersBasket";
     }

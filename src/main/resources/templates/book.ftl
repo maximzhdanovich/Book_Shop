@@ -76,6 +76,6 @@
     </div></@f.footer>
 <div id="addingToCartSuccess" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
      role="alert">
-    <strong>Success</strong> ${book_basket_add_alert}
+    <strong>${success}</strong> ${book_basket_add_alert}
 </body>
 </html>

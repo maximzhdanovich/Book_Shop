@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.Map;
 
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CategoryControllerTest {
@@ -48,7 +49,9 @@ public class CategoryControllerTest {
         Category category = new Category();
         Model model = getModel();
         Pageable pageable = getPageable();
-        categoryController.singleCategory(category, model, pageable);
+        long id = 1L;
+        when(categoryService.findById(id)).thenReturn(category);
+        categoryController.singleCategory(id, model, pageable);
         verify(bookService).findAllByCategories(category, pageable);
     }
 

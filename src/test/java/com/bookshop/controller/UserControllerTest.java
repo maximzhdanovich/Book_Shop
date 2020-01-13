@@ -44,8 +44,8 @@ public class UserControllerTest {
 
     @Test
     public void shouldCallRoleServiceFindAllWhenGetUserInformation(){
-        User user = new User();
-        userController.userEditInformation(user,getModel());
+        long id = 1L;
+        userController.userEditInformation(id,getModel());
         verify(roleService).findAll();
     }
 
@@ -64,7 +64,9 @@ public class UserControllerTest {
     public void shouldReturnUserBasketWhenAdminGetUserBasket(){
         User user = new User();
         user.setBasket(new Basket());
-        String result = userController.showUserBasket(user, getModel());
+        long id = 1L;
+        when(userService.findById(id)).thenReturn(user);
+        String result = userController.showUserBasket(id, getModel());
         assertThat(result).isEqualTo("adminUsersBasket");
     }
 

@@ -41,8 +41,8 @@ public class AuthorControllerTest {
 
     @Test
     public void shouldReturnAuthorEditWhenAdminGetAuthorEditPage(){
-        Author author = new Author();
-        String url = authorController.authorEditPage(author, getModel());
+        long id = 1L;
+        String url = authorController.authorEditPage(id, getModel());
         assertThat(url).isEqualTo("authorEdit");
     }
 
@@ -77,7 +77,9 @@ public class AuthorControllerTest {
     public void shouldCallBookServiceFindByAuthorWhenGetAuthorBooks(){
         Author author = new Author();
         Pageable pageable = getPageable();
-        authorController.authorBooks(getModel(), author, pageable);
+        long id = 1L;
+        when(authorService.findById(id)).thenReturn(author);
+        authorController.authorBooks(getModel(), id, pageable);
         verify(bookService).findAllByAuthor(author,pageable);
     }
 

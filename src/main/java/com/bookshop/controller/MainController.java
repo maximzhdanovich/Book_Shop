@@ -1,6 +1,7 @@
 package com.bookshop.controller;
 
 
+import com.bookshop.exception.PageNotFoundException;
 import com.bookshop.service.AuthorService;
 import com.bookshop.service.BookImageService;
 import com.bookshop.service.BookService;
@@ -24,6 +25,5 @@ public class MainController extends BaseController {
         model.addAttribute("authors", authorService.findAll());
         return "main";
     }
-
 
 }

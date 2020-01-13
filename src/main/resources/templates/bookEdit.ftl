@@ -139,7 +139,7 @@
         <button type="submit" class="btn btn-primary mt-2">${book_save}</button>
     </form>
     <br>
-    <form method="get" action="/book/admin/delete/${book.id}">
+    <form method="post" action="/book/admin/delete/${book.id}">
         <button type="submit" class="btn btn-primary">${book_delete}</button>
     </form>
 </@c.page>

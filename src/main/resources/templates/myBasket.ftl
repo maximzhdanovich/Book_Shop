@@ -43,6 +43,16 @@
             z-index: 15;
             text-align: center;
         }
+        #BookAllProcessing {
+            position: fixed;
+            right: 0;
+            top: 50px;
+            margin-top: 10px;
+            margin-right: 10px;
+            display: none;
+            z-index: 15;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -50,6 +60,7 @@
 <#assign price = 0>
 <#global currentId=0>
 <#global currentIdForProcessing=0>
+<#include "locale/locale.ftl">
 <#import "parts/footer.ftl" as f>
 <@f.footer>
 <div class="container center mt-5">
@@ -59,9 +70,9 @@
             <table class="table table-bordered ">
                 <thead>
                 <tr>
-                    <th>Цена</th>
-                    <th>Название</th>
-                    <th>Author</th>
+                    <th>${my_basket_price}</th>
+                    <th>${my_basket_title}</th>
+                    <th>${my_basket_author}</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -80,14 +91,13 @@
 
                             <button type="submit" id="${book.id}" class="btn btn-primary"
                                     onclick=editCurrentId(${book.id})>
-                                delete
+                                ${my_basket_delete}
                             </button>
 
                         </td>
                         <td>
                             <button type="button" id="qwe${book.id}" class="btn btn-primary"
-                                    onclick=editCurrentIdFor(${book.id})>Sent to
-                                Processing
+                                    onclick=editCurrentIdFor(${book.id})>${my_basket_sent_to_processing}
                             </button>
                         </td>
                     </tr>
@@ -102,29 +112,27 @@
             <button id="bookToProcessingButton" type="submit" hidden="hidden"></button>
         </form>
         <br>
-        <a>Total price ${price}</a>
+        <a>${my_basket_total_price} ${price}</a>
         <br>
         <form id="AllBookToProcessing">
-            <button type="submit" class="btn btn-primary" <#if price==0> disabled="disabled" </#if>>Sent all to
-                Processing
+            <button type="submit" class="btn btn-primary" <#if price==0> disabled="disabled" </#if>>${my_basket_sent_all_to_processing}
             </button>
         </form>
-    <#else >
-        Cart is empty
+    <#else >${my_basket_cart_is_empty}
     </#if>
     <br>
     <br>
     <input id="bookId" value="${currentId}" type="hidden">
     <input id="bookIdFor" value="${currentIdForProcessing}" type="hidden">
     <#if approvedBooks?size!=0>
-        Approved books
+    ${my_basket_approved_books}
 
         <table class="table table-bordered ">
             <thead>
             <tr>
-                <th>Цена</th>
-                <th>Название</th>
-                <th>Author</th>
+                <th>${my_basket_price}</th>
+                <th>${my_basket_title}</th>
+                <th>${my_basket_author}</th>
 
             </tr>
             </thead>
@@ -147,11 +155,15 @@
     </@f.footer>
     <div id="AddOnProcessing" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
          role="alert">
-        <strong>Success</strong> Book on processing
+        <strong>${success}</strong> ${my_basket_book_sent_to_processing}
     </div>
     <div id="DeleteFromBasketSuccess" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
          role="alert">
-        <strong>Success</strong> Book deleted from basket
+        <strong>${success}</strong> ${my_basket_book_deleted_from_basket}
+    </div>
+    <div id="BookAllProcessing" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
+         role="alert">
+        <strong>${success}</strong> ${my_basket_all_books_sent_to_processing}
     </div>
 
     <script>

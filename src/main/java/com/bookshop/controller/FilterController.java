@@ -1,5 +1,6 @@
 package com.bookshop.controller;
 
+import com.bookshop.exception.PageNotFoundException;
 import com.bookshop.service.BookService;
 import com.bookshop.service.CategoryService;
 import com.bookshop.service.FilterService;
@@ -33,5 +34,6 @@ public class FilterController {
         model.addAttribute("filter", filter);
         return "filter";
     }
+
 
 }

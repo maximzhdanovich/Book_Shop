@@ -1,5 +1,5 @@
-<#import "parts/common.ftl" as c>
-<#include "locale/locale.ftl">
+<#import "../parts/common.ftl" as c>
+<#include "../locale/locale.ftl">
 <@c.page>
     <div>
         ${not_found_page_not_found}

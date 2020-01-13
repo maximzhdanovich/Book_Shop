@@ -29,15 +29,19 @@ public class AuthorController {
     private BookService bookService;
 
     @GetMapping("admin/{authorId}")
-    public String authorEditPage(@PathVariable("authorId") Author author, Model model) {
-        model.addAttribute("author", author);
+    public String authorEditPage(@PathVariable("authorId") Long author, Model model) {
+        model.addAttribute("author", authorService.findById(author));
         return "authorEdit";
     }
 
     @PostMapping("admin/{authorId}")
     public String authorSaveEditedInformation(@RequestParam String surname, @RequestParam String name, @RequestParam("authorId") Author author,
                                               @RequestParam MultipartFile image) throws IOException {
-        authorService.update(surname, name, author, image);
+        try {
+            authorService.update(surname, name, author, image);
+        } catch (Exception e) {
+            throw new PageNotFoundException();
+        }
         return "redirect:/author";
     }
 
@@ -64,17 +68,16 @@ public class AuthorController {
     }
 
     @GetMapping("/{author}/books")
-    public String authorBooks(Model model, @PathVariable Author author, @PageableDefault(size = 12) Pageable pageable) {
-        model.addAttribute("page", bookService.findAllByAuthor(author, pageable));
+    public String authorBooks(Model model, @PathVariable long author, @PageableDefault(size = 12) Pageable pageable) {
+        try {
+            model.addAttribute("page", bookService.findAllByAuthor(authorService.findById(author), pageable));
+        } catch (Exception e) {
+            throw new PageNotFoundException();
+        }
         model.addAttribute("authorPage", "");
-        model.addAttribute("author", author);
-        model.addAttribute("url", "/author/" + author.getId() + "/books");
+        model.addAttribute("author", authorService.findById(author));
+        model.addAttribute("url", "/author/" + author+ "/books");
         return "bookList";
-    }
-
-    @GetMapping("/{some}")
-    public String notFound(@PathVariable String some){
-        throw new PageNotFoundException();
     }
 
 

@@ -60,10 +60,5 @@ public class AccountController {
     }
 
 
-    @GetMapping({"/{some}","/edit/{some}","/basket/{some}"})
-    public String notFound(@PathVariable String some){
-        throw new PageNotFoundException();
-    }
-
 
 }
