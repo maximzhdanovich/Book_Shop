@@ -1,9 +1,9 @@
 package com.bookshop.controller;
 
-import com.bookshop.model.entity.Basket;
+import com.bookshop.model.entity.Cart;
 import com.bookshop.model.entity.Book;
 import com.bookshop.model.entity.User;
-import com.bookshop.service.BasketService;
+import com.bookshop.service.CartService;
 import com.bookshop.service.RoleService;
 import com.bookshop.service.UserService;
 import org.junit.Test;
@@ -11,7 +11,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 
 import java.util.Collection;
@@ -31,7 +30,7 @@ public class UserControllerTest {
     private RoleService roleService;
 
     @Mock
-    private BasketService basketService;
+    private CartService cartService;
 
     @InjectMocks
     private UserController userController;
@@ -63,7 +62,7 @@ public class UserControllerTest {
     @Test
     public void shouldReturnUserBasketWhenAdminGetUserBasket(){
         User user = new User();
-        user.setBasket(new Basket());
+        user.setCart(new Cart());
         long id = 1L;
         when(userService.findById(id)).thenReturn(user);
         String result = userController.showUserBasket(id, getModel());
@@ -77,7 +76,7 @@ public class UserControllerTest {
         long id = 1L;
         book.setId(id);
         userController.approvedSingleBookToUser(book, user);
-        verify(basketService).approvedSingleBookToUser(book,user);
+        verify(cartService).approvedSingleBookToUser(book,user);
     }
 
     private Model getModel() {

@@ -1,9 +1,9 @@
 package com.bookshop.controller;
 
-import com.bookshop.model.entity.Basket;
+import com.bookshop.model.entity.Cart;
 import com.bookshop.model.entity.CustomUserDetail;
 import com.bookshop.model.entity.User;
-import com.bookshop.service.BasketService;
+import com.bookshop.service.CartService;
 import com.bookshop.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,7 +32,7 @@ public class AccountControllerTest {
     private UserService userService;
 
     @Mock
-    private BasketService basketService;
+    private CartService cartService;
 
     @InjectMocks
     private AccountController accountController;
@@ -70,10 +70,10 @@ public class AccountControllerTest {
     @Test
     public void shouldCallUserServiceGetCurrentUserWhenGetUserCart(){
         User user = new User();
-        Basket basket = new Basket();
-        basket.setBooks(new ArrayList<>());
-        basket.setBooksApproved(new ArrayList<>());
-        user.setBasket(basket);
+        Cart cart = new Cart();
+        cart.setBooks(new ArrayList<>());
+        cart.setBooksApproved(new ArrayList<>());
+        user.setCart(cart);
         CustomUserDetail customUserDetail = new CustomUserDetail(user);
         when(userService.getCurrentUser(customUserDetail)).thenReturn(user);
         accountController.myBasket(customUserDetail,getModel());

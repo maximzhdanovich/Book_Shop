@@ -1,7 +1,7 @@
 package com.bookshop.service;
 
-import com.bookshop.model.dataService.BasketDataService;
-import com.bookshop.model.entity.Basket;
+import com.bookshop.model.dataService.CartDataService;
+import com.bookshop.model.entity.Cart;
 import com.bookshop.model.entity.Book;
 import com.bookshop.model.entity.CustomUserDetail;
 import com.bookshop.model.entity.User;
@@ -11,7 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import javax.management.BadAttributeValueExpException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -19,10 +18,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class BasketServiceTest {
+public class CartServiceTest {
 
     @Mock
-    private BasketDataService basketDataService;
+    private CartDataService cartDataService;
 
     @Mock
     private UserService userService;
@@ -31,60 +30,60 @@ public class BasketServiceTest {
     private BookService bookService;
 
     @InjectMocks
-    private BasketService basketService;
+    private CartService cartService;
 
     @Test
     public void shouldReturnEmptyListWhenCallFindAllAndDataBaseIsEmpty(){
-        when(basketDataService.findAll()).thenReturn(Collections.emptyList());
-        assertThat(basketService.findAll()).isEmpty();
+        when(cartDataService.findAll()).thenReturn(Collections.emptyList());
+        assertThat(cartService.findAll()).isEmpty();
     }
 
     @Test
     public void shouldReturnBasketWhenCallFindByIdAndDataBaseIsNotEmpty(){
         long id = 1L;
-        Basket basket = new Basket();
-        when(basketDataService.findById(id)).thenReturn(basket);
-        assertThat(basketService.findById(id)).isEqualTo(basket);
+        Cart cart = new Cart();
+        when(cartDataService.findById(id)).thenReturn(cart);
+        assertThat(cartService.findById(id)).isEqualTo(cart);
     }
 
     @Test
     public void shouldCallBasketDataServiceSaveWhenCallBasketServiceSave(){
-        basketService.save(new Basket());
-        verify(basketDataService).save(isA(Basket.class));
+        cartService.save(new Cart());
+        verify(cartDataService).save(isA(Cart.class));
     }
 
     @Test
     public void shouldReturnBasketWhenCallBasketServiceCreate(){
-        Basket basket = basketService.create(getCustomUserDetail());
-        assertThat(basket).isInstanceOf(Basket.class);
+        Cart cart = cartService.create(getCustomUserDetail());
+        assertThat(cart).isInstanceOf(Cart.class);
     }
 
     @Test
     public void shouldCallBasketDataServiceSaveWhenCallAddSingleBookToBasket(){
         Book book = getBook();
-        basketService.addSingleBookToBasket(getCustomUserDetail(),book);
-        verify(basketDataService).save(isA(Basket.class));
+        cartService.addSingleBookToBasket(getCustomUserDetail(),book);
+        verify(cartDataService).save(isA(Cart.class));
     }
 
     @Test
     public void shouldCallBasketDataServiceSaveWhenCallDeleteBookFromBasket(){
         Book book = getBook();
-        basketService.deleteBookFromBasket(getCustomUserDetail(),book);
-        verify(basketDataService).save(isA(Basket.class));
+        cartService.deleteBookFromBasket(getCustomUserDetail(),book);
+        verify(cartDataService).save(isA(Cart.class));
     }
 
     @Test
     public void shouldCallBasketDataServiceSaveWhenCallSendBookToProcessing(){
         Book book = getBook();
-        basketService.sendBookToProcessing(getCustomUserDetail(),book);
-        verify(basketDataService).save(isA(Basket.class));
+        cartService.sendBookToProcessing(getCustomUserDetail(),book);
+        verify(cartDataService).save(isA(Cart.class));
     }
 
     @Test
     public void shouldCallBasketDataServiceSaveWhenCallApprovedSingleBookToUser(){
         Book book = getBook();
-        basketService.approvedSingleBookToUser(book, getCustomUserDetail());
-        verify(basketDataService).save(isA(Basket.class));
+        cartService.approvedSingleBookToUser(book, getCustomUserDetail());
+        verify(cartDataService).save(isA(Cart.class));
     }
 
     private Book getBook() {
@@ -95,14 +94,14 @@ public class BasketServiceTest {
 
     @Test
     public void shouldCallBasketDataServiceSaveWhenCallSendAllBooksToProcessing(){
-        basketService.sendAllBooksToProcessing(getCustomUserDetail());
-        verify(basketDataService).save(isA(Basket.class));
+        cartService.sendAllBooksToProcessing(getCustomUserDetail());
+        verify(cartDataService).save(isA(Cart.class));
     }
 
     private CustomUserDetail getCustomUserDetail() {
         User user = new User();
-        Basket basket = new Basket(1L,new ArrayList<>(),new ArrayList<>(),new ArrayList<>(),user);
-        user.setBasket(basket);
+        Cart cart = new Cart(1L,new ArrayList<>(),new ArrayList<>(),new ArrayList<>(),user);
+        user.setCart(cart);
         CustomUserDetail customUserDetail = new CustomUserDetail(user);
         when(userService.getCurrentUser(customUserDetail)).thenReturn(user);
         return customUserDetail;

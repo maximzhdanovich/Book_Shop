@@ -2,7 +2,7 @@ package com.bookshop.controller;
 
 import com.bookshop.model.entity.Book;
 import com.bookshop.model.entity.CustomUserDetail;
-import com.bookshop.service.BasketService;
+import com.bookshop.service.CartService;
 import com.bookshop.service.BookService;
 import com.bookshop.service.ServiceResponse;
 import com.bookshop.service.UserService;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class BasketController {
 
     @Autowired
-    private BasketService basketService;
+    private CartService cartService;
 
     @Autowired
     private BookService bookService;
@@ -29,28 +29,28 @@ public class BasketController {
 
     @PostMapping("/saveBook")
     public ResponseEntity<Object> addBookToCart(@AuthenticationPrincipal CustomUserDetail user, @RequestBody Book book) {
-        basketService.addSingleBookToBasket(user, bookService.findById(book.getId()));
+        cartService.addSingleBookToBasket(user, bookService.findById(book.getId()));
         ServiceResponse<Long> response = new ServiceResponse<>("success", book.getId());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("account/deleteFromBasket")
     public ResponseEntity<Object> deleteBook(@AuthenticationPrincipal CustomUserDetail user, @RequestBody Book book) {
-        basketService.deleteBookFromBasket(user,book);
+        cartService.deleteBookFromBasket(user,book);
         ServiceResponse<Long> response = new ServiceResponse<>("success", book.getId());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("account/bookToProcessing")
     public ResponseEntity<Object> bookToProcessing(@AuthenticationPrincipal CustomUserDetail user, @RequestBody Book book) {
-        basketService.sendBookToProcessing(user,book);
+        cartService.sendBookToProcessing(user,book);
         ServiceResponse<Long> response = new ServiceResponse<Long>("success", book.getId());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("account/AllBookToProcessing")
-    public ResponseEntity<Object> AllBookToProcessing(@AuthenticationPrincipal CustomUserDetail user) {
-        basketService.sendAllBooksToProcessing(user);
+    public ResponseEntity<Object> allBookToProcessing(@AuthenticationPrincipal CustomUserDetail user) {
+        cartService.sendAllBooksToProcessing(user);
         ServiceResponse<Long> response = new ServiceResponse<Long>("success", user.getId());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

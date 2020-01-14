@@ -1,23 +1,17 @@
 package com.bookshop.controller;
 
-import com.bookshop.exception.PageNotFoundException;
 import com.bookshop.model.entity.CustomUserDetail;
 import com.bookshop.model.entity.User;
-import com.bookshop.service.BasketService;
+import com.bookshop.service.CartService;
 import com.bookshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Map;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/account")
@@ -27,7 +21,7 @@ public class AccountController {
     private UserService userService;
 
     @Autowired
-    private BasketService basketService;
+    private CartService cartService;
 
     @GetMapping
     public String myAccount(@AuthenticationPrincipal CustomUserDetail customUserDetail, Model model) {
@@ -51,11 +45,11 @@ public class AccountController {
         return userService.userEditConfiguration(customUserDetail, newUserInformation, bindingResult, newPassword, repeatNewPassword, model);
     }
 
-    @GetMapping("/basket")
+    @GetMapping("/cart")
     public String myBasket(@AuthenticationPrincipal CustomUserDetail customUserDetail, Model model) {
             model.addAttribute("user", userService.getCurrentUser(customUserDetail));
-            model.addAttribute("books", userService.getCurrentUser(customUserDetail).getBasket().getBooks());
-            model.addAttribute("approvedBooks", userService.getCurrentUser(customUserDetail).getBasket().getBooksApproved());
+            model.addAttribute("books", userService.getCurrentUser(customUserDetail).getCart().getBooks());
+            model.addAttribute("approvedBooks", userService.getCurrentUser(customUserDetail).getCart().getBooksApproved());
             return "myBasket";
     }
 

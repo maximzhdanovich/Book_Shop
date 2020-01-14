@@ -5,7 +5,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "BASKET")
-public class Basket {
+public class Cart {
 
     private Long id;
     private List<Book> books;
@@ -76,7 +76,7 @@ public class Basket {
         this.booksApproved = booksApproved;
     }
 
-    public Basket(Long id, List<Book> books, List<Book> booksInProcessing, List<Book> booksApproved, User user) {
+    public Cart(Long id, List<Book> books, List<Book> booksInProcessing, List<Book> booksApproved, User user) {
         this.id = id;
         this.books = books;
         this.booksInProcessing = booksInProcessing;
@@ -84,14 +84,14 @@ public class Basket {
         this.user = user;
     }
 
-    public Basket(User user) {
+    public Cart(User user) {
         setUser(user);
     }
 
-    public Basket() {
+    public Cart() {
     }
 
-    public Basket(Long id, List<Book> books, List<Book> booksInProcessing, List<Book> booksApproved) {
+    public Cart(Long id, List<Book> books, List<Book> booksInProcessing, List<Book> booksApproved) {
         this.id = id;
         this.books = books;
         this.booksInProcessing = booksInProcessing;

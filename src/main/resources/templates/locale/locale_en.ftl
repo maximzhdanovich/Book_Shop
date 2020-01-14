@@ -114,7 +114,7 @@ categor_list_title_book="Title"
 categor_list_book_view="View"
 categor_list_all_books="All books"
 categor_list_books_not_found="Books not found"
-<#--    my basket-->
+<#--    my cart-->
 my_basket_price="Price"
 my_basket_title="Title"
 my_basket_author="Author"
@@ -125,7 +125,7 @@ my_basket_sent_all_to_processing="Sent all to processing"
 my_basket_cart_is_empty="Cart is empty"
 my_basket_approved_books="Approved books"
 my_basket_book_sent_to_processing="Book sent to progressing"
-my_basket_book_deleted_from_basket="Book deleted from basket"
+my_basket_book_deleted_from_basket="Book deleted from cart"
 my_basket_all_books_sent_to_processing="All books sent to processing"
 <#--    not found-->
 not_found_page_not_found="Page not found"

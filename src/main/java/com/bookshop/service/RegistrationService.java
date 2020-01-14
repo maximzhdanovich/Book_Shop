@@ -21,7 +21,7 @@ public class RegistrationService {
     private UserService userService;
 
     @Autowired
-    private BasketService basketService;
+    private CartService cartService;
 
     public String addNewUser(String repeatPassword, @Valid User newUser, BindingResult bindingResult, Model model) {
         boolean repeatPasswordEmpty = StringUtils.isEmpty(repeatPassword);
@@ -51,7 +51,7 @@ public class RegistrationService {
         }
 
         userService.create(newUser);
-        basketService.create(newUser);
+        cartService.create(newUser);
         return "successRegistration";
     }
 }

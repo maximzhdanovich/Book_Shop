@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -29,7 +28,7 @@ public class RegistrationServiceTest {
     private UserService userService;
 
     @Mock
-    private BasketService basketService;
+    private CartService cartService;
 
     @InjectMocks
     private RegistrationService registrationService;

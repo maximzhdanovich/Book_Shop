@@ -18,7 +18,7 @@ public class User {
     @NotBlank(message = "password can not be empty")
     private String password;
     private Role role;
-    private Basket basket;
+    private Cart cart;
     private boolean active;
 
     @NotNull
@@ -85,21 +85,21 @@ public class User {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "FK_BASKET_ID")
-    public Basket getBasket() {
-        return basket;
+    public Cart getCart() {
+        return cart;
     }
 
-    public void setBasket(Basket basket) {
-        this.basket = basket;
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
-    public User(Long id, @NotBlank(message = "username can not be empty") String username, @Email(message = "email error") @NotBlank(message = "email can not be empty") String email, @NotBlank(message = "password can not be empty") String password, Role role, Basket basket, boolean active) {
+    public User(Long id, @NotBlank(message = "username can not be empty") String username, @Email(message = "email error") @NotBlank(message = "email can not be empty") String email, @NotBlank(message = "password can not be empty") String password, Role role, Cart cart, boolean active) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.role = role;
-        this.basket = basket;
+        this.cart = cart;
         this.active = active;
     }
 
@@ -116,7 +116,7 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
-        setBasket(new Basket(this));
+        setCart(new Cart(this));
     }
 
     public User() {

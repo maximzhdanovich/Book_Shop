@@ -63,7 +63,7 @@
             <div class="mr-4">
                 <form action="/logout" method="post">
                     <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-                    <a href="/account/basket" class="btn btn-primary">${account_basket}</a>
+                    <a href="/account/cart" class="btn btn-primary">${account_basket}</a>
                     <a href="/account" class="btn btn-primary">${name}</a>
                     <button type="submit" class="btn btn-primary">${navbar_log_out}</button>
                 </form>

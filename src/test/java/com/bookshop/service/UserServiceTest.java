@@ -2,7 +2,6 @@ package com.bookshop.service;
 
 import com.bookshop.model.dataService.UserDataService;
 import com.bookshop.model.entity.CustomUserDetail;
-import com.bookshop.model.entity.Role;
 import com.bookshop.model.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +15,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 
-import javax.swing.plaf.PanelUI;
 import java.beans.PropertyEditor;
 import java.util.Collections;
 import java.util.List;
@@ -36,7 +34,7 @@ public class UserServiceTest {
     private RoleService roleService;
 
     @Mock
-    private BasketService basketService;
+    private CartService cartService;
 
     @InjectMocks
     private UserService userService;

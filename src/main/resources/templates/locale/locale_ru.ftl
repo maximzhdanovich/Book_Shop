@@ -114,7 +114,7 @@ categor_list_title_book="Название"
 categor_list_book_view="Посмотреть"
 categor_list_all_books="Все книги"
 categor_list_books_not_found="Книги не найдены"
-<#--    my basket-->
+<#--    my cart-->
 my_basket_price="Цена"
 my_basket_title="Название"
 my_basket_author="Автор"

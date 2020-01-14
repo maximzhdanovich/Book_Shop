@@ -30,7 +30,7 @@ public class UserService implements UserDetailsService {
     private RoleService roleService;
 
     @Autowired
-    private BasketService basketService;
+    private CartService cartService;
 
     public List<User> findAll() {
         return userDataService.findAll();

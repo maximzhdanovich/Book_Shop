@@ -23,7 +23,7 @@ public class  UserController {
     private RoleService roleService;
 
     @Autowired
-    private BasketService basketService;
+    private CartService cartService;
 
     @GetMapping
     public String userList(Model model) {
@@ -48,17 +48,17 @@ public class  UserController {
         return "redirect:/user";
     }
 
-    @GetMapping("{user}/basket")
+    @GetMapping("{user}/cart")
     public String showUserBasket(@PathVariable Long user, Model model) {
-        model.addAttribute("books", userService.findById(user).getBasket().getBooks());
-        model.addAttribute("booksInProcessing", userService.findById(user).getBasket().getBooksInProcessing());
+        model.addAttribute("books", userService.findById(user).getCart().getBooks());
+        model.addAttribute("booksInProcessing", userService.findById(user).getCart().getBooksInProcessing());
         model.addAttribute("user", user);
         return "adminUsersBasket";
     }
 
     @PostMapping("{user}/approvedBook")
     public ResponseEntity<Object> approvedSingleBookToUser(@RequestBody Book book, @PathVariable User user) {
-        basketService.approvedSingleBookToUser(book,user);
+        cartService.approvedSingleBookToUser(book,user);
 //        Basket basket = user.getBasket();
 //        basket.getBooksInProcessing().remove(bookService.findById(book.getId()));
 //        basket.getBooksApproved().add(bookService.findById(book.getId()));

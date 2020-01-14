@@ -3,7 +3,7 @@ package com.bookshop.controller;
 import com.bookshop.model.entity.Book;
 import com.bookshop.model.entity.CustomUserDetail;
 import com.bookshop.model.entity.User;
-import com.bookshop.service.BasketService;
+import com.bookshop.service.CartService;
 import com.bookshop.service.BookService;
 import com.bookshop.service.UserService;
 import org.junit.Test;
@@ -16,10 +16,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class BasketControllerTest {
+public class CartControllerTest {
 
     @Mock
-    private BasketService basketService;
+    private CartService cartService;
 
     @Mock
     private BookService bookService;
@@ -39,7 +39,7 @@ public class BasketControllerTest {
         when(bookService.findById(id)).thenReturn(book);
         CustomUserDetail customUserDetail = new CustomUserDetail(user);
         basketController.addBookToCart(customUserDetail, book);
-        verify(basketService).addSingleBookToBasket(customUserDetail,book);
+        verify(cartService).addSingleBookToBasket(customUserDetail,book);
     }
 
     @Test
@@ -48,7 +48,7 @@ public class BasketControllerTest {
         CustomUserDetail customUserDetail = new CustomUserDetail(user);
         Book book = new Book();
         basketController.deleteBook(customUserDetail, book);
-        verify(basketService).deleteBookFromBasket(customUserDetail,book);
+        verify(cartService).deleteBookFromBasket(customUserDetail,book);
     }
 
     @Test
@@ -57,15 +57,15 @@ public class BasketControllerTest {
         CustomUserDetail customUserDetail = new CustomUserDetail(user);
         Book book = new Book();
         basketController.bookToProcessing(customUserDetail,book);
-        verify(basketService).sendBookToProcessing(customUserDetail,book);
+        verify(cartService).sendBookToProcessing(customUserDetail,book);
     }
 
     @Test
     public void shouldCallBasketServiceSendAllBooksToProcessingWhenUserSendAllBooksToProcessing(){
         User user = new User();
         CustomUserDetail customUserDetail = new CustomUserDetail(user);
-        basketController.AllBookToProcessing(customUserDetail);
-        verify(basketService).sendAllBooksToProcessing(customUserDetail);
+        basketController.allBookToProcessing(customUserDetail);
+        verify(cartService).sendAllBooksToProcessing(customUserDetail);
     }
 
 }
