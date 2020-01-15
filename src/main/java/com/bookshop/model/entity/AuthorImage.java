@@ -10,7 +10,7 @@ public class AuthorImage {
 
     private Long id;
     private String authorImage;
-    private Author author;
+//    private Author author;
 
     @Id
     @Column(name = "ID")
@@ -33,26 +33,25 @@ public class AuthorImage {
         this.authorImage = authorImage;
     }
 
-    @NotNull
-    @OneToOne
-    @JoinColumn(name = "FK_AUTHOR_ID")
-    public Author getAuthor() {
-        return author;
-    }
+//    @OneToOne
+//    @JoinColumn(name = "FK_AUTHOR_ID")
+//    public Author getAuthor() {
+//        return author;
+//    }
+//
+//    public void setAuthor(Author author) {
+//        this.author = author;
+//    }
 
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
-
-    public AuthorImage(Long id, String authorImage, Author author) {
+    public AuthorImage(Long id, String authorImage) {
         this.id = id;
         this.authorImage = authorImage;
-        this.author = author;
+//        this.author = author;
     }
 
-    public AuthorImage(String authorImage, Author author) {
+    public AuthorImage(String authorImage) {
         this.authorImage = authorImage;
-        this.author = author;
+//        this.author = author;
     }
     public AuthorImage() {
     }

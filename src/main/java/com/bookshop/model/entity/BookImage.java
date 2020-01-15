@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 public class BookImage {
     private Long id;
     private String bookImage;
-    private Book book;
+//    private Book book;
 
     @NotNull
     @Column(name = "IMAGE")
@@ -20,16 +20,15 @@ public class BookImage {
         this.bookImage = bookImage;
     }
 
-    @NotNull
-    @OneToOne
-    @JoinColumn(name = "FK_BOOK_ID")
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
-    }
+//    @OneToOne
+//    @JoinColumn(name = "FK_BOOK_ID")
+//    public Book getBook() {
+//        return book;
+//    }
+//
+//    public void setBook(Book book) {
+//        this.book = book;
+//    }
 
     @Id
     @Column(name = "ID")
@@ -42,15 +41,13 @@ public class BookImage {
         this.id = id;
     }
 
-    public BookImage(Long id, String bookImage, Book book) {
+    public BookImage(Long id, String bookImage) {
         this.id = id;
         this.bookImage = bookImage;
-        this.book = book;
     }
 
-    public BookImage(String bookImage, Book book) {
+    public BookImage(String bookImag) {
         this.bookImage = bookImage;
-        this.book = book;
     }
 
     public BookImage() {

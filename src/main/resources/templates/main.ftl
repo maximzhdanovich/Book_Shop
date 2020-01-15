@@ -13,17 +13,17 @@
     </div>
     <div class="card-deck m-5" id="book-list">
         <#list books as book>
-            <#if bookIndex<5>
+            <#if bookIndex<4>
                 <div class="card">
                     <#assign bookIndex++>
                     <#if book.image??>
-                        <img class="card-img-top"
-                             src="/img/book/${book.image.bookImage}" <#--class="leftimg" width="96" height="125"-->
-                             alt="Card image cap"/>
+                    <a href="/book/${book.id}"><img class="card-img-top"
+                             src="/img/book/${book.image.bookImage}" <#--class="leftimg" width="96" height="125"-->height="370"
+                                                    alt="Card image cap"/></a>
                     <#else>
-                        <img class="card-img-top"
-                             src="/img/bookNot/bookImageNotFound.jpg" <#--class="leftimg" width="96" height="125"-->
-                             alt="Card image cap"/>
+                    <a href="/book/${book.id}">  <img class="card-img-top"
+                             src="/img/bookNot/bookImageNotFound.jpg" height="348.47" <#--class="leftimg" width="96" height="125"-->
+                                                      alt="Card image cap"/></a>
                     </#if>
                     <div class="card-body">
                         <h5 class="card-title">${book.titleEn}</h5>
@@ -36,11 +36,13 @@
     ${filter_authors}
     <div class="card-deck m-5">
         <#list authors as author>
-            <#if authorIndex<5>
+            <#if authorIndex<4>
                 <div class="card">
                     <#assign authorIndex++>
                     <#if author.image??>
                         <img src="/img/author/${author.image.authorImage}" height="226"/>
+                        <#else >
+                        <img src="/img/bookNot/authorImageNotFound.png" height="226">
                     </#if>
                     <div class="card-body">
                         <h5 class="card-title">${author.surname} ${author.name} </h5>

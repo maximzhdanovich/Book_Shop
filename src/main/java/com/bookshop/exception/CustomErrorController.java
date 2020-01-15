@@ -20,10 +20,10 @@ public class CustomErrorController implements ErrorController {
                 return "redirect:/login";
             }
             case 500:{
-                return "redirect:/main";
+                return "redirect:/";
             }
         }
-        return "main";
+        return "redirect:/";
     }
 
     @Override

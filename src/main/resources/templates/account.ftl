@@ -5,6 +5,4 @@
     <a href="/account/cart">${account_basket}</a>
     <br><br>
     <a href="/account/edit">${account_configuration}</a>
-    <br><br>
-    <a href="/account/delete">${account_delete}</a>
 </@c.page>

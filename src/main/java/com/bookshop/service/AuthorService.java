@@ -51,11 +51,14 @@ public class AuthorService {
     public void update(String surname, String name, Author author, MultipartFile image) throws IOException {
         author.setSurname(surname);
         author.setName(name);
-        if (image != null &&  image.getOriginalFilename()!=null) {
+        Long authorImageToDelete = null;
+        if (image != null &&  image.getOriginalFilename()!=null && !image.getOriginalFilename().isEmpty()) {
             if (author.getImage()!=null) {
-                authorImageService.deleteById(author.getImage().getId());
+                authorImageToDelete = author.getImage().getId();
             }
             authorImageService.add(image, author);
+            if (authorImageToDelete!=null)
+            authorImageService.deleteById(authorImageToDelete);
         }
         save(author);
     }

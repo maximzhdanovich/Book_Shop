@@ -61,10 +61,13 @@
                 </#if>
             </div>
             <br>
+            <b class="mr-2">${book_price}: ${book.price} BYN</b>
+            <br>
             <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id})
                     <#if name="unknown">disabled="disabled"</#if>>
                 ${book_basket_add}
             </button>
+
             <#if isAdmin>
                 <a href="/book/admin/${book.id}"
                    class="btn btn-primary ml-2 leftText">${book_edit}</a>

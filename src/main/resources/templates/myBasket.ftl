@@ -155,15 +155,15 @@
     </@f.footer>
     <div id="AddOnProcessing" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
          role="alert">
-        <strong>${success}</strong> ${my_basket_book_sent_to_processing}
+        <strong>${success}</strong><br> ${my_basket_book_sent_to_processing}
     </div>
     <div id="DeleteFromBasketSuccess" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
          role="alert">
-        <strong>${success}</strong> ${my_basket_book_deleted_from_basket}
+        <strong>${success}</strong><br> ${my_basket_book_deleted_from_basket}
     </div>
     <div id="BookAllProcessing" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
          role="alert">
-        <strong>${success}</strong> ${my_basket_all_books_sent_to_processing}
+        <strong>${success}</strong> <br>${my_basket_all_books_sent_to_processing}
     </div>
 
     <script>

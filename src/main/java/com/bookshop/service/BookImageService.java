@@ -43,7 +43,7 @@ public class BookImageService {
     }
 
     public void add(MultipartFile image, Book book) throws IOException {
-        if (image != null && !image.getOriginalFilename().isEmpty()) {
+        if (image != null && !image.getOriginalFilename().isEmpty() && image.getOriginalFilename()!=null) {
             BookImage book_image = new BookImage();
             File uploadDir = new File(uploadPath);
             if (!uploadDir.exists()) {
@@ -53,7 +53,7 @@ public class BookImageService {
             String fileName = uuidFile + image.getOriginalFilename();
             image.transferTo(new File(uploadPath + "/" + fileName));
             book_image.setBookImage(fileName);
-            book_image.setBook(book);
+//            book_image.setBook(book);
             save(book_image);
             book.setImage(book_image);
             bookService.save(book);

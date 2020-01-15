@@ -102,11 +102,14 @@ public class BookService {
                 book.getCategories().add(categoryService.findById(Long.parseLong(s)));
             }
         }
-        if (image != null && image.getOriginalFilename()!=null) {
+        Long imageIdToDelete=null;
+        if (image != null && image.getOriginalFilename()!=null  && !image.getOriginalFilename().isEmpty()) {
             if (book.getImage() != null) {
-                bookImageService.deleteById(book.getImage().getId());
+                imageIdToDelete = book.getImage().getId();
             }
             bookImageService.add(image, book);
+            if(imageIdToDelete!=null)
+            bookImageService.deleteById(imageIdToDelete);
         }
         save(book);
     }

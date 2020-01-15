@@ -1,5 +1,6 @@
 package com.bookshop.controller;
 import com.bookshop.model.entity.User;
+import com.bookshop.service.AuthorService;
 import com.bookshop.service.BookService;
 import com.bookshop.service.UserService;
 import org.junit.Test;
@@ -19,7 +20,7 @@ public class DeleteControllerTest {
     private BookService bookService;
 
     @Mock
-    private UserService userService;
+    private AuthorService authorService;
 
     @InjectMocks
     private DeleteController deleteController;
@@ -30,14 +31,12 @@ public class DeleteControllerTest {
         deleteController.deleteBook(id);
         verify(bookService).deleteById(id);
     }
-
     @Test
-    public void shouldCallUserServiceDeleteByIdWhenUserDeleteAccount(){
-        User user = new User();
+    public void shouldCallAuthorServiceDeleteByIdWhenDeleteAuthor(){
         long id = 1L;
-        user.setId(id);
-        when(userService.getCurrentUser(user)).thenReturn(user);
-        deleteController.deleteAccount(user);
-        verify(userService).deleteById(id);
+        deleteController.deleteAuthor(id);
+        verify(authorService).deleteById(id);
     }
+
+
 }

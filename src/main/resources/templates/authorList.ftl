@@ -2,6 +2,11 @@
 <#include "parts/security.ftl">
 <#include "locale/locale.ftl">
 <@c.page>
+    <style>.card-columns {
+
+            column-count: 4;
+        }
+    </style>
     <#if isAdmin>
         <#if authorError??>
             ${authorError}
@@ -46,7 +51,9 @@
 
                 <div class="card m-2" <#--style="width: 20rem;"-->>
                     <#if author.image??>
-                        <img class="card-img-top" src="/img/author/${author.image.authorImage}" height="400">
+                        <img class="card-img-top" src="/img/author/${author.image.authorImage}" height="370">
+                    <#else >
+                        <img src="/img/bookNot/authorImageNotFound.png" width="260.5" height="370">
                     </#if>
                     <div class="card-body">
                         <a class="card-title m-2">${author.surname} ${author.name}</a>

@@ -69,8 +69,9 @@
 
     <style>.card-columns {
 
-            column-count: 4;
+            column-count: 3;
         }
+
     </style>
 
 </head>
@@ -251,17 +252,17 @@
                             <p><a href="/book/${book.id}"><img src="/img/bookNot/bookImageNotFound.jpg" class="leftimg"
                                                                width="96" height="125"/></a>
                                 </#if>
-                                ${book_author}: ${book.author.name} ${book.author.surname}
+                                <#--${book_author}:--> <i>${book.author.name} ${book.author.surname}</i>
                                 <br/>
-                                ${book_title}:
+<#--                                ${book_title}:-->
 
-                                <#if .lang=="en">
+                                <b><#if .lang=="en">
                                     ${book.titleEn}
-                                    <#if book.titleEn?length<32><br/><br/></#if>
+                                    <#if book.titleEn?length<32><br><br></#if>
                                 <#elseif .lang=="ru">
                                     ${book.titleRu}
-                                    <#if book.titleRu?length<32><br/><br/></#if>
-                                </#if>
+                                    <#if book.titleRu?length<32><br><br></#if>
+                                </#if></b>
                             <div class="cope_text line-clamp">
                                 <#if book.description??>
                                     ${book.description}
@@ -311,7 +312,7 @@
 </@f.footer>
 <div id="addingToCartSuccess" class="alert alert-success col-lg-2 col-md-3 col-sm-3 col-xs-4"
      role="alert">
-    <strong>Success</strong> ${book_basket_add_alert}</div>
+    <strong>Success</strong><br> ${book_basket_add_alert}</div>
 
 <script>
     function editCurrentId(id) {

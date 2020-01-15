@@ -17,7 +17,7 @@
         </div>
         <input  type="text" name="name" placeholder="${author_edit_author_name}"
                class="form-control" aria-label="${author_edit_author_name}"
-               aria-describedby="basic-addon1" value="${author_edit_author_name}">
+               aria-describedby="basic-addon1" value="${author.name}">
     </div>
 <#--    <div><label>${author_edit_author_surname}<input type="text" name="surname" value="${author.surname}"></label></div>-->
 <#--    <div><label>${author_edit_author_name}<input type="text" name="name" value="${author.name}"></label></div>-->
@@ -39,4 +39,9 @@
     <br>
     <input type="hidden" value="${author.id}" name="authorId">
     <button type="submit" class="btn btn-primary">${author_edit_save}</button>
+    </form>
+    <br>
+    <form method="post" action="/author/admin/delete/${author.id}">
+        <button type="submit" class="btn btn-primary">${book_delete}</button>
+    </form>
 </@c.page>

@@ -42,7 +42,7 @@ public class AuthorImageService {
     }
 
     public void add(MultipartFile image, Author author) throws IOException {
-        if (image != null && image.getOriginalFilename()!=null) {
+        if (image != null && image.getOriginalFilename()!=null && !image.getOriginalFilename().isEmpty()) {
             AuthorImage authorImage = new AuthorImage();
             File uploadDir = new File(uploadPath);
             if (!uploadDir.exists()) {
@@ -52,7 +52,7 @@ public class AuthorImageService {
             String fileName = uuidFile + image.getOriginalFilename();
             image.transferTo(new File(uploadPath + "/" + fileName));
             authorImage.setAuthorImage(fileName);
-            authorImage.setAuthor(author);
+//            authorImage.setAuthor(author);
             save(authorImage);
             author.setImage(authorImage);
             authorService.save(author);

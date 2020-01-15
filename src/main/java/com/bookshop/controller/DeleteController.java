@@ -1,6 +1,8 @@
 package com.bookshop.controller;
 
 import com.bookshop.model.entity.User;
+import com.bookshop.service.AuthorService;
+import com.bookshop.service.BookImageService;
 import com.bookshop.service.BookService;
 import com.bookshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class DeleteController {
     private BookService bookService;
 
     @Autowired
+    private AuthorService authorService;
+
+    @Autowired
     private UserService userService;
 
     @PreAuthorize("hasAnyRole('ADMIN')")
@@ -27,11 +32,11 @@ public class DeleteController {
         return "redirect:/book";
     }
 
-    @PreAuthorize("hasAnyRole('USER','ADMIN')")
-    @GetMapping("/account/delete")
-    public String deleteAccount(@AuthenticationPrincipal User user) {
-        userService.deleteById(userService.getCurrentUser(user).getId());
-        return "redirect:/logout";
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PostMapping("/author/admin/delete/{id}")
+    public String deleteAuthor(@PathVariable long id) {
+        authorService.deleteById(id);
+        return "redirect:/author";
     }
 
 }
