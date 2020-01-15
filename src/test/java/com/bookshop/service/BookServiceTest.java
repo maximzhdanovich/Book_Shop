@@ -11,13 +11,15 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -77,7 +79,7 @@ public class BookServiceTest {
     }
 
     @Test
-    public void shouldReturnCollectionsSingletonWhenDataBaseHaveOneSatisfyingBook(){
+    public void shouldReturnCollectionsSingletonWhenDataBaseHaveOneSatisfyingBook() {
         String titleEn = "some";
         String titleRu = "some";
         Book book = new Book();
@@ -87,30 +89,30 @@ public class BookServiceTest {
     }
 
     @Test
-    public void shouldCallBookDataServiceDeleteWhenDeleteBook(){
+    public void shouldCallBookDataServiceDeleteWhenDeleteBook() {
         long id = 1L;
         bookService.deleteById(id);
         verify(bookDataService).deleteById(id);
     }
 
     @Test
-    public void shouldReturnEmptyPageOfBooksWhenFindByAuthorDataBaseIsEmpty(){
+    public void shouldReturnEmptyPageOfBooksWhenFindByAuthorDataBaseIsEmpty() {
         Author author = new Author();
-        when(bookDataService.findAllByAuthor(author,pageable)).thenReturn(null);
+        when(bookDataService.findAllByAuthor(author, pageable)).thenReturn(null);
         Page<Book> bookAllByAuthor = bookService.findAllByAuthor(author, pageable);
         assertThat(bookAllByAuthor).isNull();
     }
 
     @Test
-    public void shouldReturnEmptyPageOfBooksWhenFindByCategoryDataBaseIsEmpty(){
+    public void shouldReturnEmptyPageOfBooksWhenFindByCategoryDataBaseIsEmpty() {
         Category category = new Category();
-        when(bookDataService.findAllByCategories(category,pageable)).thenReturn(null);
+        when(bookDataService.findAllByCategories(category, pageable)).thenReturn(null);
         Page<Book> bookAllByCategory = bookService.findAllByCategories(category, pageable);
         assertThat(bookAllByCategory).isNull();
     }
 
     @Test
-    public void shouldReturnEmptyPageOfBooksWhenFindAllDataBaseIsEmpty(){
+    public void shouldReturnEmptyPageOfBooksWhenFindAllDataBaseIsEmpty() {
         when(bookDataService.findAllPage(pageable)).thenReturn(null);
         Page<Book> bookAll = bookService.findAllPage(pageable);
         assertThat(bookAll).isNull();

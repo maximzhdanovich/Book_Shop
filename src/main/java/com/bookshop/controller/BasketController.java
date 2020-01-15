@@ -2,8 +2,8 @@ package com.bookshop.controller;
 
 import com.bookshop.model.entity.Book;
 import com.bookshop.model.entity.CustomUserDetail;
-import com.bookshop.service.CartService;
 import com.bookshop.service.BookService;
+import com.bookshop.service.CartService;
 import com.bookshop.service.ServiceResponse;
 import com.bookshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,14 +36,14 @@ public class BasketController {
 
     @PostMapping("account/deleteFromBasket")
     public ResponseEntity<Object> deleteBook(@AuthenticationPrincipal CustomUserDetail user, @RequestBody Book book) {
-        cartService.deleteBookFromBasket(user,book);
+        cartService.deleteBookFromBasket(user, book);
         ServiceResponse<Long> response = new ServiceResponse<>("success", book.getId());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("account/bookToProcessing")
     public ResponseEntity<Object> bookToProcessing(@AuthenticationPrincipal CustomUserDetail user, @RequestBody Book book) {
-        cartService.sendBookToProcessing(user,book);
+        cartService.sendBookToProcessing(user, book);
         ServiceResponse<Long> response = new ServiceResponse<Long>("success", book.getId());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

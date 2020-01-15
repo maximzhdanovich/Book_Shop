@@ -1,4 +1,4 @@
-SET FOREIGN_KEY_CHECKS=0;
+SET FOREIGN_KEY_CHECKS = 0;
 insert into role(id, title)
 VALUES (1, 'USER'),
        (2, 'ADMIN');
@@ -101,29 +101,29 @@ VALUES (1, 'Fantasy', 'Фэнтез'),
        (8, 'Novel', 'Роман'),
        (9, 'Philosophical novel', 'Философский роман'),
        (10, 'Business', 'Бизнес'),
-       (11,'Political science fiction','Политическая фантастика');
+       (11, 'Political science fiction', 'Политическая фантастика');
 insert into book_with_category(book_id, category_id)
-VALUES (1,1),
-       (2,1),
-       (3,1),
-       (4,2),
-       (4,3),
-       (5,2),
-       (5,3),
-       (6,2),
-       (6,3),
-       (7,4),
-       (7,11),
-       (8,5),
-       (9,6),
-       (10,7),
-       (11,1),
-       (11,8),
-       (12,1),
-       (12,8),
-       (13,1),
-       (13,8),
-       (14,9),
-       (15,9),
-       (16,10);
-SET FOREIGN_KEY_CHECKS=1;
+VALUES (1, 1),
+       (2, 1),
+       (3, 1),
+       (4, 2),
+       (4, 3),
+       (5, 2),
+       (5, 3),
+       (6, 2),
+       (6, 3),
+       (7, 4),
+       (7, 11),
+       (8, 5),
+       (9, 6),
+       (10, 7),
+       (11, 1),
+       (11, 8),
+       (12, 1),
+       (12, 8),
+       (13, 1),
+       (13, 8),
+       (14, 9),
+       (15, 9),
+       (16, 10);
+SET FOREIGN_KEY_CHECKS = 1;

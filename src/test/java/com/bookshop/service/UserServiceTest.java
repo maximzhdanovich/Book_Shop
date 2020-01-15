@@ -22,7 +22,8 @@ import java.util.Map;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
@@ -74,21 +75,21 @@ public class UserServiceTest {
     }
 
     @Test
-    public void shouldCallUserDataServiceDeleteWhenDeleteUser(){
+    public void shouldCallUserDataServiceDeleteWhenDeleteUser() {
         long id = 1L;
         userService.deleteById(id);
         verify(userDataService).deleteById(id);
     }
 
     @Test
-    public void shouldCallUserDataServiceSaveWhenSaveUser(){
+    public void shouldCallUserDataServiceSaveWhenSaveUser() {
         User user = new User();
         userService.save(user);
         verify(userDataService).save(user);
     }
 
     @Test
-    public void shouldCallUserDataServiceFindByIdWhenGetCurrentUser(){
+    public void shouldCallUserDataServiceFindByIdWhenGetCurrentUser() {
         User user = new User();
         long id = 1L;
         user.setId(id);
@@ -97,14 +98,14 @@ public class UserServiceTest {
     }
 
     @Test
-    public void shouldCallUserDataServiceWhenCreateUser(){
+    public void shouldCallUserDataServiceWhenCreateUser() {
         User user = new User();
         userService.create(user);
         verify(userDataService).save(user);
     }
 
     @Test
-    public void shouldCallUserDataServiceWhenUpdateUser(){
+    public void shouldCallUserDataServiceWhenUpdateUser() {
         User user = new User();
         String email = "email@email.com";
         String password = "password";
@@ -115,7 +116,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void shouldReturnRedirectWhenSuccessEditConfiguration(){
+    public void shouldReturnRedirectWhenSuccessEditConfiguration() {
         User user = new User();
         long id = 1L;
         user.setId(id);

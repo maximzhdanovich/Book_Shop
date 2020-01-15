@@ -188,7 +188,8 @@
                                     <div class="custom-file">
                                         <input type="file" name="image" class="custom-file-input" id="inputGroupFile01"
                                                aria-describedby="inputGroupFileAddon01"/>
-                                        <label class="custom-file-label" for="inputGroupFile01">${book_choose_file}</label>
+                                        <label class="custom-file-label"
+                                               for="inputGroupFile01">${book_choose_file}</label>
                                     </div>
                                 </div>
                                 <#--                            <input type="file" name="image">-->
@@ -254,15 +255,15 @@
                                 </#if>
                                 <#--${book_author}:--> <i>${book.author.name} ${book.author.surname}</i>
                                 <br/>
-<#--                                ${book_title}:-->
+                                <#--                                ${book_title}:-->
 
                                 <b><#if .lang=="en">
-                                    ${book.titleEn}
-                                    <#if book.titleEn?length<32><br><br></#if>
-                                <#elseif .lang=="ru">
-                                    ${book.titleRu}
-                                    <#if book.titleRu?length<32><br><br></#if>
-                                </#if></b>
+                                        ${book.titleEn}
+                                        <#if book.titleEn?length<32><br><br></#if>
+                                    <#elseif .lang=="ru">
+                                        ${book.titleRu}
+                                        <#if book.titleRu?length<32><br><br></#if>
+                                    </#if></b>
                             <div class="cope_text line-clamp">
                                 <#if book.description??>
                                     ${book.description}

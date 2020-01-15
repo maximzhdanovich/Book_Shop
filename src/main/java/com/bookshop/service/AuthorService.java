@@ -52,13 +52,13 @@ public class AuthorService {
         author.setSurname(surname);
         author.setName(name);
         Long authorImageToDelete = null;
-        if (image != null &&  image.getOriginalFilename()!=null && !image.getOriginalFilename().isEmpty()) {
-            if (author.getImage()!=null) {
+        if (image != null && image.getOriginalFilename() != null && !image.getOriginalFilename().isEmpty()) {
+            if (author.getImage() != null) {
                 authorImageToDelete = author.getImage().getId();
             }
             authorImageService.add(image, author);
-            if (authorImageToDelete!=null)
-            authorImageService.deleteById(authorImageToDelete);
+            if (authorImageToDelete != null)
+                authorImageService.deleteById(authorImageToDelete);
         }
         save(author);
     }

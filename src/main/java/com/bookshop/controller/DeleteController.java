@@ -1,15 +1,11 @@
 package com.bookshop.controller;
 
-import com.bookshop.model.entity.User;
 import com.bookshop.service.AuthorService;
-import com.bookshop.service.BookImageService;
 import com.bookshop.service.BookService;
 import com.bookshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 

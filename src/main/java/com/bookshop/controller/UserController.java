@@ -2,7 +2,10 @@ package com.bookshop.controller;
 
 import com.bookshop.model.entity.Book;
 import com.bookshop.model.entity.User;
-import com.bookshop.service.*;
+import com.bookshop.service.CartService;
+import com.bookshop.service.RoleService;
+import com.bookshop.service.ServiceResponse;
+import com.bookshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @PreAuthorize("hasAnyRole('ADMIN')")
 @Controller
 @RequestMapping("/user")
-public class  UserController {
+public class UserController {
 
     @Autowired
     private UserService userService;
@@ -58,7 +61,7 @@ public class  UserController {
 
     @PostMapping("{user}/approvedBook")
     public ResponseEntity<Object> approvedSingleBookToUser(@RequestBody Book book, @PathVariable User user) {
-        cartService.approvedSingleBookToUser(book,user);
+        cartService.approvedSingleBookToUser(book, user);
 //        Basket basket = user.getBasket();
 //        basket.getBooksInProcessing().remove(bookService.findById(book.getId()));
 //        basket.getBooksApproved().add(bookService.findById(book.getId()));

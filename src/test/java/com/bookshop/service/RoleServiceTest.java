@@ -1,7 +1,6 @@
 package com.bookshop.service;
 
 import com.bookshop.model.dataService.RoleDataService;
-import com.bookshop.model.entity.Author;
 import com.bookshop.model.entity.Role;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +12,8 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RoleServiceTest {
@@ -25,21 +25,21 @@ public class RoleServiceTest {
     private RoleService roleService;
 
     @Test
-    public void shouldReturnEmptyListWhenCallFindAllAndDataBaseIsEmpty(){
+    public void shouldReturnEmptyListWhenCallFindAllAndDataBaseIsEmpty() {
         when(roleDataService.findAll()).thenReturn(Collections.emptyList());
         List<Role> roleList = roleService.findAll();
         assertThat(roleList).isEmpty();
     }
 
     @Test
-    public void shouldCallRoleDataServiceFindByIdWhenRoleFindById(){
+    public void shouldCallRoleDataServiceFindByIdWhenRoleFindById() {
         long id = 1L;
         roleService.findById(id);
         verify(roleDataService).findById(id);
     }
 
     @Test
-    public void shouldReturnEntityWhenDataBaseHaveSatisfyingRole(){
+    public void shouldReturnEntityWhenDataBaseHaveSatisfyingRole() {
         String title = "title";
         Role role = new Role();
         when(roleDataService.findByTitle(title)).thenReturn(role);

@@ -8,7 +8,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.PropertyEditorRegistry;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
@@ -21,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RegistrationControllerTest {
@@ -33,13 +31,13 @@ public class RegistrationControllerTest {
     private RegistrationController registrationController;
 
     @Test
-    public void shouldCallRegistrationServiceAddNewUserWhenUserRegistered(){
+    public void shouldCallRegistrationServiceAddNewUserWhenUserRegistered() {
         String password = "password";
         User user = new User();
         BindingResult bindingResult = getBindingResult();
         Model model = getModel();
         registrationController.addUser(password, user, bindingResult, model);
-        verify(registrationService).addNewUser(password,user,bindingResult,model);
+        verify(registrationService).addNewUser(password, user, bindingResult, model);
     }
 
     private Model getModel() {

@@ -10,7 +10,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.ui.Model;
@@ -25,8 +24,8 @@ import java.util.Map;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.byLessThan;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BookControllerTest {
@@ -67,14 +66,14 @@ public class BookControllerTest {
         map.put("authorSurname", authorSurname);
         map.put("authorName", authorName);
         Author author = new Author();
-        when(authorService.findBySurnameAndName(authorSurname,authorName)).thenReturn(Optional.of(author));
+        when(authorService.findBySurnameAndName(authorSurname, authorName)).thenReturn(Optional.of(author));
         MultipartFile image = getImage();
         bookController.bookCreate(image, map, getModel(), getPageable());
         verify(bookService).create(Double.parseDouble(value), titleRu, titleEn, description, author, map, image);
     }
 
     @Test
-    public void shouldReturnBookEditWhenGetBookEditPageAndBookIsPresent(){
+    public void shouldReturnBookEditWhenGetBookEditPageAndBookIsPresent() {
         long id = 1L;
         Book book = new Book();
         when(bookService.findById(id)).thenReturn(book);
@@ -99,14 +98,14 @@ public class BookControllerTest {
         map.put("authorName", authorName);
         Book book = new Book();
         Author author = new Author();
-        when(authorService.findBySurnameAndName(authorSurname,authorName)).thenReturn(Optional.of(author));
+        when(authorService.findBySurnameAndName(authorSurname, authorName)).thenReturn(Optional.of(author));
         MultipartFile image = getImage();
-        bookController.bookSaveEdit(image,map, book);
-        verify(bookService).update(book, Double.parseDouble(value),titleEn,titleRu,authorSurname,authorName,description,map,image);
+        bookController.bookSaveEdit(image, map, book);
+        verify(bookService).update(book, Double.parseDouble(value), titleEn, titleRu, authorSurname, authorName, description, map, image);
     }
 
     @Test
-    public void shouldReturnBookWhenGetBookPage(){
+    public void shouldReturnBookWhenGetBookPage() {
         Long bookId = 1L;
         Book book = new Book();
         when(bookService.findById(bookId)).thenReturn(book);

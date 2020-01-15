@@ -1,9 +1,7 @@
 package com.bookshop.controller;
 
 
-import com.bookshop.exception.PageNotFoundException;
 import com.bookshop.service.AuthorService;
-import com.bookshop.service.BookImageService;
 import com.bookshop.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

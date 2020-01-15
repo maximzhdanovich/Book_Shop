@@ -1,7 +1,7 @@
 package com.bookshop.controller;
 
-import com.bookshop.model.entity.Cart;
 import com.bookshop.model.entity.Book;
+import com.bookshop.model.entity.Cart;
 import com.bookshop.model.entity.User;
 import com.bookshop.service.CartService;
 import com.bookshop.service.RoleService;
@@ -16,9 +16,9 @@ import org.springframework.ui.Model;
 import java.util.Collection;
 import java.util.Map;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserControllerTest {
@@ -36,20 +36,20 @@ public class UserControllerTest {
     private UserController userController;
 
     @Test
-    public void shouldCallUserServiceFindAllWhenGetUserList(){
+    public void shouldCallUserServiceFindAllWhenGetUserList() {
         userController.userList(getModel());
         verify(userService).findAll();
     }
 
     @Test
-    public void shouldCallRoleServiceFindAllWhenGetUserInformation(){
+    public void shouldCallRoleServiceFindAllWhenGetUserInformation() {
         long id = 1L;
-        userController.userEditInformation(id,getModel());
+        userController.userEditInformation(id, getModel());
         verify(roleService).findAll();
     }
 
     @Test
-    public void shouldCallUserServiceUpdateWhenSaveUserNewInformation(){
+    public void shouldCallUserServiceUpdateWhenSaveUserNewInformation() {
         User user = new User();
         String role = "role";
         String username = "username";
@@ -60,7 +60,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void shouldReturnUserBasketWhenAdminGetUserBasket(){
+    public void shouldReturnUserBasketWhenAdminGetUserBasket() {
         User user = new User();
         user.setCart(new Cart());
         long id = 1L;
@@ -70,13 +70,13 @@ public class UserControllerTest {
     }
 
     @Test
-    public void shouldCallBasketServiceApprovedSingleBookToUserWhenAdminApprovedBook(){
+    public void shouldCallBasketServiceApprovedSingleBookToUserWhenAdminApprovedBook() {
         Book book = new Book();
         User user = new User();
         long id = 1L;
         book.setId(id);
         userController.approvedSingleBookToUser(book, user);
-        verify(cartService).approvedSingleBookToUser(book,user);
+        verify(cartService).approvedSingleBookToUser(book, user);
     }
 
     private Model getModel() {

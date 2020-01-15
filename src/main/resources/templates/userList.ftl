@@ -15,14 +15,15 @@
             <tr>
                 <td>${user.username}</td>
                 <td class="text-center"><a href="/user/${user.id}" class="btn btn-primary">${user_list_edit}</a></td>
-                <td class="text-center"><a href="/user/${user.id}/cart" class="btn btn-primary">${user_list_basket}</a></td>
+                <td class="text-center"><a href="/user/${user.id}/cart" class="btn btn-primary">${user_list_basket}</a>
+                </td>
                 <td>
                     <#if user.cart.booksInProcessing?size!=0>
                         <i>
                             ${user_list_have_book_to_approve}
                         </i>
-<#--                    <#else >-->
-<#--                        Don't have book to approve-->
+                    <#--                    <#else >-->
+                    <#--                        Don't have book to approve-->
                     </#if>
                 </td>
             </tr>

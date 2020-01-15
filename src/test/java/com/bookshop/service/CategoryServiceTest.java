@@ -24,7 +24,7 @@ public class CategoryServiceTest {
     private CategoryService categoryService;
 
     @Test
-    public void shouldReturnCollectionsSingletonWhenDataBaseHaveOneEntity(){
+    public void shouldReturnCollectionsSingletonWhenDataBaseHaveOneEntity() {
         Category category = new Category();
         when(categoryDataService.findAll()).thenReturn(Collections.singletonList(category));
         List<Category> categoryList = categoryService.findAll();
@@ -32,14 +32,14 @@ public class CategoryServiceTest {
     }
 
     @Test
-    public void shouldReturnNullWhenCallFindByIdAndDataBaseIsEmpty(){
+    public void shouldReturnNullWhenCallFindByIdAndDataBaseIsEmpty() {
         long id = 1L;
         Category category = categoryService.findById(id);
         assertThat(category).isNull();
     }
 
     @Test
-    public void shouldReturnSingletonWhenDataBaseHaveManySatisfyingBook(){
+    public void shouldReturnSingletonWhenDataBaseHaveManySatisfyingBook() {
         String titleEn = "some";
         String titleRu = "some";
         Category category = new Category();
@@ -49,7 +49,7 @@ public class CategoryServiceTest {
     }
 
     @Test
-    public void shouldCallCategoryDataServiceSaveWhenSaveCategory(){
+    public void shouldCallCategoryDataServiceSaveWhenSaveCategory() {
         categoryService.save(new Category());
         verify(categoryDataService).save(isA(Category.class));
     }

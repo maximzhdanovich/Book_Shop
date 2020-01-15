@@ -7,7 +7,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -40,37 +39,37 @@ public class AuthorServiceTest {
     }
 
     @Test
-    public void shouldCallAuthorDataServiceFindBySurnameAndNameAndReturnEmptyAuthorIfDataBaseIsEmpty(){
+    public void shouldCallAuthorDataServiceFindBySurnameAndNameAndReturnEmptyAuthorIfDataBaseIsEmpty() {
         String name = "name";
         String surname = "surname";
         Optional<Author> authorBySurnameAndName = authorService.findBySurnameAndName(surname, name);
         assertThat(authorBySurnameAndName).isEmpty();
-        verify(authorDataService).findBySurnameAndName(surname,name);
+        verify(authorDataService).findBySurnameAndName(surname, name);
     }
 
     @Test
-    public void shouldCallAuthorDataServiceDeleteWhenDeleteAuthor(){
+    public void shouldCallAuthorDataServiceDeleteWhenDeleteAuthor() {
         long id = 1L;
         authorService.deleteById(id);
         verify(authorDataService).deleteById(id);
     }
 
     @Test
-    public void shouldCallAuthorDataServiceFindByIdWhenAuthorFindById(){
+    public void shouldCallAuthorDataServiceFindByIdWhenAuthorFindById() {
         long id = 1L;
         authorService.findById(id);
         verify(authorDataService).findById(id);
     }
 
     @Test
-    public void shouldReturnEmptyListWhenCallFindAllAndDataBaseIsEmpty(){
+    public void shouldReturnEmptyListWhenCallFindAllAndDataBaseIsEmpty() {
         when(authorDataService.findAll()).thenReturn(Collections.emptyList());
         List<Author> authorList = authorService.findAll();
         assertThat(authorList).isEmpty();
     }
 
     @Test
-    public void shouldCallAuthorDataServiceSaveWhenCreateAuthor(){
+    public void shouldCallAuthorDataServiceSaveWhenCreateAuthor() {
         String name = "name";
         String surname = "surname";
         authorService.create(surname, name);

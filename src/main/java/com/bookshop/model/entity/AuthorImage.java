@@ -2,7 +2,6 @@ package com.bookshop.model.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "AUTHOR_IMAGE")
@@ -53,6 +52,7 @@ public class AuthorImage {
         this.authorImage = authorImage;
 //        this.author = author;
     }
+
     public AuthorImage() {
     }
 

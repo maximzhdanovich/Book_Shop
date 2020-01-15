@@ -31,21 +31,21 @@ public class CategoryControllerTest {
     private CategoryController categoryController;
 
     @Test
-    public void shouldCallCategoryServiceWhenGetCategoryListPage(){
+    public void shouldCallCategoryServiceWhenGetCategoryListPage() {
         categoryController.allCategory(getModel());
         verify(categoryService).findAll();
     }
 
     @Test
-    public void shouldCallCategoryServiceCreateWhenCreateCategory(){
+    public void shouldCallCategoryServiceCreateWhenCreateCategory() {
         String titleEn = "titleEn";
         String titleRu = "titleRu";
         categoryController.createCategory(titleEn, titleRu);
-        verify(categoryService).create(titleEn,titleRu);
+        verify(categoryService).create(titleEn, titleRu);
     }
 
     @Test
-    public void shouldCallBookServiceFindAllByCategoriesWhenGetBooksOfCategory(){
+    public void shouldCallBookServiceFindAllByCategoriesWhenGetBooksOfCategory() {
         Category category = new Category();
         Model model = getModel();
         Pageable pageable = getPageable();

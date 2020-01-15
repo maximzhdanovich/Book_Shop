@@ -47,7 +47,7 @@ public class AccountControllerTest {
     }
 
     @Test
-    public void shouldCallUserServiceGetCurrentUserWhenGetMyAccountEditPage(){
+    public void shouldCallUserServiceGetCurrentUserWhenGetMyAccountEditPage() {
         User user = new User();
         CustomUserDetail customUserDetail = new CustomUserDetail(user);
         when(userService.getCurrentUser(customUserDetail)).thenReturn(user);
@@ -56,19 +56,19 @@ public class AccountControllerTest {
     }
 
     @Test
-    public void shouldCallUserServiceEditConfigurationWhenEditAccountSave(){
+    public void shouldCallUserServiceEditConfigurationWhenEditAccountSave() {
         User user = new User();
         CustomUserDetail customUserDetail = new CustomUserDetail(user);
 
         String newPassword = "newPassword";
         Model model = getModel();
         BindingResult bindingResult = getBindingResult();
-        accountController.saveAccountEdit(customUserDetail, user, bindingResult, newPassword,newPassword, model);
-        verify(userService).userEditConfiguration(customUserDetail, user, bindingResult, newPassword,newPassword, model);
+        accountController.saveAccountEdit(customUserDetail, user, bindingResult, newPassword, newPassword, model);
+        verify(userService).userEditConfiguration(customUserDetail, user, bindingResult, newPassword, newPassword, model);
     }
 
     @Test
-    public void shouldCallUserServiceGetCurrentUserWhenGetUserCart(){
+    public void shouldCallUserServiceGetCurrentUserWhenGetUserCart() {
         User user = new User();
         Cart cart = new Cart();
         cart.setBooks(new ArrayList<>());
@@ -76,47 +76,47 @@ public class AccountControllerTest {
         user.setCart(cart);
         CustomUserDetail customUserDetail = new CustomUserDetail(user);
         when(userService.getCurrentUser(customUserDetail)).thenReturn(user);
-        accountController.myBasket(customUserDetail,getModel());
-        verify(userService,times(3)).getCurrentUser(customUserDetail);
+        accountController.myBasket(customUserDetail, getModel());
+        verify(userService, times(3)).getCurrentUser(customUserDetail);
     }
 
     private Model getModel() {
         return new Model() {
-                @Override
-                public Model addAttribute(String s, Object o) {
-                    return null;
-                }
+            @Override
+            public Model addAttribute(String s, Object o) {
+                return null;
+            }
 
-                @Override
-                public Model addAttribute(Object o) {
-                    return null;
-                }
+            @Override
+            public Model addAttribute(Object o) {
+                return null;
+            }
 
-                @Override
-                public Model addAllAttributes(Collection<?> collection) {
-                    return null;
-                }
+            @Override
+            public Model addAllAttributes(Collection<?> collection) {
+                return null;
+            }
 
-                @Override
-                public Model addAllAttributes(Map<String, ?> map) {
-                    return null;
-                }
+            @Override
+            public Model addAllAttributes(Map<String, ?> map) {
+                return null;
+            }
 
-                @Override
-                public Model mergeAttributes(Map<String, ?> map) {
-                    return null;
-                }
+            @Override
+            public Model mergeAttributes(Map<String, ?> map) {
+                return null;
+            }
 
-                @Override
-                public boolean containsAttribute(String s) {
-                    return false;
-                }
+            @Override
+            public boolean containsAttribute(String s) {
+                return false;
+            }
 
-                @Override
-                public Map<String, Object> asMap() {
-                    return null;
-                }
-            };
+            @Override
+            public Map<String, Object> asMap() {
+                return null;
+            }
+        };
     }
 
     private BindingResult getBindingResult() {

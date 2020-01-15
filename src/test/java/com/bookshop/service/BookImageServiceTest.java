@@ -1,8 +1,6 @@
 package com.bookshop.service;
 
 import com.bookshop.model.dataService.BookImageDataService;
-import com.bookshop.model.entity.Author;
-import com.bookshop.model.entity.AuthorImage;
 import com.bookshop.model.entity.Book;
 import com.bookshop.model.entity.BookImage;
 import org.junit.Test;
@@ -62,7 +60,7 @@ public class BookImageServiceTest {
     }
 
     @Test
-    public void shouldCallBookImageDataServiceDeleteByIdWhenDeleteByIdBookImage(){
+    public void shouldCallBookImageDataServiceDeleteByIdWhenDeleteByIdBookImage() {
         long id = 1L;
         bookImageService.deleteById(id);
         verify(bookImageDataService).deleteById(id);
@@ -72,7 +70,7 @@ public class BookImageServiceTest {
     public void shouldCallBookImageServiceSaveWhenAddNotNullBookImage() throws Exception {
         Book book = new Book();
         setUploadPath();
-        bookImageService.add(getImage(),book);
+        bookImageService.add(getImage(), book);
         verify(bookImageDataService).save(notNull());
     }
 

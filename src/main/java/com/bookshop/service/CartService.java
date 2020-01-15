@@ -1,8 +1,8 @@
 package com.bookshop.service;
 
 import com.bookshop.model.dataService.CartDataService;
-import com.bookshop.model.entity.Cart;
 import com.bookshop.model.entity.Book;
+import com.bookshop.model.entity.Cart;
 import com.bookshop.model.entity.CustomUserDetail;
 import com.bookshop.model.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,27 +57,27 @@ public class CartService {
         save(cart);
     }
 
-    public void deleteBookFromBasket(CustomUserDetail user, Book book){
+    public void deleteBookFromBasket(CustomUserDetail user, Book book) {
         Cart cart = userService.getCurrentUser(user).getCart();
         cart.getBooks().remove(bookService.findById(book.getId()));
         save(cart);
     }
 
-    public void sendBookToProcessing(CustomUserDetail user, Book book){
+    public void sendBookToProcessing(CustomUserDetail user, Book book) {
         Cart cart = userService.getCurrentUser(user).getCart();
         cart.getBooks().remove(bookService.findById(book.getId()));
         cart.getBooksInProcessing().add(bookService.findById(book.getId()));
         save(cart);
     }
 
-    public void sendAllBooksToProcessing(CustomUserDetail user){
+    public void sendAllBooksToProcessing(CustomUserDetail user) {
         Cart cart = userService.getCurrentUser(user).getCart();
         cart.getBooksInProcessing().addAll(cart.getBooks());
         cart.getBooks().clear();
         save(cart);
     }
 
-    public void approvedSingleBookToUser(Book book, User user){
+    public void approvedSingleBookToUser(Book book, User user) {
         Cart cart = userService.getCurrentUser(user).getCart();
         cart.getBooksInProcessing().remove(bookService.findById(book.getId()));
         cart.getBooksApproved().add(bookService.findById(book.getId()));

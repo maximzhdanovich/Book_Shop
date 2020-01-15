@@ -19,14 +19,16 @@
                         <form method="post" action="/category/admin/create">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">${categor_list_create_title_en}</span>
+                                    <span class="input-group-text"
+                                          id="basic-addon1">${categor_list_create_title_en}</span>
                                 </div>
                                 <input type="text" name="titleEn" class="form-control" placeholder="Title En"
                                        aria-label="Title En" aria-describedby="basic-addon1">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">${categor_list_create_title_ru}</span>
+                                    <span class="input-group-text"
+                                          id="basic-addon1">${categor_list_create_title_ru}</span>
                                 </div>
                                 <input type="text" name="titleRu" class="form-control" placeholder="Title Ru"
                                        aria-label="Title Ru" aria-describedby="basic-addon1">

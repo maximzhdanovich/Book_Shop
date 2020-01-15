@@ -76,7 +76,7 @@ public class AuthorController {
         }
         model.addAttribute("authorPage", "");
         model.addAttribute("author", authorService.findById(author));
-        model.addAttribute("url", "/author/" + author+ "/books");
+        model.addAttribute("url", "/author/" + author + "/books");
         return "bookList";
     }
 

@@ -12,8 +12,8 @@ import org.springframework.ui.Model;
 
 import java.util.Collection;
 import java.util.Map;
+
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MainControllerTest {
@@ -28,7 +28,7 @@ public class MainControllerTest {
     private MainController mainController;
 
     @Test
-    public void shouldCallAuthorServiceFindAllWhenGetMainPage(){
+    public void shouldCallAuthorServiceFindAllWhenGetMainPage() {
         mainController.main(getModel());
         verify(authorService).findAll();
     }

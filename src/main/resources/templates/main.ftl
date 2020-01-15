@@ -17,13 +17,15 @@
                 <div class="card">
                     <#assign bookIndex++>
                     <#if book.image??>
-                    <a href="/book/${book.id}"><img class="card-img-top"
-                             src="/img/book/${book.image.bookImage}" <#--class="leftimg" width="96" height="125"-->height="370"
-                                                    alt="Card image cap"/></a>
+                        <a href="/book/${book.id}"><img class="card-img-top"
+                                                        src="/img/book/${book.image.bookImage}"
+                                                        <#--class="leftimg" width="96" height="125"-->height="370"
+                                                        alt="Card image cap"/></a>
                     <#else>
-                    <a href="/book/${book.id}">  <img class="card-img-top"
-                             src="/img/bookNot/bookImageNotFound.jpg" height="348.47" <#--class="leftimg" width="96" height="125"-->
-                                                      alt="Card image cap"/></a>
+                        <a href="/book/${book.id}"> <img class="card-img-top"
+                                                         src="/img/bookNot/bookImageNotFound.jpg"
+                                                         height="348.47" <#--class="leftimg" width="96" height="125"-->
+                                                         alt="Card image cap"/></a>
                     </#if>
                     <div class="card-body">
                         <h5 class="card-title">${book.titleEn}</h5>
@@ -41,7 +43,7 @@
                     <#assign authorIndex++>
                     <#if author.image??>
                         <img src="/img/author/${author.image.authorImage}" height="226"/>
-                        <#else >
+                    <#else >
                         <img src="/img/bookNot/authorImageNotFound.png" height="226">
                     </#if>
                     <div class="card-body">

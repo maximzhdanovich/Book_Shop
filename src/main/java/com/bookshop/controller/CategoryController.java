@@ -1,7 +1,5 @@
 package com.bookshop.controller;
 
-import com.bookshop.exception.PageNotFoundException;
-import com.bookshop.model.entity.Category;
 import com.bookshop.service.BookService;
 import com.bookshop.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -14,15 +14,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AuthorControllerTest {
@@ -40,7 +40,7 @@ public class AuthorControllerTest {
     private AuthorController authorController;
 
     @Test
-    public void shouldReturnAuthorEditWhenAdminGetAuthorEditPage(){
+    public void shouldReturnAuthorEditWhenAdminGetAuthorEditPage() {
         long id = 1L;
         String url = authorController.authorEditPage(id, getModel());
         assertThat(url).isEqualTo("authorEdit");
@@ -53,11 +53,11 @@ public class AuthorControllerTest {
         Author author = new Author();
         MultipartFile image = getImage();
         authorController.authorSaveEditedInformation(surname, name, author, image);
-        verify(authorService).update(surname,name,author, image);
+        verify(authorService).update(surname, name, author, image);
     }
 
     @Test
-    public void shouldCallAuthorServiceFindAllWhenGetAuthorListPage(){
+    public void shouldCallAuthorServiceFindAllWhenGetAuthorListPage() {
         authorController.authorList(getModel());
         verify(authorService).findAll();
     }
@@ -74,13 +74,13 @@ public class AuthorControllerTest {
     }
 
     @Test
-    public void shouldCallBookServiceFindByAuthorWhenGetAuthorBooks(){
+    public void shouldCallBookServiceFindByAuthorWhenGetAuthorBooks() {
         Author author = new Author();
         Pageable pageable = getPageable();
         long id = 1L;
         when(authorService.findById(id)).thenReturn(author);
         authorController.authorBooks(getModel(), id, pageable);
-        verify(bookService).findAllByAuthor(author,pageable);
+        verify(bookService).findAllByAuthor(author, pageable);
     }
 
     private Pageable getPageable() {

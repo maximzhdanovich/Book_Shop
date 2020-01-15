@@ -8,14 +8,12 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 
 import java.util.Collection;
 import java.util.Map;
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FilterControllerTest {
@@ -33,12 +31,12 @@ public class FilterControllerTest {
     private FilterController filterController;
 
     @Test
-    public void shouldCallFindByTitleEnOrTitleRuAndFilterServiceAuthorsFilterWhenGetFilter(){
+    public void shouldCallFindByTitleEnOrTitleRuAndFilterServiceAuthorsFilterWhenGetFilter() {
         String filter = "filter";
         Model model = getModel();
         filterController.filter(model, filter);
-        verify(bookService).findByTitleEnOrTitleRu(filter,filter);
-        verify(categoryService).findFirstByTitleEnOrTitleRu(filter,filter);
+        verify(bookService).findByTitleEnOrTitleRu(filter, filter);
+        verify(categoryService).findFirstByTitleEnOrTitleRu(filter, filter);
         verify(filterService).authorsFilter(filter);
     }
 

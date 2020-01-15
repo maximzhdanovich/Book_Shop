@@ -12,14 +12,14 @@ public class CustomErrorController implements ErrorController {
     @GetMapping("/error")
     public String renderErrorPage(HttpServletResponse resp) {
         int status = resp.getStatus();
-        switch (status){
-            case 404:{
+        switch (status) {
+            case 404: {
                 return "notFound";
             }
-            case 403:{
+            case 403: {
                 return "redirect:/login";
             }
-            case 500:{
+            case 500: {
                 return "redirect:/";
             }
         }

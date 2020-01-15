@@ -43,6 +43,7 @@
             z-index: 15;
             text-align: center;
         }
+
         #BookAllProcessing {
             position: fixed;
             right: 0;
@@ -115,7 +116,8 @@
         <a>${my_basket_total_price} ${price}</a>
         <br>
         <form id="AllBookToProcessing">
-            <button type="submit" class="btn btn-primary" <#if price==0> disabled="disabled" </#if>>${my_basket_sent_all_to_processing}
+            <button type="submit"
+                    class="btn btn-primary" <#if price==0> disabled="disabled" </#if>>${my_basket_sent_all_to_processing}
             </button>
         </form>
     <#else >${my_basket_cart_is_empty}
@@ -125,7 +127,7 @@
     <input id="bookId" value="${currentId}" type="hidden">
     <input id="bookIdFor" value="${currentIdForProcessing}" type="hidden">
     <#if approvedBooks?size!=0>
-    ${my_basket_approved_books}
+        ${my_basket_approved_books}
 
         <table class="table table-bordered ">
             <thead>

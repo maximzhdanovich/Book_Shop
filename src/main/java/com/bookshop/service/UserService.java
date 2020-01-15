@@ -87,7 +87,7 @@ public class UserService implements UserDetailsService {
         save(user);
     }
 
-    public String userEditConfiguration(CustomUserDetail customUserDetail, @Valid User newUserInformation, BindingResult bindingResult, String newPassword, String repeatNewPassword, Model model){
+    public String userEditConfiguration(CustomUserDetail customUserDetail, @Valid User newUserInformation, BindingResult bindingResult, String newPassword, String repeatNewPassword, Model model) {
         User currentUser = getCurrentUser(customUserDetail);
         boolean newPasswordEmpty = StringUtils.isEmpty(newPassword);
         boolean repeatNewPasswordEmpty = StringUtils.isEmpty(repeatNewPassword);

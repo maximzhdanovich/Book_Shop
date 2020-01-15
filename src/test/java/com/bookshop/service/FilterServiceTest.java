@@ -18,10 +18,10 @@ public class FilterServiceTest {
     private FilterService filterService;
 
     @Test
-    public void shouldCallAuthorServiceFindBySurnameAndNameTwoTimesWhenFilterConsistsOfTwoWords(){
+    public void shouldCallAuthorServiceFindBySurnameAndNameTwoTimesWhenFilterConsistsOfTwoWords() {
         String filter = "filter filter";
         filterService.authorsFilter(filter);
-        verify(authorService,times(2)).findBySurnameAndName(isA(String.class),isA(String.class));
+        verify(authorService, times(2)).findBySurnameAndName(isA(String.class), isA(String.class));
     }
 
 }

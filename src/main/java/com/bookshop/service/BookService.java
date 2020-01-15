@@ -94,7 +94,7 @@ public class BookService {
         book.setTitleRu(titleRu);
         book.setTitleEn(titleEn);
         if (authorService.findBySurnameAndName(authorSurname, authorName).isPresent())
-        book.setAuthor(authorService.findBySurnameAndName(authorSurname, authorName).get());
+            book.setAuthor(authorService.findBySurnameAndName(authorSurname, authorName).get());
         book.setDescription(description);
         book.getCategories().clear();
         for (String s : form.keySet()) {
@@ -102,14 +102,14 @@ public class BookService {
                 book.getCategories().add(categoryService.findById(Long.parseLong(s)));
             }
         }
-        Long imageIdToDelete=null;
-        if (image != null && image.getOriginalFilename()!=null  && !image.getOriginalFilename().isEmpty()) {
+        Long imageIdToDelete = null;
+        if (image != null && image.getOriginalFilename() != null && !image.getOriginalFilename().isEmpty()) {
             if (book.getImage() != null) {
                 imageIdToDelete = book.getImage().getId();
             }
             bookImageService.add(image, book);
-            if(imageIdToDelete!=null)
-            bookImageService.deleteById(imageIdToDelete);
+            if (imageIdToDelete != null)
+                bookImageService.deleteById(imageIdToDelete);
         }
         save(book);
     }

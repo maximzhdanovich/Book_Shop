@@ -33,7 +33,7 @@ public class RegistrationController {
                           @Valid User user,
                           BindingResult bindingResult,
                           Model model) {
-        return registrationService.addNewUser(repeatPassword,user,bindingResult,model);
+        return registrationService.addNewUser(repeatPassword, user, bindingResult, model);
     }
 
 }

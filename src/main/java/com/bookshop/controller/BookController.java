@@ -48,7 +48,7 @@ public class BookController {
             model.addAttribute("url", "/book");
             model.addAttribute("page", bookService.findAllPage(pageable));
             model.addAttribute("categories", categoryService.findAll());
-            model.addAttribute("authorNotFoundError","");
+            model.addAttribute("authorNotFoundError", "");
             return "bookList";
         }
         bookService.create(Double.parseDouble(form.get("price")), form.get("titleRu"), form.get("titleEn"), form.get("description"), authorService.findBySurnameAndName(form.get("authorSurname"), form.get("authorName")).get(), form, image);

@@ -61,7 +61,7 @@ public class AuthorImageServiceTest {
     }
 
     @Test
-    public void shouldCallAuthorImageDataServiceDeleteByIdWhenDeleteByIdAuthorImage(){
+    public void shouldCallAuthorImageDataServiceDeleteByIdWhenDeleteByIdAuthorImage() {
         long id = 1L;
         authorImageService.deleteById(id);
         verify(authorImageDataService).deleteById(id);
@@ -71,7 +71,7 @@ public class AuthorImageServiceTest {
     public void shouldCallAuthorImageServiceSaveWhenAddNotNullAuthorImage() throws Exception {
         Author author = new Author();
         setUploadPath();
-        authorImageService.add(getImage(),author);
+        authorImageService.add(getImage(), author);
         verify(authorImageDataService).save(notNull());
     }
 
