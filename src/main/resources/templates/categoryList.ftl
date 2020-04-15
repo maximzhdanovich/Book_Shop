@@ -49,7 +49,7 @@
         <div id="accordion">
 
             <#list categories as category>
-                <#assign books=category.getBooks()>
+<#--                <#assign books=category.getBooks()>-->
 
                 <div class="card my-3">
                     <div class="card-header" id="heading${category.id}">
@@ -68,8 +68,8 @@
                     <div id="collapse${category.id}" class="collapse" aria-labelledby="heading${category.id}"
                          data-parent="#accordion">
                         <div class="card-body">
-                            <#if books?size!=0>
-                                <#list books as book>
+                            <#if category.getBooks()?size!=0>
+                                <#list category.getBooks() as book>
                                     <#if index<5>
                                         <div class="card">
                                             ${categor_list_author}: ${book.author.surname} ${book.author.surname}<br>
