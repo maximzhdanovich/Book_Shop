@@ -29,22 +29,22 @@ public class BasketController {
 
     @PostMapping("/saveBook")
     public ResponseEntity<Object> addBookToCart(@AuthenticationPrincipal CustomUserDetail user, @RequestBody Book book) {
-        cartService.addSingleBookToBasket(user, bookService.findById(book.getId()));
-        ServiceResponse<Long> response = new ServiceResponse<>("success", book.getId());
+        cartService.addSingleBookToBasket(user, bookService.findById(book.getBookId()));
+        ServiceResponse<Long> response = new ServiceResponse<>("success", book.getBookId());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("account/deleteFromBasket")
     public ResponseEntity<Object> deleteBook(@AuthenticationPrincipal CustomUserDetail user, @RequestBody Book book) {
         cartService.deleteBookFromBasket(user, book);
-        ServiceResponse<Long> response = new ServiceResponse<>("success", book.getId());
+        ServiceResponse<Long> response = new ServiceResponse<>("success", book.getBookId());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("account/bookToProcessing")
     public ResponseEntity<Object> bookToProcessing(@AuthenticationPrincipal CustomUserDetail user, @RequestBody Book book) {
         cartService.sendBookToProcessing(user, book);
-        ServiceResponse<Long> response = new ServiceResponse<Long>("success", book.getId());
+        ServiceResponse<Long> response = new ServiceResponse<Long>("success", book.getBookId());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

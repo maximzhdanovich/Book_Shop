@@ -59,11 +59,11 @@
                         <a class="card-title m-2">${author.surname} ${author.name}</a>
                         <br>
                         <div class="card-text">
-                            <a href="/author/${author.id}/books"
+                            <a href="/author/${author.authorId}/books"
                                class="btn btn-primary m-2">${author_list_author_book_list}</a>
                             <br>
                             <#if isAdmin>
-                                <a href="/author/admin/${author.id}" class="btn btn-primary m-2">${author_list_edit}</a>
+                                <a href="/author/admin/${author.authorId}" class="btn btn-primary m-2">${author_list_edit}</a>
                             </#if>
                         </div>
                     </div>

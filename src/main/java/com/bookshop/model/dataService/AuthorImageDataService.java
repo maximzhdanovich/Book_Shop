@@ -22,11 +22,11 @@ public class AuthorImageDataService {
     }
 
     public AuthorImage findById(long id) {
-        return author_imageDAO.findById(id);
+        return author_imageDAO.findByAuthorId(id);
     }
 
 
     public void deleteById(long id) {
-        author_imageDAO.deleteById(id);
+        author_imageDAO.deleteByAuthorId(id);
     }
 }

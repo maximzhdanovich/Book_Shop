@@ -20,7 +20,7 @@ public class BookDataService {
     private BookDAO bookDAO;
 
     public List<Book> getLastBooks() {
-        return bookDAO.findByOrderByIdDesc();
+        return bookDAO.findByOrderByBookIdDesc();
     }
 
     public void save(Book book) {
@@ -28,7 +28,7 @@ public class BookDataService {
     }
 
     public Book findById(long id) {
-        return bookDAO.findById(id);
+        return bookDAO.findByBookId(id);
     }
 
     public List<Book> findAll() {
@@ -52,7 +52,7 @@ public class BookDataService {
     }
 
     public void deleteById(long id) {
-        bookDAO.deleteById(id);
+        bookDAO.deleteByBookId(id);
     }
 
 }

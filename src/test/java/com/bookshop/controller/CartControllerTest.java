@@ -35,7 +35,7 @@ public class CartControllerTest {
         Book book = new Book();
         User user = new User();
         long id = 1L;
-        book.setId(id);
+        book.setBookId(id);
         when(bookService.findById(id)).thenReturn(book);
         CustomUserDetail customUserDetail = new CustomUserDetail(user);
         basketController.addBookToCart(customUserDetail, book);

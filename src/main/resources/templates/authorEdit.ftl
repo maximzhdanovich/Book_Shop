@@ -37,11 +37,11 @@
         </#if>
         <br>
         <br>
-        <input type="hidden" value="${author.id}" name="authorId">
+        <input type="hidden" value="${author.authorId}" name="authorId">
         <button type="submit" class="btn btn-primary">${author_edit_save}</button>
     </form>
     <br>
-    <form method="post" action="/author/admin/delete/${author.id}">
+    <form method="post" action="/author/admin/delete/${author.authorId}">
         <button type="submit" class="btn btn-primary">${book_delete}</button>
     </form>
 </@c.page>

@@ -1,6 +1,6 @@
 CREATE TABLE BOOK
 (
-    ID           BIGINT PRIMARY KEY NOT NULL auto_increment,
+    book_ID           BIGINT PRIMARY KEY NOT NULL auto_increment,
     PRICE        DOUBLE             NOT NULL,
     TITLE_RU     VARCHAR(255)       NOT NULL,
     TITLE_EN     VARCHAR(255)       NOT NULL,
@@ -10,20 +10,20 @@ CREATE TABLE BOOK
 );
 CREATE TABLE CATEGORY
 (
-    ID       BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    TITLE_RU VARCHAR(128)       NOT NULL,
-    TITLE_EN VARCHAR(128)       NOT NULL
+    category_Id       BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    category_Title_Ru VARCHAR(128)       NOT NULL,
+    category_Title_En VARCHAR(128)       NOT NULL
 );
 CREATE TABLE AUTHOR
 (
-    ID          BIGINT PRIMARY KEY NOT NULL auto_increment,
+    author_Id          BIGINT PRIMARY KEY NOT NULL auto_increment,
     NAME        VARCHAR(128)       NOT NULL,
     SURNAME     VARCHAR(128)       NOT NULL,
     FK_IMAGE_ID BIGINT
 );
 CREATE TABLE AUTHOR_IMAGE
 (
-    ID    BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    Id    BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     IMAGE VARCHAR(255)
 #     FK_AUTHOR_ID BIGINT
 );
@@ -60,15 +60,15 @@ CREATE TABLE book_with_category
 );
 
 ALTER TABLE book_with_category
-    add FOREIGN KEY (book_id) references book (id);
+    add FOREIGN KEY (book_id) references book (book_ID);
 ALTER TABLE book_with_category
-    add FOREIGN KEY (category_id) references CATEGORY (id);
+    add FOREIGN KEY (category_id) references CATEGORY (category_Id);
 ALTER TABLE BOOK
     add foreign key (fk_image_id) references BOOK_IMAGE (ID);
 ALTER TABLE BOOK
-    ADD FOREIGN KEY (FK_AUTHOR_ID) REFERENCES AUTHOR (ID);
+    ADD FOREIGN KEY (FK_AUTHOR_ID) REFERENCES AUTHOR (author_Id);
 ALTER TABLE AUTHOR
-    ADD FOREIGN KEY (FK_IMAGE_ID) REFERENCES AUTHOR_IMAGE (ID);
+    ADD FOREIGN KEY (FK_IMAGE_ID) REFERENCES AUTHOR_IMAGE (Id);
 # ALTER TABLE AUTHOR_IMAGE
 #     ADD FOREIGN KEY (FK_AUTHOR_ID) REFERENCES AUTHOR (ID);
 # ALTER TABLE BOOK_IMAGE

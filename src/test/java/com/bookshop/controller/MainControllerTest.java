@@ -3,6 +3,7 @@ package com.bookshop.controller;
 
 import com.bookshop.service.AuthorService;
 import com.bookshop.service.BookService;
+import org.apache.solr.client.solrj.SolrServerException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -10,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.ui.Model;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
@@ -28,7 +30,7 @@ public class MainControllerTest {
     private MainController mainController;
 
     @Test
-    public void shouldCallAuthorServiceFindAllWhenGetMainPage() {
+    public void shouldCallAuthorServiceFindAllWhenGetMainPage() throws IOException, SolrServerException {
         mainController.main(getModel());
         verify(authorService).findAll();
     }

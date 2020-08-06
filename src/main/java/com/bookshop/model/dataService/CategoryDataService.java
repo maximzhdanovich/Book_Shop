@@ -18,11 +18,11 @@ public class CategoryDataService {
     }
 
     public Category findById(long id) {
-        return categoryDAO.findById(id);
+        return categoryDAO.findByCategoryId(id);
     }
 
     public Category findFirstByTitleEnOrTitleRu(String titleEn, String titleRu) {
-        return categoryDAO.findFirstByTitleEnOrTitleRu(titleEn, titleRu);
+        return categoryDAO.findFirstByCategoryTitleEnOrCategoryTitleRu(titleEn, titleRu);
     }
 
     public void save(Category category) {

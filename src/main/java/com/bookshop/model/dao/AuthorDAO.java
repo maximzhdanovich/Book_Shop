@@ -11,9 +11,9 @@ public interface AuthorDAO extends CrudRepository<Author, Long> {
 
     List<Author> findAll();
 
-    Author findById(long id);
+    Author findByAuthorId(long id);
 
-    void deleteById(long id);
+    void deleteByAuthorId(long id);
 
     Optional<Author> findBySurnameAndName(String surname, String name);
 

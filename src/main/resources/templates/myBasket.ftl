@@ -90,15 +90,15 @@
                         <td>${book.author.surname} ${book.author.name}</td>
                         <td>
 
-                            <button type="submit" id="${book.id}" class="btn btn-primary"
-                                    onclick=editCurrentId(${book.id})>
+                            <button type="submit" id="${book.bookId}" class="btn btn-primary"
+                                    onclick=editCurrentId(${book.bookId})>
                                 ${my_basket_delete}
                             </button>
 
                         </td>
                         <td>
-                            <button type="button" id="qwe${book.id}" class="btn btn-primary"
-                                    onclick=editCurrentIdFor(${book.id})>${my_basket_sent_to_processing}
+                            <button type="button" id="qwe${book.bookId}" class="btn btn-primary"
+                                    onclick=editCurrentIdFor(${book.bookId})>${my_basket_sent_to_processing}
                             </button>
                         </td>
                     </tr>

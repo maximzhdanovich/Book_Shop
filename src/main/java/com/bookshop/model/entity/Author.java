@@ -9,7 +9,7 @@ import java.util.List;
 @Table(name = "AUTHOR")
 public class Author {
 
-    private Long id;
+    private Long authorId;
     private String name;
     private String surname;
     private List<Book> books;
@@ -26,10 +26,10 @@ public class Author {
     }
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "author_Id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long getId() {
-        return id;
+    public Long getAuthorId() {
+        return authorId;
     }
 
     @OneToMany(targetEntity = Book.class, mappedBy = "author", orphanRemoval = true)
@@ -41,8 +41,8 @@ public class Author {
         this.books = books;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setAuthorId(Long id) {
+        this.authorId = id;
     }
 
     @NotNull
@@ -65,8 +65,8 @@ public class Author {
         this.surname = surname;
     }
 
-    public Author(Long id, String name, String surname, List<Book> books, AuthorImage image) {
-        this.id = id;
+    public Author(Long authorId, String name, String surname, List<Book> books, AuthorImage image) {
+        this.authorId = authorId;
         this.name = name;
         this.surname = surname;
         this.books = books;

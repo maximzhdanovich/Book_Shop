@@ -59,14 +59,14 @@ public class CartService {
 
     public void deleteBookFromBasket(CustomUserDetail user, Book book) {
         Cart cart = userService.getCurrentUser(user).getCart();
-        cart.getBooks().remove(bookService.findById(book.getId()));
+        cart.getBooks().remove(bookService.findById(book.getBookId()));
         save(cart);
     }
 
     public void sendBookToProcessing(CustomUserDetail user, Book book) {
         Cart cart = userService.getCurrentUser(user).getCart();
-        cart.getBooks().remove(bookService.findById(book.getId()));
-        cart.getBooksInProcessing().add(bookService.findById(book.getId()));
+        cart.getBooks().remove(bookService.findById(book.getBookId()));
+        cart.getBooksInProcessing().add(bookService.findById(book.getBookId()));
         save(cart);
     }
 
@@ -79,8 +79,8 @@ public class CartService {
 
     public void approvedSingleBookToUser(Book book, User user) {
         Cart cart = userService.getCurrentUser(user).getCart();
-        cart.getBooksInProcessing().remove(bookService.findById(book.getId()));
-        cart.getBooksApproved().add(bookService.findById(book.getId()));
+        cart.getBooksInProcessing().remove(bookService.findById(book.getBookId()));
+        cart.getBooksApproved().add(bookService.findById(book.getBookId()));
         save(cart);
     }
 }

@@ -88,7 +88,7 @@ public class CartServiceTest {
 
     private Book getBook() {
         Book book = new Book();
-        book.setId(1L);
+        book.setBookId(1L);
         return book;
     }
 

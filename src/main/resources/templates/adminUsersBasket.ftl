@@ -92,8 +92,8 @@
                             </#if></td>
                         <td>${bookInProcessing.author.surname} ${bookInProcessing.author.name}</td>
                         <td>
-                            <button type="submit" id="${bookInProcessing.id}" class="btn btn-primary"
-                                    onclick=editCurrentId(${bookInProcessing.id})>
+                            <button type="submit" id="${bookInProcessing.bookId}" class="btn btn-primary"
+                                    onclick=editCurrentId(${bookInProcessing.bookId})>
                                 ${admin_user_basket_approved}
                             </button>
                         </td>

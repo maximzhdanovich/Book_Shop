@@ -1,0 +1,12 @@
+<luceneMatchVersion>8.2.0</luceneMatchVersion>
+
+<requestHandler name="/dataimport" class="org.apache.solr.handler.dataimport.DataImportHandler">
+<lst name="defaults">
+    <str name="config">shop-data-config.xml</str>
+    <str name="wt">xml</str>
+</lst>
+</requestHandler>
+
+...
+<lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-dataimporthandler-.*\.jar" />
+...

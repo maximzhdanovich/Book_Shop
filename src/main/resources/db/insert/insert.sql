@@ -8,7 +8,7 @@ VALUES (1, true, 'user@gmail.com', 'user', 'user', 1, 1),
 insert basket(id, fk_user_id)
 VALUES (1, 1),
        (2, 2);
-insert into author(id, name, surname, fk_image_id)
+insert into author(author_Id, name, surname, fk_image_id)
 VALUES (1, 'Анджей', 'Сапковский', 1),
        (2, 'Стивен', 'Кинг', 2),
        (3, 'Джордж', 'Оруэлл', 3),
@@ -16,7 +16,7 @@ VALUES (1, 'Анджей', 'Сапковский', 1),
        (5, 'Джоан', 'Роулинг', 5),
        (6, 'Фёдор', 'Достоевский', 6),
        (7, 'Роберт', 'Кийосаки', 7);
-insert into author_image (id, image)
+insert into author_image (Id, image)
 VALUES (1, 'sapkowski.jpg'),
        (2, 'king.jpg'),
        (3, 'orwell.jpg'),
@@ -24,7 +24,7 @@ VALUES (1, 'sapkowski.jpg'),
        (5, 'rouling.jpg'),
        (6, 'dostoevsky.jpg'),
        (7, 'kiyosaki.jpg');
-insert into book(id, price, title_en, title_ru, fk_author_id, description, fk_image_id)
+insert into book(book_Id, price, title_en, title_ru, fk_author_id, description, fk_image_id)
 VALUES (1, 17.07, 'Season of storms', 'Сезон гроз', 1,
         '"Всегда, всегда будет существовать тьма. И всегда будет таящееся в темноте Зло, всегда будут во тьме клыки и когти, убийство и кровь. И всегда будут нужны ведьмаки. И крайне необходимо, чтобы они появлялись там, где в них нужда. Там, откуда доносятся крики о помощи. Там, откуда их зовут слабые. Чтобы они появились, призванные, с мечом в руке. С мечом, сверкание которого разобьет тьму, свет которого - разгонит мрак".',
         1),
@@ -90,7 +90,7 @@ VALUES (1, 'SeasonOfStorms.jpg'),
        (14, 'CrimeAndPunishment.jpg'),
        (15, 'TheIdiot.jpg'),
        (16, 'RichDadPoorDad.jpg');
-insert into category(id, title_en, title_ru)
+insert into category(category_Id, category_Title_En, category_Title_Ru)
 VALUES (1, 'Fantasy', 'Фэнтез'),
        (2, 'Horror', 'Ужасы'),
        (3, 'Mystic', 'Мистика'),

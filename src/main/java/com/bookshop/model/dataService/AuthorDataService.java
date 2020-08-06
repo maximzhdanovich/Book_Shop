@@ -19,11 +19,11 @@ public class AuthorDataService {
     }
 
     public Author findById(long id) {
-        return authorDAO.findById(id);
+        return authorDAO.findByAuthorId(id);
     }
 
     public void deleteById(long id) {
-        authorDAO.deleteById(id);
+        authorDAO.deleteByAuthorId(id);
     }
 
     public Optional<Author> findBySurnameAndName(String surname, String name) {

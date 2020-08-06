@@ -9,7 +9,7 @@ public interface AuthorImageDAO extends CrudRepository<AuthorImage, Long> {
 
     List<AuthorImage> findAll();
 
-    AuthorImage findById(long id);
+    AuthorImage findByAuthorId(long id);
 
-    void deleteById(long id);
+    void deleteByAuthorId(long id);
 }

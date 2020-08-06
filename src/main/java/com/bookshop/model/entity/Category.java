@@ -9,9 +9,9 @@ import java.util.List;
 @Table(name = "CATEGORY")
 public class Category implements Serializable {
 
-    protected long id;
-    private String titleRu;
-    private String titleEn;
+    private long categoryId;
+    private String categoryTitleRu;
+    private String categoryTitleEn;
     private List<Book> Books;
 
     @ManyToMany
@@ -29,50 +29,50 @@ public class Category implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
-    public long getId() {
-        return id;
+    @Column(name = "category_Id")
+    public long getCategoryId() {
+        return categoryId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setCategoryId(long id) {
+        this.categoryId = id;
     }
 
-    public void setTitleRu(String titleRu) {
-        this.titleRu = titleRu;
+    public void setCategoryTitleRu(String titleRu) {
+        this.categoryTitleRu = titleRu;
     }
 
-    public void setTitleEn(String titleEn) {
-        this.titleEn = titleEn;
-    }
-
-    @NotNull
-    @Column(name = "TITLE_RU")
-    public String getTitleRu() {
-        return titleRu;
+    public void setCategoryTitleEn(String titleEn) {
+        this.categoryTitleEn = titleEn;
     }
 
     @NotNull
-    @Column(name = "TITLE_EN")
-    public String getTitleEn() {
-        return titleEn;
+    @Column(name = "category_Title_Ru")
+    public String getCategoryTitleRu() {
+        return categoryTitleRu;
+    }
+
+    @NotNull
+    @Column(name = "category_Title_En")
+    public String getCategoryTitleEn() {
+        return categoryTitleEn;
     }
 
     @Override
     public String toString() {
-        return String.valueOf(id);
+        return String.valueOf(categoryId);
     }
 
-    public Category(long id, String titleRu, String titleEn, List<Book> books) {
-        this.id = id;
-        this.titleRu = titleRu;
-        this.titleEn = titleEn;
+    public Category(long CategoryId, String categoryTitleRu, String categoryTitleEn, List<Book> books) {
+        this.categoryId = CategoryId;
+        this.categoryTitleRu = categoryTitleRu;
+        this.categoryTitleEn = categoryTitleEn;
         Books = books;
     }
 
-    public Category(String titleRu, String titleEn) {
-        this.titleRu = titleRu;
-        this.titleEn = titleEn;
+    public Category(String categoryTitleRu, String categoryTitleEn) {
+        this.categoryTitleRu = categoryTitleRu;
+        this.categoryTitleEn = categoryTitleEn;
     }
 
     public Category() {

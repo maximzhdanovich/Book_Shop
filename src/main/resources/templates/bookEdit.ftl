@@ -135,11 +135,11 @@
         <#--            </#list>-->
 
         <#--        </div>-->
-        <input type="hidden" value="${book.id}" name="bookId">
+        <input type="hidden" value="${book.bookId}" name="bookId">
         <button type="submit" class="btn btn-primary mt-2">${book_save}</button>
     </form>
     <br>
-    <form method="post" action="/book/admin/delete/${book.id}">
+    <form method="post" action="/book/admin/delete/${book.bookId}">
         <button type="submit" class="btn btn-primary">${book_delete}</button>
     </form>
 </@c.page>

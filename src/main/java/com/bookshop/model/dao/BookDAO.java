@@ -15,7 +15,7 @@ public interface BookDAO extends CrudRepository<Book, Long> {
 
     List<Book> findAll();
 
-    List<Book> findByOrderByIdDesc();
+    List<Book> findByOrderByBookIdDesc();
 
     Page<Book> findByOrderByTitleEnAsc(Pageable pageable);
 
@@ -23,9 +23,9 @@ public interface BookDAO extends CrudRepository<Book, Long> {
 
     Page<Book> findAllByCategories(Category category, Pageable pageable);
 
-    Book findById(long id);
+    Book findByBookId(long id);
 
-    void deleteById(long id);
+    void deleteByBookId(long id);
 
     List<Book> findAllByPrice(double price);
 

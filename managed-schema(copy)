@@ -1,0 +1,12 @@
+<schema name="default-config" version="1.6">
+    <field name="author_Id" type="string" indexed="true" stored="true" multiValued="false"/>
+    <field name="name" type="string" indexed="true" stored="true" multiValued="false" />
+    <field name="surname" type="string" indexed="true" stored="true" multiValued="false" />
+    <field name="book_Id" type="string" indexed="true" stored="true" multiValued="false" />
+    <field name="price" type="string" indexed="true" stored="true" multiValued="false" />
+    <field name="title_Ru" type="string" indexed="true" stored="true" multiValued="false" />
+    <field name="title_En" type="string" indexed="true" stored="true" multiValued="false" />
+    <field name="description" type="string" indexed="true" stored="true" multiValued="false" />
+    <field name="Category_Id" type="string" indexed="true" stored="true" multiValued="false" />
+    <field name="category_Title_Ru" type="string" indexed="true" stored="true" multiValued="false" />
+    <field name="category_Title_En" type="string" indexed="true" stored="true" multiValued="false" />

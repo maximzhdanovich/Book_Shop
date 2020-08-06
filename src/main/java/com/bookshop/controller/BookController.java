@@ -77,7 +77,7 @@ public class BookController {
             @RequestParam Map<String, String> form,
             @RequestParam("bookId") Book book) throws IOException {
         if (!authorService.findBySurnameAndName(form.get("authorSurname"), form.get("authorName")).isPresent()) {
-            return "redirect:/book/admin/" + book.getId();
+            return "redirect:/book/admin/" + book.getBookId();
         }
         bookService.update(book, Double.parseDouble(form.get("price")),
                 form.get("titleEn"), form.get("titleRu"), form.get("authorSurname"),

@@ -63,17 +63,17 @@
             <br>
             <b class="mr-2">${book_price}: ${book.price} BYN</b>
             <br>
-            <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.id})
+            <button type="submit" class="btn btn-primary" onclick=editCurrentId(${book.bookId})
                     <#if name="unknown">disabled="disabled"</#if>>
                 ${book_basket_add}
             </button>
 
             <#if isAdmin>
-                <a href="/book/admin/${book.id}"
+                <a href="/book/admin/${book.bookId}"
                    class="btn btn-primary ml-2 leftText">${book_edit}</a>
             </#if>
 
-            <input type="hidden" id="bookId" value="${book.id}">
+            <input type="hidden" id="bookId" value="${book.bookId}">
     </form>
 
     </div></@f.footer>

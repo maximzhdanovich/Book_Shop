@@ -1,0 +1,41 @@
+<dataConfig>
+    <dataSource type="JdbcDataSource"
+                driver="com.mysql.jdbc.Driver"
+                url="jdbc:mysql://localhost:3306/shop"
+                user="root"
+                password="root"/>
+    <document>
+        <entity name="author"
+                pk="author_Id"
+                query="select author_Id, name, surname from shop.author"
+                deltaImportQuery="select author_Id, name, surname from shop.author WHERE author_Id='${dih.delta.id}'"
+                deltaQuery="SELECT author_Id FROM shop.author  WHERE updated_at > '${dih.last_index_time}'"
+        >
+            <field column="author_Id" name="author_Id"/>
+            <field column="name" name="name"/>
+            <field column="surname" name="surname"/>
+        </entity>
+        <entity name="book"
+                pk="book_Id"
+                query="select book_Id, price, title_Ru, title_En, description from shop.book"
+                deltaImportQuery="select book_Id, price, title_Ru, title_En, description from shop.book WHERE book_Id='${dih.delta.id}'"
+                deltaQuery="SELECT book_Id FROM shop.book  WHERE updated_at > '${dih.last_index_time}'"
+        >
+            <field column="book_Id" name="book_Id"/>
+            <field column="price" name="price"/>
+            <field column="title_Ru" name="title_Ru"/>
+            <field column="title_En" name="title_En"/>
+            <field column="description" name="description"/>
+        </entity>
+        <entity name="category"
+                pk="category_Id"
+                query="select category_Id, category_Title_Ru, category_Title_En from shop.category"
+                deltaImportQuery="select category_Id, category_Title_Ru, category_Title_En from shop.category WHERE category_Id='${dih.delta.id}'"
+                deltaQuery="SELECT category_Id FROM shop.category  WHERE updated_at > '${dih.last_index_time}'"
+        >
+            <field column="category_Id" name="category_Id"/>
+            <field column="category_Title_Ru" name="category_Title_Ru"/>
+            <field column="category_Title_En" name="category_Title_En"/>
+        </entity>
+    </document>
+</dataConfig>

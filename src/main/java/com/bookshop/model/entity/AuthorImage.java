@@ -7,19 +7,19 @@ import javax.validation.constraints.NotNull;
 @Table(name = "AUTHOR_IMAGE")
 public class AuthorImage {
 
-    private Long id;
+    private Long authorId;
     private String authorImage;
 //    private Author author;
 
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long getId() {
-        return id;
+    public Long getAuthorId() {
+        return authorId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setAuthorId(Long id) {
+        this.authorId = id;
     }
 
     @NotNull
@@ -42,8 +42,8 @@ public class AuthorImage {
 //        this.author = author;
 //    }
 
-    public AuthorImage(Long id, String authorImage) {
-        this.id = id;
+    public AuthorImage(Long authorId, String authorImage) {
+        this.authorId = authorId;
         this.authorImage = authorImage;
 //        this.author = author;
     }

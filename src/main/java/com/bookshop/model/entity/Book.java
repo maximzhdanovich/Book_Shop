@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name = "BOOK")
 public class Book {
 
-    private long id;
+    private long bookId;
     private double price;
     private String titleRu;
     private String titleEn;
@@ -61,18 +61,18 @@ public class Book {
 
     @Override
     public String toString() {
-        return String.valueOf(id);
+        return String.valueOf(bookId);
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
-    public long getId() {
-        return id;
+    @Column(name = "book_Id")
+    public long getBookId() {
+        return bookId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setBookId(long id) {
+        this.bookId = id;
     }
 
     public double getPrice() {
@@ -103,8 +103,8 @@ public class Book {
         this.titleEn = titleEn;
     }
 
-    public Book(long id, double price, String titleRu, String titleEn, List<Category> categories, Author author, BookImage image, String description) {
-        this.id = id;
+    public Book(long bookId, double price, String titleRu, String titleEn, List<Category> categories, Author author, BookImage image, String description) {
+        this.bookId = bookId;
         this.price = price;
         this.titleRu = titleRu;
         this.titleEn = titleEn;

@@ -74,7 +74,7 @@ public class UserControllerTest {
         Book book = new Book();
         User user = new User();
         long id = 1L;
-        book.setId(id);
+        book.setBookId(id);
         userController.approvedSingleBookToUser(book, user);
         verify(cartService).approvedSingleBookToUser(book, user);
     }

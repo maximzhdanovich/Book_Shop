@@ -9,7 +9,7 @@ public interface CategoryDAO extends CrudRepository<Category, Long> {
 
     List<Category> findAll();
 
-    Category findById(long id);
+    Category findByCategoryId(long id);
 
-    Category findFirstByTitleEnOrTitleRu(String titleEn, String titleRu);
+    Category findFirstByCategoryTitleEnOrCategoryTitleRu(String titleEn, String titleRu);
 }

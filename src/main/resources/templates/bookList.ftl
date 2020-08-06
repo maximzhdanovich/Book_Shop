@@ -243,15 +243,15 @@
 
                     <#list page.content as book>
 
-                        <div class="card my-3" data-id="${book.id}">
+                        <div class="card my-3" data-id="${book.bookId}">
 
 
                             <#if book.image??>
-                            <p><a href="/book/${book.id}"><img src="/img/book/${book.image.bookImage}" class="leftimg"
-                                                               width="96" height="125"/></a>
+                            <p><a href="/book/${book.bookId}"><img src="/img/book/${book.image.bookImage}" class="leftimg"
+                                                                   width="96" height="125"/></a>
                                 <#else>
-                            <p><a href="/book/${book.id}"><img src="/img/bookNot/bookImageNotFound.jpg" class="leftimg"
-                                                               width="96" height="125"/></a>
+                            <p><a href="/book/${book.bookId}"><img src="/img/bookNot/bookImageNotFound.jpg" class="leftimg"
+                                                                   width="96" height="125"/></a>
                                 </#if>
                                 <#--${book_author}:--> <i>${book.author.name} ${book.author.surname}</i>
                                 <br/>
@@ -279,7 +279,7 @@
                             </div>
                             </p>
                             <div class="card-footer text-muted text-right">
-                                <a href="/book/${book.id}"
+                                <a href="/book/${book.bookId}"
                                    class="btn btn-primary ml-2 leftText">${book_view}</a>
                                 <#--                                <#if isAdmin>-->
                                 <#--                                    <a href="/book/admin/${book.id}"-->
@@ -289,7 +289,7 @@
                                 <b class="mr-2">${book_price}: ${book.price} BYN</b>
                                 <br/>
 
-                                <button type="submit" class="btn btn-primary" onclick="editCurrentId(${book.id})"
+                                <button type="submit" class="btn btn-primary" onclick="editCurrentId(${book.bookId})"
                                         <#if name="unknown">disabled="disabled"</#if>>
                                     ${book_basket_add}
                                 </button>

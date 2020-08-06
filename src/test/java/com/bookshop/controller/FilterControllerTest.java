@@ -3,6 +3,7 @@ package com.bookshop.controller;
 import com.bookshop.service.BookService;
 import com.bookshop.service.CategoryService;
 import com.bookshop.service.FilterService;
+import org.apache.solr.client.solrj.SolrServerException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -10,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.ui.Model;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
@@ -31,7 +33,7 @@ public class FilterControllerTest {
     private FilterController filterController;
 
     @Test
-    public void shouldCallFindByTitleEnOrTitleRuAndFilterServiceAuthorsFilterWhenGetFilter() {
+    public void shouldCallFindByTitleEnOrTitleRuAndFilterServiceAuthorsFilterWhenGetFilter() throws IOException, SolrServerException {
         String filter = "filter";
         Model model = getModel();
         filterController.filter(model, filter);

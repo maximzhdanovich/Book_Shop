@@ -52,11 +52,11 @@
 <#--                <#assign books=category.getBooks()>-->
 
                 <div class="card my-3">
-                    <div class="card-header" id="heading${category.id}">
+                    <div class="card-header" id="heading${category.CategoryId}">
                         <a class="mb-0">
                             <button class="btn btn-link collapsed" data-toggle="collapse"
-                                    data-target="#collapse${category.id}" aria-expanded="true"
-                                    aria-controls="collapse${category.id}">
+                                    data-target="#collapse${category.CategoryId}" aria-expanded="true"
+                                    aria-controls="collapse${category.CategoryId}">
                                 <#if .lang=="en">
                                     ${category.titleEn}
                                 <#elseif .lang=="ru">
@@ -65,7 +65,7 @@
                             </button>
                         </a>
                     </div>
-                    <div id="collapse${category.id}" class="collapse" aria-labelledby="heading${category.id}"
+                    <div id="collapse${category.CategoryId}" class="collapse" aria-labelledby="heading${category.CategoryId}"
                          data-parent="#accordion">
                         <div class="card-body">
                             <#if category.getBooks()?size!=0>
@@ -80,12 +80,12 @@
                                                 ${book.titleRu}
                                             </#if>
                                             <br>
-                                            <a href="/book/${book.id}" class="right">${categor_list_book_view}</a>
+                                            <a href="/book/${book.bookId}" class="right">${categor_list_book_view}</a>
                                         </div>
                                         <#assign index++>
                                     </#if>
                                 </#list>
-                                <a href="/category/${category.id}" methods="get">${categor_list_all_books}</a>
+                                <a href="/category/${category.CategoryId}" methods="get">${categor_list_all_books}</a>
                             <#else>
                                 ${categor_list_books_not_found}
                             </#if>

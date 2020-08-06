@@ -66,7 +66,7 @@ public class UserController {
 //        basket.getBooksInProcessing().remove(bookService.findById(book.getId()));
 //        basket.getBooksApproved().add(bookService.findById(book.getId()));
 //        basketService.save(basket);
-        ServiceResponse<Long> response = new ServiceResponse<Long>("success", book.getId());
+        ServiceResponse<Long> response = new ServiceResponse<Long>("success", book.getBookId());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

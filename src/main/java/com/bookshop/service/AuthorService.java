@@ -54,7 +54,7 @@ public class AuthorService {
         Long authorImageToDelete = null;
         if (image != null && image.getOriginalFilename() != null && !image.getOriginalFilename().isEmpty()) {
             if (author.getImage() != null) {
-                authorImageToDelete = author.getImage().getId();
+                authorImageToDelete = author.getImage().getAuthorId();
             }
             authorImageService.add(image, author);
             if (authorImageToDelete != null)
